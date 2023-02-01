@@ -1,0 +1,110 @@
+@import '../styles/vars.scss';
+@import '../styles/common/title.scss';
+@import '../styles/common/btns.scss';
+
+//fonts
+@font-face {
+	font-family: "Gilroy";
+	src: url("/assets/fonts/Gilroy-Black.woff2") format("truetype");
+}
+@font-face {
+	font-family: "Lato-Regular";
+	src: url("/assets/fonts/Lato-Regular.woff2") format("truetype");
+}
+@font-face {
+	font-family: "Lato-Semibold";
+	src: url("/assets/fonts/Lato-Semibold.woff2") format("truetype");
+}
+@font-face {
+	font-family: "Lato-Bold";
+	src: url("/assets/fonts/Lato-Bold.woff2") format("truetype");
+}
+
+html {
+	line-height: $mainLineHeight;
+	color: $mainFontColor;
+	height: 100%;
+	font-size: 10px;
+	scroll-behavior: smooth;
+	@media (min-width: 1180px) {
+		font-size: calc(10vw / 19);
+	}
+}
+
+body {
+	font-family: $mainFont;
+	font-size: $mainFontSize;
+	background-color: $mainBackgroundColor;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+button{
+	border:none
+}
+a {
+	text-decoration: none;
+	color: $mainFontColor;
+}
+p{
+	margin: 0;
+}
+ul,
+li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	position: relative;
+	flex: 0 0 auto;
+	margin: 0 auto;
+	width: 100%;
+	max-width: $lgDesktopWidth;
+
+	@media screen and (max-width: $lgDesktopWidth) {
+		padding: 0 1.6rem;
+	}
+
+	@media screen and (max-width: $smDesktopWidth) {
+		max-width: $tableWidth;
+	}
+
+	@media screen and (max-width: $tableWidth) {
+		max-width: $smTableWidth;
+	}
+
+	@media screen and (max-width: $smTableWidth) {
+		max-width: $phoneWidth;
+	}
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0 auto;
+}
+
+.wrapper-content {
+	display: flex;
+	flex: 1 0 auto;
+	margin-top: 8rem; // if header is fixed do mt: headerHeight
+	// @media screen and (max-width: $tableWidth) {
+	// 	margin-top: 90px;
+	// }
+}
+
+.card {
+	max-width: 138rem;
+	margin: 0 auto;
+	background: $default-color;
+	box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.4);
+	border-radius: 2.3rem;
+	padding: 2.9rem;
+	z-index: 20;
+	position: relative;
+}
+.card-under {
+	padding-top: 7rem;
+}

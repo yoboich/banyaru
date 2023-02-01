@@ -1,0 +1,36 @@
+.btn{
+	padding: .7rem 3.8rem;
+	border-radius: 10rem;
+}
+
+.btn-green{
+	background-color: $green-color;
+	color:$default-color
+}
+
+
+
+// keep reading btn (green)
+.keep-read {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 1rem;
+	font-weight: 600;
+	font-size: 1.4rem;
+	color: $green-color;
+	margin-bottom: 2rem;
+	position: relative;
+	overflow: hidden;
+	&::before {
+		position: absolute;
+		content: '';
+		top: 50%;
+		left: -11.6rem;
+		height: 1px;
+		width: 100%;
+		background-color: #e1e5f2;
+		transform: translateY(-50%);
+	}
+}
