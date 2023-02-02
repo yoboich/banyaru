@@ -25,10 +25,16 @@
 			</div>
 		</div>
 	</div>
-	<ProductCardBlocked v-if="true" />
+	<ProductCardBlocked class="no-box" v-if="true" />
+	<ProductCardService class="no-box" />
+	<ProductCardReview class="no-box" />
+	<ProductCardRelated class="no-box" />
 </template>
 
 <style lang="scss" scoped>
+	.no-box {
+		box-shadow: none;
+	}
 	.card {
 		&__top {
 			display: flex;
@@ -37,16 +43,6 @@
 			color: $secondary-color;
 			margin-bottom: 5.5rem;
 			position: relative;
-		}
-
-		&__top-tariff {
-			position: absolute;
-			top: 0.5rem;
-			left: -4.5rem;
-			background: #8f99ba;
-			color: white;
-			padding: 1rem;
-			border-radius: 6px 0 0px 0px;
 		}
 
 		&__top-left {

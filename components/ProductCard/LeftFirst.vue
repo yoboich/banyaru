@@ -3,15 +3,7 @@
 <template>
 	<div class="card__name h1">Сауна цветы</div>
 	<div class="card__review">
-		<div class="card__stars">
-			<div class="card__star" v-for="item in 4">
-				<img src="~/assets/img/icon/active-star.svg" alt="" />
-			</div>
-			<div class="card__star">
-				<img src="~/assets/img/icon/star.svg" alt="" />
-			</div>
-			<span class="h4">4,2</span>
-		</div>
+		<Stars :rate="true" />
 		|
 		<div class="card__feedback h5-mini">11 отзывов</div>
 	</div>

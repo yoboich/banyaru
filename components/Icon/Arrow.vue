@@ -17,11 +17,16 @@
 		fill: #3e3e51;
 	}
 
-	.green  {
-width: 1.4rem;
+	.green {
+		width: 1.4rem;
 		& path {
 			fill: $green-color;
 		}
-		
+	}
+
+	.swiper-btn__arr.active {
+		& path {
+			fill: $green-color;
+		}
 	}
 </style>

@@ -12,6 +12,10 @@
 	src: url("/assets/fonts/Lato-Regular.woff2") format("truetype");
 }
 @font-face {
+	font-family: "Lato-Medium";
+	src: url("/assets/fonts/Lato-Medium.woff2") format("truetype");
+}
+@font-face {
 	font-family: "Lato-Semibold";
 	src: url("/assets/fonts/Lato-Semibold.woff2") format("truetype");
 }
@@ -38,14 +42,14 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-button{
-	border:none
+button {
+	border: none;
 }
 a {
 	text-decoration: none;
 	color: $mainFontColor;
 }
-p{
+p {
 	margin: 0;
 }
 ul,
@@ -107,4 +111,24 @@ li {
 }
 .card-under {
 	padding-top: 7rem;
+}
+
+// badje
+
+.card__top-tariff {
+	position: absolute;
+	top: 0.5rem;
+	left: -4.5rem;
+	background: #8f99ba;
+	color: white;
+	padding: 1rem;
+	border-radius: 6px 0 0px 0px;
+
+	&.purple {
+		background: $purple-color;
+	}
+
+	&.orange {
+		background: $vip-color;
+	}
 }

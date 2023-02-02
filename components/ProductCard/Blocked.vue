@@ -1,5 +1,5 @@
 <script setup>
-	const title = ['Цены', 'Залы', 'Банный ивентарь', 'Услуги'];
+	const title = ref(['Цены', 'Залы', 'Банный ивентарь', 'Услуги']);
 </script>
 
 <template>
