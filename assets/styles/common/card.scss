@@ -5,14 +5,16 @@
 	padding: 2.9rem;
 	z-index: 20;
 	position: relative;
+	max-width: 138rem;
+	margin: 0 auto;
 	&__content {
 		display: flex;
 		gap: 3.3rem;
 	}
 
 	&__left {
-		max-width: 52rem;
 		width: 100%;
+		max-width: 54rem;
 	}
 
 	&__right {

@@ -67,6 +67,7 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+			max-height: 45rem;
 		}
 
 		&__logo {
@@ -77,8 +78,7 @@
 
 		&__play {
 			background: rgba($color: #000000, $alpha: 0.4);
-			width: 6.4rem;
-			height: 6.4rem;
+
 			border-radius: 50%;
 			display: flex;
 			justify-content: center;
@@ -98,8 +98,6 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 4rem;
-			height: 4rem;
 
 			top: 50%;
 			left: 2rem;
@@ -123,9 +121,9 @@
 			align-items: center;
 			justify-content: space-between;
 			margin-top: 1.6rem;
+			gap: 1.6rem;
 
 			& img {
-				max-width: 15.1rem;
 				width: 100%;
 				border: 2px solid transparent;
 				transition: all 0.2s linear;

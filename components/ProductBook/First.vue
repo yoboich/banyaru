@@ -51,21 +51,12 @@
 
 <style lang="scss" scoped>
 	.book-card-first {
+		border-bottom: 1px solid #E1E5F2;
+		padding-bottom: 4rem;
 		&__top {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-		}
-
-		&__i {
-			width: 3.2rem;
-			height: 3.2rem;
-			cursor: pointer;
-			box-shadow: 1px 4px 12px rgba(166, 175, 205, 0.36);
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
 		}
 
 		&__name {
@@ -77,11 +68,22 @@
 			align-items: center;
 			gap: 4.5rem;
 			margin-bottom: 4.5rem;
+
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 50%;
+				width: 1px;
+				height: 100%;
+				background-color: #e1e5f2;
+
+				transform: translateX(-50%);
+			}
 		}
 
 		&__info-left {
-			border-right: 1px solid #e1e5f2;
-			padding-right: 4.5rem;
 		}
 
 		&__price {
