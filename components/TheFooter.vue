@@ -115,7 +115,7 @@
 .router-link-active{
   color: $green-color;
   font-size: 1.6rem;
-  font-family: "Lato-Bold";
+  font-weight: 700;
 }
 .information {
   display: flex;
@@ -139,7 +139,7 @@
     margin-bottom: 1.8rem;
   }
   &__text {
-    font-family: "Lato-Regular";
+    font-weight: 400;
     color: $secondary-color;
   }
   &__text_black {
@@ -170,7 +170,7 @@
 }
 
 .copyright {
-  font-family: "Lato-Regular";
+  font-weight: 400;
   margin-top: 4.4rem;
   padding: 2rem 0 2rem 9rem;
   box-shadow: 0px -6px 50px rgba(166, 175, 203, 0.16);

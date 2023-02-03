@@ -2,12 +2,14 @@
 
 <template>
 	<div class="product-card">
-		<!-- header -->
-		<div class="sub-header">
-			<Breadcrumbs />
-			<UserAction />
+		<div class="container">
+			<!-- header -->
+			<div class="sub-header">
+				<Breadcrumbs />
+				<UserAction />
+			</div>
+			<NuxtPage />
 		</div>
-		<ProductCardMain />
 	</div>
 </template>
 

@@ -27,7 +27,7 @@ let isActive = ref(false);
   border-radius: $mainBorderRadius;
   & span {
     color: $green-color;
-    font-family: "Lato-Bold";
+    font-weight: 700;
   }
   &__icon {
     position: relative;

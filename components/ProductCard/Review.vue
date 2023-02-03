@@ -100,6 +100,9 @@
 			gap: 1rem;
 
 			&-item {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
 				cursor: pointer;
 				color: $green-color;
 			}

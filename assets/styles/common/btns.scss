@@ -72,3 +72,30 @@
 		height: 100%;
 	}
 }
+
+.next-prev-btn {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	&__item {
+		background: $default-color;
+		box-shadow: 0px 6px 21px rgba(166, 175, 205, 0.22);
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.5rem 2.5rem;
+		cursor: pointer;
+		color: $green-color;
+	}
+	&__prev {
+		border-radius: 100px 0px 0px 100px;
+
+		& svg {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__next {
+		border-radius: 0px 100px 100px 0px;
+	}
+}

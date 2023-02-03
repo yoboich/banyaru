@@ -7,6 +7,13 @@
 	import img6 from '~/assets/img/product-card/6.png';
 	import img7 from '~/assets/img/product-card/6.png';
 
+	defineProps({
+		premium: {
+			type: Boolean,
+			default: false,
+		},
+	});
+
 	const images = ref([img1, img2, img3, img4, img5, img6, img7]);
 </script>
 
@@ -118,7 +125,7 @@
 			margin-top: 1.6rem;
 
 			& img {
-				max-width: 10.1rem;
+				max-width: 15.1rem;
 				width: 100%;
 				border: 2px solid transparent;
 				transition: all 0.2s linear;

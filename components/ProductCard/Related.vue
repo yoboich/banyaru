@@ -96,6 +96,7 @@
 
 <style lang="scss" scoped>
 	.card-related {
+		margin-top: 2rem;
 		&__content {
 		}
 

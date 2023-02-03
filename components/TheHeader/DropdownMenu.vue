@@ -1,61 +1,54 @@
-<script lang="ts" setup>
-const links: { title: string; name: string[] }[] = [
-  {
-    title: "Бани",
-    name: [
-      "Баня",
-      "Сауна",
-      "Хаммам",
-      "Баня на дровах",
-      "Баня по-черному",
-      "Японская / афуро",
-      "Банный чан",
-      "Кедровая бочка",
-      "Инфракрасная",
-      "Римские / Термы",
-      "Общественные бани",
-      "Автобаня",
-      "Баня на воде",
-    ],
+<script setup>
+
+defineProps({
+  menu: {
+    type: Object,
+    required: true
   },
-  {
-    title: "Номера",
-    name: ["На час", "На ночь", "Посуточно"],
-  },
-];
+})
+
 </script>
 
 <template>
   <div class="dropdown-menu">
+    <div @click="$emit('close')" class="dropdown-menu__overlay"></div>
     <div class="container">
       <div class="menu">
-
-          <div class="menu__item">
-            <ul class="nav">
-              <h4 class="nav__title">Бани</h4>
-              <li class="nav__item">Баня</li>
-              <li class="nav__item">Сауна</li>
-              <li class="nav__item">Хаммам</li>
-              <li class="nav__item">Баня на дровах</li>
-              <li class="nav__item">Баня по-черному</li>
-              <li class="nav__item">Японская / афуро</li>
-              <li class="nav__item">Кедровая бочка</li>
-              <li class="nav__item">Инфракрасная</li>
-              <li class="nav__item">Римские / Термы</li>
-              <li class="nav__item">Общественные бани</li>
-              <li class="nav__item">Автобаня</li>
-              <li class="nav__item">Баня на воде</li>
-            </ul>
+        <div class="menu__item">
+          <ul class="nav">
+            <h4 class="nav__title">Бани</h4>
+            <li v-for="link in menu.linksBaths" class="nav__item">
+              <nuxt-link class="nav__link" :to="link.src">{{
+                link.name
+              }}</nuxt-link>
+            </li>
+          </ul>
+        </div>
+        <div class="menu__item">
+          <ul class="nav">
+            <h4 class="nav__title">Номера</h4>
+            <li v-for="link in menu.linksRooms" class="nav__item">
+              <nuxt-link class="nav__link" :to="link.src">{{
+                link.name
+              }}</nuxt-link>
+            </li>
+          </ul>
+        </div>
+        <div class="menu__banner">
+          <div class="menu__banner banner">
+            <div class="banner__text">
+              <h2 class="banner__title">Рекламный баннер</h2>
+              <h5 class="banner__subtitle">Рекламный текст</h5>
+            </div>
           </div>
-          <div class="menu__item">
-            <ul class="nav"> 
-              <h4 class="nav__title">Номера</h4>
-              <li class="nav__item">На час</li>
-              <li class="nav__item">На ночь</li>
-              <li class="nav__item">Посуточно</li>
-            </ul>
-          </div>
-          <div class="menu__item"></div>
+          <button class="btn btn-green">Перейти</button>
+        </div>
+      </div>
+      <div class="footer">
+        <nuxt-link class="footer__link">Поиск по карте</nuxt-link>
+        <nuxt-link class="footer__link"> Помощь</nuxt-link>
+        <nuxt-link class="footer__link"> О проекте</nuxt-link>
+        <nuxt-link class="footer__link"> Договор оферта</nuxt-link>
       </div>
     </div>
   </div>
@@ -74,22 +67,87 @@ const links: { title: string; name: string[] }[] = [
   background: $default-color;
   box-shadow: 0px 7px 27px rgba(136, 152, 206, 0.35);
   border-radius: 1.2rem;
+
+  &__overlay {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin-left: calc(-50vw + 50%);
+    top: 9rem;
+    left: 0;
+  }
 }
-.menu{
+.menu {
   display: flex;
   gap: 8rem;
   padding: 3rem 0;
+  &__banner {
+    position: relative;
+    margin-left: auto;
+    max-width: 40rem;
+    width: 100%;
+    max-height: 22rem;
+    height: 100%;
+    height: auto;
+    background-image: url("@/assets/img/promotions/3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+    & button {
+      bottom: 1.3rem;
+      right: 1.2rem;
+      position: absolute;
+      font-size: 2rem;
+      font-weight: 500;
+      padding: 1.4rem 3.8rem;
+    }
+  }
 }
-.nav{
+.nav {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
-  &__title{
-    font-family: "Lato-Bold";
+  gap: 0.5rem;
+  &__title {
+    font-weight: 700;
     font-size: 1.6rem;
   }
-  &__item{
+  &__item {
+  }
+  &__link {
+    transition: all 0.3s ease;
+    &:hover {
+      transition: all 0.3s ease;
+      color: $green-color;
+    }
+  }
+}
+.banner {
+  color: $default-color;
+  position: relative;
+  &__text {
+    padding: 3rem 2.8rem;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  &__subtitle {
     font-size: 1.1rem;
   }
+}
+.footer {
+  display: flex;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+  &__link {
+    font-size: 1.1rem;
+    color: #9da7c7;
+  }
+}
+.router-link-active {
+  color: $green-color;
+  font-size: 1.6rem;
+  font-weight: 700;
 }
 </style>

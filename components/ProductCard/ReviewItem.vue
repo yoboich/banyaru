@@ -57,7 +57,7 @@
 
 		&__answer {
 			cursor: pointer;
-			font-family: 'Lato-Bold';
+			font-weight: 700;
 			font-size: 1.4rem;
 			color: $green-color;
 		}

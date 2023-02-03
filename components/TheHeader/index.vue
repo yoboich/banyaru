@@ -1,5 +1,76 @@
 <script lang="ts" setup>
 let isActive = ref(false);
+
+const BathsDropdownMenu = {
+  linksBaths: [
+    {
+      name: "Баня",
+      src: "/asd",
+    },
+    {
+      name: "Сауна",
+      src: "/asd",
+    },
+    {
+      name: "Хаммам",
+      src: "/",
+    },
+    {
+      name: "Баня на дровах",
+      src: "/asd",
+    },
+    {
+      name: "Баня по-черному",
+      src: "/asd",
+    },
+    {
+      name: "Японская / афуро",
+      src: "/asd",
+    },
+    {
+      name: "Банный чан",
+      src: "/asd",
+    },
+    {
+      name: "Кедровая бочка",
+      src: "/asd",
+    },
+    {
+      name: "Инфракрасная",
+      src: "/asd",
+    },
+    {
+      name: "Римские / Термы",
+      src: "/asd",
+    },
+    {
+      name: "Общественные бани",
+      src: "/asd",
+    },
+    {
+      name: "Автобаня",
+      src: "/asd",
+    },
+    {
+      name: "Баня на воде",
+      src: "/asd",
+    },
+  ],
+  linksRooms: [
+    {
+      name: "На час",
+      src: "/asd",
+    },
+    {
+      name: "На ночь",
+      src: "/asd",
+    },
+    {
+      name: "Посуточно",
+      src: "/asd",
+    },
+  ],
+};
 </script>
 
 <template>
@@ -12,12 +83,22 @@ let isActive = ref(false);
         <TheHeaderCitySelect />
         <div class="menu-items">
           <ul class="nav">
-            <li @click="isActive = !isActive" class="nav__item">Снять</li>
-            <transition name="fade">
-              <TheHeaderDropdownMenu v-if="isActive" />
-            </transition>
+            <li
+              @click="isActive = !isActive"
+              :class="[isActive ? 'nav__item_active' : '']"
+              class="nav__item"
+            >
+              Снять
+            </li>
             <li class="nav__item">Услуги</li>
             <li class="nav__item">Купить</li>
+            <transition name="fade">
+              <TheHeaderDropdownMenu
+                :menu="BathsDropdownMenu"
+                @close="() => (isActive = false)"
+                v-if="isActive"
+              />
+            </transition>
           </ul>
           <ul class="nav-icons">
             <li class="nav-icons__item">
@@ -94,6 +175,21 @@ let isActive = ref(false);
   align-items: center;
   &__item {
     cursor: pointer;
+    position: relative;
+    &_active {
+      &::after {
+        content: "";
+        width: 100%;
+        height: 0.4rem;
+        position: absolute;
+        top: 4.7rem;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        background: $green-color;
+        border-radius: 2px 2px 0px 0px;
+      }
+    }
   }
 }
 .nav-icons {

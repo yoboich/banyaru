@@ -32,41 +32,18 @@
 		древнем бревенчатом стиле контрастирует с европейский газон с бассейном....
 	</div>
 	<div class="card__read keep-read">Читать всё <IconArrow class="green" /></div>
-	<div class="card__btn btn">+7 498 289 89 ...</div>
+	<div class="card__btn">
+		<button class="card__btn-item btn btn-green h2-lite">
+			+7 498 289 89 ...
+		</button>
+	</div>
 </template>
 
 <style lang="scss" scoped>
 	.card {
-		&__name {
-			color: $mainFontColor;
-			margin-bottom: 0.5rem;
-		}
+		
 
-		&__review {
-			display: flex;
-			align-items: center;
-			gap: 1.3rem;
-			color: $secondary-color;
-			margin-bottom: 1.3rem;
-		}
-
-		&__stars {
-			display: flex;
-			align-items: center;
-
-			& span {
-				color: #9da7c7;
-				margin-left: 1rem;
-			}
-		}
-
-		&__star {
-		}
-
-		&__feedback {
-			color: $green-color;
-			text-decoration: underline;
-		}
+		
 
 		&__info {
 			display: flex;
@@ -89,19 +66,14 @@
 			}
 		}
 
-		&__open {
-			color: $red-color;
-			font-weight: 500;
-			font-size: 1.4rem;
-			margin-bottom: 1.1rem;
-			& span {
-				font-weight: 900;
-			}
-		}
-
 		&__text {
 			color: #8f99ba;
 			margin-bottom: 2rem;
+		}
+
+		&__btn-item {
+			padding-top: 1.4rem;
+			padding-bottom: 1.4rem;
 		}
 	}
 </style>

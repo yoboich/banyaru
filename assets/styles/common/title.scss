@@ -1,11 +1,19 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
 .h1 {
-	font-family: 'Lato-Bold';
+	font-weight: 700;
 	font-size: 2.6rem;
 	color: #000000;
 }
 
 .h2 {
-	font-family: 'Lato-Bold';
+	font-weight: 700;
 	font-size: 2rem;
 	line-height: 130%;
 
@@ -13,42 +21,42 @@
 }
 
 .h2-lite {
-	font-family: 'Lato-Medium';
+	font-weight: 500;
 	font-size: 2rem;
 	line-height: 100%;
 	color: #000000;
 }
 
 .h3 {
-	font-family: 'Lato-Bold';
+	font-weight: 700;
 	font-size: 1.6rem;
 
 	color: #000000;
 }
 
 .h3-lite {
-	font-family: 'Lato-Medium';
+	font-weight: 500;
 	font-size: 1.6rem;
 
 	color: #000000;
 }
 
 .h4-bold {
-	font-family: 'Lato-Bold';
+	font-weight: 700;
 	font-size: 1.4rem;
 
 	color: #000000;
 }
 
 .h4 {
-	font-family: 'Lato-Medium';
+	font-weight: 500;
 	font-size: 1.4rem;
 
 	color: #000000;
 }
 
 .h4-mini {
-	font-family: 'Lato-Medium';
+	font-weight: 500;
 	font-size: 1.1rem;
 	color: #000000;
 }
