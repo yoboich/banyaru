@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+	import productItemData from '~~/composables/productItemData';
+</script>
 
 <template>
 	<div class="card">
@@ -31,13 +33,39 @@
 			</div>
 		</div>
 	</div>
-	<ProductBookPrice class="no-box card-under" />
+	<ProductBookPrice class="card-under" />
+	<ProductBookSales class="card-under" />
+	<ProductBookItems
+		class="card-hall"
+		title="Залы"
+		:items="productItemData.halls"
+	/>
+	<ProductBookItems
+		class="card-service"
+		title="Услуги"
+		:items="productItemData.services"
+	/>
+	<ProductBookItems
+		class="card-bath"
+		title="Банные принадлежности"
+		:items="productItemData.bath"
+	/>
 	<ProductCardService class="no-box" />
 	<ProductCardReview class="no-box" />
 	<ProductCardRelated class="no-box" />
 </template>
 
 <style lang="scss">
+	.card-hall {
+		z-index: 8;
+	}
+	.card-service {
+		z-index: 7;
+	}
+	.card-bath {
+		z-index: 6;
+	}
+
 	.card-desc {
 		padding-top: 3.5em;
 		display: flex;

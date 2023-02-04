@@ -3,7 +3,7 @@
 <template>
 	<div class="card__name h1">Сауна цветы</div>
 	<div class="card__review">
-		<Stars :rate="true" />
+		<UIStars :rate="true" />
 		|
 		<div class="card__feedback h5-mini">11 отзывов</div>
 	</div>

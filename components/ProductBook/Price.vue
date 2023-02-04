@@ -44,7 +44,7 @@
 <style lang="scss" scoped>
 	.card-price {
 		margin-top: -4rem;
-		z-index: 2;
+		z-index: 10;
 		&__name {
 			margin-bottom: 3rem;
 		}
@@ -75,7 +75,7 @@
 				right: 8rem;
 				width: 63%;
 				height: 1px;
-				background-color: $mainFontColor;
+				border-bottom: 1px dashed $secondary-color;
 			}
 
 			&:last-child {

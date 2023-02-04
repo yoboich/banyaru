@@ -51,7 +51,7 @@
 				<div class="card-item__what-place" v-if="place">({{ place }})</div>
 			</div>
 			<div class="card-item__review">
-				<Stars />
+				<UIStars />
 				<div class="card-item__feedback">
 					11 <img src="~/assets/img/icon/comment.svg" alt="" />
 				</div>

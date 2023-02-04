@@ -42,7 +42,7 @@
 				<IconArrow />
 			</div>
 
-			<SliderButton class="product-card-swiper__count pos" v-if="premium" />
+			<UISliderButton class="product-card-swiper__count pos" v-if="premium" />
 		</div>
 		<div class="product-card-swiper__thumbnail" v-if="premium">
 			<img v-for="(item, idx) in 7" :src="images[idx]" alt="" />

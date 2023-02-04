@@ -6,7 +6,7 @@
 	<div class="card-related__column">
 		<div class="card-related__item">
 			<div class="card-related__action">
-				<Stars />
+				<UIStars />
 				<div class="card-related__feedback">
 					11 <img src="~/assets/img/icon/comment.svg" alt="" />
 				</div>

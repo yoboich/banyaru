@@ -56,18 +56,21 @@ let options = ref([
               :multiple="true"
               :close-on-select="false"
               :clear-on-select="false"
-              placeholder="Pick some"
+              placeholder="Баню/сауну"
               label="name"
               track-by="name"
+              selectLabel="Выбрать"
+              selectedLabel="Выбрано"
+              deselectLabel="Удалить"
             >
-              <template v-slot:selection slot-scope="{ values, search, isOpen }"
+              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
                 ><span
                   class="multiselect__single"
                   v-if="value.length"
                   v-show="!isOpen"
                   >{{ value.length }} options selected</span
                 ></template
-              >
+              > -->
             </multiselect>
             <multiselect
               v-model="value"
@@ -75,18 +78,21 @@ let options = ref([
               :multiple="true"
               :close-on-select="false"
               :clear-on-select="false"
-              placeholder="Pick some"
+              placeholder="Парная"
               label="name"
               track-by="name"
+              selectLabel="Выбрать"
+              selectedLabel="Выбрано"
+              deselectLabel="Удалить"
             >
-              <template v-slot:selection slot-scope="{ values, search, isOpen }"
+              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
                 ><span
                   class="multiselect__single"
                   v-if="value.length"
                   v-show="!isOpen"
                   >{{ value.length }}</span
                 ></template
-              >
+              > -->
             </multiselect>
             <multiselect
               v-model="value"
@@ -94,18 +100,21 @@ let options = ref([
               :multiple="true"
               :close-on-select="false"
               :clear-on-select="false"
-              placeholder="Pick some"
+              placeholder="Цена"
               label="name"
               track-by="name"
+              selectLabel="Выбрать"
+              selectedLabel="Выбрано"
+              deselectLabel="Удалить"
             >
-              <template v-slot:selection slot-scope="{ values, search, isOpen }"
+              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
                 ><span
                   class="multiselect__single"
                   v-if="value.length"
                   v-show="!isOpen"
                   >{{ value.length }} options selected</span
                 ></template
-              >
+              > -->
             </multiselect>
             <multiselect
               v-model="value"
@@ -113,19 +122,35 @@ let options = ref([
               :multiple="true"
               :close-on-select="false"
               :clear-on-select="false"
-              placeholder="Pick some"
+              placeholder="18+"
               label="name"
               track-by="name"
+              selectLabel="Выбрать"
+              selectedLabel="Выбрано"
+              deselectLabel="Удалить"
             >
-              <template v-slot:selection slot-scope="{ values, search, isOpen }"
+              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
                 ><span
                   class="multiselect__single"
                   v-if="value.length"
                   v-show="!isOpen"
                   >{{ value.length }} options selected</span
                 ></template
-              >
+              > -->
             </multiselect>
+            <div class="filter-form__checkbox" style="display: flex">
+              <input id="c1" type="checkbox" />
+              <label for="c1">Элитные</label>
+            </div>
+            <div class="filter-form__input">
+              <input
+                placeholder="Метро, район, улица, название"
+                id="input"
+                type="text"
+              />
+              <label for="input"></label>
+            </div>
+            <div class="filter-form__button">Еще фильтры</div>
           </div>
         </div>
       </div>
@@ -135,53 +160,56 @@ let options = ref([
 
 <style lang="scss">
 //styles for select
-// .multiselect {
-//   display: flex;
-//   flex-direction: row-reverse;
-//   align-items: center;
-//   &__tags {
-//     display: flex;
-//     align-items: center;
-//     border: none;
-//     min-height: 2.4rem;
-//     padding: 0;
-//   }
-//   &__placeholder {
-//     color: $mainFontColor;
-//     margin: 0;
-//     padding: 0;
-//   }
-//   &__select {
-//     display: block;
-//     padding: 0;
-//     position: relative;
-//     width: 40px;
-//     height: 2.4rem;
-//     right: 1px;
-//     top: 1px;
-//     text-align: center;
-//     transition: transform 0.2s ease;
-//     &::before {
-//       position: relative;
-//       right: 0;
-//       top: 65%;
-//       color: #999;
-//       margin-top: 4px;
-//       border-style: solid;
-//       border-width: 5px 5px 0 5px;
-//       border-color: #999 transparent transparent transparent;
-//       content: "";
-//     }
-//   }
-//   &__input,
-//   &__single {
+.multiselect {
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0.1rem;
+    height: 50%;
+    top: 25%;
+    right: -2.4rem;
+    background: #e1e5f2;
+  }
+  width: auto;
+  &--active {
+    width: 20rem;
+  }
+  &__content-wrapper {
+    width: 30rem;
+    border: none;
+  }
+  &__select {
+    &::before {
+      position: relative;
+      right: 0;
+      top: 65%;
+      color: #8f99ba;
+      margin-top: 4px;
+      border-style: solid;
+      border-width: 5px 5px 0 5px;
+      border-color: #8f99ba transparent transparent transparent;
+      content: "";
+    }
+  }
+  &__input {
+    font-size: 1.4rem;
+  }
 
-//   }
+  &__tags {
+    padding: 10px 40px 0px 8px;
+    border: none;
+  }
 
-//   &__content-wrapper {
-//     top: 4rem;
-//   }
-// }
+  &:nth-child(1) &__placeholder {
+    color: $mainFontColor;
+  }
+  &__placeholder {
+    color: #8f99ba;
+    display: inline-block;
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+}
 </style>
 
 <style lang="scss" scoped>
@@ -240,11 +268,48 @@ let options = ref([
 }
 
 .filter-form {
-  padding: 3.5rem 0;
+  padding: 2.6rem 0;
+  &__button {
+    display: flex;
+    align-items: center;
+    color: $green-color;
+  }
   &__select {
     display: flex;
-    // max-width: 50rem;
+    gap: 4.8rem;
     width: 100%;
   }
+  &__input {
+    flex: 1 1 auto;
+    align-items: center;
+    display: flex;
+
+    & input {
+      max-width: 40rem;
+      width: 100%;
+      border: none;
+      min-height: 2.4rem;
+    }
+  }
+  &__checkbox {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 2.4rem;
+    & label {
+      color: $vip-color;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0.1rem;
+      height: 50%;
+      top: 25%;
+      right: -2.4rem;
+      background: #e1e5f2;
+    }
+  }
 }
+
 </style>

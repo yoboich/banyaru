@@ -5,7 +5,7 @@
 		<div class="container">
 			<!-- header -->
 			<div class="sub-header">
-				<Breadcrumbs />
+				<UIBreadcrumbs />
 				<UserAction />
 			</div>
 			<NuxtPage />
@@ -13,7 +13,7 @@
 	</div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	ul,
 	ol {
 		list-style: none;

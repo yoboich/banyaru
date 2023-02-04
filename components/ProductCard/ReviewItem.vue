@@ -10,7 +10,7 @@
 		<div class="card-service__info">
 			<div class="card-service__first">
 				<div class="card-service__name h3">{{ name }}</div>
-				<Stars />
+				<UIStars />
 			</div>
 			<div class="card-service__review h4">
 				{{ text }}

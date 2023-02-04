@@ -12,7 +12,7 @@
 		<div class="book-card-first__info">
 			<div class="book-card-first__info-left">
 				<div class="card__review">
-					<Stars :rate="true" />
+					<UIStars :rate="true" />
 					|
 					<div class="card__feedback h5-mini">11 отзывов</div>
 				</div>

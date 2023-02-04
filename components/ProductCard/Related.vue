@@ -77,7 +77,7 @@
 						>
 					</li>
 				</ul>
-				<SwiperButton />
+				<UISwiperButton />
 			</div>
 			<div class="card-related__row">
 				<ProductCardRelatedRequest
