@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="block">hello</div>
+   <Filter/>
   </div>
 </template>
 

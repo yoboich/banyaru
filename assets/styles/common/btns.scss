@@ -112,3 +112,18 @@
 	justify-content: center;
 	align-items: center;
 }
+
+// btn-select
+
+.btn-select {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 2.4rem;
+	height: 2.4rem;
+	box-shadow: 1px 4px 12px rgba(166, 175, 205, 0.36);
+	border-radius: 50%;
+	transition: all 0.2s;
+}

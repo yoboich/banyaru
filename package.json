@@ -13,6 +13,7 @@
     "sass-loader": "^13.2.0"
   },
   "dependencies": {
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "vue-multiselect": "^3.0.0-alpha.2"
   }
 }

@@ -9,5 +9,5 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	css: ['normalize.css/normalize.css', 'assets/styles/main.scss'],
+	css: ['normalize.css/normalize.css', 'assets/styles/main.scss', 'vue-multiselect/dist/vue-multiselect.css'],
 });

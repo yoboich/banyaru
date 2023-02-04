@@ -18,7 +18,7 @@
 				</div>
 				<div class="book-card-first__price h2">
 					от 9 000 ₽
-					<span class="book-card-first__select">
+					<span class="book-card-first__select btn-select">
 						<IconSelect class="green" />
 					</span>
 				</div>
@@ -94,16 +94,7 @@
 		}
 
 		&__select {
-			cursor: pointer;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			position: relative;
-			width: 2.4rem;
-			height: 2.4rem;
-			box-shadow: 1px 4px 12px rgba(166, 175, 205, 0.36);
-			border-radius: 50%;
-			transition: all 0.2s;
+			
 		}
 
 		&__info-right {
