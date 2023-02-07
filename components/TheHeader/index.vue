@@ -246,7 +246,6 @@ const BathsDropdownMenu = {
   margin-left: auto;
   align-items: center;
   gap: 2.3rem;
-  padding-right: 3.2rem;
   & .btn {
     padding: 0.75rem 2rem;
     font-size: 1.6rem;

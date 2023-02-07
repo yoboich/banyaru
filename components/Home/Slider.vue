@@ -1,5 +1,5 @@
 <template>
-  <div class="slider">
+  <section class="slider">
     <div class="slider__wrapper">
     <div class="slider__inner">
       <div class="slider__titles">
@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="pagination"></div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

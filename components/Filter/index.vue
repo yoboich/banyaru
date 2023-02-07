@@ -15,7 +15,7 @@ let options = ref([
 </script>
 
 <template>
-  <div class="filter">
+  <section class="filter">
     <div class="nav">
       <div class="nav__inner">
         <div
@@ -155,7 +155,7 @@ let options = ref([
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
@@ -189,6 +189,8 @@ let options = ref([
       border-width: 5px 5px 0 5px;
       border-color: #8f99ba transparent transparent transparent;
       content: "";
+      width: 4rem;
+      height: 3.8rem;
     }
   }
   &__input {
@@ -196,7 +198,8 @@ let options = ref([
   }
 
   &__tags {
-    padding: 10px 40px 0px 8px;
+    font-size: 1.4rem;
+    padding: 1rem 4rem 0 .8rem;
     border: none;
   }
 

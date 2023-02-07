@@ -1,5 +1,5 @@
 <template>
-  <div class="map">
+  <section class="map">
     <h2 class="map__title">Поиск по карте</h2>
     <div class="map__content">
       <iframe
@@ -16,7 +16,7 @@
         style="filter: opacity(0.7)"
       ></iframe>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

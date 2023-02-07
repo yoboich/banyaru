@@ -32,7 +32,7 @@ const relatedProduct = ref([
 </script>
 
 <template>
-  <div class="popular">
+  <section class="popular">
     <div class="popular__nav nav">
       <h2 class="nav__title">Популярные предложения</h2>
       <ul class="nav__list">
@@ -64,7 +64,7 @@ const relatedProduct = ref([
         <div class="adv__price">22 300 руб.</div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
