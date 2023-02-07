@@ -9,5 +9,12 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	css: ['normalize.css/normalize.css', 'assets/styles/main.scss', 'vue-multiselect/dist/vue-multiselect.css'],
+	css: [
+		'normalize.css/normalize.css',
+		'assets/styles/main.scss',
+		'vue-multiselect/dist/vue-multiselect.css',
+	],
+	build: {
+		transpile: ['@vuepic/vue-datepicker'],
+	},
 });

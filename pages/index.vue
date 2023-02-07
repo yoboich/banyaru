@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-   <Filter/>
+    <Filter />
+    <HomeSlider/>
+    <HomeDiscount/>
+    <HomePopular/>
+    <HomeMap/>
   </div>
 </template>
-

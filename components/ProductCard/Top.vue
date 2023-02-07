@@ -56,6 +56,8 @@
 		&__top-info {
 			font-weight: 400;
 			font-size: 1.4rem;
+			display: flex;
+			gap: 0.8rem;
 		}
 
 		&__top-right {

@@ -97,6 +97,7 @@
 <style lang="scss" scoped>
 	.card-related {
 		margin-top: 2rem;
+		padding: 4rem 0;
 		&__content {
 		}
 
@@ -105,6 +106,7 @@
 			align-items: center;
 			justify-content: space-between;
 			margin-bottom: 4rem;
+			padding: 0 2.9rem;
 		}
 
 		&__title {
@@ -134,8 +136,6 @@
 
 		&__row {
 			display: flex;
-			gap: 2rem;
-			align-items: center;
 		}
 	}
 

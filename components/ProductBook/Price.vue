@@ -34,9 +34,7 @@
 		</div>
 		<div class="card-price__btns">
 			Смотреть все
-			<span class="card-price__select btn-select">
-				<IconSelect class="green" />
-			</span>
+			<IconSelect class="green" />
 		</div>
 	</div>
 </template>
