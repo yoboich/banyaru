@@ -1,34 +1,4 @@
-<script setup>
-	import Datepicker from '@vuepic/vue-datepicker';
-	const currentDate = ref(new Date().getDate());
-	const date = ref(new Date());
-	const dateValue = ref();
-
-	watchEffect(() => {
-		const year = date.value.getFullYear();
-		const month = date.value.getMonth();
-		const day = date.value.getDate();
-		dateValue.value = `${month}.${day}.${year}`;
-	});
-
-	const plusDay = () => {
-		date.value = new Date(date.value.setDate(date.value.getDate() + 1));
-	};
-	const minusDay = () => {
-		if (date.value.getDate() - 1 < currentDate.value) {
-			console.log(1);
-			return;
-		}
-		date.value = new Date(date.value.setDate(date.value.getDate() - 1));
-	};
-
-	const handleDate = modelData => {
-		if (modelData.getDate() < currentDate.value) {
-			return;
-		}
-		date.value = modelData;
-	};
-</script>
+<script setup></script>
 
 <template>
 	<div class="card card-detail">
@@ -52,29 +22,10 @@
 			</div>
 			<div class="card-detail__column">
 				<div class="card-detail__item">
-					<div class="card-detail__num h4">
-						<div class="card-detail__num-item">1.</div>
-						<div class="card-detail__num-text">Дата брони</div>
-					</div>
-					<div class="card-detail__date">
-						<div class="card-detail__change btn btn-white">
-							<IconArrow @click="minusDay" class="card-detail__arrow first" />
-							{{ dateValue }}
-							<IconArrow @click="plusDay" class="card-detail__arrow" />
-						</div>
-						<Datepicker
-							@update:modelValue="handleDate"
-							:value="date"
-							:range="false"
-							:enable-time-picker="false"
-						>
-							<template #trigger>
-								<div class="card-detail__calendar">
-									<IconCalendar />
-								</div>
-							</template>
-						</Datepicker>
-					</div>
+					<ProductBookDate />
+					<ProductBookTime />
+					<ProductBookCount />
+					<ProductBookWhom />
 				</div>
 			</div>
 			<div class="card-detail__column">
@@ -189,6 +140,22 @@
 			margin-bottom: 3rem;
 		}
 
+		&__num {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			font-weight: 700;
+			margin-bottom: 2rem;
+		}
+
+		&__num-item {
+			color: $mainFontColor;
+		}
+
+		&__num-text {
+			color: $mainFontColor;
+		}
+
 		&__hall {
 			color: $green-color;
 		}
@@ -210,61 +177,6 @@
 			color: $mainFontColor;
 			font-size: 1.6rem;
 			font-weight: 700;
-		}
-
-		&__num {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-			margin-bottom: 2rem;
-		}
-
-		&__num-item {
-			color: $mainFontColor;
-		}
-
-		&__num-text {
-			color: $mainFontColor;
-		}
-
-		&__date {
-			display: flex;
-			align-items: center;
-			gap: 1.8rem;
-		}
-
-		&__change {
-			padding: 0.5rem 1.1rem;
-			display: flex;
-			font-weight: 500;
-			font-size: 1.4rem;
-			gap: 1.6rem;
-			cursor: auto;
-			color: $mainFontColor;
-			&:hover {
-				background-color: #fff;
-			}
-		}
-
-		&__arrow {
-			width: 1.2rem;
-			cursor: pointer;
-
-			&.first {
-				transform: rotate(180deg);
-			}
-		}
-
-		&__calendar {
-			width: 3.5rem;
-			height: 3.5rem;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
-			background: #ffffff;
-			box-shadow: 0px 4px 22px rgba(143, 153, 186, 0.27);
 		}
 
 		&__item-info {
