@@ -1,32 +1,42 @@
 <template>
   <section class="slider">
     <div class="slider__wrapper">
-    <div class="slider__inner">
-      <div class="slider__titles">
-        <h1 class="slider__title">Название бани</h1>
-        <h2 class="slider__subtitle">Любая полезна инфа про баню</h2>
-      </div>
-      <div class="slider__thumbs thumbs">
-        <div class="thumbs__titles">
-          <h3 class="thumbs__title">Элитная сауна в центре</h3>
-          <h4 class="thumbs__subtitle">
-            Да прибудет с вами легкий Очаковский пар!
-          </h4>
+      <div class="slider__inner">
+        <div class="slider__titles">
+          <h1 class="slider__title">Название бани</h1>
+          <h2 class="slider__subtitle">Любая полезна инфа про баню</h2>
         </div>
-        <div class="thumbs__images">
-          <img src="@/assets/img/product-card/1.png" alt="" />
-          <img src="@/assets/img/product-card/2.png" alt="" />
-          <img src="@/assets/img/product-card/3.png" alt="" />
-          <img src="@/assets/img/product-card/4.png" alt="" />
+        <div class="slider__thumbs thumbs">
+          <div class="thumbs__titles">
+            <h3 class="thumbs__title">Элитная сауна в центре</h3>
+            <h4 class="thumbs__subtitle">
+              Да прибудет с вами легкий Очаковский пар!
+            </h4>
+          </div>
+          <div class="thumbs__images">
+            <img src="@/assets/img/product-card/1.png" alt="" />
+            <img src="@/assets/img/product-card/2.png" alt="" />
+            <img src="@/assets/img/product-card/3.png" alt="" />
+            <img src="@/assets/img/product-card/4.png" alt="" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="pagination"></div>
+    <div class="pagination">
+      <HomeSliderPagination />
+    </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
+.swiper-btn__arr {
+  &:nth-child(1) {
+    transform: rotate(-90deg);
+  }
+  &:nth-child(2) {
+    transform: rotate(90deg);
+  }
+}
 .pagination {
   height: 43rem;
   width: 5%;
@@ -34,8 +44,8 @@
   border-radius: 0px 23px 23px 0px;
 }
 .slider {
-  display: flex; 
-  align-items:center;
+  display: flex;
+  align-items: center;
   margin-top: 4.6rem;
   &__wrapper {
     width: 95%;

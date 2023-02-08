@@ -19,7 +19,7 @@
 
 <template>
 	<div class="card__top">
-		<div class="card__top-tariff" :class="badje">{{ badjeText }}</div>
+		<UIBadje :class="badje">{{ badjeText }}</UIBadje>
 
 		<div class="card__top-left">
 			<div class="card__top-info">Размещено 07.11.2019</div>

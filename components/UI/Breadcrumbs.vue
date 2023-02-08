@@ -1,12 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+	defineProps(['items']);
+</script>
 
 <template>
 	<ul class="breadcrumbs">
-		<li class="breadcrumbs__item">Главная</li>
-		<IconArrow class="breadcrumbs__arr" />
-		<li class="breadcrumbs__item">Бани в городе Москва</li>
-		<IconArrow class="breadcrumbs__arr" />
-		<li class="breadcrumbs__item">Аминьевские бани</li>
+		<template v-for="item in items" :key="item">
+			<li class="breadcrumbs__item">{{ item }}</li>
+			<IconArrow class="breadcrumbs__arr" />
+		</template>
 	</ul>
 </template>
 
@@ -26,6 +27,10 @@
 		&__arr {
 			width: 1.4rem;
 			height: 1.6rem;
+
+			&:last-child {
+				display: none;
+			}
 		}
 	}
 </style>

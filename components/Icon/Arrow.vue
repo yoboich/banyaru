@@ -29,4 +29,10 @@
 			fill: $green-color;
 		}
 	}
+	.swiper-btn__arr.active-black {
+		& path {
+			fill: #3E3E51;
+		}
+	}
+	
 </style>

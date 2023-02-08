@@ -1,11 +1,17 @@
-<script setup></script>
+<script setup>
+	const breadcrumbs = ref([
+		'Главная',
+		'Бани в городе Москва',
+		'Аминьевские бани',
+	]);
+</script>
 
 <template>
 	<div class="product-card">
 		<div class="container">
 			<!-- header -->
 			<div class="sub-header">
-				<UIBreadcrumbs />
+				<UIBreadcrumbs :items="breadcrumbs" />
 				<UserAction />
 			</div>
 			<NuxtPage />
