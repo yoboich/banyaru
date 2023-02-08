@@ -218,6 +218,7 @@ defineProps(["type", "name", "img", "metro", "walk", "price"]);
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    color: $secondary-color;
   }
 
   &__walk {
