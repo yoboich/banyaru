@@ -1,10 +1,12 @@
-<script setup></script>
+<script setup>
+	defineProps(['max', 'current']);
+</script>
 
 <template>
 	<div class="slider-btn">
 		<div class="slider-btn__content">
-			<span class="slider-btn__active h2">01</span> |
-			<span class="slider-btn__total h5">20</span>
+			<span class="slider-btn__active h2">{{ current }}</span> |
+			<span class="slider-btn__total h5">{{ max }}</span>
 		</div>
 	</div>
 </template>

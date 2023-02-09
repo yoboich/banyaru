@@ -2,31 +2,38 @@
   const data = [
     {
       name:'Царь-баня на дровах',
-      quantity:'3 объектов'
+      quantity:'3 объектов',
+      src:'/product'
     },
     {
       name:'Сауна Остров на Симоновском',
-      quantity:'2 объектов'
+      quantity:'2 объектов',
+      src:'/product'
     },
     {
       name:'Сауна Цветы',
-      quantity:'2 объектов'
+      quantity:'2 объектов',
+      src:'/product'
     },
     {
       name:'Сауна на Шаболовке',
-      quantity:'5 объектов'
+      quantity:'5 объектов',
+      src:'/product'
     },
     {
       name:'Сауна Фламинго',
-      quantity:'9 объектов'
+      quantity:'9 объектов',
+      src:'/product'
     },
     {
       name:'Банька на Декабристов',
-      quantity:'3 объектов'
+      quantity:'3 объектов',
+      src:'/product'
     },
     {
       name:'Сауна Пандок',
-      quantity:'2 объектов'
+      quantity:'2 объектов',
+      src:'/product'
     },
   ]
 </script>
@@ -74,10 +81,10 @@
       <div class="right__inner">
         <div v-for="item in data" class="right__item item">
           <img src="@/assets/img/home/circle-img.png" alt="" />
-          <div class="item__info">
+          <nuxt-link :to="item.src" class="item__info">
             <div class="item__name">{{ item.name }}</div>
             <div class="item__quantity">{{ item.quantity }}</div>
-          </div>
+          </nuxt-link>
         </div>
       </div>
     </div>

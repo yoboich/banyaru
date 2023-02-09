@@ -80,7 +80,9 @@ const BathsDropdownMenu = {
         <NuxtLink to="/" class="header__logo">
           <img src="@/assets/img/logo.png" alt="Баня" />
         </NuxtLink>
-        <TheHeaderCitySelect />
+        <transition name="fade">
+          <TheHeaderCitySelect />
+        </transition>
         <div class="menu-items">
           <ul class="nav">
             <li

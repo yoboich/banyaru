@@ -6,37 +6,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -46,37 +46,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -86,37 +86,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -126,37 +126,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -166,37 +166,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -206,37 +206,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -246,37 +246,37 @@ const items = [
       {
         name: "Spa-терапия",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Банный комплекс повышеной комфортности",
         quantity: "2000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Ледяная купель",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/product",
+        src: "/search",
       },
       {
         name: "Арендовать сауну на день",
         quantity: "4000",
-        src: "/product",
+        src: "/search",
       },
     ],
   },
@@ -287,9 +287,9 @@ const items = [
   <section class="links">
     <h2 class="links__title">Полезные ссылки</h2>
     <div class="links__inner">
-      <div class="links__item item item_first">
+      <nuxt-link to="/search" class="links__item item item_first">
         <h2 class="item__title_first">Каталог Саун</h2>
-      </div>
+      </nuxt-link>
       <div v-for="item in items" class="links__item item">
         <h2 class="item__title">{{ item.title }}</h2>
         <div class="item__menu">
@@ -303,9 +303,9 @@ const items = [
           </nuxt-link>
         </div>
       </div>
-      <div class="links__item item item_last">
+      <nuxt-link to="search" class="links__item item item_last">
         <h2 class="item__title_last">Загородные сауны</h2>
-      </div>
+      </nuxt-link>
     </div>
   </section>
 </template>

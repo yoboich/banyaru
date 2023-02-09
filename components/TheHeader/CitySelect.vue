@@ -1,15 +1,168 @@
 <script lang="ts" setup>
 let isActive = ref(false);
+let selectCity = ref("Москва");
+let search = ref('');
+
+const filteredData = computed(() => {
+  return data.filter(({ city }) =>
+    [city].some((val) => val.toLowerCase().includes(search.value))
+  );
+});
+const data = [
+  {
+    city: "Москва",
+  },
+  {
+    city: "Санкт-Петербург",
+  },
+  {
+    city: "Новосибирск",
+  },
+  {
+    city: "Екатеринбург",
+  },
+  {
+    city: "Казань",
+  },
+  {
+    city: "Нижний Новгород",
+  },
+  {
+    city: "Челябинск",
+  },
+  {
+    city: "Самара",
+  },
+  {
+    city: "Омск",
+  },
+  {
+    city: "Ростов-на-Дону",
+  },
+  {
+    city: "Уфа",
+  },
+  {
+    city: "Красноярск",
+  },
+  {
+    city: "Воронеж",
+  },
+  {
+    city: "Пермь",
+  },
+  {
+    city: "Волгоград",
+  },
+  {
+    city: "Краснодар",
+  },
+  {
+    city: "Саратов",
+  },
+  {
+    city: "Тольятти",
+  },
+  {
+    city: "Тюмень",
+  },
+  {
+    city: "Ижевск",
+  },
+  {
+    city: "Барнаул",
+  },
+  {
+    city: "Ульяновск",
+  },
+  {
+    city: "Иркутск",
+  },
+  {
+    city: "Хабаровск",
+  },
+  {
+    city: "Ярославль",
+  },
+  {
+    city: "Владивосток",
+  },
+  {
+    city: "Махачкала",
+  },
+  {
+    city: "Оренбург",
+  },
+  {
+    city: "Томск",
+  },
+  {
+    city: "Кемерово",
+  },
+  {
+    city: "Новокузнецк",
+  },
+  {
+    city: "Рязань",
+  },
+  {
+    city: "Набережные Челны",
+  },
+  {
+    city: "Астрахань",
+  },
+  {
+    city: "Пенза",
+  },
+  {
+    city: "Киров",
+  },
+  {
+    city: "Липецк",
+  },
+  {
+    city: "Калининград",
+  },
+  {
+    city: "Чебоксары",
+  },
+  {
+    city: "Тула",
+  },
+];
 </script>
 
 <template>
   <div @click="isActive = !isActive" class="city-select">
     <img src="@/assets/img/icon/geo.svg" alt="" />
-    <span>Москва</span>
+    <span>{{ selectCity }}</span>
     <span
       :class="[isActive ? 'city-select__icon_active' : '']"
       class="city-select__icon"
     ></span>
+  </div>
+  <div
+    v-if="isActive"
+    @click="isActive = !isActive"
+    class="city-dropdown__overlay"
+  ></div>
+  <div :class="[isActive ? 'active' : '']" class="city-dropdown">
+    <div class="city-dropdown__title">Выбор города</div>
+    <span class="city-dropdown__info"
+      >10 578 пунктов выдачи в 1 154 городах</span
+    >
+    <input placeholder="Поиск" type="search" v-model="search" />
+    <div class="city-dropdown__inner">
+      <p
+        class="city-dropdown__item"
+        @click="selectCity = city.city"
+        :class="[selectCity === city.city ? 'active' : '']"
+        v-for="city in filteredData"
+      >
+        {{ city.city }}
+      </p>
+      <p v-if="!filteredData.length">Город не найден</p>
+    </div>
   </div>
 </template>
 
@@ -55,6 +208,77 @@ let isActive = ref(false);
         background-color: $green-color;
         transition: all 0.2s;
       }
+    }
+  }
+}
+.city-dropdown {
+  max-width: 68rem;
+  width: 100%;
+  position: absolute;
+  padding: 3.3rem 4rem 4.2rem 3.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  top: 9rem;
+  z-index: 1002;
+  background: $default-color;
+  box-shadow: 0px 7px 27px rgba(136, 152, 206, 0.35);
+  border-radius: 1.2rem;
+  opacity: 0;
+  transform: translateY(-2rem);
+  transition: all 0.2s ease;
+  visibility: hidden;
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+    visibility: visible;
+  }
+  &__title {
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.9rem;
+  }
+  &__info {
+    color: $secondary-color;
+    margin-bottom: 3.5rem;
+  }
+  & input {
+    max-width: 32rem;
+    width: 100%;
+    padding: 1.1rem 1.5rem;
+    border: 0.1rem solid #8f99ba;
+    border-radius: 10rem;
+    margin-bottom: 5.2rem;
+    &::placeholder {
+      color: $secondary-color;
+    }
+  }
+  &__overlay {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin-left: calc(-50vw + 50%);
+    top: 9rem;
+    left: 0;
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10rem;
+    row-gap: 1.5rem;
+  }
+  &__item {
+    cursor: pointer;
+    &:hover {
+      color: $green-color;
+      transition: all 0.2s ease;
+    }
+    &.active {
+      color: $green-color;
     }
   }
 }

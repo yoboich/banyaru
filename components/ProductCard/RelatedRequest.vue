@@ -21,7 +21,7 @@ defineProps(["type", "name", "img", "metro", "walk", "price"]);
         <div class="card-related__play">
           <!-- <img src="~/assets/img/product-card/play.svg" alt="" /> -->
         </div>
-        <button class="btn btn-white card-related__btn">Подробнее</button>
+        <nuxt-link to="/product/vip" class="btn btn-white card-related__btn">Подробнее</nuxt-link>
       </div>
       <div class="card-related__hover">
         <div class="card-related__name h3">{{ name }}</div>

@@ -49,17 +49,22 @@ const product = ref([
         <li class="nav__item">Услуги</li>
         <li class="nav__item">Предбанник</li>
       </ul>
-      <div class="nav__button">
-        <UISwiperButton />
-      </div>
+      <nuxt-link class="nav__button btn btn-green" to="/search"
+        >Показать все сауны</nuxt-link
+      >
     </div>
     <div class="premium__inner">
       <div v-for="item in product" class="premium__item">
         <div class="premium__desc">
           <div class="premium__title">{{ item.name }}</div>
-          <div class="premium__text">Портал BANYA.RU – это единая площадка, на которой встречаются любители лёгкого пара со всей страны. У нас вы можете быстро подобрать близкое для вас заведение на карте или при помощи удобного фильтра.</div>
+          <div class="premium__text">
+            Портал BANYA.RU – это единая площадка, на которой встречаются
+            любители лёгкого пара со всей страны. У нас вы можете быстро
+            подобрать близкое для вас заведение на карте или при помощи удобного
+            фильтра.
+          </div>
         </div>
-        <div class="premium__card">
+        <nuxt-link to="/product/vip" class="premium__card">
           <HomePremiumCard
             :img="item.img"
             :metro="item.metro"
@@ -68,7 +73,7 @@ const product = ref([
             :walk="item.walk"
             :price="item.price"
           />
-        </div>
+        </nuxt-link>
       </div>
     </div>
   </section>
@@ -83,35 +88,35 @@ const product = ref([
     flex-direction: column;
     gap: 6.9rem;
   }
-  &__item{
+  &__item {
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
     gap: 5rem;
-    &::after{
-      content:'';
+    &::after {
+      content: "";
       position: absolute;
-      height: .1rem;
+      height: 0.1rem;
       width: 45%;
       bottom: -25%;
       left: 1%;
-      background-color:#E1E5F2
+      background-color: #e1e5f2;
     }
-    &:last-child::after{
+    &:last-child::after {
       height: 0;
     }
   }
-  &__desc{
+  &__desc {
     position: relative;
   }
-  &__title{
+  &__title {
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 2.6rem;
   }
-  &__text{
-    color:$secondary-color;
+  &__text {
+    color: $secondary-color;
   }
 }
 .nav {
@@ -127,6 +132,11 @@ const product = ref([
   &__list {
     display: flex;
     gap: 7.5rem;
+  }
+  &__button {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 1.5rem 2.2rem;
   }
   &__item {
     &_active {
