@@ -36,7 +36,6 @@
 
 <template>
 	<div class="search-found">
-		x
 		<div class="search__recomend recomend">
 			<div class="recomend__title h3">Рекомендуем посмотреть</div>
 			<div class="recomend__row">
@@ -53,7 +52,6 @@
 </template>
 
 <style lang="scss" scoped>
-
 	.recomend {
 		margin-bottom: 5rem;
 		&__title {

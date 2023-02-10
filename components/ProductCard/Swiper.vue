@@ -2,16 +2,18 @@
 	// Import Swiper Vue.js components
 	import { Swiper, SwiperSlide } from 'swiper/vue';
 	// import { useSwiper } from 'swiper/vue';
-	// const ss = useSwiper();
+	// const sr = useSwiper();
+	// sr.value.slideTo()
 
 	// Import Swiper styles
 	import 'swiper/css';
 
+	import 'swiper/css/thumbs';
 	import 'swiper/css/pagination';
 	import 'swiper/css/navigation';
 
 	// import required modules
-	import { Pagination, Navigation } from 'swiper';
+	import { Pagination, Navigation, Thumbs } from 'swiper';
 
 	import img1 from '~/assets/img/product-card/1.png';
 	import img2 from '~/assets/img/product-card/2.png';
@@ -33,8 +35,8 @@
 	// swiper
 
 	const swiperBtn = ref(null);
+	const thumbsSwiper = ref(null);
 	function getRef(swiperInstance) {
-		console.log(swiperInstance);
 		swiperBtn.value = swiperInstance;
 	}
 
@@ -44,17 +46,19 @@
 	function prev() {
 		swiperBtn.value.slidePrev();
 	}
-	const modules = [Pagination, Navigation];
+	function setThumbsSwiper(swiper) {
+		thumbsSwiper.value = swiper;
+	}
+	function slideTo(idx) {
+		swiperBtn.value.slideTo(idx);
+	}
+	const modules = [Pagination, Navigation, Thumbs];
 </script>
 
 <template>
 	<div class="product-card-swiper">
 		<swiper @swiper="getRef" :modules="modules" class="product-swiper">
-			<swiper-slide v-for="item in 4" v-slot="{ isActive }">
-				<div>
-					Current slide is <span>click</span>
-					{{ isActive ? 'active' : 'not active' }}
-				</div>
+			<swiper-slide v-for="item in 7">
 				<div class="product-card-swiper__main">
 					<img
 						class="product-card-swiper__bg"
@@ -69,23 +73,22 @@
 					/>
 					<div class="product-card-swiper__play pos" v-if="premium">
 						<img src="~/assets/img/product-card/play.svg" alt="" />
-					</div>
-
-					<div
-						class="product-card-swiper__arrow arrow-left pos"
-						v-if="premium"
-						@click="prev"
-					>
-						<IconArrow class="fill" />
-					</div>
-					<div
-						class="product-card-swiper__arrow arrow-right pos"
-						@click="next"
-						v-if="premium"
-					>
-						<IconArrow />
 					</div></div
 			></swiper-slide>
+			<div
+				class="product-card-swiper__arrow arrow-left pos"
+				v-if="premium"
+				@click="prev"
+			>
+				<IconArrow class="fill" />
+			</div>
+			<div
+				class="product-card-swiper__arrow arrow-right pos"
+				@click="next"
+				v-if="premium"
+			>
+				<IconArrow />
+			</div>
 			<UISliderButton
 				:current="swiperBtn?.realIndex + 1"
 				:max="swiperBtn?.snapGrid?.length"
@@ -94,15 +97,38 @@
 			/>
 		</swiper>
 
-		<div class="product-card-swiper__thumbnail" v-if="premium">
-			<img v-for="(item, idx) in 7" :src="images[idx]" alt="" />
-		</div>
+		<swiper
+			@swiper="setThumbsSwiper"
+			:spaceBetween="5"
+			:watchSlidesProgress="true"
+			:modules="modules"
+			class="product-card-swiper-small"
+		>
+			<swiper-slide v-for="(item, idx) in 7" v-if="premium">
+				<div class="product-card-swiper__thumbnail">
+					<img
+						@click="slideTo(idx)"
+						:src="images[idx]"
+						alt=""
+						:class="{
+							active: idx === swiperBtn?.realIndex,
+						}"
+					/>
+				</div>
+			</swiper-slide>
+		</swiper>
 	</div>
 </template>
 
 <style lang="scss">
 	.product-swiper {
 		max-width: 81rem;
+	}
+	.product-card-swiper-small {
+		overflow: visible;
+		& .swiper-slide {
+			max-width: 11rem;
+		}
 	}
 
 	.pos {
@@ -171,6 +197,7 @@
 		}
 
 		&__thumbnail {
+			max-width: 11rem;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -184,7 +211,7 @@
 				border-radius: 12px;
 				cursor: pointer;
 
-				&:hover {
+				&.active {
 					border: 2px solid #17a300;
 					filter: drop-shadow(0px 7px 23px rgba(118, 130, 168, 0.55));
 					border-radius: 12px;
