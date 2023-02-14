@@ -125,28 +125,65 @@ li {
 // badje
 
 .card__top-tariff {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
 	position: absolute;
 	top: 0.5rem;
 	left: -4.5rem;
-	background: #8f99ba;
-	color: white;
-	padding: 1rem;
-	border-radius: 6px 0 0px 0px;
+	padding: .5rem 0.5rem 0.5rem 1.5rem;
+	background: #ffffff;
+	box-shadow: 0px 6px 21px rgba(166, 175, 205, 0.22);
+	border-radius: 100px;
+
+	& svg {
+		& circle {
+			stroke: $secondary-color;
+		}
+		& path {
+			fill: $secondary-color;
+		}
+	}
 
 	&.book {
-		background: $purple-color;
+		color: $purple-color;
+
+		& svg {
+			& circle {
+				stroke: $purple-color;
+			}
+			& path {
+				fill: $purple-color;
+			}
+		}
 	}
 
 	&.vip {
-		background: $vip-color;
-		padding-right: 3.2rem
+		color: $vip-color;
+
+		& svg {
+			& circle {
+				stroke: $vip-color;
+			}
+			& path {
+				fill: $vip-color;
+			}
+		}
 	}
 
 	&.buy {
-		background-color: $green-color;
+		color: $green-color;
+
+		& svg {
+			& circle {
+				stroke: $green-color;
+			}
+			& path {
+				fill: $green-color;
+			}
+		}
 	}
 }
-
 
 .no-box {
 	box-shadow: none !important;

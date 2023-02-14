@@ -13,16 +13,17 @@
 
 <style lang="scss" scoped>
 	.slider-btn {
-		background-color: $default-color;
+		background-color: rgba($color: #fff, $alpha: 0.9);
 		border-radius: 2.2rem;
 		display: flex;
 		align-items: center;
 		gap: 0.2rem;
-		padding: 1.3rem 2.5rem;
+		padding: 1.3rem 2.6rem;
 
 		border-radius: 23px;
 
 		&__content {
+			color: #9da7c7;
 		}
 
 		&__active {

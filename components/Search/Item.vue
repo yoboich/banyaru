@@ -1,30 +1,74 @@
 <script setup>
+	// Import Swiper Vue.js components
+	import { Swiper, SwiperSlide } from 'swiper/vue';
+
+	import bigIm1 from '~/assets/img/promotions/1.jpg';
+	import bigIm2 from '~/assets/img/promotions/2.jpg';
+	import bigIm3 from '~/assets/img/promotions/3.jpg';
+
+	// Import Swiper styles
+	import 'swiper/css';
 	defineProps(['badje']);
+
+	const mainImages = ref([bigIm1, bigIm2, bigIm3, bigIm2]);
+
+	const swiperBtn = ref(null);
+	const currentImg = computed(() => swiperBtn.value?.realIndex + 1);
+
+	function getRef(swiperInstance) {
+		swiperBtn.value = swiperInstance;
+	}
+
+	function next() {
+		swiperBtn.value.slideNext();
+	}
+	function prev() {
+		swiperBtn.value.slidePrev();
+	}
+
+	function slideTo(idx) {
+		swiperBtn.value.slideTo(idx);
+	}
 </script>
 
 <template>
 	<div class="search__item card no-box">
 		<div class="search__swip">
-			<div class="search__main-img">
-				<img class="search__img" src="~/assets/img/search/main.png" alt="" />
-				<div class="search__like img-pos">
-					<img src="~/assets/img/icon/love.svg" alt="" />
-				</div>
-				<div class="search__play img-pos">
-					<img src="~/assets/img/product-card/play.svg" alt="" />
-				</div>
-				<div class="search__arrow inactive back img-pos">
+			<swiper @swiper="getRef" class="search-swiper">
+				<swiper-slide v-for="(item, idx) in 4">
+					<div class="search__main-img">
+						<img class="search__img" :src="mainImages[idx]" alt="" />
+						<div class="search__like img-pos">
+							<img src="~/assets/img/icon/love.svg" alt="" />
+						</div>
+						<div class="search__play img-pos">
+							<img src="~/assets/img/product-card/play-white.svg" alt="" />
+						</div></div
+				></swiper-slide>
+				<div
+					@click="prev"
+					class="search__arrow back img-pos"
+					:class="{ inactive: currentImg === 1 }"
+				>
 					<img src="~/assets/img/search/big-arr.png" alt="" />
 				</div>
-				<div class="search__arrow img-pos">
+
+				<div
+					@click="next"
+					class="search__arrow img-pos"
+					:class="{ inactive: currentImg === 4 }"
+				>
 					<img src="~/assets/img/search/big-arr.png" alt="" />
 				</div>
-			</div>
+			</swiper>
+
 			<div class="search__thumbnail" v-if="true">
-				<img src="~/assets/img/search/main.png" alt="" />
-				<img src="~/assets/img/search/main.png" alt="" />
-				<img src="~/assets/img/search/main.png" alt="" />
-				<img src="~/assets/img/search/main.png" alt="" />
+				<img
+					v-for="(item, idx) in 4"
+					@click="slideTo(idx)"
+					:src="mainImages[idx]"
+					alt=""
+				/>
 			</div>
 		</div>
 		<div class="search__info info-search">
@@ -38,7 +82,7 @@
 					class="info-search__logo"
 					:class="badje.type"
 				/>
-				<UIBadje class="info-search__badje" :class="badje.type">{{
+				<UIBadje :icon="false" class="info-search__badje" :class="badje.type">{{
 					badje.text
 				}}</UIBadje>
 			</div>
@@ -98,6 +142,9 @@
 </template>
 
 <style lang="scss" scoped>
+	.search-swiper {
+		max-width: 40rem;
+	}
 	.img-pos {
 		position: absolute;
 		border-radius: 50%;
@@ -127,7 +174,6 @@
 		}
 
 		&__swip {
-			min-width: 40rem;
 			max-width: 40rem;
 			display: flex;
 			flex-direction: column;
@@ -212,6 +258,23 @@
 			top: 2rem;
 			left: auto;
 			right: -1rem;
+			background: #8f99ba;
+			color: white;
+			padding: 1rem;
+			border-radius: 6px 0 0px 0px;
+
+			&.book {
+				background: $purple-color;
+			}
+
+			&.vip {
+				background: $vip-color;
+				padding-right: 3.2rem;
+			}
+
+			&.buy {
+				background-color: $green-color;
+			}
 		}
 
 		&__title {

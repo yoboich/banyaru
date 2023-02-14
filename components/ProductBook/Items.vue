@@ -21,7 +21,7 @@
 					<div class="card-offers__type h5">{{ item.type }}</div>
 					<div class="card-offers__img">
 						<div class="card-offers__play" v-if="item.video">
-							<img src="~/assets/img/product-card/play.svg" alt="" />
+							<img src="~/assets/img/product-card/play-white.svg" alt="" />
 						</div>
 						<img :src="item.img" alt="" />
 					</div>

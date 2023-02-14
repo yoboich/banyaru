@@ -45,6 +45,33 @@
 			price: '22 300',
 		},
 	]);
+
+	const nav = ref([
+		{
+			text: 'Бани и сауны',
+			active: false,
+		},
+		{
+			text: 'Номера',
+			active: true,
+		},
+		{
+			text: 'Услуги',
+			active: false,
+		},
+		{
+			text: 'Предбанник',
+			active: false,
+		},
+	]);
+
+	const activeLink = item => {
+		if (item.active === true) {
+			return;
+		}
+		nav.value.forEach(i => (i.active = false));
+		item.active = true;
+	};
 </script>
 
 <template>
@@ -53,28 +80,14 @@
 			<div class="card-related__top">
 				<div class="card-related__title h1">Похожи сауны</div>
 				<ul class="nav card-related__nav">
-					<li class="nav__item">
-						<nuxt-link class="nav__link card-related__link h4" to="/1"
-							>Бани и&nbsp;сауны</nuxt-link
-						>
-					</li>
-					<li class="nav__item">
-						<nuxt-link
+					<li v-for="item in nav" :key="item.text" class="nav__item">
+						<button
 							class="nav__link card-related__link h4"
-							:class="{ active: true }"
-							to="/"
-							>Номера</nuxt-link
+							:class="{ active: item.active }"
+							@click="activeLink(item)"
 						>
-					</li>
-					<li class="nav__item">
-						<nuxt-link class="nav__link card-related__link h4" to="/3"
-							>Услуги</nuxt-link
-						>
-					</li>
-					<li class="nav__item">
-						<nuxt-link class="nav__link card-related__link h4" to="/4"
-							>Предбанник</nuxt-link
-						>
+							{{ item.text }}
+						</button>
 					</li>
 				</ul>
 				<UISwiperButton />
@@ -116,6 +129,8 @@
 		}
 
 		&__link {
+			background-color: transparent;
+			cursor: pointer;
 			&.active {
 				font-size: 1.6rem;
 				color: $green-color;

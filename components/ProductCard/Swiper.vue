@@ -36,6 +36,8 @@
 	]);
 	const images = ref([img1, img2, img3, img4, img5, img6, img7]);
 
+	const modalVisible = ref(false);
+
 	// swiper
 
 	const swiperBtn = ref(null);
@@ -63,6 +65,12 @@
 
 <template>
 	<div class="product-card-swiper">
+		<Teleport to="body">
+			<PreviewModal
+				:visible="modalVisible"
+				@close-modal="modalVisible = false"
+			/>
+		</Teleport>
 		<swiper
 			@swiper="getRef"
 			:modules="modules"
@@ -78,7 +86,11 @@
 						alt=""
 						class="product-card-swiper__logo pos"
 					/>
-					<div class="product-card-swiper__play pos" v-if="premium">
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
 						<img src="~/assets/img/product-card/play.svg" alt="" />
 					</div></div
 			></swiper-slide>
