@@ -46,7 +46,7 @@
 		}
 
 		&__top-left {
-			padding-left: 6.4rem;
+			padding-left: 11.4rem;
 			display: flex;
 			align-items: center;
 

@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+	const activeText = ref(0);
+	const text = ref([
+		'А Сибирский сруб рядом! Для этого не нужно ехать за 5000 километров. У вас есть уникальная возможность принять комплекс настоящих',
+		'А Сибирский сруб рядом! Для этого не нужно ехать за 5000 километров. У вас есть уникальная возможность принять комплекс настоящих. А ехать за 5000 километров. У вас есть уникальная возможность принять комплекс настоящих',
+	]);
+</script>
 
 <template>
 	<div class="card">
@@ -9,11 +15,13 @@
 				<ProductVipSecond />
 				<div class="vip-card-third">
 					<div class="vip-card-third__text h4">
-						А Сибирский сруб рядом! Для этого не нужно ехать за 5000 километров.
-						<br />
-						У вас есть уникальная возможность принять комплекс настоящих
+						{{ activeText === 0 ? text[0] : text[1] }}
 					</div>
-					<div class="card__read keep-read">
+					<div
+						class="card__read keep-read"
+						v-if="activeText === 0"
+						@click="activeText = 1"
+					>
 						Читать всё <IconArrow class="green" />
 					</div>
 				</div>
