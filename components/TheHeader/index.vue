@@ -1,76 +1,7 @@
 <script lang="ts" setup>
 let isActive = ref(false);
 
-const BathsDropdownMenu = {
-  linksBaths: [
-    {
-      name: "Баня",
-      src: "/asd",
-    },
-    {
-      name: "Сауна",
-      src: "/asd",
-    },
-    {
-      name: "Хаммам",
-      src: "/",
-    },
-    {
-      name: "Баня на дровах",
-      src: "/asd",
-    },
-    {
-      name: "Баня по-черному",
-      src: "/asd",
-    },
-    {
-      name: "Японская / афуро",
-      src: "/asd",
-    },
-    {
-      name: "Банный чан",
-      src: "/asd",
-    },
-    {
-      name: "Кедровая бочка",
-      src: "/asd",
-    },
-    {
-      name: "Инфракрасная",
-      src: "/asd",
-    },
-    {
-      name: "Римские / Термы",
-      src: "/asd",
-    },
-    {
-      name: "Общественные бани",
-      src: "/asd",
-    },
-    {
-      name: "Автобаня",
-      src: "/asd",
-    },
-    {
-      name: "Баня на воде",
-      src: "/asd",
-    },
-  ],
-  linksRooms: [
-    {
-      name: "На час",
-      src: "/asd",
-    },
-    {
-      name: "На ночь",
-      src: "/asd",
-    },
-    {
-      name: "Посуточно",
-      src: "/asd",
-    },
-  ],
-};
+let activeMenu = ref(0);
 </script>
 
 <template>
@@ -86,17 +17,35 @@ const BathsDropdownMenu = {
         <div class="menu-items">
           <ul class="nav">
             <li
-              @click="isActive = !isActive"
-              :class="[isActive ? 'nav__item_active' : '']"
+              @click="(activeMenu = 1), (isActive = true)"
+              :class="[
+                activeMenu == 1 && isActive == true ? 'nav__item_active' : '',
+              ]"
               class="nav__item"
             >
               Снять
             </li>
-            <li class="nav__item">Услуги</li>
-            <li class="nav__item">Купить</li>
+            <li
+              @click="(activeMenu = 2), (isActive = true)"
+              :class="[
+                activeMenu == 2 && isActive == true ? 'nav__item_active' : '',
+              ]"
+              class="nav__item"
+            >
+              Услуги
+            </li>
+            <li
+              @click="(activeMenu = 3), (isActive = true)"
+              :class="[
+                activeMenu == 3 && isActive == true ? 'nav__item_active' : '',
+              ]"
+              class="nav__item"
+            >
+              Купить
+            </li>
             <transition name="fade">
               <TheHeaderDropdownMenu
-                :menu="BathsDropdownMenu"
+                :activeMenu="activeMenu"
                 @close="() => (isActive = false)"
                 v-if="isActive"
               />

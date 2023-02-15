@@ -22,4 +22,25 @@
 	</svg>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.setting-aside__info-item {
+	& path {
+		fill: $green-color;
+	}
+}
+
+.cabinet-card-ads__badje {
+	& svg {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
+}
+
+.cabinet-card-favorite__badje {
+	& svg {
+		width: 2rem;
+		height: 2rem;
+	}
+}
+</style>

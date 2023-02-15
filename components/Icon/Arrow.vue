@@ -23,6 +23,12 @@
 			fill: $green-color;
 		}
 	}
+	.black {
+		width: 1.4rem;
+		& path {
+			fill: $mainFontColor;
+		}
+	}
 
 	.swiper-btn__arr.active {
 		& path {
@@ -31,8 +37,7 @@
 	}
 	.swiper-btn__arr.active-black {
 		& path {
-			fill: #3E3E51;
+			fill: #3e3e51;
 		}
 	}
-	
 </style>

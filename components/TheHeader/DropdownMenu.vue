@@ -1,12 +1,184 @@
 <script setup>
-
-defineProps({
-  menu: {
-    type: Object,
-    required: true
+const props = defineProps(["activeMenu"]);
+console.log(props.activeMenu);
+const takeOffMenuData = [
+  {
+    title: "Бани",
+    links: [
+      {
+        name: "Баня",
+        src: "/asd",
+      },
+      {
+        name: "Сауна",
+        src: "/asd",
+      },
+      {
+        name: "Хаммам",
+        src: "/",
+      },
+      {
+        name: "Баня на дровах",
+        src: "/asd",
+      },
+      {
+        name: "Баня по-черному",
+        src: "/asd",
+      },
+      {
+        name: "Японская / афуро",
+        src: "/asd",
+      },
+      {
+        name: "Банный чан",
+        src: "/asd",
+      },
+      {
+        name: "Кедровая бочка",
+        src: "/asd",
+      },
+      {
+        name: "Инфракрасная",
+        src: "/asd",
+      },
+      {
+        name: "Римские / Термы",
+        src: "/asd",
+      },
+      {
+        name: "Общественные бани",
+        src: "/asd",
+      },
+      {
+        name: "Автобаня",
+        src: "/asd",
+      },
+      {
+        name: "Баня на воде",
+        src: "/asd",
+      },
+    ],
   },
-})
+  {
+    title: "Номера",
+    links: [
+      {
+        name: "На час",
+        src: "/asd",
+      },
+      {
+        name: "На ночь",
+        src: "/asd",
+      },
+      {
+        name: "Посуточно",
+        src: "/asd",
+      },
+    ],
+  },
+];
 
+const ServicesMenuData = [
+  {
+    title: "Title",
+    links: [
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+    ],
+  },
+  {
+    title: "Title",
+    links: [
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+    ],
+  },
+  {
+    title: "Title",
+    links: [
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+      {
+        name: "Item",
+        src: "/asd",
+      },
+    ],
+  },
+];
 </script>
 
 <template>
@@ -14,26 +186,51 @@ defineProps({
     <div @click="$emit('close')" class="dropdown-menu__overlay"></div>
     <div class="container">
       <div class="menu">
-        <div class="menu__item">
+        <div
+          v-if="activeMenu == 1"
+          v-for="item in takeOffMenuData"
+          class="menu__item"
+        >
           <ul class="nav">
-            <h4 class="nav__title">Бани</h4>
-            <li v-for="link in menu.linksBaths" class="nav__item">
+            <h4 class="nav__title">{{ item.title }}</h4>
+            <li v-for="link in item.links" class="nav__item">
               <nuxt-link class="nav__link" :to="link.src">{{
                 link.name
               }}</nuxt-link>
             </li>
           </ul>
         </div>
-        <div class="menu__item">
+
+        <div
+          v-if="activeMenu == 2"
+          v-for="item in ServicesMenuData"
+          class="menu__item"
+        >
           <ul class="nav">
-            <h4 class="nav__title">Номера</h4>
-            <li v-for="link in menu.linksRooms" class="nav__item">
+            <h4 class="nav__title">{{ item.title }}</h4>
+            <li v-for="link in item.links" class="nav__item">
               <nuxt-link class="nav__link" :to="link.src">{{
                 link.name
               }}</nuxt-link>
             </li>
           </ul>
         </div>
+
+        <div
+          v-if="activeMenu == 3"
+          v-for="item in ServicesMenuData"
+          class="menu__item"
+        >
+          <ul class="nav">
+            <h4 class="nav__title">{{ item.title }}</h4>
+            <li v-for="link in item.links" class="nav__item">
+              <nuxt-link class="nav__link" :to="link.src">{{
+                link.name
+              }}</nuxt-link>
+            </li>
+          </ul>
+        </div>
+
         <div class="menu__banner">
           <div class="menu__banner banner">
             <div class="banner__text">

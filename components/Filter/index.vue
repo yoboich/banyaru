@@ -1,17 +1,7 @@
 <script setup>
-import Multiselect from "vue-multiselect";
-// import "vue-multiselect/dist/vue-multiselect.css";
 let activeTab = ref(1);
+let isActive = ref(false)
 
-let value = ref([]);
-let options = ref([
-  { name: "Vue.js", language: "JavaScript" },
-  { name: "Adonis", language: "JavaScript" },
-  { name: "Rails", language: "Ruby" },
-  { name: "Sinatra", language: "Ruby" },
-  { name: "Laravel", language: "PHP" },
-  { name: "Phoenix", language: "Elixir" },
-]);
 </script>
 
 <template>
@@ -49,109 +39,16 @@ let options = ref([
     <div class="filter-wrapper">
       <div class="container">
         <div class="filter-form">
-          <div class="filter-form__select">
-            <multiselect
-              v-model="value"
-              :options="options"
-              :multiple="true"
-              :close-on-select="false"
-              :clear-on-select="false"
-              placeholder="Баню/сауну"
-              label="name"
-              track-by="name"
-              selectLabel="Выбрать"
-              selectedLabel="Выбрано"
-              deselectLabel="Удалить"
-            >
-              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
-                ><span
-                  class="multiselect__single"
-                  v-if="value.length"
-                  v-show="!isOpen"
-                  >{{ value.length }} options selected</span
-                ></template
-              > -->
-            </multiselect>
-            <multiselect
-              v-model="value"
-              :options="options"
-              :multiple="true"
-              :close-on-select="false"
-              :clear-on-select="false"
-              placeholder="Парная"
-              label="name"
-              track-by="name"
-              selectLabel="Выбрать"
-              selectedLabel="Выбрано"
-              deselectLabel="Удалить"
-            >
-              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
-                ><span
-                  class="multiselect__single"
-                  v-if="value.length"
-                  v-show="!isOpen"
-                  >{{ value.length }}</span
-                ></template
-              > -->
-            </multiselect>
-            <multiselect
-              v-model="value"
-              :options="options"
-              :multiple="true"
-              :close-on-select="false"
-              :clear-on-select="false"
-              placeholder="Цена"
-              label="name"
-              track-by="name"
-              selectLabel="Выбрать"
-              selectedLabel="Выбрано"
-              deselectLabel="Удалить"
-            >
-              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
-                ><span
-                  class="multiselect__single"
-                  v-if="value.length"
-                  v-show="!isOpen"
-                  >{{ value.length }} options selected</span
-                ></template
-              > -->
-            </multiselect>
-            <multiselect
-              v-model="value"
-              :options="options"
-              :multiple="true"
-              :close-on-select="false"
-              :clear-on-select="false"
-              placeholder="18+"
-              label="name"
-              track-by="name"
-              selectLabel="Выбрать"
-              selectedLabel="Выбрано"
-              deselectLabel="Удалить"
-            >
-              <!-- <template v-slot:selection slot-scope="{ values, search, isOpen }"
-                ><span
-                  class="multiselect__single"
-                  v-if="value.length"
-                  v-show="!isOpen"
-                  >{{ value.length }} options selected</span
-                ></template
-              > -->
-            </multiselect>
-            <div class="filter-form__checkbox" style="display: flex">
-              <input id="c1" type="checkbox" />
-              <label for="c1">Элитные</label>
-            </div>
-            <div class="filter-form__input">
-              <input
-                placeholder="Метро, район, улица, название"
-                id="input"
-                type="text"
-              />
-              <label for="input"></label>
-            </div>
-            <div class="filter-form__button">Еще фильтры</div>
+          <FilterTakeOff v-if="activeTab == 1" />
+          <FilterServices v-if="activeTab == 2" />
+          <FilterBuy v-if="activeTab == 3" />
+          <div @click="isActive = !isActive" class="filter-form__button">
+              <span>Еще фильтры</span>
+              <img src="@/assets/img/icon/select-green.svg" alt="">
           </div>
+          <transition name="fade">
+            <FilterDropdown  @close="() => (isActive = false)" v-if="isActive"/>
+          </transition>
         </div>
       </div>
     </div>
@@ -161,6 +58,7 @@ let options = ref([
 <style lang="scss">
 //styles for select
 .multiselect {
+  max-width: 17rem;
   &::after {
     content: "";
     position: absolute;
@@ -172,7 +70,7 @@ let options = ref([
   }
   width: auto;
   &--active {
-    width: 20rem;
+    width: 17rem;
   }
   &__content-wrapper {
     width: 30rem;
@@ -216,6 +114,19 @@ let options = ref([
 </style>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateY(-2rem);
+  opacity: 0;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  opacity: 0;
+}
 .filter {
   display: flex;
   flex-direction: column;
@@ -271,16 +182,20 @@ let options = ref([
 }
 
 .filter-form {
+  display: flex;
   padding: 2.6rem 0;
   &__button {
     display: flex;
     align-items: center;
     color: $green-color;
+    gap: 1.2rem;
+    cursor: pointer;
+    margin-left: auto;
   }
   &__select {
     display: flex;
     gap: 4.8rem;
-    width: 100%;
+    width: 90%;
   }
   &__input {
     flex: 1 1 auto;
