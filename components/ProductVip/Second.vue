@@ -6,7 +6,7 @@
 		<div class="vip-card-sec__btns">
 			<div class="vip-card-sec__btn">
 				<button class="btn btn-white h3-lite">
-					<IconArrow class="green" /> Зал малинки
+					<IconArrow class="green rotate" /> Зал малинки
 				</button>
 			</div>
 			<div class="vip-card-sec__btn">
@@ -16,7 +16,7 @@
 			</div>
 			<div class="vip-card-sec__btn">
 				<button class="vip-card-sec__btn btn btn-white h3-lite">
-					Все Залы <IconArrow class="green" />
+					Все Залы <IconArrow class="green down" />
 				</button>
 			</div>
 		</div>

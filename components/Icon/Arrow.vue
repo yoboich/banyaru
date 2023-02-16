@@ -13,6 +13,12 @@
 </template>
 
 <style lang="scss" scoped>
+	.rotate {
+		transform: rotate(180deg);
+	}
+	.down {
+		transform: rotate(90deg);
+	}
 	.fill path {
 		fill: #3e3e51;
 	}
