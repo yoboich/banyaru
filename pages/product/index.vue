@@ -1,16 +1,8 @@
 <script setup>
-	import { useMediaQuery } from '@vueuse/core';
-
-	const isLargeScreen = useMediaQuery('(min-width: 768px)');
-	const mobile = computed(() =>
-		reactive({
-			isLargeScreen,
-		})
-	);
 </script>
 
 <template>
-	<div class="card" v-if="mobile.isLargeScreen">
+	<div class="card">
 		<ProductCardTop />
 		<div class="card__content">
 			<div class="card__left">
@@ -21,7 +13,6 @@
 			</div>
 		</div>
 	</div>
-	<MobileCard v-if="!mobile.isLargeScreen" :free="true" />
 	<ProductCardBlocked class="no-box" v-if="true" />
 	<ProductCardService class="no-box" />
 	<ProductCardReview class="no-box" />

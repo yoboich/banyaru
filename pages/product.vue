@@ -1,13 +1,4 @@
 <script setup>
-	import { useMediaQuery } from '@vueuse/core';
-
-	const isLargeScreen = useMediaQuery('(min-width: 768px)');
-	const mobile = computed(() =>
-		reactive({
-			isLargeScreen,
-		})
-	);
-
 	const breadcrumbs = ref([
 		'Главная',
 		'Бани в городе Москва',
@@ -19,21 +10,10 @@
 	<div class="product-card">
 		<div class="container">
 			<!-- header -->
-			<div class="sub-header" v-if="mobile.isLargeScreen">
+			<div class="sub-header" >
 				<UIBreadcrumbs :items="breadcrumbs" />
 				<UserAction />
 			</div>
-			<div class="sub-header" v-else>
-				<div class="sub-header__back">
-					<img src="~/assets/img/product-mobile/mobile-back.svg" alt="" />
-				</div>
-				<div class="sub-header__right">
-					<img src="~/assets/img/product-mobile/mobile-share.svg" alt="" />
-					<img src="~/assets/img/product-mobile/mobile-like.svg" alt="" />
-					<img src="~/assets/img/product-mobile/mobile-add.svg" alt="" />
-				</div>
-			</div>
-			<ProductMobileSwiper v-if="!mobile.isLargeScreen" />
 			<NuxtPage />
 		</div>
 	</div>

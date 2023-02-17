@@ -1,6 +1,6 @@
 <template>
   <div class="name">
-    <div class="name__title">Название</div>
+    <div class="name__title">Название объекта</div>
     <div class="name__subtitle">Символов 120</div>
     <div class="name__inner">
       <div class="name__item">

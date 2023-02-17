@@ -1,6 +1,6 @@
 <template>
   <div class="contacts">
-    <div class="contacts__title">Объект в интернете</div>
+    <div class="contacts__title">Контакты</div>
     <div class="contacts__subtitle">Если есть</div>
     <div class="contacts__inner">
       <div class="contacts__item">

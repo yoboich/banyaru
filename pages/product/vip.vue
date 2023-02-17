@@ -1,12 +1,4 @@
 <script setup>
-	import { useMediaQuery } from '@vueuse/core';
-
-	const isLargeScreen = useMediaQuery('(min-width: 768px)');
-	const mobile = computed(() =>
-		reactive({
-			isLargeScreen,
-		})
-	);
 	const activeText = ref(0);
 	const text = ref([
 		'А Сибирский сруб рядом! Для этого не нужно ехать за 5000 километров. У вас есть уникальная возможность принять комплекс настоящих',
@@ -15,7 +7,7 @@
 </script>
 
 <template>
-	<div class="card" v-if="mobile.isLargeScreen">
+	<div class="card">
 		<ProductCardTop badje="vip" badjeText="VIP" />
 		<div class="card__content">
 			<div class="card__left">
@@ -69,7 +61,6 @@
 			</div>
 		</div>
 	</div>
-	<MobileCard v-if="!mobile.isLargeScreen" />
 	<ProductBookPrice class="card-under" />
 	<ProductBookSales class="card-under" />
 	<ProductBookItems

@@ -1,6 +1,6 @@
 <template>
   <div class="worktime">
-    <div class="worktime__title">Название</div>
+    <div class="worktime__title">Режим работы</div>
     <div class="worktime__inner">
       <div class="worktime__item">
         <div class="worktime__radio">
@@ -77,15 +77,21 @@ input {
     font-weight: 700;
     font-size: 2rem;
     line-height: 130%;
-    margin-bottom: 0.6rem;
+    margin-bottom: 3rem;
   }
   &__inner {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    // gap: 5rem;
     max-width: 34.5rem;
   }
   &__item {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(143, 153, 186, 0.2);
+    &:nth-last-child(1){
+      border-bottom: none
+    }
   }
   &__radio {
     display: flex;
