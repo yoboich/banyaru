@@ -119,19 +119,6 @@
 			gap: 0.5rem;
 		}
 
-		&__btns {
-			position: relative;
-			display: flex;
-			justify-content: center;
-		}
-
-		&__announc {
-			position: absolute;
-			padding-top: 0;
-			padding-bottom: 0;
-			background-color: $default-color;
-			box-shadow: 0px 4px 8px rgba(143, 153, 186, 0.16);
-			color: $secondary-color;
-		}
+		
 	}
 </style>

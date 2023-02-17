@@ -14,8 +14,8 @@
           <input type="radio" />
         </div>
         <div class="worktime__input">
-          <input placeholder="c 9:00" type="text" />
-          <input placeholder="до 18:00" type="text" />
+          <input class="input" placeholder="c 9:00" type="text" />
+          <input class="input" placeholder="до 18:00" type="text" />
         </div>
       </div>
       <div class="worktime__item">
@@ -26,38 +26,38 @@
         <div class="worktime__input-inner">
           <div class="worktime__input">
             <span>Пн</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
           <div class="worktime__input">
             <span>Вт</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
           <div class="worktime__input">
             <span>Ср</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
           <div class="worktime__input">
             <span>Чт</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
           <div class="worktime__input">
             <span>Пт</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
           <div class="worktime__input">
             <span>Сб</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
           <div class="worktime__input">
             <span>Вс</span>
-            <input placeholder="c 9:00" type="text" />
-            <input placeholder="до 18:00" type="text" />
+            <input class="input" placeholder="c 9:00" type="text" />
+            <input class="input" placeholder="до 18:00" type="text" />
           </div>
         </div>
       </div>

@@ -7,10 +7,11 @@
           Примеры: Жаркий сруб | Королевский номер | Зал №3 | Общее отделение |
           Хаммам
         </div>
-        <input placeholder="Название зала" type="text" />
+        <input class="input" placeholder="Название зала" type="text" />
         <div class="zal-name__desc">
           <span>Описание</span>
           <textarea
+            class="input input_textarea"
             placeholder="Добавиьте описание"
             name=""
             id=""
@@ -35,7 +36,6 @@
 
 <style lang="scss" scoped>
 .zal-name {
-  margin-top: 7.2rem;
   padding-bottom: 5.9rem;
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
   &__title {

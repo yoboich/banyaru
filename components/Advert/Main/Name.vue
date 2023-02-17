@@ -8,10 +8,10 @@
           Название не должно содержать привязки к географическому положению.
           Например: Баня на ул. Ленина, Сауна Томск
         </div>
-        <input placeholder="Название бани" type="text" />
+        <input class="input" placeholder="Название бани" type="text" />
       </div>
       <div class="name__desc">
-        <textarea placeholder="Описание бани" type="textarea" />
+        <textarea class="input input_textarea" placeholder="Описание бани" type="textarea" />
       </div>
     </div>
   </div>

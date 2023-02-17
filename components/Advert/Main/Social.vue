@@ -4,16 +4,12 @@
     <div class="social__subtitle">Если есть</div>
     <div class="social__inner">
       <div class="social__item">
-        <div class="social__name">
-          Официальный сайт
-        </div>
-        <input placeholder="Сайт" type="text">
+        <div class="social__name">Официальный сайт</div>
+        <input class="input" placeholder="Сайт" type="text" />
       </div>
       <div class="social__item">
-        <div class="social__name">
-          Вк
-        </div>
-        <input placeholder="Ссылка" type="text">
+        <div class="social__name">Вк</div>
+        <input class="input" placeholder="Ссылка" type="text" />
       </div>
     </div>
   </div>
@@ -30,16 +26,18 @@
     line-height: 130%;
     margin-bottom: 1.1rem;
   }
-  &__subtitle{
+  &__subtitle {
     color: $secondary-color;
     margin-bottom: 2.7rem;
   }
-  &__inner{
+  &__inner {
+    max-width: 74rem;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 6rem;
   }
-  &__item{
+  &__item {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;

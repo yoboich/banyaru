@@ -6,9 +6,9 @@
         Введите адрес или поставьте точку на карте
       </div>
       <div class="location__input">
-        <input placeholder="Адрес" type="text" />
+        <input class="input" placeholder="Адрес" type="text" />
         <p>или</p>
-        <input placeholder="Координаты" type="text" />
+        <input class="input" placeholder="Координаты" type="text" />
       </div>
     </div>
     <div class="location__map">
@@ -31,7 +31,6 @@
 
 <style lang="scss" scoped>
 .location {
-  margin-top: 7.2rem;
   display: flex;
   gap: 5.3rem;
   align-items: center;
@@ -59,6 +58,9 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    & p{
+      padding-left: 1.5rem;
+    }
   }
 }
 </style>

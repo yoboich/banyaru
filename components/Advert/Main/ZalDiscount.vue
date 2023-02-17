@@ -4,31 +4,31 @@
       <div class="discount__item">
         <div class="discount__title">Скидки</div>
         <div class="discount__input">
-          <input placeholder="%" type="text" />
-          <input placeholder="Описание скидки" type="text" />
+          <input placeholder="%" class="input" type="text" />
+          <input placeholder="Описание скидки" class="input" type="text" />
         </div>
         <div class="discount__input">
-          <input placeholder="%" type="text" />
-          <input placeholder="Описание скидки" type="text" />
+          <input placeholder="%" class="input" type="text" />
+          <input placeholder="Описание скидки" class="input" type="text" />
         </div>
         <div class="discount__input">
-          <input placeholder="%" type="text" />
-          <input placeholder="Описание скидки" type="text" />
+          <input placeholder="%" class="input" type="text" />
+          <input placeholder="Описание скидки" class="input" type="text" />
         </div>
       </div>
       <div class="discount__item">
         <div class="discount__title">Вместимость</div>
         <div class="discount__input-quantity">
           <span>Количество гостей, входящих в цену.</span>
-          <input placeholder="1" type="text" />
+          <input placeholder="1" class="input" type="text" />
         </div>
         <div class="discount__input-quantity">
           <span>Максимальное допустимое количество гостей для зала.</span>
-          <input placeholder="1" type="text" />
+          <input placeholder="1" class="input" type="text" />
         </div>
         <div class="discount__input-quantity">
           <span>Количество комнат отдыха с кроватью.</span>
-          <input placeholder="1" type="text" />
+          <input placeholder="1" class="input" type="text" />
         </div>
       </div>
     </div>
