@@ -2,6 +2,13 @@
 	import img1 from '~/assets/img/promotions/1.jpg';
 	import img2 from '~/assets/img/promotions/2.jpg';
 	import img3 from '~/assets/img/promotions/3.jpg';
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
 
 	const relatedProduct = ref([
 		{
@@ -79,7 +86,7 @@
 		<div class="card-related__content">
 			<div class="card-related__top">
 				<div class="card-related__title h1">Похожи сауны</div>
-				<ul class="nav card-related__nav">
+				<ul v-if="isLarge" class="nav card-related__nav">
 					<li v-for="item in nav" :key="item.text" class="nav__item">
 						<button
 							class="nav__link card-related__link h4"
@@ -90,7 +97,7 @@
 						</button>
 					</li>
 				</ul>
-				<UISwiperButton />
+				<UISwiperButton v-if="isLarge" />
 			</div>
 			<div class="card-related__row">
 				<ProductCardRelatedRequest
@@ -151,6 +158,9 @@
 
 		&__row {
 			display: flex;
+			@media screen and (max-width: 768px) {
+				flex-wrap: wrap;
+			}
 		}
 	}
 

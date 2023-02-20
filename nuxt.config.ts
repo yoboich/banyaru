@@ -1,6 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	app: { pageTransition: { name: 'page', mode: 'out-in' } },
+	modules: ['@nuxt/image-edge'],
+	image: {
+		dir: 'assets/img',
+		screens: {
+			sm: 320,
+			md: 768,
+			lg: 1000,
+		},
+	},
 	vite: {
 		css: {
 			preprocessorOptions: {

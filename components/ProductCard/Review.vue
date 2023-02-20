@@ -56,6 +56,8 @@
 <style lang="scss" scoped>
 	.card-service {
 		margin-top: 2rem;
+
+
 		&__content {
 		}
 
@@ -79,6 +81,10 @@
 
 		&__items {
 			padding: 0 2.2rem;
+
+			@media screen and (max-width: 768px) {
+				padding: 0;
+			}
 		}
 
 		&__input {

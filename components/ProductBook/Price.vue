@@ -53,10 +53,18 @@
 			justify-content: space-between;
 			gap: 2rem;
 			margin-bottom: 3.5rem;
+
+			@media screen and (max-width: 768px) {
+				flex-direction: column;
+			}
 		}
 
 		&__content {
 			flex: 1;
+
+			@media screen and (max-width: 768px) {
+				width: 100%;
+			}
 		}
 
 		&__items {
@@ -74,6 +82,11 @@
 				width: 63%;
 				height: 1px;
 				border-bottom: 1px dashed $secondary-color;
+
+				@media screen and (max-width: 768px) {
+					left: 7rem;
+					width: 30%;
+				}
 			}
 
 			&:last-child {

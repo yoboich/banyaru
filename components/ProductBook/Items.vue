@@ -34,6 +34,9 @@
 
 <style lang="scss" scoped>
 	.card-offers {
+		& * {
+			box-sizing: border-box;
+		}
 		margin-top: -4rem;
 		&__title {
 			margin-bottom: 3.5rem;
@@ -46,11 +49,20 @@
 		&__row {
 			display: flex;
 			margin: 0 -1rem;
+
+			@media screen and (max-width: 768px) {
+				flex-wrap: wrap;
+				row-gap: 2rem;
+			}
 		}
 
 		&__column {
 			flex: 0 1 25%;
 			padding: 0 1rem;
+
+			@media screen and (max-width: 768px) {
+				flex: 0 1 50%;
+			}
 		}
 
 		&__item {

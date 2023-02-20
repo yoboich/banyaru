@@ -75,11 +75,149 @@
 			@swiper="getRef"
 			:modules="modules"
 			:effect="'fade'"
+			draggable="false"
 			class="product-swiper"
 		>
-			<swiper-slide v-for="(item, idx) in 7">
+			<swiper-slide>
 				<div class="product-card-swiper__main">
-					<img class="product-card-swiper__bg" :src="mainImages[idx]" alt="" />
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/1.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
+
+					<img
+						src="~/assets/img/product-card/logo.png"
+						alt=""
+						class="product-card-swiper__logo pos"
+					/>
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
+						<img src="~/assets/img/product-card/play.svg" alt="" />
+					</div></div
+			></swiper-slide>
+			<swiper-slide>
+				<div class="product-card-swiper__main">
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/3.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
+
+					<img
+						src="~/assets/img/product-card/logo.png"
+						alt=""
+						class="product-card-swiper__logo pos"
+					/>
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
+						<img src="~/assets/img/product-card/play.svg" alt="" />
+					</div></div
+			></swiper-slide>
+			<swiper-slide>
+				<div class="product-card-swiper__main">
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/2.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
+
+					<img
+						src="~/assets/img/product-card/logo.png"
+						alt=""
+						class="product-card-swiper__logo pos"
+					/>
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
+						<img src="~/assets/img/product-card/play.svg" alt="" />
+					</div></div
+			></swiper-slide>
+			<swiper-slide>
+				<div class="product-card-swiper__main">
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/3.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
+
+					<img
+						src="~/assets/img/product-card/logo.png"
+						alt=""
+						class="product-card-swiper__logo pos"
+					/>
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
+						<img src="~/assets/img/product-card/play.svg" alt="" />
+					</div></div
+			></swiper-slide>
+			<swiper-slide>
+				<div class="product-card-swiper__main">
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/2.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
+
+					<img
+						src="~/assets/img/product-card/logo.png"
+						alt=""
+						class="product-card-swiper__logo pos"
+					/>
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
+						<img src="~/assets/img/product-card/play.svg" alt="" />
+					</div></div
+			></swiper-slide>
+			<swiper-slide>
+				<div class="product-card-swiper__main">
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/3.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
+
+					<img
+						src="~/assets/img/product-card/logo.png"
+						alt=""
+						class="product-card-swiper__logo pos"
+					/>
+					<div
+						class="product-card-swiper__play pos"
+						v-if="premium"
+						@click="modalVisible = true"
+					>
+						<img src="~/assets/img/product-card/play.svg" alt="" />
+					</div></div
+			></swiper-slide>
+			<swiper-slide>
+				<div class="product-card-swiper__main">
+					<nuxt-img
+						class="product-card-swiper__bg"
+						src="/promotions/2.jpg"
+						sizes="sm:100vw md:50vw lg:900px"
+						quality="90"
+					/>
 
 					<img
 						src="~/assets/img/product-card/logo.png"

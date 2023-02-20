@@ -27,6 +27,8 @@
 			display: flex;
 			border-top: 1px solid #e1e5f2;
 			padding: 2.4rem 0 2rem;
+
+			
 		}
 
 		&__avatar {

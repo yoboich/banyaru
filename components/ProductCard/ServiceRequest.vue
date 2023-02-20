@@ -23,41 +23,69 @@
 			type: [Boolean, String],
 			default: false,
 		},
+		book: {
+			type: Boolean,
+			default: false,
+		},
+	});
+
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
 	});
 </script>
 
 <template>
-	<div class="card-item__content">
-		<div class="card-item__img">
-			<img v-if="img" :src="img" alt="" />
-		</div>
-		<div class="card-item__info">
-			<div class="card-item__info-top">
-				<div class="card-item__name h4">
-					<img
-						v-if="logo"
-						src="~/assets/img/product-card/card-logo.svg"
-						alt=""
-					/>
-					{{ title }}
-				</div>
-				<div class="card-item__price" v-if="price">
+	<div class="card-item__main-content">
+		<div class="card-item__content">
+			<div class="card-item__img">
+				<img class="card-item__img-main" v-if="img" :src="img" alt="" />
+				<img
+					v-if="logo && !isLarge"
+					class="card-item__img-logo"
+					src="~/assets/img/product-card/card-logo.svg"
+					alt=""
+				/>
+				<div class="card-item__price" v-if="price && !isLarge">
 					от {{ price }} <span class="h5-mini">р.</span>
 				</div>
 			</div>
-
-			<div class="card-item__what h5-mini">
-				<div class="card-item__what-text">Сауны и бани - Массаж</div>
-				<div class="card-item__what-place" v-if="place">({{ place }})</div>
-			</div>
-			<div class="card-item__review">
-				<UIStars />
-				<div class="card-item__feedback">
-					11 <img src="~/assets/img/icon/comment.svg" alt="" />
+			<div class="card-item__info">
+				<div class="card-item__info-top">
+					<div class="card-item__name h4">
+						<img
+							v-if="logo && isLarge"
+							src="~/assets/img/product-card/card-logo.svg"
+							alt=""
+						/>
+						{{ title }}
+					</div>
+					<div class="card-item__price" v-if="price && isLarge">
+						от {{ price }} <span class="h5-mini">р.</span>
+					</div>
 				</div>
-			</div>
-			<div class="card-item__desc h5" v-if="desc">
-				{{ desc }}
+
+				<div class="card-item__what h5-mini">
+					<div class="card-item__what-text">Сауны и бани - Массаж</div>
+					<div class="card-item__what-place" v-if="place">({{ place }})</div>
+				</div>
+				<div class="card-item__review">
+					<UIStars />
+					<div class="card-item__feedback">
+						11 <img src="~/assets/img/icon/comment.svg" alt="" />
+					</div>
+				</div>
+				<div class="card-item__desc h5" v-if="desc">
+					{{ desc }}
+				</div>
+				<div class="card-item__book h5" v-if="book">
+					<div class="card-item__book-text">
+						Бронирование <IconArrow class="green" />
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -65,23 +93,37 @@
 
 <style lang="scss">
 	.card-item {
-		&__content {
-			display: flex;
-			gap: 2rem;
+		&__main-content {
 			padding: 2rem;
 			border-radius: 1.2rem;
+
 			&:hover {
 				box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.4);
 			}
 		}
+		&__content {
+			display: flex;
+
+			gap: 2rem;
+		}
 
 		&__img {
 			min-width: 150px;
+			@media screen and (max-width: 768px) {
+				position: relative;
+			}
 		}
 
+		&__img-main {
+			@media screen and (max-width: 768px) {
+				margin-bottom: 1rem;
+			}
+		}
 		&__info {
 			flex: 1;
 			padding-bottom: 1.5rem;
+
+			border-bottom: 1px solid #e1e5f2;
 		}
 
 		&__info-top {
@@ -105,6 +147,13 @@
 
 			& span {
 				color: $green-color;
+			}
+
+			@media screen and (max-width: 768px) {
+				color: $mainFontColor;
+				& span {
+					color: $mainFontColor;
+				}
 			}
 		}
 
@@ -143,5 +192,25 @@
 		&__desc {
 			color: $secondary-color;
 		}
+
+		&__book {
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 0.5rem;
+			cursor: pointer;
+			color: $green-color;
+
+			&-text {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+		}
+	}
+
+	.card-item__img-logo {
+		position: absolute;
+		top: 1rem;
+		left: 1rem;
 	}
 </style>

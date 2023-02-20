@@ -1,4 +1,12 @@
 <script setup>
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
+
 	const activeText = ref(0);
 	const text = ref([
 		'А Сибирский сруб рядом! Для этого не нужно ехать за 5000 километров. У вас есть уникальная возможность принять комплекс настоящих',
@@ -7,7 +15,7 @@
 </script>
 
 <template>
-	<div class="card">
+	<div class="card" v-if="isLarge">
 		<ProductCardTop badje="vip" badjeText="VIP" />
 		<div class="card__content">
 			<div class="card__left">
@@ -61,6 +69,9 @@
 			</div>
 		</div>
 	</div>
+	<MobileProductCard v-if="!isLarge" />
+	<MobileProductAdress v-if="!isLarge" />
+	<MobileProductFavorite v-if="!isLarge" />
 	<ProductBookPrice class="card-under" />
 	<ProductBookSales class="card-under" />
 	<ProductBookItems

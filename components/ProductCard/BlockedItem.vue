@@ -1,9 +1,36 @@
 <script setup>
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
+
 	defineProps(['title', 'index']);
 </script>
 
 <template>
+	
 	<div
+		v-if="!isLarge"
+		class="product-card-blocked__item"
+		:class="'product-card-blocked__item-' + index"
+	>
+		<div class="product-card-blocker__info">
+			<div class="product-card-blocked__title h2">{{ title }}</div>
+			<div class="product-card-blocked__text h4">
+				Контент доступен пользователям с премиум аккаунтом
+			</div>
+		</div>
+		<div class="product-card-blocked__right">
+			<div class="product-card-blocked__lock">
+				<img src="~/assets/img/product-card/lock.svg" alt="" />
+			</div>
+		</div>
+	</div>
+	<div
+		v-else
 		class="product-card-blocked__item"
 		:class="'product-card-blocked__item-' + index"
 	>
@@ -28,6 +55,9 @@
 			align-items: center;
 			justify-content: space-between;
 
+			@media screen and (max-width: 768px) {
+				align-items: flex-end;
+			}
 
 			&-2 {
 				z-index: 9;
@@ -45,6 +75,10 @@
 
 		&__title {
 			color: $mainFontColor;
+
+			@media screen and (max-width: 768px) {
+				margin-bottom: 1rem;
+			}
 		}
 
 		&__right {

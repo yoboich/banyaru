@@ -33,12 +33,21 @@
 		&__row {
 			display: flex;
 			justify-content: space-between;
+
+			@media screen and (max-width: 768px) {
+				flex-direction: column;
+				gap: 2.5rem;
+			}
 		}
 
 		&__item {
 			display: flex;
 			gap: 10rem;
 			position: relative;
+
+			@media screen and (max-width: 768px) {
+				justify-content: space-between;
+			}
 
 			&::before {
 				content: '';
@@ -48,6 +57,11 @@
 				width: 25%;
 				height: 1px;
 				border-bottom: 1px dashed $secondary-color;
+
+				@media screen and (max-width: 768px) {
+					bottom: 0;
+					width: 30%;
+				}
 			}
 		}
 

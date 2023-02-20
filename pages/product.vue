@@ -1,4 +1,11 @@
 <script setup>
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
 	const breadcrumbs = ref([
 		'Главная',
 		'Бани в городе Москва',
@@ -10,10 +17,21 @@
 	<div class="product-card">
 		<div class="container">
 			<!-- header -->
-			<div class="sub-header" >
+			<div class="sub-header" v-if="isLarge">
 				<UIBreadcrumbs :items="breadcrumbs" />
 				<UserAction />
 			</div>
+			<div class="sub-header" v-else>
+				<div class="sub-header__back">
+					<img src="~/assets/img/product-mobile/mobile-back.svg" alt="" />
+				</div>
+				<div class="sub-header__right">
+					<img src="~/assets/img/product-mobile/mobile-share.svg" alt="" />
+					<img src="~/assets/img/product-mobile/mobile-like.svg" alt="" />
+					<img src="~/assets/img/product-mobile/mobile-add.svg" alt="" />
+				</div>
+			</div>
+			<ProductMobileSwiper v-if="!isLarge" />
 			<NuxtPage />
 		</div>
 	</div>

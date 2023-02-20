@@ -1,14 +1,23 @@
 <script setup>
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
 </script>
 
 <template>
-	<div class="wrapper">
-		<TheHeader/>
-		<div class="wrapper-content">
-			<slot />
+	<ClientOnly fallback-tag="span" fallback="Loading comments...">
+		<div class="wrapper">
+			<TheHeader v-if="isLarge" />
+			<div class="wrapper-content">
+				<slot />
+			</div>
+			<TheFooter v-if="isLarge" />
 		</div>
-		<TheFooter />
-	</div>
+	</ClientOnly>
 </template>
 
 <style scoped lang="scss">

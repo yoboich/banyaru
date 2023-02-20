@@ -124,12 +124,193 @@
 						:effect="'fade'"
 						class="preview-swiper product-swiper"
 					>
-						<swiper-slide v-for="item in img">
+						<swiper-slide>
 							<div class="preview-card-swiper__main product-card-swiper__main">
-								<img
+								<nuxt-img
 									class="preview-card-swiper__bg product-card-swiper__bg"
-									:src="item"
+									src="/promotions/1.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
 									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/2.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/3.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/2.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/1.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/3.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/1.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/2.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/2.jpg"
+									width="100vw"
+									quality="80"
+								/>
+
+								<img
+									src="~/assets/img/product-card/logo.png"
+									alt=""
+									class="preview-card-swiper__logo product-card-swiper__logo pos"
+								/>
+								<div
+									class="preview-card-swiper__play product-card-swiper__play pos"
+								>
+									<img src="~/assets/img/preview/play.svg" alt="" />
+								</div></div
+						></swiper-slide>
+						<swiper-slide>
+							<div class="preview-card-swiper__main product-card-swiper__main">
+								<nuxt-img
+									class="preview-card-swiper__bg product-card-swiper__bg"
+									src="/promotions/2.jpg"
+									width="100vw"
+									quality="80"
 								/>
 
 								<img

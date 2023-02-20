@@ -1,8 +1,16 @@
 <script setup>
+	import productItemData from '~~/composables/productItemData';
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
 </script>
 
 <template>
-	<div class="card">
+	<div class="card" v-if="isLarge">
 		<ProductCardTop badje="book" badjeText="Бронь" />
 		<div class="card__content">
 			<div class="card__left">
@@ -44,6 +52,9 @@
 			</div>
 		</div>
 	</div>
+	<MobileProductCard v-if="!isLarge" />
+	<MobileProductAdress v-if="!isLarge" />
+	<MobileProductFavorite v-if="!isLarge" />
 	<ProductBookPrice class="card-under" />
 	<ProductBookSales class="card-under" />
 	<ProductBookDetail class="card-under" />
