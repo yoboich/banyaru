@@ -69,7 +69,8 @@
 			</div>
 		</div>
 	</div>
-	<MobileProductCard v-if="!isLarge" />
+	<MobileProductCard v-if="!isLarge" type="vip" />
+	<MobileProductHalls v-if="!isLarge" />
 	<MobileProductAdress v-if="!isLarge" />
 	<MobileProductFavorite v-if="!isLarge" />
 	<ProductBookPrice class="card-under" />
@@ -89,9 +90,10 @@
 		title="Банные принадлежности"
 		:items="productItemData.bath"
 	/>
-	<ProductCardService class="no-box" />
-	<ProductCardReview class="no-box" />
-	<ProductCardRelated class="no-box" />
+	<ProductCardService class="no-box service-mobile" />
+	<ProductCardReview class="no-box review-mobile" />
+	<ProductCardRelated class="no-box related-mobile" />
+	<MobileProductAnnounce class="no-box" v-if="!isLarge" />
 </template>
 
 <style lang="scss" scoped>

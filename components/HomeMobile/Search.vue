@@ -38,7 +38,7 @@ export default {
     </div>
     <swiper
       :slidesPerView="3"
-      :spaceBetween="10"
+      :spaceBetween="0"
       :freeMode="true"
       class="search__menu menu"
     >
@@ -90,8 +90,15 @@ export default {
   width: 100%;
   height: 100%;
   overflow: visible;
+  padding: 2rem 0;
   max-width: 90vw;
   width: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-left: calc(-50vw + 50%);
+  z-index: 50;
+  padding-left: 2rem;
   height: auto;
   &__item {
     display: flex;
@@ -123,9 +130,11 @@ export default {
   margin-top: 3.5rem;
   display: flex;
   flex-direction: column;
-  gap: 3.6rem;
+  gap: 1.6rem;
+  overflow-x: hidden;
   &__inner {
     display: flex;
+    padding: 0 2rem;
   }
   &__item {
     display: flex;

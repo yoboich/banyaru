@@ -1,16 +1,34 @@
 <script setup>
 	const isLarge = ref(true);
-
-	onMounted(() => {
-		if (window.innerWidth <= 768) {
-			isLarge.value = false;
-		}
-	});
+	const mobileHead = ref(false);
 	const breadcrumbs = ref([
 		'Главная',
 		'Бани в городе Москва',
 		'Аминьевские бани',
 	]);
+
+	const handleScroll = () => {
+		if (window.scrollY > 330) {
+			mobileHead.value = true;
+		}
+		if (window.scrollY < 330) {
+			mobileHead.value = false;
+		}
+	};
+
+	window.addEventListener('scroll', handleScroll);
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
+	onUnmounted(() => {
+		window.removeEventListener('scroll', handleScroll);
+	});
+
+	definePageMeta({
+		layout: 'product',
+	});
 </script>
 
 <template>
@@ -21,7 +39,13 @@
 				<UIBreadcrumbs :items="breadcrumbs" />
 				<UserAction />
 			</div>
-			<div class="sub-header" v-else>
+			<div
+				class="sub-header"
+				:class="{
+					fixed: mobileHead,
+				}"
+				v-else
+			>
 				<div class="sub-header__back">
 					<img src="~/assets/img/product-mobile/mobile-back.svg" alt="" />
 				</div>
@@ -57,6 +81,13 @@
 		display: flex;
 		justify-content: space-between;
 		margin: 1.6rem 0;
+
+		&.fixed {
+			position: fixed;
+			width: 100%;
+			z-index: 1000;
+			box-sizing: border-box;
+		}
 
 		@media screen and (max-width: 768px) {
 			padding: 4rem 2rem;

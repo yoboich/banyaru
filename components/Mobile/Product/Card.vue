@@ -4,7 +4,16 @@
 			type: Boolean,
 			default: false,
 		},
+		type: {
+			type: String,
+			default: 'free',
+		},
 	});
+
+	const types = {
+		vip: 'Vip',
+		book: 'Бронь',
+	};
 </script>
 
 <template>
@@ -13,12 +22,17 @@
 
 		<div class="card-mobile__top">
 			<div class="card__open">Откроется в <span>09:00</span></div>
-			<div class="card-mobile__status">Бесплатное</div>
+			<div :class="['card-mobile__status', type]">{{ types[type] }}</div>
 		</div>
 		<div class="card-mobile__info">
 			<IconInfo class="setting-aside__info-item" />
 		</div>
-		<div class="card-mobile__title h2">Сауна цветы</div>
+		<div class="card-mobile__title h2">
+			Сауна цветы
+			<span class="card-mobile__dropdown" v-if="type !== 'free'">
+				<IconArrow class="green down" />
+			</span>
+		</div>
 		<div class="card-mobile__types h4">
 			<div class="card-mobile__type">Баня на дровах</div>
 			<div class="card-mobile__type">Сауна</div>
@@ -86,10 +100,21 @@
 		}
 
 		&__status {
+			text-transform: capitalize;
+
+			&.vip {
+				color: #faba17;
+			}
+			&.book {
+				color: $purple-color;
+			}
 		}
 
 		&__title {
 			margin-bottom: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 2rem;
 			color: $mainFontColor;
 		}
 
@@ -112,6 +137,17 @@
 			&:first-child {
 				padding-left: 0;
 			}
+		}
+		&__dropdown {
+			width: 3.2rem;
+			height: 3.2rem;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: $default-color;
+			cursor: pointer;
+			box-shadow: 1px 4px 12px rgba(166, 175, 205, 0.36);
 		}
 	}
 </style>

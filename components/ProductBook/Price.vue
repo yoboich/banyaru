@@ -42,7 +42,7 @@
 <style lang="scss" scoped>
 	.card-price {
 		margin-top: -4rem;
-		z-index: 10;
+		z-index: 9;
 		&__name {
 			margin-bottom: 3rem;
 		}

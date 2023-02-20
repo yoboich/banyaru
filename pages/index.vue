@@ -24,12 +24,14 @@ useHead({ title: "Баня.ру – портал о банях и саунах �
 
   <div v-else>
     <HomeMobileTop />
-    <div class="mobile-container">
-      <div class="add-advert">+ Разместить объявление</div>
-      <HomeMobileSearch/>
-      <HomeMobileCatalog/>
-      <HomeMobileServices/>
-    </div>
+    <div class="add-advert">+ Разместить объявление</div>
+    <HomeMobileSearch />
+    <HomeMobileCatalog />
+    <HomeMobileServices />
+    <HomeMobileAdvert/>
+    <HomeMobileLinks/>
+    <HomeMobileAdvertsLocation/>
+    <HomeMobileFooter/>
   </div>
 </template>
 
@@ -39,9 +41,10 @@ useHead({ title: "Баня.ру – портал о банях и саунах �
   font-size: 1.6rem;
   line-height: 2rem;
   margin-top: 5rem;
-  color:$green-color;
+  padding: 0 2rem;
+  color: $green-color;
 }
-.mobile-container{
+.mobile-container {
   padding: 0 2rem;
 }
 </style>

@@ -26,7 +26,7 @@
 <style lang="scss" scoped>
 	.card-sales {
 		margin-top: -4rem;
-		z-index: 9;
+		z-index: 8;
 		&__name {
 		}
 

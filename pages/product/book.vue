@@ -52,9 +52,11 @@
 			</div>
 		</div>
 	</div>
-	<MobileProductCard v-if="!isLarge" />
+	<MobileProductCard v-if="!isLarge" type="book" />
+	<MobileProductHalls v-if="!isLarge" />
 	<MobileProductAdress v-if="!isLarge" />
 	<MobileProductFavorite v-if="!isLarge" />
+	<MobileProductDesc v-if="!isLarge" />
 	<ProductBookPrice class="card-under" />
 	<ProductBookSales class="card-under" />
 	<ProductBookDetail class="card-under" />
@@ -73,22 +75,13 @@
 		title="Банные принадлежности"
 		:items="productItemData.bath"
 	/>
-	<ProductCardService class="no-box" />
-	<ProductCardReview class="no-box" />
-	<ProductCardRelated class="no-box" />
+	<ProductCardService class="no-box service-mobile" />
+	<ProductCardReview class="no-box review-mobile" />
+	<ProductCardRelated class="no-box related-mobile" />
+	<MobileProductAnnounce v-if="!isLarge" />
 </template>
 
 <style lang="scss">
-	.card-hall {
-		z-index: 5;
-	}
-	.card-service {
-		z-index: 4;
-	}
-	.card-bath {
-		z-index: 3;
-	}
-
 	.card-desc {
 		padding-top: 3.5em;
 		display: flex;

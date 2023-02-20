@@ -12,11 +12,10 @@
 	<ClientOnly fallback-tag="span" fallback="Loading comments...">
 		<div class="wrapper">
 			<TheHeader v-if="isLarge" />
-			<TheMobileMenu v-if="!isLarge"/>
 			<div class="wrapper-content">
 				<slot />
 			</div>
-			<TheFooter v-if="isLarge" />
+			<TheFooter />
 		</div>
 	</ClientOnly>
 </template>

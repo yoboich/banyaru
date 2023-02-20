@@ -1,10 +1,19 @@
-<script setup></script>
+<script setup>
+	const isLarge = ref(true);
+	const tab = ref(1);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
+</script>
 
 <template>
 	<div class="card card-detail">
 		<div class="card-detail__name card__name h1">Бронирование</div>
 		<div class="card-detail__row">
-			<div class="card-detail__column">
+			<div class="card-detail__column" v-if="isLarge">
 				<div class="card-detail__item">
 					<div class="card-detail__top">
 						<div class="card-detail__hall h2">Зал мак</div>
@@ -20,15 +29,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="card-detail__column">
+			<div class="card-detail__column" v-if="tab === 1 || tab === 2 || isLarge">
 				<div class="card-detail__item">
-					<ProductBookDate />
-					<ProductBookTime />
-					<ProductBookCount />
-					<ProductBookWhom />
+					<ProductBookDate v-if="tab === 1 || isLarge" />
+					<ProductBookTime v-if="tab === 1 || isLarge" />
+					<ProductBookCount v-if="tab === 2 || isLarge" />
+					<ProductBookWhom v-if="tab === 2 || isLarge" />
 				</div>
 			</div>
-			<div class="card-detail__column">
+			<div class="card-detail__column" v-if="tab === 3 || isLarge">
 				<div class="card-detail__item">
 					<div class="card-detail__num">
 						<div class="card-detail__num-text h4">Детали бронирования:</div>
@@ -92,13 +101,23 @@
 							офертой согласен(-на)</label
 						>
 					</div>
-					<button class="card-detail__btn btn btn-purple h2-lite">
-						Забронировать
-					</button>
+					<div class="card-detail__btns">
+						<button
+							class="card-detail__btn btn btn-grey h2-lite"
+							@click="tab -= 1"
+						>
+							Назад
+						</button>
+						<button class="card-detail__btn btn btn-purple h2-lite">
+							Забронировать
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-		<UISteps />
+
+		<div class="card-detail__btn btn btn-green" @click="tab += 1">Далее</div>
+		<UISteps :number="tab" />
 	</div>
 </template>
 
@@ -106,12 +125,29 @@
 	@import '@vuepic/vue-datepicker/src/VueDatePicker/style/main.scss';
 	.card-detail {
 		margin-top: -4rem;
-		z-index: 8;
+		z-index: 7;
 		&__name {
 		}
 
 		&__row {
 			display: flex;
+		}
+
+		&__btns {
+			display: flex;
+			gap: 1.5rem;
+		}
+
+		&__btn {
+			padding: 1.5rem 0;
+			margin-top: 4rem;
+			text-align: center;
+
+			&.btn-grey {
+				color: white;
+				background-color: #8f99ba;
+				flex: 0 1 40%;
+			}
 		}
 
 		&__column {

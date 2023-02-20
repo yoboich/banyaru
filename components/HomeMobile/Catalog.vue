@@ -35,9 +35,10 @@
 
 <style lang="scss" scoped>
 .catalog {
-  margin-top: 5rem;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
+  padding: 0 2rem;
   &__top {
     display: flex;
     justify-content: space-between;

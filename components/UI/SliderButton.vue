@@ -33,6 +33,9 @@
 
 		&__content {
 			color: #9da7c7;
+			display: flex;
+			align-items: flex-end;
+			gap: .4rem;
 		}
 
 		&__active {

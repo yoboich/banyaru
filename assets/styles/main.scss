@@ -116,15 +116,15 @@ li {
 	flex-direction: column;
 	min-height: 100vh;
 	margin: 0 auto;
+	@media screen and (max-width: 768px) {
+		margin-bottom: 9rem;
+	}
 }
 
 .wrapper-content {
 	display: flex;
 	flex: 1 0 auto;
 	margin-top: 10rem; // if header is fixed do mt: headerHeight
-	// @media screen and (max-width: $tableWidth) {
-	// 	margin-top: 90px;
-	// }
 }
 
 // badje
@@ -192,4 +192,23 @@ li {
 
 .no-box {
 	box-shadow: none !important;
+
+	@media screen and (max-width: 768px) {
+		box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.4) !important;
+		margin-top: -3rem !important;
+
+
+		&.service-mobile {
+			z-index: 3;
+			padding-top: 4rem !important;
+		}
+		&.review-mobile {
+			z-index: 2;
+			padding-top: 4rem !important;
+		}
+		&.related-mobile {
+			z-index: 1;
+			padding-top: 4rem !important;
+		}
+	}
 }

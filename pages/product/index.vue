@@ -38,8 +38,8 @@
 	<MobileProductFavorite v-if="!isLarge" />
 	<ProductCardBlocked class="no-box" v-if="true" />
 	<ProductCardService v-if="isLarge" class="no-box" />
-	<ProductCardReview class="no-box" />
-	<ProductCardRelated class="no-box" />
+	<ProductCardReview class="no-box review-mobile" />
+	<ProductCardRelated class="no-box related-mobile" />
 </template>
 
 <style lang="scss">

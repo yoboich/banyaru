@@ -1,4 +1,17 @@
 <script setup>
+	const props = defineProps({
+		number: {
+			type: Number,
+		},
+	});
+	const isLarge = ref(true);
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
+
 	const steps = ref([
 		{ text: 'Создана', num: 1 },
 		{ text: 'Подтверждение брони', num: 2 },
@@ -9,13 +22,24 @@
 
 <template>
 	<div class="steps">
-		<div class="steps__item" v-for="(item, idx) in steps" :key="item.text" :class="{
-			active: idx === 0
-		}">
+		<div
+			class="steps__item"
+			v-for="(item, idx) in steps"
+			:key="item.text"
+			:class="{
+				active: idx === 0,
+				'un-shown':
+					!(idx + 1 === props.number || idx + 1 === props.number + 1) &&
+					!isLarge,
+			}"
+		>
 			<div class="steps__text">{{ item.text }}</div>
-			<div class="steps__circle" :class="{
-				active: idx === 0 || idx === 1
-			}"></div>
+			<div
+				class="steps__circle"
+				:class="{
+					active: idx === 0 || idx === 1,
+				}"
+			></div>
 			<div class="steps__num">{{ item.num }}</div>
 		</div>
 	</div>
@@ -88,5 +112,8 @@
 
 		&__num {
 		}
+	}
+	.un-shown {
+		display: none;
 	}
 </style>

@@ -1,13 +1,42 @@
 <template>
-  <div class="type">
-    <div class="type__title">День и время</div>
+  <div class="time">
+    <div class="time__title">День и время</div>
+    <div class="time__inner">
+      <div class="time__item">
+        <div class="time__name">Выбор будних дней</div>
+        <div class="time__radio">
+          <input type="radio" />
+          <label for="">пн-ср</label>
+        </div>
+        <div class="time__radio">
+          <input type="radio" />
+          <label for="">пн-ср</label>
+        </div>
+        <div class="time__radio">
+          <input type="radio" />
+          <label for="">пн-ср</label>
+        </div>
+      </div>
 
-   
+      <div class="time__item">
+        <div class="time__name">Определение времени суток</div>
+        <div class="time__input">
+          <label for="">Утро будни c</label>
+          <input class="input" type="text" name="" id="">
+          <input class="input" type="text" name="" id="">
+        </div>
+        <div class="time__input">
+          <label for="">Утро выходные c</label>
+          <input class="input" type="text" name="" id="">
+          <input class="input" type="text" name="" id="">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.type {
+.time {
   margin-top: 7.2rem;
   padding-bottom: 5.9rem;
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
@@ -25,12 +54,19 @@
   }
   &__item {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
   &__name {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.6rem;
-    line-height: 1.8rem;
+    line-height: 2rem;
+    margin-bottom: 2.3rem;
+  }
+  &__radio {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    margin-bottom: 1.6rem;
   }
 }
 </style>
