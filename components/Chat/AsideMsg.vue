@@ -1,5 +1,13 @@
 <script setup>
 	let activeTab = ref(1);
+	let secActiveTab = ref(1);
+	// const isLarge = ref(true);
+
+	// onMounted(() => {
+	// 	if (window.innerWidth <= 768) {
+	// 		isLarge.value = false;
+	// 	}
+	// });
 
 	const tabs = [
 		{
@@ -41,6 +49,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="chat-msg__sec-tab">
+			<div
+				class="chat-msg__sec-tab-item h3"
+				:class="{ active: secActiveTab === 1 }"
+				@click="secActiveTab = 1"
+			>
+				Все
+			</div>
+			<div
+				class="chat-msg__sec-tab-item h3"
+				:class="{ active: secActiveTab === 2 }"
+				@click="secActiveTab = 2"
+			>
+				Пропущенные
+			</div>
+		</div>
 		<div class="chat-msg__row">
 			<nuxt-link
 				v-for="(_, idx) in 5"
@@ -75,6 +99,36 @@
 </template>
 
 <style lang="scss" scoped>
+	.chat-msg {
+		&__sec-tab {
+			background: #ffffff;
+			box-shadow: inset 0px 0px 8px rgba(136, 152, 206, 0.46);
+			border-radius: 100px;
+			padding: 0.3rem;
+			margin-top: 1.5rem;
+			overflow: hidden;
+
+			display: none;
+			@media screen and (max-width: 768px) {
+				display: flex;
+			}
+		}
+
+		&__sec-tab-item {
+			flex: 1;
+			padding: 1.6rem 4rem;
+			text-align: center;
+			cursor: pointer;
+			color: $mainFontColor;
+
+			&.active {
+				background: #ffffff;
+				box-shadow: 0px 6px 21px rgba(166, 175, 205, 0.22);
+				border-radius: 100px;
+			}
+		}
+	}
+
 	.nav {
 		display: flex;
 		align-items: flex-start;
@@ -122,6 +176,10 @@
 			margin-top: 5rem;
 			margin-bottom: 3.5rem;
 			gap: 1.4rem;
+
+			@media screen and (max-width: 768px) {
+				display: none;
+			}
 		}
 
 		&__info {
@@ -137,6 +195,12 @@
 		}
 
 		&__row {
+			@media screen and (max-width: 768px) {
+				margin-top: 1.5rem;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
 		}
 
 		&__item {
@@ -146,6 +210,12 @@
 			transition: all 0.2s linear;
 			cursor: pointer;
 
+			@media screen and (max-width: 768px) {
+				box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.15);
+				border: none;
+				border-radius: 12px;
+				padding: 1rem 2rem;
+			}
 			&:hover {
 				box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.15);
 			}

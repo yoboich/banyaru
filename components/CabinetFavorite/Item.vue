@@ -43,6 +43,11 @@
 		padding: 0.2rem 0.2rem 0.2rem 0.6rem;
 		font-size: 1.6rem;
 		color: $secondary-color;
-		gap: .5rem;
+		gap: 0.5rem;
+
+		@media screen and (max-width: 768px) {
+			font-size: 1rem;
+			left: 0;
+		}
 	}
 </style>

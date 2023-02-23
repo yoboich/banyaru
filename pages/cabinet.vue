@@ -1,4 +1,32 @@
 <script setup>
+	const isLarge = ref(true);
+	const navIsShown = ref(true);
+	const route = useRoute();
+
+	onMounted(() => {
+		if (route.name.includes('cabinet-') && window.innerWidth <= 768) {
+			navIsShown.value = false;
+		} else {
+			navIsShown.value = true;
+		}
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
+	onUpdated(() => {
+		if (route.name.includes('cabinet-') && window.innerWidth <= 768) {
+			navIsShown.value = false;
+		} else {
+			navIsShown.value = true;
+		}
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 	definePageMeta({
 		layout: 'cabinet',
 	});
@@ -10,11 +38,13 @@
 	<div class="cabinet">
 		<div class="container">
 			<div class="cabinet__inner">
-				<UIBreadcrumbs :items="breadcrumbs" />
+				<UIBreadcrumbs :items="breadcrumbs" v-if="isLarge" />
 				<div class="card card-cabinet">
-					<div class="card-cabinet__title h1">Личный кабинет</div>
+					<div class="card-cabinet__title h1" v-if="navIsShown">
+						Личный кабинет
+					</div>
 					<div class="card-cabinet__content">
-						<div class="cabinet-aside">
+						<div class="cabinet-aside" v-if="navIsShown">
 							<div class="cabinet-aside__top">
 								<div class="cabinet-aside__avatar">
 									<img src="~/assets/img/cabinet/avatar.png" alt="" />
@@ -104,7 +134,10 @@
 								</button>
 							</div>
 						</div>
-						<div class="cabinet-main">
+						<div
+							class="cabinet-main"
+							:class="{ hidden: !isLarge && navIsShown }"
+						>
 							<NuxtPage />
 						</div>
 					</div>
@@ -118,11 +151,21 @@
 	.cabinet {
 		margin-top: 3.5rem;
 		width: 100%;
+
+		@media screen and (max-width: 768px) {
+			margin: 0;
+		}
 		&__inner {
 		}
 	}
 	.card-cabinet {
 		margin-top: 3.5rem;
+		box-sizing: border-box;
+
+		@media screen and (max-width: 768px) {
+			padding: 1rem;
+			margin: 0;
+		}
 		&__title {
 			margin-bottom: 4.5rem;
 		}
@@ -134,11 +177,25 @@
 	.cabinet-main {
 		padding-left: 4.5rem;
 		width: 65%;
+
+		&.hidden {
+			display: none;
+		}
+
+		@media screen and (max-width: 768px) {
+			width: 100%;
+			padding: 0;
+		}
 	}
 	.cabinet-aside {
 		padding-right: 4.5rem;
 
 		border-right: 1px solid #8f99ba;
+
+		@media screen and (max-width: 768px) {
+			border: none;
+			padding: 0;
+		}
 		&__top {
 			display: flex;
 			align-items: center;

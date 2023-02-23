@@ -1,8 +1,20 @@
-<script setup></script>
+<script setup>
+	const isLarge = ref(true);
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
+</script>
 
 <template>
 	<div class="cabinet-favorite">
-		<div class="cabinet-favorite__title h2">Избранное</div>
+		<div class="cabinet-ads-mobile__top" v-if="!isLarge">
+			<NuxtLink to="/cabinet/"> <IconBack /></NuxtLink>
+			<div class="cabinet-ads__title h2">Избранное</div>
+			<IconAdd />
+		</div>
+		<div class="cabinet-favorite__title h2" v-if="isLarge">Избранное</div>
 		<div class="cabinet-favorite__content">
 			<!-- <CabinetAdsEmpty
 				text="Добавляейте объявления в избранное"
@@ -29,6 +41,10 @@
 			justify-content: center;
 		}
 	}
-	.h2 {
+	.cabinet-ads-mobile__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 4rem 2rem;
 	}
 </style>

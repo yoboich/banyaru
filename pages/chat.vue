@@ -1,5 +1,32 @@
 <script setup>
 	const route = useRoute();
+	const isLarge = ref(true);
+	const navIsShown = ref(true);
+
+	onMounted(() => {
+		if (route.name.includes('chat-') && window.innerWidth <= 768) {
+			navIsShown.value = false;
+		} else {
+			navIsShown.value = true;
+		}
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
+	onUpdated(() => {
+		if (route.name.includes('chat-') && window.innerWidth <= 768) {
+			navIsShown.value = false;
+		} else {
+			navIsShown.value = true;
+		}
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 
 	definePageMeta({
 		layout: 'cabinet',
@@ -17,7 +44,7 @@
 							<ChatAside v-if="false" />
 							<ChatAsideMsg />
 						</div>
-						<div class="chat-main">
+						<div class="chat-main" :class="{ hidden: !isLarge && navIsShown }">
 							<ChatUnSelected v-if="!route.params.name" />
 							<NuxtPage />
 						</div>
@@ -33,6 +60,10 @@
 		margin-top: 2.5rem;
 		margin-bottom: 8rem;
 		flex: 1 1 auto;
+
+		@media screen and (max-width: 768px) {
+			margin: 0;
+		}
 
 		&__inner {
 		}
@@ -52,12 +83,26 @@
 		display: flex;
 		flex-direction: column;
 		overflow-y: scroll;
+
+		@media screen and (max-width: 768px) {
+			width: 100%;
+			border: none;
+			padding: 1.8rem;
+		}
 		&__title {
 			color: $mainFontColor;
 			margin-bottom: 2.5rem;
+
+			@media screen and (max-width: 768px) {
+				display: none;
+			}
 		}
 	}
 	.chat-main {
 		width: 100%;
+
+		&.hidden {
+			display: none;
+		}
 	}
 </style>

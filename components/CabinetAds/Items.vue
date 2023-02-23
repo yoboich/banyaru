@@ -74,6 +74,10 @@
 		&__column {
 			flex: 0 1 50%;
 			position: relative;
+
+			@media screen and (max-width: 768px) {
+				flex: 0 1 100%;
+			}
 		}
 
 		&__item {
