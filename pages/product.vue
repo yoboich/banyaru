@@ -47,7 +47,9 @@
 				v-else
 			>
 				<div class="sub-header__back">
-					<img src="~/assets/img/product-mobile/mobile-back.svg" alt="" />
+					<nuxt-link to="/">
+						<img src="~/assets/img/product-mobile/mobile-back.svg" alt=""
+					/></nuxt-link>
 				</div>
 				<div class="sub-header__right">
 					<img src="~/assets/img/product-mobile/mobile-share.svg" alt="" />
