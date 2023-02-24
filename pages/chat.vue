@@ -39,7 +39,7 @@
 			<div class="chat__inner">
 				<div class="card chat-card">
 					<div class="chat-card__content">
-						<div class="chat-aside">
+						<div class="chat-aside" v-if="navIsShown">
 							<div class="chat-aside__title h1">Чаты</div>
 							<ChatAside v-if="false" />
 							<ChatAsideMsg />
@@ -63,6 +63,7 @@
 
 		@media screen and (max-width: 768px) {
 			margin: 0;
+			overflow: hidden;
 		}
 
 		&__inner {

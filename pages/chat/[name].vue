@@ -3,6 +3,10 @@
 <template>
 	<div class="chat-content">
 		<div class="chat-content__top">
+			<nuxt-link to="/chat/"
+				><IconArrow class="green rotate chat-content__arrow"
+			/></nuxt-link>
+
 			<div class="chat-content__left">
 				<div class="chat-content__img">
 					<img
@@ -20,7 +24,7 @@
 					<div class="chat-content__name h3">Светлана</div>
 					<div class="chat-content__text h4">
 						Массаж в 4 руки | 2000 р. <br />
-						Здравствуйте
+						<span>в сети</span>
 					</div>
 				</div>
 				<div class="chat-content__checked h4-mini">
@@ -29,7 +33,11 @@
 			</div>
 			<div class="chat-content__right">
 				<img src="~/assets/img/chat/tel.svg" alt="" />
-				<img src="~/assets/img/chat/heart.svg" alt="" />
+				<img
+					class="chat-content__heart"
+					src="~/assets/img/chat/heart.svg"
+					alt=""
+				/>
 			</div>
 		</div>
 		<div class="chat-content__main main-chat">
@@ -82,5 +90,15 @@
 </template>
 
 <style lang="scss" scoped>
-
+	.chat-content {
+		&__heart {
+			@media screen and (max-width: 768px) {
+				display: none;
+			}
+		}
+		&__arrow {
+			margin-right: 1.5rem;
+			cursor: pointer;
+		}
+	}
 </style>

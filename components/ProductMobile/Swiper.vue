@@ -2,6 +2,7 @@
 	// Import Swiper Vue.js components
 	import { Swiper, SwiperSlide } from 'swiper/vue';
 	import { EffectFade } from 'swiper';
+
 	// Import Swiper styles
 	import 'swiper/css';
 	import bigIm1 from '~/assets/img/promotions/1.jpg';
@@ -23,9 +24,12 @@
 		swiperBtn.value = swiperInstance;
 	}
 	const modules = [EffectFade];
+
+	const modalVisible = ref(false);
 </script>
 <template>
 	<div class="mobile-card-swiper">
+		<PreviewModal :visible="modalVisible" @close-modal="modalVisible = false" />
 		<swiper
 			@swiper="getRef"
 			:modules="modules"
@@ -35,7 +39,10 @@
 			<swiper-slide v-for="(item, idx) in 7">
 				<div class="mobile-card-swiper__main">
 					<img class="product-card-swiper__bg" :src="mainImages[idx]" alt="" />
-					<div class="product-card-swiper__play pos">
+					<div
+						class="product-card-swiper__play pos"
+						@click="modalVisible = true"
+					>
 						<img src="~/assets/img/product-card/play.svg" alt="" />
 					</div></div
 			></swiper-slide>

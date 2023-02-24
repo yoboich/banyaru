@@ -34,6 +34,7 @@
 		bigIm1,
 	]);
 
+	const isLarge = ref(true);
 	const swiperBtn = ref(null);
 	const currentImg = computed(() => swiperBtn.value?.realIndex + 1);
 	function getRef(swiperInstance) {
@@ -74,6 +75,12 @@
 	const closeModal = () => {
 		emit('closeModal');
 	};
+
+	onMounted(() => {
+		if (window.innerWidth <= 768) {
+			isLarge.value = false;
+		}
+	});
 </script>
 
 <template>
@@ -325,13 +332,13 @@
 								</div></div
 						></swiper-slide>
 						<div
-							class="product-card-swiper__arrow arrow-left pos"
+							class="product-card-swiper__arrow arrow-left pos preview-card-swiper__arrow"
 							@click="prev"
 						>
 							<IconArrow class="fill" />
 						</div>
 						<div
-							class="product-card-swiper__arrow arrow-right pos"
+							class="product-card-swiper__arrow arrow-right pos preview-card-swiper__arrow"
 							@click="next"
 						>
 							<IconArrow />
@@ -339,11 +346,11 @@
 						<UISliderButton
 							:max="10"
 							:current="currentImg"
-							class="product-card-swiper__count pos"
+							class="product-card-swiper__count pos preview-card-swiper__count"
 						/>
 					</swiper>
 
-					<div class="preview-card-swiper__thumbnail">
+					<div class="preview-card-swiper__thumbnail" v-if="isLarge">
 						<img
 							@click="slideTo(idx)"
 							v-for="(item, idx) in 10"
@@ -388,6 +395,10 @@
 					border-radius: 0px 2px 2px 0px;
 					bottom: -4rem;
 					transform: translateX(-50%);
+
+					@media screen and (max-width: 768px) {
+						bottom: -3rem;
+					}
 				}
 			}
 		}
@@ -402,7 +413,11 @@
 		z-index: 100;
 		background-color: $default-color;
 		overflow-y: scroll;
+
 		&__inner {
+			@media screen and (max-width: 768px) {
+				margin-top: 5rem;
+			}
 		}
 
 		&__close {
@@ -416,12 +431,20 @@
 			justify-content: space-between;
 			align-items: center;
 			margin-bottom: 2.8rem;
+
+			@media screen and (max-width: 768px) {
+				flex-direction: column;
+			}
 		}
 
 		&__left {
 			display: flex;
 			gap: 7.7rem;
 			align-items: center;
+
+			@media screen and (max-width: 768px) {
+				gap: 3rem;
+			}
 		}
 
 		&__title {
@@ -447,6 +470,12 @@
 		&__right {
 			display: flex;
 			align-items: center;
+
+			@media screen and (max-width: 768px) {
+				flex-direction: column-reverse;
+				gap: 3rem;
+				margin-top: 3rem;
+			}
 		}
 
 		&__action {
@@ -464,6 +493,14 @@
 			padding-top: 1.5rem;
 			padding-bottom: 1.5rem;
 		}
+
+		&__close {
+			@media screen and (max-width: 768px) {
+				position: absolute;
+				top: -5rem;
+				right: 0.5rem;
+			}
+		}
 	}
 
 	.preview-swiper {
@@ -479,21 +516,40 @@
 		}
 
 		&__logo {
+			@media screen and (max-width: 768px) {
+				width: 3.5rem;
+				height: 3.5rem;
+			}
 		}
 
 		&__play {
 			width: 8rem;
 			height: 8rem;
 
+			@media screen and (max-width: 768px) {
+				width: 3rem;
+				height: 3rem;
+			}
 			& img {
 				width: 50px;
+
+				@media screen and (max-width: 768px) {
+					width: 3rem;
+				}
 			}
 		}
 
 		&__arrow {
+			@media screen and (max-width: 768px) {
+				width: 1.5rem;
+				height: 1.5rem;
+			}
 		}
 
 		&__count {
+			@media screen and (max-width: 768px) {
+				padding: 0.3rem 1.6rem !important; 
+			}
 		}
 
 		&__thumbnail {

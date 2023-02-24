@@ -68,7 +68,7 @@
 		<div class="chat-msg__row">
 			<nuxt-link
 				v-for="(_, idx) in 5"
-				to="/1"
+				to="1"
 				class="chat-msg__item chat-content__left"
 			>
 				<div class="chat-content__img">

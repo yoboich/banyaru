@@ -47,10 +47,18 @@
 
 	&__text {
 		color: $secondary-color;
+
+		& span {
+			color: $green-color;
+		}
 	}
 
 	&__checked {
 		align-self: flex-start;
+
+		@media screen and (max-width: 768px) {
+			display: none;
+		}
 	}
 
 	&__right {
@@ -77,6 +85,10 @@
 			top: 50%;
 			left: 2rem;
 			transform: translateY(-50%);
+
+			@media screen and (max-width: 768px) {
+				width: 40%;
+			}
 		}
 	}
 
@@ -182,6 +194,10 @@
 	&__title {
 		color: $mainFontColor;
 		margin-bottom: 1.5rem;
+
+		@media screen and (max-width: 768px) {
+			display: none;
+		}
 	}
 
 	&__vars {
@@ -189,6 +205,9 @@
 		align-items: center;
 		gap: 1.5rem;
 		margin-bottom: 1.5rem;
+		@media screen and (max-width: 768px) {
+			display: none;
+		}
 	}
 
 	&__var {
@@ -221,6 +240,7 @@
 		border: none;
 		outline: none;
 		background: transparent;
+		flex: 1;
 
 		&::placeholder {
 			color: $secondary-color;
