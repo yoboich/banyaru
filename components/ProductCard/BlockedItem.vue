@@ -1,8 +1,17 @@
 <script setup>
+	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
 
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (width.value <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 	onMounted(() => {
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		}
 	});
@@ -11,7 +20,6 @@
 </script>
 
 <template>
-	
 	<div
 		v-if="!isLarge"
 		class="product-card-blocked__item"

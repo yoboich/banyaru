@@ -8,30 +8,15 @@ function uploadFile(e) {
   <div class="photo">
     <div class="photo__inner">
       <div class="photo__item">
-        <div class="photo__title">Фото бани | Лого</div>
-        <div class="photo__subtitle">Добавьте самое удачное фото</div>
-        <label class="photo__input">
-          <img src="@/assets/img/chat/camera.svg" alt="" />
-          <p>Добавить фото</p>
-          <input
-            @change="uploadFile"
-            type="file"
-            ref="file"
-            accept="image/gif, 
-            image/jpeg, image/png"
-            hidden
-          />
-        </label>
-      </div>
-      <div class="photo__item">
-        <div class="photo__title_logo">Логотип</div>
-        <div class="photo__subtitle photo__subtitle_logo">
-          Добавьте самое удачное фото
+        <div class="photo__title">Главная фотография</div>
+        <div class="photo__subtitle">
+          Не допускать к размещению фотографии с водяным знаками, чужих объектах
+          и рекламные баннеры, JPG, PNG или GIF
         </div>
         <label class="photo__input">
           <img src="@/assets/img/chat/camera.svg" alt="" />
           <p>Добавить фото</p>
-          <span>Jepg | Png | 160 x 160</span>
+          <span>Jpeg | Png | 160 x 160</span>
           <input
             @change="uploadFile"
             type="file"
@@ -41,12 +26,66 @@ function uploadFile(e) {
             hidden
           />
         </label>
+        <div class="photo__sub-item sub-item">
+          <div class="sub-item__title">Видео</div>
+          <div class="sub-item__subtitle">
+            Добавить ссылку на видео ролик об объекте (YouTube)
+          </div>
+          <input placeholder="Ссылка на YouTube" type="text" class="input" />
+        </div>
+      </div>
+      <div class="photo__item">
+        <div class="photo__title">Логотип</div>
+        <div class="photo__subtitle photo__subtitle">
+          Не допускать к размещению фотографии с водяным знаками, чужих объектах
+          и рекламные баннеры, JPG, PNG или GIF
+        </div>
+        <label class="photo__input">
+          <img src="@/assets/img/chat/camera.svg" alt="" />
+          <p>Добавить фото</p>
+          <span>Jpeg | Png | 160 x 160</span>
+          <input
+            @change="uploadFile"
+            type="file"
+            ref="file"
+            accept="image/gif, 
+            image/jpeg, image/png"
+            hidden
+          />
+        </label>
+        <div class="photo__sub-item sub-item">
+          <div class="sub-item__title">Заголовок</div>
+          <div class="sub-item__subtitle">
+            Яркий заголовок объявления для Платных, Бронирования и VIP.
+          </div>
+          <input placeholder="Заголовок" type="text" class="input" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.sub-item {
+  & input{
+    max-width: 34rem;
+  }
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  &__title {
+    margin-top: 3.7rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 130%;
+  }
+  &__subtitle {
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    color:$secondary-color;
+  }
+}
 .photo {
   margin-top: 7.2rem;
   padding-bottom: 5.9rem;
@@ -66,6 +105,7 @@ function uploadFile(e) {
   &__subtitle {
     color: $secondary-color;
     margin-bottom: 2.5rem;
+    max-width: 32rem;
     &_logo {
       margin-bottom: 1.6rem;
     }

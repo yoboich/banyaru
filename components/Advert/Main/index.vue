@@ -1,18 +1,11 @@
 <template>
   <div class="advert-main">
     <div class="advert-main__item">
-      <div class="advert-main__title advert-main__title_first">
-        Новое объявление
-      </div>
-      <div class="advert-main__subtitle">
-        Объявление будет доступно на <a target="_blank" href="/">Баня.ру</a> и в
-        нашем <a target="_blank" href="/">мобильном приложении</a>
-      </div>
       <AdvertMainType />
     </div>
 
     <div class="advert-main__item">
-      <div class="advert-main__title">Новое объявление</div>
+      <AdvertMainTypeChoosen/>
       <AdvertMainLocation />
       <AdvertMainBuildingType />
       <AdvertMainName />

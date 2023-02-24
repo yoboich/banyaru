@@ -4,7 +4,7 @@
 	// const isLarge = ref(true);
 
 	// onMounted(() => {
-	// 	if (window.innerWidth <= 768) {
+	// 	if (width.value <= 768) {
 	// 		isLarge.value = false;
 	// 	}
 	// });

@@ -1,4 +1,5 @@
 <script setup>
+	import { useWindowSize } from '@vueuse/core';
 	// Import Swiper Vue.js components
 	import { Swiper, SwiperSlide } from 'swiper/vue';
 	import { EffectFade } from 'swiper';
@@ -76,8 +77,16 @@
 		emit('closeModal');
 	};
 
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (width.value <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 	onMounted(() => {
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		}
 	});
@@ -548,7 +557,7 @@
 
 		&__count {
 			@media screen and (max-width: 768px) {
-				padding: 0.3rem 1.6rem !important; 
+				padding: 0.3rem 1.6rem !important;
 			}
 		}
 

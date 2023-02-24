@@ -1,53 +1,27 @@
 <template>
   <section class="type">
+    <div class="type__title">Тип объявления</div>
     <div class="type__inner">
       <div class="type__item">
-        <div class="type__title">Тип объявления</div>
-        <div class="type__checkbox">
-          <div class="type__checkbox-item">
-            <label for="">Сдать</label>
-            <input name="type" type="radio" />
-          </div>
-          <div class="type__checkbox-item">
-            <label for="">Услуги</label>
-            <input name="type" type="radio" />
-          </div>
-          <div class="type__checkbox-item">
-            <label for="">Продать</label>
-            <input name="type" type="radio" />
-          </div>
+        <div class="type__name">Тип сдлелки</div>
+        <div class="type__tab">
+          <span class="type__tab-item active">Сдать</span>
+          <span class="type__tab-item">Услуги</span>
+          <span class="type__tab-item">Продать</span>
         </div>
       </div>
-      <div class="arrow">
-        <IconArrow />
-      </div>
       <div class="type__item">
-        <div class="type__title">Сдать</div>
-        <div class="type__checkbox">
-          <div class="type__checkbox-item">
-            <label for="">Баня | сауна</label>
-            <input name="snyat" type="radio" />
-          </div>
-          <div class="type__checkbox-item">
-            <label for="">Номер</label>
-            <input name="snyat" type="radio" />
-          </div>
+        <div class="type__name">Сдать</div>
+        <div class="type__tab">
+          <span class="type__tab-item active">Баня</span>
+          <span class="type__tab-item">Номер</span>
         </div>
       </div>
-      <div class="arrow">
-        <IconArrow />
-      </div>
       <div class="type__item">
-        <div class="type__title">Расчет</div>
-        <div class="type__checkbox">
-          <div class="type__checkbox-item">
-            <label for="">Час</label>
-            <input name="time" type="radio" />
-          </div>
-          <div class="type__checkbox-item">
-            <label for="">Сутки</label>
-            <input name="time" type="radio" />
-          </div>
+        <div class="type__name">Расчет</div>
+        <div class="type__tab">
+          <span class="type__tab-item">Час</span>
+          <span class="type__tab-item">Сутки</span>
         </div>
       </div>
     </div>
@@ -55,61 +29,45 @@
 </template>
 
 <style lang="scss" scoped>
-.arrow {
-  max-width: 4.8rem;
-  width: 100%;
-  margin-top: 125%;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    top: -45%;
-    left: 45%;
-    width: .1rem;
-    height: 3.6rem;
-    background-color: rgba(143,153,186, 0.2) ;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    bottom: -10%;
-    left: 45%;
-    width: .1rem;
-    height: 3.6rem;
-    background-color: rgba(143,153,186, 0.2) ;
-  }
-}
 .type {
-  &__inner {
-    display: grid;
-    grid-template-columns: 3fr 1fr 3fr 1fr 3fr;
-    gap: 5rem;
-    padding-bottom: 5.9rem;
-  }
-  &__item {
-    display: flex;
-    flex-direction: column;
-    gap: 5.9rem;
-  }
+  padding: 5.5rem;
   &__title {
     font-weight: 700;
     font-size: 2rem;
     line-height: 130%;
+    margin-bottom: 4.6rem;
   }
-  &__checkbox {
+  &__inner {
     display: flex;
     flex-direction: column;
-    gap: 1.3rem;
+    gap: 2.6rem;
   }
-  &__checkbox-item {
+  &__item {
     display: flex;
-    justify-content: space-between;
-    & label {
-      font-weight: 500;
-      font-size: 1.6rem;
-      line-height: 1.8rem;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+  &__name {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+  &__tab {
+    display: flex;
+    justify-content: flex-start;
+    background: #ffffff;
+    box-shadow: inset 0px 0px 8px rgba(136, 152, 206, 0.46);
+    border-radius: 100px;
+    padding: 0.4rem;
+    align-self: self-start;
+  }
+  &__tab-item {
+    padding: 1.1rem 5.5rem;
+    &.active {
+      background: $default-color;
+      box-shadow: 0px 6px 21px rgba(166, 175, 205, 0.22);
+      border-radius: 100px;
+      font-weight: 700;
     }
   }
 }

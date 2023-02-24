@@ -3,10 +3,19 @@
 	import img2 from '~/assets/img/product-card/service2.png';
 	import img3 from '~/assets/img/product-card/service3.png';
 
+	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
 
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (width.value <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 	onMounted(() => {
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		}
 	});

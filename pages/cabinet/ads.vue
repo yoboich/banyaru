@@ -1,4 +1,6 @@
 <script setup>
+	import { useWindowSize } from '@vueuse/core';
+
 	let activeTab = ref(1);
 	const isLarge = ref(true);
 
@@ -13,8 +15,18 @@
 	const mobileTab = ['Аренда 1', 'Продажа 2', 'Залы', 'Услуги'];
 	const mainTab = ref(null);
 
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (width.value <= 768) {
+			isLarge.value = false;
+			mainTab.value = mobileTab;
+		} else {
+			isLarge.value = true;
+			mainTab.value = tabs;
+		}
+	});
 	onMounted(() => {
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 			mainTab.value = mobileTab;
 		} else {

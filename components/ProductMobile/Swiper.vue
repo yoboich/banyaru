@@ -26,10 +26,21 @@
 	const modules = [EffectFade];
 
 	const modalVisible = ref(false);
+	const openModal = () => {
+		modalVisible.value = true;
+
+		document.body.classList.add('lock');
+	};
+
+	const closeModal = () => {
+		modalVisible.value = false;
+
+		document.body.classList.remove('lock');
+	};
 </script>
 <template>
 	<div class="mobile-card-swiper">
-		<PreviewModal :visible="modalVisible" @close-modal="modalVisible = false" />
+		<PreviewModal :visible="modalVisible" @close-modal="closeModal" />
 		<swiper
 			@swiper="getRef"
 			:modules="modules"
@@ -39,10 +50,7 @@
 			<swiper-slide v-for="(item, idx) in 7">
 				<div class="mobile-card-swiper__main">
 					<img class="product-card-swiper__bg" :src="mainImages[idx]" alt="" />
-					<div
-						class="product-card-swiper__play pos"
-						@click="modalVisible = true"
-					>
+					<div class="product-card-swiper__play pos" @click="openModal">
 						<img src="~/assets/img/product-card/play.svg" alt="" />
 					</div></div
 			></swiper-slide>

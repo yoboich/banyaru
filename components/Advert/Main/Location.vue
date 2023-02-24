@@ -33,7 +33,6 @@
 .location {
   display: flex;
   gap: 5.3rem;
-  align-items: center;
   padding-bottom: 5.9rem;
     border-bottom: 1px solid rgba(143,153,186,0.2);
   &__map{
@@ -47,7 +46,7 @@
   }
   &__title {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 130%;
     margin-bottom: 1.8rem;
   }

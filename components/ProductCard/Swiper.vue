@@ -61,15 +61,24 @@
 	}
 
 	const modules = [EffectFade];
+
+	const openModal = () => {
+		modalVisible.value = true;
+
+		document.body.classList.add('lock');
+	};
+
+	const closeModal = () => {
+		modalVisible.value = false;
+
+		document.body.classList.remove('lock');
+	};
 </script>
 
 <template>
 	<div class="product-card-swiper">
 		<Teleport to="body">
-			<PreviewModal
-				:visible="modalVisible"
-				@close-modal="modalVisible = false"
-			/>
+			<PreviewModal :visible="modalVisible" @close-modal="closeModal" />
 		</Teleport>
 		<swiper
 			@swiper="getRef"
@@ -95,7 +104,7 @@
 					<div
 						class="product-card-swiper__play pos"
 						v-if="premium"
-						@click="modalVisible = true"
+						@click="openModal"
 					>
 						<img src="~/assets/img/product-card/play.svg" alt="" />
 					</div></div

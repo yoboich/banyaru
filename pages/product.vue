@@ -1,4 +1,5 @@
 <script setup>
+	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
 	const mobileHead = ref(false);
 	const breadcrumbs = ref([
@@ -16,12 +17,22 @@
 		}
 	};
 
+	const { width } = useWindowSize();
+
 	window.addEventListener('scroll', handleScroll);
+	watchEffect(() => {
+		if (width.value <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 	onMounted(() => {
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		}
 	});
+
 	onUnmounted(() => {
 		window.removeEventListener('scroll', handleScroll);
 	});

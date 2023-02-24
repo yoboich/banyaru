@@ -1,7 +1,7 @@
 <template>
   <div class="worktime">
-    <div class="worktime__title">Режим работы</div>
     <div class="worktime__inner">
+      <div class="worktime__title">Режим работы</div>
       <div class="worktime__item">
         <div class="worktime__radio">
           <label for="">Круглосуточно</label>
@@ -18,7 +18,8 @@
           <input class="input" placeholder="до 18:00" type="text" />
         </div>
       </div>
-      <div class="worktime__item">
+    </div>
+    <div class="worktime__item">
         <div class="worktime__radio">
           <label for="">Свой график</label>
           <input type="radio" />
@@ -61,7 +62,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -70,12 +70,14 @@ input {
   max-width: 10rem;
 }
 .worktime {
+  display: flex;
+  gap: 16rem;
   margin-top: 7.2rem;
   padding-bottom: 5.9rem;
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
   &__title {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 130%;
     margin-bottom: 3rem;
   }
@@ -111,6 +113,7 @@ input {
   &__input {
     display: flex;
     gap: 2rem;
+    align-items:center;
     & span{
       margin-right: 7rem;
     }

@@ -2,10 +2,19 @@
 	import img1 from '~/assets/img/promotions/1.jpg';
 	import img2 from '~/assets/img/promotions/2.jpg';
 	import img3 from '~/assets/img/promotions/3.jpg';
+	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
 
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (width.value <= 768) {
+			isLarge.value = false;
+		} else {
+			isLarge.value = true;
+		}
+	});
 	onMounted(() => {
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		}
 	});

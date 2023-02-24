@@ -1,27 +1,29 @@
 <script setup>
+	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
 	const navIsShown = ref(true);
 	const route = useRoute();
 
-	onMounted(() => {
-		if (route.name.includes('cabinet-') && window.innerWidth <= 768) {
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (route.name.includes('cabinet-') && width.value <= 768) {
 			navIsShown.value = false;
 		} else {
 			navIsShown.value = true;
 		}
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		} else {
 			isLarge.value = true;
 		}
 	});
-	onUpdated(() => {
-		if (route.name.includes('cabinet-') && window.innerWidth <= 768) {
+	onMounted(() => {
+		if (route.name.includes('cabinet-') && width.value <= 768) {
 			navIsShown.value = false;
 		} else {
 			navIsShown.value = true;
 		}
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		} else {
 			isLarge.value = true;
@@ -134,10 +136,7 @@
 								</button>
 							</div>
 						</div>
-						<div
-							class="cabinet-main"
-							:class="{ hidden: !isLarge && navIsShown }"
-						>
+						<div class="cabinet-main" v-if="!isLarge && !navIsShown">
 							<NuxtPage />
 						</div>
 					</div>
@@ -177,10 +176,6 @@
 	.cabinet-main {
 		padding-left: 4.5rem;
 		width: 65%;
-
-		&.hidden {
-			display: none;
-		}
 
 		@media screen and (max-width: 768px) {
 			width: 100%;

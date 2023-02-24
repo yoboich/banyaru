@@ -1,27 +1,30 @@
 <script setup>
+	import { useWindowSize } from '@vueuse/core';
 	const route = useRoute();
 	const isLarge = ref(true);
 	const navIsShown = ref(true);
 
-	onMounted(() => {
-		if (route.name.includes('chat-') && window.innerWidth <= 768) {
+	const { width } = useWindowSize();
+	watchEffect(() => {
+		if (route.name.includes('chat-') && width.value <= 768) {
 			navIsShown.value = false;
 		} else {
 			navIsShown.value = true;
 		}
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
 			isLarge.value = false;
 		} else {
 			isLarge.value = true;
 		}
 	});
-	onUpdated(() => {
-		if (route.name.includes('chat-') && window.innerWidth <= 768) {
+	onMounted(() => {
+		if (route.name.includes('chat-') && width.value <= 768) {
 			navIsShown.value = false;
 		} else {
 			navIsShown.value = true;
 		}
-		if (window.innerWidth <= 768) {
+		if (width.value <= 768) {
+			console.log('hello');
 			isLarge.value = false;
 		} else {
 			isLarge.value = true;
@@ -44,7 +47,7 @@
 							<ChatAside v-if="false" />
 							<ChatAsideMsg />
 						</div>
-						<div class="chat-main" :class="{ hidden: !isLarge && navIsShown }">
+						<div class="chat-main" v-if="!isLarge && !navIsShown">
 							<ChatUnSelected v-if="!route.params.name" />
 							<NuxtPage />
 						</div>
@@ -101,9 +104,5 @@
 	}
 	.chat-main {
 		width: 100%;
-
-		&.hidden {
-			display: none;
-		}
 	}
 </style>
