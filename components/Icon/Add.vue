@@ -20,4 +20,7 @@
 			fill: $green-color;
 		}
 	}
+	.white circle {
+		fill: white;
+	}
 </style>

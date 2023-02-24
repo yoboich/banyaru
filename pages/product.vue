@@ -59,13 +59,13 @@
 			>
 				<div class="sub-header__back">
 					<nuxt-link to="/">
-						<img src="~/assets/img/product-mobile/mobile-back.svg" alt=""
+						<IconBack :class="{ white: !mobileHead }"
 					/></nuxt-link>
 				</div>
 				<div class="sub-header__right">
-					<img src="~/assets/img/product-mobile/mobile-share.svg" alt="" />
-					<img src="~/assets/img/product-mobile/mobile-like.svg" alt="" />
-					<img src="~/assets/img/product-mobile/mobile-add.svg" alt="" />
+					<IconShare :class="{ white: !mobileHead }" />
+					<IconHeart :class="{ white: !mobileHead }" />
+					<IconAdd :class="{ white: !mobileHead }" />
 				</div>
 			</div>
 			<ProductMobileSwiper v-if="!isLarge" />

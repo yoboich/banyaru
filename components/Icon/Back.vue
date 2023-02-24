@@ -20,4 +20,7 @@
 			fill: $green-color;
 		}
 	}
+	.white path {
+		fill: white;
+	}
 </style>
