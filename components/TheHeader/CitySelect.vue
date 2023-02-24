@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 let isActive = ref(false);
 let selectCity = ref("Москва");
-let search = ref('');
+let search = ref("");
 
 const filteredData = computed(() => {
   return data.filter(({ city }) =>
@@ -279,6 +279,49 @@ const data = [
     }
     &.active {
       color: $green-color;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .city-select {
+    position: relative;
+    max-width: none;
+    width: 94%;
+    margin-left: 0;
+    margin-top: 2.8rem;
+  }
+  .city-dropdown {
+    top: 22rem;
+    max-width: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    z-index: 1002;
+    background: $default-color;
+    box-shadow: 0px 7px 27px rgba(136, 152, 206, 0.35);
+    border-radius: 1.2rem;
+    opacity: 0;
+    display: none;
+    transform: translateY(-2rem);
+    transition: all 0.2s ease;
+    visibility: hidden;
+    &__inner {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1rem;
+      row-gap: 1rem;
+    }
+    &.active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.5s ease;
+      visibility: visible;
+      display: block;
     }
   }
 }
