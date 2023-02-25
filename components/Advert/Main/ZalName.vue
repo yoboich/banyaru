@@ -8,6 +8,8 @@
           Хаммам
         </div>
         <input class="input" placeholder="Название зала" type="text" />
+      </div>
+      <div class="zal-name__item">
         <div class="zal-name__desc">
           <span>Описание</span>
           <textarea
@@ -20,16 +22,6 @@
           ></textarea>
         </div>
       </div>
-      <div class="zal-name__item">
-        <div class="zal-name__title">Галерея</div>
-        <div class="zal-name__gallery">
-          <img src="@/assets/img/product-card/4.png" alt="" />
-          <img src="@/assets/img/product-card/4.png" alt="" />
-          <img src="@/assets/img/product-card/4.png" alt="" />
-          <img src="@/assets/img/product-card/4.png" alt="" />
-        </div>
-        <button class="btn btn-white">+Добавить фото</button>
-      </div>
     </div>
   </div>
 </template>
@@ -40,7 +32,7 @@
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
   &__title {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 130%;
     margin-bottom: 2rem;
   }
@@ -69,12 +61,10 @@
   &__desc {
     display: flex;
     flex-direction: column;
-    margin-top: 5.2rem;
     & span {
-      text-align: center;
       margin-bottom: 1.6rem;
       font-weight: 700;
-      font-size: 2rem;
+      font-size: 2.4rem;
       line-height: 130%;
     }
   }

@@ -77,7 +77,7 @@
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
   &__title {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 130%;
     margin-bottom: 4.1rem;
   }

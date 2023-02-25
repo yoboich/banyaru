@@ -21,14 +21,18 @@
       <div class="time__item">
         <div class="time__name">Определение времени суток</div>
         <div class="time__input">
-          <label for="">Утро будни c</label>
-          <input class="input" type="text" name="" id="">
-          <input class="input" type="text" name="" id="">
+          <label class="mr" for="">Утро будни</label>
+          с
+          <input class="input" type="text" name="" id="" />
+          до
+          <input class="input" type="text" name="" id="" />
         </div>
         <div class="time__input">
-          <label for="">Утро выходные c</label>
-          <input class="input" type="text" name="" id="">
-          <input class="input" type="text" name="" id="">
+          <label for="">Утро выходные</label>
+          с
+          <input class="input" type="text" name="" id="" />
+          до
+          <input class="input" type="text" name="" id="" />
         </div>
       </div>
     </div>
@@ -42,14 +46,13 @@
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
   &__title {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 130%;
     margin-bottom: 4.1rem;
   }
   &__inner {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 19.6rem;
+    display: flex;
+    column-gap: 10rem;
     row-gap: 1.3rem;
   }
   &__item {
@@ -67,6 +70,19 @@
     align-items: center;
     gap: 1.3rem;
     margin-bottom: 1.6rem;
+  }
+  &__input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    & .mr {
+      margin-right: 2.7rem;
+    }
+    & input {
+      max-width: 9rem;
+      display: block;
+    }
   }
 }
 </style>

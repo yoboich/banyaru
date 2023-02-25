@@ -4,16 +4,19 @@
       <div class="discount__item">
         <div class="discount__title">Скидки</div>
         <div class="discount__input">
-          <input placeholder="%" class="input" type="text" />
-          <input placeholder="Описание скидки" class="input" type="text" />
+          <input placeholder="10" class="input" type="text" />
+          <span>%</span>
+          <input placeholder="Д/Р (5 дней До и После+документ)" class="input" type="text" />
         </div>
         <div class="discount__input">
-          <input placeholder="%" class="input" type="text" />
-          <input placeholder="Описание скидки" class="input" type="text" />
+          <input placeholder="10" class="input" type="text" />
+          <span>%</span>
+          <input placeholder="7- 14 лет" class="input" type="text" />
         </div>
         <div class="discount__input">
-          <input placeholder="%" class="input" type="text" />
-          <input placeholder="Описание скидки" class="input" type="text" />
+          <input placeholder="10" class="input" type="text" />
+          <span>%</span>
+          <input placeholder="9-17 пн-чт" class="input" type="text" />
         </div>
       </div>
       <div class="discount__item">
@@ -40,9 +43,10 @@
   margin-top: 7.2rem;
   padding-bottom: 5.9rem;
   border-bottom: 1px solid rgba(143, 153, 186, 0.2);
+  max-width: 83rem;
   &__title {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 130%;
     margin-bottom: 2rem;
   }
@@ -66,12 +70,22 @@
     gap: 2rem;
     align-items:center;
     margin-bottom: 1rem;
+    & input:nth-child(1){
+      max-width: 6rem;
+    }
+    & span{
+      color: $secondary-color;
+    }
   }
   &__input-quantity {
     display: flex;
+    justify-content: space-between;
     gap: 5rem;
     align-items:center;
     margin-bottom: 3rem;
+    & input{
+      max-width: 6rem;
+    }
   }
 }
 </style>
