@@ -136,7 +136,7 @@
 								</button>
 							</div>
 						</div>
-						<div class="cabinet-main" v-if="!isLarge && !navIsShown">
+						<div class="cabinet-main" v-if="isLarge || !navIsShown">
 							<NuxtPage />
 						</div>
 					</div>

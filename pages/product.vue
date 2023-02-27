@@ -68,7 +68,7 @@
 					<IconAdd :class="{ white: !mobileHead }" />
 				</div>
 			</div>
-			<ProductMobileSwiper v-if="!isLarge" />
+			
 			<NuxtPage />
 		</div>
 	</div>

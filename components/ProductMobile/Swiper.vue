@@ -8,6 +8,13 @@
 	import bigIm1 from '~/assets/img/promotions/1.jpg';
 	import bigIm2 from '~/assets/img/promotions/2.jpg';
 	import bigIm3 from '~/assets/img/promotions/3.jpg';
+
+	defineProps({
+		type: {
+			type: String,
+		},
+	});
+
 	const mainImages = ref([
 		bigIm1,
 		bigIm2,
@@ -39,8 +46,10 @@
 	};
 </script>
 <template>
-	<div class="mobile-card-swiper">
-		<PreviewModal :visible="modalVisible" @close-modal="closeModal" />
+	<div class="mobile-card-swiper" v-if="type !== 'free'">
+		<teleport to="body">
+			<PreviewModal :visible="modalVisible" @close-modal="closeModal" />
+		</teleport>
 		<swiper
 			@swiper="getRef"
 			:modules="modules"
@@ -62,12 +71,35 @@
 			/>
 		</swiper>
 	</div>
+	<div class="mobile-card-swiper" v-if="type === 'free'">
+		<div class="mobile-card-swiper__main">
+			<nuxt-img
+				class="product-card-swiper__bg"
+				src="/promotions/1.jpg"
+				quality="80"
+			/>
+			<div class="product-card-swiper__play pos">
+				<img src="~/assets/img/product-card/play.svg" alt="" />
+			</div>
+		</div>
+
+		<div class="slider-count">
+			<UISliderButton
+				:current="1"
+				:max="20"
+				:mobile="true"
+				class="mobile-card-swiper__count"
+			/>
+			<img src="~/assets/img/product-mobile/pr-block.svg" alt="" />
+		</div>
+	</div>
 </template>
 <style lang="scss" scoped>
 	.mobile-card-swiper {
 		padding-bottom: 4rem;
 		background-color: $mainFontColor;
 		&__main {
+			position: relative;
 		}
 	}
 	.mobile-swiper {
@@ -81,5 +113,18 @@
 	.mobile-card-swiper__count {
 		background-color: transparent;
 		color: #9da7c7;
+	}
+	.slider-count {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 1rem;
+		margin-top: 6rem;
+		padding-right: 2rem;
+
+		& .mobile-card-swiper__count {
+			margin-top: 0;
+			padding: 0;
+		}
 	}
 </style>

@@ -78,6 +78,7 @@
 			</div>
 		</div>
 	</div>
+	<ProductMobileSwiper v-if="!isLarge" />
 	<MobileProductCard v-if="!isLarge" type="vip" />
 	<MobileProductHalls v-if="!isLarge" />
 	<MobileProductAdress v-if="!isLarge" />

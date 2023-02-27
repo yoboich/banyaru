@@ -28,4 +28,7 @@
 	.white path {
 		fill: white;
 	}
+	.black path {
+		fill: black;
+	}
 </style>

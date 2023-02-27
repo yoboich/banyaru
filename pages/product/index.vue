@@ -42,6 +42,7 @@
 			</div>
 		</div>
 	</div>
+	<ProductMobileSwiper v-if="!isLarge" type="free" />
 	<MobileProductCard v-if="!isLarge" :free="true" />
 	<MobileProductAdress v-if="!isLarge" />
 	<MobileProductFavorite v-if="!isLarge" />

@@ -1,5 +1,7 @@
 <template>
-	<div class="wrapper">
-		<slot />
-	</div>
+	<ClientOnly>
+		<div class="wrapper">
+			<slot />
+		</div>
+	</ClientOnly>
 </template>

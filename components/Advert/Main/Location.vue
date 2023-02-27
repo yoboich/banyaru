@@ -2,6 +2,8 @@
 	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
 	const { width } = useWindowSize();
+
+	console.log(width.value);
 	watchEffect(() => {
 		if (width.value <= 768) {
 			isLarge.value = false;
@@ -19,7 +21,7 @@
 <template>
 	<div class="location">
 		<div class="location__item">
-			<div class="location__title">Расположение</div>
+			<div class="location__title">Расположение {{ width }}</div>
 			<div class="location__subtitle">
 				Введите адрес или поставьте точку на карте
 			</div>

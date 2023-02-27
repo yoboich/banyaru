@@ -14,9 +14,24 @@
 		vip: 'Vip',
 		book: 'Бронь',
 	};
+
+	const modalInfo = ref(false);
+	const modalDrop = ref(false);
 </script>
 
 <template>
+	<teleport to="body">
+		<MobileProductModalInfo
+			:visible="modalInfo"
+			@close-modal="modalInfo = false"
+		/>
+	</teleport>
+	<teleport to="body">
+		<MobileProductModalDrop
+			:visible="modalDrop"
+			@close-modal="modalDrop = false"
+		/>
+	</teleport>
 	<div class="card card-mobile">
 		<div class="card-mobile__warn" v-if="!free">На длительный срок!</div>
 
@@ -24,13 +39,13 @@
 			<div class="card__open">Откроется в <span>09:00</span></div>
 			<div :class="['card-mobile__status', type]">{{ types[type] }}</div>
 		</div>
-		<div class="card-mobile__info">
+		<div class="card-mobile__info" @click="modalInfo = true">
 			<IconInfo class="setting-aside__info-item" />
 		</div>
 		<div class="card-mobile__title h2">
 			Сауна цветы
 			<span class="card-mobile__dropdown" v-if="type !== 'free'">
-				<IconArrow class="green down" />
+				<IconArrow class="green down" @click="modalDrop = true" />
 			</span>
 		</div>
 		<div class="card-mobile__types h4">
@@ -54,6 +69,7 @@
 				</button>
 			</div>
 		</div>
+		
 	</div>
 </template>
 
@@ -97,6 +113,7 @@
 			display: flex;
 			justify-content: flex-end;
 			margin-bottom: 0.5rem;
+			cursor: pointer;
 		}
 
 		&__status {
