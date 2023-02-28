@@ -49,6 +49,7 @@
 			<AdvertMainZalBooking />
 			<AdvertMainTotal/>
 			<AdvertMainTariff/>
+			<AdvertMainTotalPrice/>
 		</div>
 	</div>
 </template>

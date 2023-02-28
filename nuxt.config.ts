@@ -3,6 +3,7 @@ export default defineNuxtConfig({
 	app: { pageTransition: { name: 'page', mode: 'out-in' } },
 	modules: ['@nuxt/image-edge'],
 	image: {
+		provider: 'ipx',
 		dir: 'assets/img',
 		screens: {
 			sm: 320,

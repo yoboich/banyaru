@@ -1,6 +1,6 @@
 <template>
 	<ClientOnly>
-		<div class="wrapper">
+		<div>
 			<slot />
 		</div>
 	</ClientOnly>
