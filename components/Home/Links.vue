@@ -1,7 +1,7 @@
 <script setup>
 const items = [
   {
-    title: "Снять сауну",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -41,7 +41,7 @@ const items = [
     ],
   },
   {
-    title: "Банные комплексы",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -81,7 +81,48 @@ const items = [
     ],
   },
   {
-    title: "Снять сауну",
+    title: "Популярные ссылки",
+    links: [
+      {
+        name: "Spa-терапия",
+        quantity: "4000",
+        src: "/search",
+      },
+      {
+        name: "Ледяная купель",
+        quantity: "2000",
+        src: "/search",
+      },
+      {
+        name: "Баня недалеко от метро",
+        quantity: "34000",
+        src: "/search",
+      },
+      {
+        name: "Банный комплекс повышеной комфортности",
+        quantity: "2000",
+        src: "/search",
+      },
+      {
+        name: "Ледяная купель",
+        quantity: "4000",
+        src: "/search",
+      },
+      {
+        name: "Баня недалеко от метро",
+        quantity: "34000",
+        src: "/search",
+      },
+      {
+        name: "Арендовать сауну на день",
+        quantity: "4000",
+        src: "/search",
+      },
+    ],
+  },
+  {},
+  {
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -121,7 +162,7 @@ const items = [
     ],
   },
   {
-    title: "Банные комплексы",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -161,87 +202,7 @@ const items = [
     ],
   },
   {
-    title: "Снять сауну",
-    links: [
-      {
-        name: "Spa-терапия",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Банный комплекс повышеной комфортности",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
-        src: "/search",
-      },
-    ],
-  },
-  {
-    title: "Банные комплексы",
-    links: [
-      {
-        name: "Spa-терапия",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Банный комплекс повышеной комфортности",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
-        src: "/search",
-      },
-    ],
-  },
-  {
-    title: "Снять сауну",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -337,7 +298,7 @@ const items = [
     display: flex;
     flex-direction: column;
     &_first {
-      background-image: url("@/assets/img/promotions/3.jpg");
+      background-image: url("@/assets/img/promotions/4.png");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -380,5 +341,11 @@ const items = [
       color: #8f99ba;
     }
   }
+}
+.links__item:nth-child(5) {
+    background-image: url("@/assets/img/promotions/5.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 </style>

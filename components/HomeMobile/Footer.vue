@@ -10,7 +10,6 @@
     </div>
     <div class="home-footer__link">
       <span>Читать далее</span>
-      <img src="@/assets/img/icon/select-green.svg" alt="" />
     </div>
     <div class="home-footer__inner">
       <div class="home-footer__copyright">©2023 Баня.ру</div>

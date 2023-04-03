@@ -28,72 +28,77 @@
 					</div>
 
 					<p class="information__text">
-						<b>Banya.ru</b>&nbsp;&mdash; достоверная база данных об&nbsp;аренде
+						Banya.ru&nbsp;&mdash; достоверная база данных об&nbsp;аренде
 						и&nbsp;продаже бань и саун, услуг и&nbsp;товаров для бань
 					</p>
 				</div>
 
 				<div class="information__item">
 					<p class="information__text">
-						<span class="information__text information__text_black"
-							>БАНЯ.РУ</span
-						>
-						&mdash;&nbsp;крупнейший в&nbsp;России каталог бань и&nbsp;саун,
+            БАНЯ.РУ &mdash;&nbsp;крупнейший в&nbsp;России каталог бань и&nbsp;саун,
 						услуг, товаров и&nbsp;готовых бань. Использование сайта означает
-						согласие с&nbsp; <b>Пользовательским соглашением</b> и&nbsp;<b
-							>Политикой конфиденциальности</b
-						>. Оплачивая лицензионный платеж, вы&nbsp;принимаете
-						<b>Лицензионное соглашение</b>.
+						согласие с&nbsp;Пользовательским соглашением и&nbsp;
+							Политикой конфиденциальности
+						. Оплачивая лицензионный платеж, вы&nbsp;принимаете
+						Лицензионное соглашение.
 					</p>
 					<div class="subscribe">
 						<p>Подпишитесь на&nbsp;новые объявления и&nbsp;новости Баня.ру</p>
 						<div class="subscribe__item">
-							<input placeholder="Адрес электронной почты" type="text" />
-							<button class="btn btn-green">Подписаться</button>
+							<input placeholder="Адрес электронной почты" type="text" class="input"/>
+							<button class="btn click">Подписаться</button>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="copyright">
-			<div class="container">
-				<div class="copyright__content">
-					<div class="copyright__bot-left">
-						<p class="copyright__text">
-							2022&nbsp;&copy; ООО &laquo;Баня.ру&raquo;&nbsp;&mdash; Бани
-							и&nbsp;сауны ОГРН 1187746492120
-							<span class="copyright__text copyright__text_small">
-								Предложения и условия не&nbsp;являются публичной афертой
-							</span>
-						</p>
-
-						<img src="@/assets/img/partners/halva.png" alt="" />
-					</div>
-					<div class="copyright__bot-right">
-						<div class="copyright__social-links">
-							<img src="@/assets/img/social/vk.svg" alt="" />
-							<img src="@/assets/img/social/facebook.svg" alt="" />
-							<img src="@/assets/img/social/instagram.svg" alt="" />
-							<img src="@/assets/img/social/youtube.svg" alt="" />
-							<img src="@/assets/img/social/dzen.svg" alt="" />
-							<img src="@/assets/img/social/twitter.svg" alt="" />
-						</div>
-						<div class="copyright__icon">18+</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</footer>
+  <div class="copyright">
+    <div class="container">
+      <div class="copyright__content">
+        <div class="copyright__bot-left">
+          <p class="copyright__text">
+            2022&nbsp;&copy; ООО &laquo;Баня.ру&raquo;&nbsp;&mdash; Бани
+            и&nbsp;сауны ОГРН 1187746492120
+            <span class="copyright__text copyright__text_small">
+								Предложения и условия не&nbsp;являются публичной афертой
+							</span>
+          </p>
+        </div>
+        <div class="copyright__bot-right">
+          <div class="copyright__social-links">
+            <img src="@/assets/img/social/vk.svg" alt="" />
+            <img src="@/assets/img/social/facebook.svg" alt="" />
+            <img src="@/assets/img/social/instagram.svg" alt="" />
+            <img src="@/assets/img/social/youtube.svg" alt="" />
+            <img src="@/assets/img/social/dzen.svg" alt="" />
+            <img src="@/assets/img/social/twitter.svg" alt="" />
+          </div>
+          <div class="copyright__icon">18+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <style lang="scss" scoped>
+.input{
+  width: 340px;
+  height: 35px;
+  background: #FFFFFF;
+  box-shadow: inset 0px 0px 8px rgba(136, 152, 206, 0.46);
+  border-radius: 100px;
+}
 	.footer {
-		background-color: $default-color;
-		padding-top: 1.6rem;
-		margin-top: 2rem;
-		box-shadow: 0px -6px 50px rgba(166, 175, 203, 0.16);
+    background: #FFFFFF;
+    box-shadow: 0px -6px 50px rgba(166, 175, 203, 0.16);
+    border-radius: 23px;
+    width: 98%;
+    margin: 3rem auto 0;
+    padding: 30px 0;
 
-		@media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
 			padding: 3rem 2rem;
 		}
 	}
@@ -177,7 +182,7 @@
 		flex-direction: column;
 		gap: 1.9rem;
 		& p {
-			padding: 1.9rem 0 0 1.9rem;
+			padding: 1.9rem 5rem 0 0;
 
 			@media screen and (max-width: 768px) {
 			padding: 1.9rem 0 0;
@@ -211,10 +216,13 @@
 	}
 
 	.copyright {
-		font-weight: 400;
-		margin-top: 4.4rem;
-		padding: 2rem 0 2rem 9rem;
-		box-shadow: 0px -6px 50px rgba(166, 175, 203, 0.16);
+    background: #FFFFFF;
+    box-shadow: 0px -6px 50px rgba(166, 175, 203, 0.16);
+    border-radius: 23px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+    transform: translateY(-10px);
 
 		@media screen and (max-width: 768px) {
 			box-shadow: none;
@@ -223,6 +231,7 @@
 		&__content {
 			display: flex;
 			align-items: center;
+      justify-content: space-between;
 
 			@media screen and (max-width: 768px) {
 				flex-direction: column-reverse;
@@ -249,7 +258,7 @@
 		&__icon {
 			font-size: 1.15rem;
 			padding: 0.4rem;
-			border: 0.3rem solid $mainFontColor;
+			border: 0.5rem solid $mainFontColor;
 		}
 
 		&__bot-right {
@@ -269,4 +278,11 @@
 			}
 		}
 	}
+  .click {
+    width: 260px;
+    height: 35px;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 21px rgba(166, 175, 205, 0.22);
+    border-radius: 100px;
+  }
 </style>

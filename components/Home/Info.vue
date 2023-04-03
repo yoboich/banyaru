@@ -1,165 +1,330 @@
 <script setup>
-  const data = [
-    {
-      name:'Царь-баня на дровах',
-      quantity:'3 объектов',
-      src:'/product'
-    },
-    {
-      name:'Сауна Остров на Симоновском',
-      quantity:'2 объектов',
-      src:'/product'
-    },
-    {
-      name:'Сауна Цветы',
-      quantity:'2 объектов',
-      src:'/product'
-    },
-    {
-      name:'Сауна на Шаболовке',
-      quantity:'5 объектов',
-      src:'/product'
-    },
-    {
-      name:'Сауна Фламинго',
-      quantity:'9 объектов',
-      src:'/product'
-    },
-    {
-      name:'Банька на Декабристов',
-      quantity:'3 объектов',
-      src:'/product'
-    },
-    {
-      name:'Сауна Пандок',
-      quantity:'2 объектов',
-      src:'/product'
-    },
-  ]
+import img1 from "~/assets/img/promotions/1.jpg";
+import img3 from "~/assets/img/promotions/3.jpg";
+import img4 from "~/assets/img/promotions/6.png";
+import message from "~/assets/img/promotions/icon1.png";
+import eye from "~/assets/img/promotions/icon2.png";
+import line from "~/assets/img/promotions/line.png";
+import home from "~/assets/img/promotions/home.png";
+import like from "~/assets/img/promotions/like.png";
+import logo from "~/assets/img/promotions/logo.png";
+import big_line from "~/assets/img/promotions/big-line.png";
+import sauna from "~/assets/img/promotions/sauna.png";
+import down from "~/assets/img/promotions/down.png";
+
+let activeTab = ref(1);
+const relatedProduct = ref([
+  {
+    name: "Сауна Дионис-СПА",
+    img: img1,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img1,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img3,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img4,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img1,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img3,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+]);
 </script>
 
 <template>
-  <section class="info">
-    <div class="left">
-      <h2 class="left__title">Портал о банях и саунах России - Баня.ру</h2>
-      <div class="left__text">
-        <p>
-          Понравившиеся вам заведения вы можете добавить в Избранное, чтобы
-          иметь к ним постоянный и быстрый доступ. Вся база нашего портала
-          регулярно проверяется нашими менеджерами, таким образом вы можете быть
-          уверены в актуальности представленной информации. Мы регулярно
-          проводим проверки качества услуг заведений и используем в работе
-          отзывы наших посетителей, благодаря чему можем рекомендовать вам бани
-          и сауны с наилучшим сервисом и ценой (отмечены в каталоге значком
-          VIP).
-        </p>
-        <p>
-          БАНЯ.РУ — крупнейший в России каталог бань и саун, услуг, товаров и
-          готовых бань. Использование сайта означает согласие с Пользовательским
-          соглашением и Политикой конфиденциальности. Оплачивая лицензионный
-          платеж, вы принимаете Лицензионное соглашение.
-        </p>
+  <section class="page">
+    <section class="discount">
+      <div class="discount__nav nav">
+        <h1 class="nav__title">Новости</h1>
       </div>
-      <div class="information">
-        <div class="information__logo">
-          <img src="@/assets/img/logo2.png" alt="" />
-          <p class="information__text">
-            Ведущий тематический портал о&nbsp;банях и&nbsp;саунах России,
-            банных услугах и&nbsp;товарах* <br />
-            * По&nbsp;данным сервиса SimilarWeb на&nbsp;февраль 2021 года
-          </p>
-        </div>
-
-        <p class="information__text">
-          <b>Banya.ru</b>&nbsp;&mdash; достоверная база данных об&nbsp;аренде
-          и&nbsp;продаже бань и саун, услуг и&nbsp;товаров для бань
-        </p>
-      </div>
-    </div>
-    <div class="right">
-      <div class="right__title">Банные сети</div>
-      <div class="right__inner">
-        <div v-for="item in data" class="right__item item">
-          <img src="@/assets/img/home/circle-img.png" alt="" />
-          <nuxt-link :to="item.src" class="item__info">
-            <div class="item__name">{{ item.name }}</div>
-            <div class="item__quantity">{{ item.quantity }}</div>
-          </nuxt-link>
+      <div class="discount__nav nav wrappers">
+        <h1 class="nav__title" style="font-size: 20px">Новые бани в Москве</h1>
+        <div class="flex-wrap df">
+          <div class="child-wrap df">
+            <img :src="message" alt="message" class="wrap-image">
+            <span>2</span>
+          </div>
+          <img :src="line" alt="line">
+          <div class="child-wrap df">
+            <span>124</span>
+            <img :src="eye" alt="message" class="wrap-images">
+          </div>
+          <img :src="line" alt="line">
+          <div class="child-wrap">
+            <span>20.03.2023</span>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="main-wrap">
+        <img :src="home" alt="home">
+        <h2>Бани краткое описание, что входит, отдых</h2>
+        <div class="main-wrap__main-wrap-footer">
+          <div class="first main-wrap-child">
+            <img :src="logo" alt="logo">
+            <h4>Баня.ру</h4>
+          </div>
+          <div class="first main-wrap-child">
+            <h4>3</h4>
+            <img :src="like" alt="like">
+          </div>
+        </div>
+      </div>
+      <div class="border">
+        <img :src="big_line" alt="big-line">
+      </div>
+      <div class="discount__nav nav wrappers">
+        <h1 class="nav__title" style="font-size: 20px">Новые бани в Москве</h1>
+        <div class="flex-wrap df">
+          <div class="child-wrap df">
+            <img :src="message" alt="message" class="wrap-image">
+            <span>2</span>
+          </div>
+          <img :src="line" alt="line">
+          <div class="child-wrap df">
+            <span>124</span>
+            <img :src="eye" alt="message" class="wrap-images">
+          </div>
+          <img :src="line" alt="line">
+          <div class="child-wrap">
+            <span>20.03.2023</span>
+          </div>
+        </div>
+      </div>
+      <div class="main-wrap">
+        <img :src="home" alt="home">
+        <h2>Бани краткое описание, что входит, отдых</h2>
+        <div class="main-wrap__main-wrap-footer">
+          <div class="first main-wrap-child">
+            <img :src="logo" alt="logo">
+            <h4>Баня.ру</h4>
+          </div>
+          <div class="first main-wrap-child">
+            <h4>3</h4>
+            <img :src="like" alt="like">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="discount-content">
+      <div class="discount__nav nav">
+        <h1 class="nav__title">Реклама</h1>
+      </div>
+      <div class="discount-product">
+        <img :src="home" alt="home" class="home-image">
+        <h4>Баня в  москве</h4>
+        <p>В Москве открылась новая сеть банных<br> омплексов<br>
+          в районе метро ВДНХ...</p>
+        <img :src="big_line" alt="big-line" class="line-big">
+      </div>
+      <div class="discount-product">
+        <img :src="home" alt="home" class="home-image">
+        <h4>Баня в  москве</h4>
+        <p>В Москве открылась новая сеть банных<br> омплексов<br>
+          в районе метро ВДНХ...</p>
+      </div>
+      <div class="sauna-image">
+        <img :src="sauna" alt="sauna-image">
+      </div>
+      <div class="down-image">
+        <img :src="down" alt="down-image">
+      </div>
+    </section>
   </section>
 </template>
 
 <style lang="scss" scoped>
-.information {
-  margin-top: 4.8rem;
-  max-width: 54rem;
-  width: 100%;
-  & img {
-    max-width: 10.7rem;
-    max-height: 3rem;
-  }
-  &__logo {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1.8rem;
-  }
-  &__text {
-    font-weight: 400;
-    color: $secondary-color;
-  }
-}
-.info {
-  gap: 14rem;
-  margin-top: 11.8rem;
+.page {
   display: flex;
-  margin-bottom: 9rem;
+  margin-top: 11rem;
 }
-.left {
-  width: 80%;
-  &__title {
-    font-family: "Gilroy";
-    font-size: 2.6rem;
-    margin-bottom: 6.5rem;
+.main-wrap {
+  img {
+    width: 100%;
+    margin-top: 20px;
   }
-  &__text {
+  h2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3E3E51;
+    padding-top: 35px;
+  }
+  &__main-wrap-footer {
     display: flex;
-    flex-direction: column;
-    gap: 6.5rem;
-    color: $secondary-color;
+    justify-content: space-between;
+    .main-wrap-child {
+      display: flex;
+      align-items: center;
+      img {
+        width: 100px;
+      }
+      h4 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: #3E3E51;
+        padding: 15px 0 0;
+      }
+    }
   }
 }
-.right {
-  width: 22%;
+.sauna-image {
+  margin: 40px 0 0;
+}
+.border  img {
+  width: 100%;
+  margin: 30px 0;
+}
+.df {
+  display: flex;
+  align-items: center;
+}
+.child-wrap {
+  margin: 0 10px;
+}
+.wrap-image{
+  margin: 0 20px;
+}
+.wrap-images {
+  margin: 0 3px 0 14px;
+}
+.discount {
   display: flex;
   flex-direction: column;
-  &__title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-  }
+  background: #FFFFFF;
+  border-radius: 23px;
+  height: auto;
+  padding: 30px;
+  width: 66%;
   &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    max-width: 80%;
   }
-  &__item {
-    display: flex;
-    align-items:center;
-    gap: 1.3rem
+  &__cart{
+    background: $default-color;
+    border-radius: 23px;
+    padding: 1rem 2rem 2rem 2rem;
   }
 }
-.item {
-  cursor: pointer;
-  &__info {
+.nav {
+  &__inner {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    &__item {
+      color: #3E3E51;
+      padding: 2.35rem 3.4rem 1.95rem;
+      border: none;
+      background: #ffffff;
+      box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
+      border-radius: 6px 6px 0px 0px;
+      &_active {
+        color: #17A300;
+        padding: 2.35rem 3.4rem 1.95rem;
+        border: none;
+        background: #ffffff;
+        box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
+        border-radius: 6px 6px 0px 0px;
+      }
+    }
   }
-  &__quantity {
-    color: #8f99ba;
-    font-size: 1.1rem;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+}
+.nav__item {
+  color: #3E3E51;
+  padding: 2.35rem 3.4rem 1.95rem;
+  background: #fff;
+  border-radius: 6px 6px 0px 0px;
+  box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
+  border-left: rgba(143, 153, 186, 0.15);
+  border-bottom: rgba(143, 153, 186, 0.15);
+  opacity: .15;
+  &_active {
+    color: #17A300;
+    padding: 2.35rem 3.4rem 1.95rem;
+    border: none;
+    background: #ffffff;
+    box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
+    border-radius: 6px 6px 0px 0px;
+    opacity: 1;
   }
+}
+.wrappers {
+  margin-top: 20px;
+}
+.discount-content {
+  background: #FFFFFF;
+  border-radius: 23px;
+  width: 30%;
+  height: 1400px;
+  padding: 25px;
+  margin: 0 30px 0;
+  position: relative;
+  .discount-product {
+    h4 {
+      font-family: 'Lato', sans-serif;
+      color: #3E3E51;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 15px 0 0;
+    }
+    p {
+      font-family: 'Lato', sans-serif;
+      color: #8F99BA;
+      font-weight: 500;
+      font-size: 14px;
+      margin: 15px 0;
+    }
+    .home-image {
+      width: 300px;
+      height: 180px;
+    }
+    .line-big {
+      width: 100%;
+      margin: 25px 0;
+    }
+  }
+}
+.down-image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 </style>

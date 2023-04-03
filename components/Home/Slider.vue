@@ -39,8 +39,8 @@ const modules = [Pagination, Navigation, Thumbs, EffectFade];
 <template>
   <section class="slider">
     <div class="slider__titles">
-      <h1 class="slider__title">Название бани</h1>
-      <h2 class="slider__subtitle">Любая полезная инфа про баню</h2>
+      <h1 class="slider__title">Баня.ру</h1>
+      <h2 class="slider__subtitle">С нами теплее</h2>
     </div>
     <swiper
       @swiper="getRef"
@@ -64,9 +64,9 @@ const modules = [Pagination, Navigation, Thumbs, EffectFade];
     </swiper>
     <div class="slider__thumbs thumbs">
       <div class="thumbs__titles">
-        <h3 class="thumbs__title">Элитная сауна в центре</h3>
+        <h3 class="thumbs__title">Справочник бань, саун и услуг</h3>
         <h4 class="thumbs__subtitle">
-          Да прибудет с вами легкий Очаковский пар!
+          Найти легко!
         </h4>
       </div>
     </div>
@@ -226,14 +226,13 @@ const modules = [Pagination, Navigation, Thumbs, EffectFade];
   }
   .thumbs {
     display: grid;
-    grid-template-columns: 20rem 10rem;
     margin-left: auto;
     padding: 7.3rem 7rem 7rem 0;
     gap: 3.5rem;
     position: absolute;
     z-index: 3;
     top: 0;
-    right: 7%;
+    right: 16%;
     &__titles {
       display: flex;
       flex-direction: column;
@@ -244,8 +243,12 @@ const modules = [Pagination, Navigation, Thumbs, EffectFade];
     }
     &__title {
       font-weight: 700;
-      font-size: 2rem;
+      font-size: 2.5rem;
       line-height: 2rem;
+    }
+    &__subtitle {
+      font-weight: 700;
+      font-size: 2rem;
     }
     &__images {
       display: flex;

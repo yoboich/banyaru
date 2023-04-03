@@ -23,10 +23,10 @@
 	<div class="container" v-if="isLarge">
 		<Filter />
 		<HomeSlider />
-		<HomeDiscount />
-		<HomePopular />
-		<HomeMap />
-		<HomeLinks />
+    <HomeLinks />
+    <HomeMap />
+    <HomeDiscount />
+    <HomePopular />
 		<HomePremium />
 		<HomeInfo />
 	</div>
