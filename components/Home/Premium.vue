@@ -1,7 +1,9 @@
 <script setup>
-import img1 from "~/assets/img/promotions/1.jpg";
-import img3 from "~/assets/img/promotions/3.jpg";
-import img4 from "~/assets/img/promotions/6.png";
+import img1 from "~/assets/img/promotions/girl-sauna.png";
+import img5 from "~/assets/img/promotions/girl2-sauna.png";
+import img3 from "~/assets/img/promotions/saunaa.png";
+import home from "~/assets/img/promotions/home2.png"
+import room from "~/assets/img/promotions/room.png"
 
 let activeTab = ref(1);
 const relatedProduct = ref([
@@ -28,7 +30,21 @@ const relatedProduct = ref([
   },
   {
     name: "Сауна Дионис-СПА",
-    img: img4,
+    img: img3,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img3,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img5,
     metro: "Павелецкая",
     walk: "13 мин пешком",
     price: "от 22 300 ₽",
@@ -36,6 +52,20 @@ const relatedProduct = ref([
   {
     name: "Сауна Дионис-СПА",
     img: img1,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img3,
+    metro: "Павелецкая",
+    walk: "13 мин пешком",
+    price: "от 22 300 ₽",
+  },
+  {
+    name: "Сауна Дионис-СПА",
+    img: img3,
     metro: "Павелецкая",
     walk: "13 мин пешком",
     price: "от 22 300 ₽",
@@ -115,9 +145,8 @@ const relatedProduct = ref([
   padding: 30px;
   &__inner {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
-    max-width: 80%;
   }
   &__cart{
     background: $default-color;

@@ -21,7 +21,6 @@
 
 <template>
 	<div class="container" v-if="isLarge">
-		<Filter />
 		<HomeSlider />
     <HomeLinks />
     <HomeMap />

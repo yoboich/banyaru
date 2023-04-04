@@ -11,11 +11,14 @@ let activeMenu = ref(0);
         <NuxtLink to="/" class="header__logo">
           <img src="@/assets/img/logo.png" alt="Баня" />
         </NuxtLink>
+        <NuxtLink to="/" class="header__logo plus-logo">
+          <img src="@/assets/img/header-plus.jpg" alt="plus" />
+        </NuxtLink>
         <transition name="fade">
           <TheHeaderCitySelect />
         </transition>
         <div class="menu-items">
-          <ul class="nav">
+          <ul class="nav paddings">
             <li
               @click="(activeMenu = 1), (isActive = true)"
               :class="[
@@ -43,6 +46,15 @@ let activeMenu = ref(0);
             >
               Купить
             </li>
+            <li
+                @click="(activeMenu = 4), (isActive = true)"
+                :class="[
+                activeMenu == 4 && isActive == true ? 'nav__item_active' : '',
+              ]"
+                class="nav__item color"
+            >
+              Плюс
+            </li>
             <transition name="fade">
               <TheHeaderDropdownMenu
                 :activeMenu="activeMenu"
@@ -53,19 +65,19 @@ let activeMenu = ref(0);
           </ul>
           <ul class="nav-icons">
             <li class="nav-icons__item">
-              <img src="@/assets/img/icon/messages.png" alt="" />
+              <img src="@/assets/img/icon/phone.jpg" alt="phone" />
             </li>
             <li class="nav-icons__item">
-              <img src="@/assets/img/icon/favorite.png" alt="" />
+              <img src="@/assets/img/icon/heart.jpg" alt="heart" />
             </li>
             <li class="nav-icons__item">
-              <img src="@/assets/img/icon/cart.png" alt="" />
+              <img src="@/assets/img/icon/cart.jpg" alt="cart" />
               <span class="counter">3</span>
             </li>
           </ul>
         </div>
         <div class="nav-btns">
-          <nuxt-link to="/advert" class="btn btn-green">Разместить объявление</nuxt-link>
+          <button to="/advert" class="btn btn-green">Разместить объявление</button>
           <div class="btn-login">
             <img src="@/assets/img/icon/avatar.svg" alt="" />
             <span>Вход</span>
@@ -77,6 +89,12 @@ let activeMenu = ref(0);
 </template>
 
 <style lang="scss" scoped>
+.paddings{
+  padding: 0!important;
+}
+.plus-logo{
+  margin: 0 10px 0;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s ease;
@@ -90,6 +108,9 @@ let activeMenu = ref(0);
 .slide-fade-leave-to {
   opacity: 0;
 }
+.color {
+  color: #A169F7!important;
+}
 .header {
   position: fixed;
   top: 0;
@@ -97,7 +118,10 @@ let activeMenu = ref(0);
   right: 0;
   z-index: 99;
   background-color: $default-color;
-  box-shadow: 0px 6px 50px rgba(166, 175, 203, 0.16);
+  box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
+  border-radius: 23px;
+  width: 98%;
+  margin: 0 auto 0;
 
   &__content {
     display: flex;
@@ -114,40 +138,44 @@ let activeMenu = ref(0);
   }
 }
 
+.nav-icons__item{
+  width: 26.02px;
+  height: 26.25px;
+  margin: 0 30px 0 0;
+}
+
 .menu-items {
   display: flex;
   align-items: center;
-  gap: 13.8rem;
+  gap: 3.8rem;
   margin: 0 auto;
 }
 .nav {
   display: flex;
   gap: 2.8rem;
   align-items: center;
+  border: 2px solid #DCE1F0;
+  border-radius: 100px;
+  margin: 0 0 0 45px;
+  padding: 13px 0 0;
   &__item {
     cursor: pointer;
     position: relative;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3E3E51;
+    padding: 7px 15px;
     &_active {
-      &::after {
-        content: "";
-        width: 100%;
-        height: 0.4rem;
-        position: absolute;
-        top: 4.7rem;
-        left: 0;
-        right: 0;
-        opacity: 1;
-        background: $green-color;
-        border-radius: 2px 2px 0px 0px;
-      }
+      background: #32BD1B;
+      border-radius: 100px;
+      color: #F1F3F9!important;
     }
   }
 }
 .nav-icons {
   display: flex;
   align-items: center;
-  gap: 2.9rem;
-
   &__item {
     position: relative;
     & img {
@@ -199,7 +227,12 @@ let activeMenu = ref(0);
   gap: 2.3rem;
   & .btn {
     padding: 0.75rem 2rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    width: 222px;
+    height: 35px;
+    background: #32BD1B;
+    box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+    border-radius: 100px;
   }
   & .btn-login {
     cursor: pointer;

@@ -1,18 +1,22 @@
+<script setup>
+let activeTab = ref(1);
+</script>
+
 <template>
 	<footer class="footer">
 		<div class="container">
 			<ul class="nav">
-				<li class="nav__item">
-					<nuxt-link class="nav__link" to="/1">Бани и&nbsp;сауны</nuxt-link>
+				<li class="nav__item" @click="activeTab = 1" :class="[activeTab == 1 ? 'router-link-active' : '']">
+					Бани и&nbsp;сауны
 				</li>
-				<li class="nav__item">
-					<nuxt-link class="nav__link" to="/">Номера</nuxt-link>
+				<li class="nav__item" @click="activeTab = 2" :class="[activeTab == 2 ? 'router-link-active' : '']">
+					Номера
 				</li>
-				<li class="nav__item">
-					<nuxt-link class="nav__link" to="/3">Услуги</nuxt-link>
+				<li class="nav__item" @click="activeTab = 3" :class="[activeTab == 3 ? 'router-link-active' : '']">
+					Услуги
 				</li>
-				<li class="nav__item">
-					<nuxt-link class="nav__link" to="/4">Предбанник</nuxt-link>
+				<li class="nav__item" @click="activeTab = 4" :class="[activeTab == 4 ? 'router-link-active' : '']">
+					Предбанник
 				</li>
 			</ul>
 
@@ -114,6 +118,8 @@
 		}
 		&__item {
 			position: relative;
+      cursor: pointer;
+      padding-bottom: 5px;
 			&::after {
 				content: '';
 				position: absolute;
@@ -134,6 +140,7 @@
 		color: $green-color;
 		font-size: 1.6rem;
 		font-weight: 700;
+    border-bottom: 2px solid $green-color;
 	}
 	.information {
 		display: flex;

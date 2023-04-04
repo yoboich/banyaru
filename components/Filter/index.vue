@@ -7,34 +7,36 @@ let isActive = ref(false)
 <template>
   <section class="filter">
     <div class="nav">
-      <div class="nav__inner">
-        <div
-          @click="activeTab = 1"
-          :class="[activeTab == 1 ? 'nav__item_active' : '']"
-          class="nav__item"
-        >
-          Снять
+      <div class="container flexs">
+        <div class="nav__inner">
+          <div
+              @click="activeTab = 1"
+              :class="[activeTab == 1 ? 'nav__item_active' : '']"
+              class="nav__item"
+          >
+            Снять
+          </div>
+          <div
+              @click="activeTab = 2"
+              :class="[activeTab == 2 ? 'nav__item_active' : '']"
+              class="nav__item"
+          >
+            Услуги
+          </div>
+          <div
+              @click="activeTab = 3"
+              :class="[activeTab == 3 ? 'nav__item_active' : '']"
+              class="nav__item"
+          >
+            Купить
+          </div>
         </div>
-        <div
-          @click="activeTab = 2"
-          :class="[activeTab == 2 ? 'nav__item_active' : '']"
-          class="nav__item"
-        >
-          Услуги
-        </div>
-        <div
-          @click="activeTab = 3"
-          :class="[activeTab == 3 ? 'nav__item_active' : '']"
-          class="nav__item"
-        >
-          Купить
+        <div class="nav__buttons">
+          <button class="btn nav__buttons_cart">Показать на карте</button>
+          <button class="btn btn-green nav__buttons_search">Найти</button>
         </div>
       </div>
-      <div class="nav__buttons">
-        <button class="btn nav__buttons_cart">Показать на карте</button>
-        <button class="btn btn-green nav__buttons_search">Найти</button>
       </div>
-    </div>
 
     <div class="filter-wrapper">
       <div class="container">
@@ -130,16 +132,26 @@ let isActive = ref(false)
 .filter {
   display: flex;
   flex-direction: column;
+  width: 95%;
+  margin: 70px auto 0;
+}
+.flexs{
+  display: flex;
+  align-items: center;
 }
 .nav {
   display: flex;
-  align-items: flex-start;
-  &__inner {
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
+  border-radius: 0px;
+  padding: 18px 0 1px;
+  .nav__inner {
     display: flex;
   }
   &__item {
     cursor: pointer;
-    padding: 2.15rem 3.4rem 1.95rem;
+    padding: 2rem 3.4rem 1rem;
     border-top: 1px solid rgb(56%, 60%, 73%, 0.15);
     border-right: 1px solid rgb(56%, 60%, 73%, 0.15);
     border-radius: 6px 6px 0px 0px;
@@ -148,7 +160,7 @@ let isActive = ref(false)
     }
     &_active {
       color: $green-color;
-      padding: 2.35rem 3.4rem 1.95rem;
+      padding: 2rem 3.4rem 1rem;
       border: none;
       background: #ffffff;
       box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
@@ -160,16 +172,26 @@ let isActive = ref(false)
     gap: 2.5rem;
     margin-left: auto;
     &_cart {
-      background-color: $default-color;
-      font-weight: 700;
-      font-size: 1.6rem;
-      padding: 1.1rem 3.1rem;
-      box-shadow: 1px 7px 21px rgba(166, 175, 205, 0.22);
+      background: #FFFFFF;
+      box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+      border-radius: 100px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      text-align: center;
+      color: #3E3E51;
+      height: 40px;
     }
     &_search {
-      font-weight: 700;
       font-size: 1.6rem;
-      padding: 1.4rem 2.5rem;
+      padding: .8rem 3.5rem;
+      background: #32BD1B;
+      box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+      border-radius: 100px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      text-align: center;
+      color: #FFFFFF;
     }
   }
 }
@@ -177,8 +199,7 @@ let isActive = ref(false)
   background-color: $default-color;
   box-shadow: 0px 0px 24px rgba(166, 175, 203, 0.16);
   border-radius: 0px 0px 23px 23px;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  padding: 0 20px 0;
 }
 
 .filter-form {

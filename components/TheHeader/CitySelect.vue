@@ -173,11 +173,12 @@ const data = [
   justify-content: space-between;
   align-items: center;
   margin-left: 3.1rem;
-  padding: 0.8rem 0.9rem;
+  padding: 0.5rem 2rem;
   max-width: 20rem;
   width: 100%;
   box-shadow: 1px 7px 21px rgba(166, 175, 205, 0.22);
   border-radius: $mainBorderRadius;
+  border: 2px solid #DCE1F0;
   & span {
     color: $green-color;
     font-weight: 700;

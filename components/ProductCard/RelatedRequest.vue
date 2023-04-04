@@ -40,7 +40,7 @@
 				<div class="card-related__price h3">{{ price }} руб.</div>
 			</div>
 			<div class="card-related__top">
-        <img src="~/assets/img/icon/price.svg" alt="price">
+        <img src="~/assets/img/icon/price.png" alt="price">
 				<div class="card-related__what h4">{{ type }}</div>
 				<div class="card-related__name h3">{{ name }}</div>
 			</div>
@@ -66,6 +66,7 @@
 			display: flex;
 			align-items: stretch;
 			flex: 1;
+      margin: 0 21px 0 0;
       @media screen and (max-width: 768px) {
 				flex: 0 1 50%;
 			}
@@ -207,10 +208,10 @@
 			&::before {
 				content: '';
 				width: 1rem;
-				height: 1rem;
+				height: 1.2rem;
 				position: absolute;
 				left: 36%;
-				top: 32%;
+				top: 31%;
 				background-image: url(@/assets/img/product-card/icon.svg);
 				background-size: cover;
 				background-repeat: no-repeat;
@@ -235,11 +236,11 @@
 		&__bottom {
 			display: flex;
 			flex-direction: column;
-			margin-top: auto;
+			margin-top: 0;
 		}
 		&__metro {
 			display: flex;
-			align-items: end;
+			align-items: flex-end;
 			gap: 1.3rem;
 			margin-bottom: 1.5rem;
 			color: $mainFontColor;
