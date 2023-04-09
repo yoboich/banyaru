@@ -11,6 +11,7 @@ export default defineNuxtConfig({
 			lg: 1000,
 		},
 	},
+
 	vite: {
 		css: {
 			preprocessorOptions: {
@@ -28,4 +29,7 @@ export default defineNuxtConfig({
 	build: {
 		transpile: ['@vuepic/vue-datepicker'],
 	},
+	ssr: false
 });
+
+

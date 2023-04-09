@@ -28,7 +28,7 @@
 			}"
 		>
 			<div class="card-related__img">
-				<img :src="img" alt="" />
+				<nuxt-link><img :src="img" alt="" /></nuxt-link>
 				<div class="card-related__play">
 				</div>
 				<nuxt-link to="/product/vip" class="btn btn-white card-related__btn"

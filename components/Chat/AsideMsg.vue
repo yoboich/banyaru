@@ -1,13 +1,7 @@
 <script setup>
 	let activeTab = ref(1);
 	let secActiveTab = ref(1);
-	// const isLarge = ref(true);
-
-	// onMounted(() => {
-	// 	if (width.value <= 768) {
-	// 		isLarge.value = false;
-	// 	}
-	// });
+	let activeProductTab = ref(1);
 
 	const tabs = [
 		{
@@ -21,6 +15,56 @@
 			text: 'Звонки',
 		},
 	];
+  const users = [
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "users.png"
+    },
+    {
+      image: "online-user.png"
+    },
+    {
+      image: "online-user.png"
+    },
+  ]
 </script>
 
 <template>
@@ -41,7 +85,7 @@
 			</div>
 		</div>
 		<div class="chat-msg__help">
-			<img src="~/assets/img/chat/logo.png" alt="" />
+			<img src="../../assets/img/chat/logo2.svg" alt="logo" class="help-logo"/>
 			<div class="chat-msg__info">
 				<div class="chat-msg__help-name h3">Поддержка баня.ру</div>
 				<div class="chat-msg__help-text h4">
@@ -66,34 +110,33 @@
 			</div>
 		</div>
 		<div class="chat-msg__row">
-			<nuxt-link
-				v-for="(_, idx) in 5"
-				to="1"
+			<div
+				v-for="(item, idx) in users"
+        @click="activeProductTab = idx + 1"
+        :class="[activeProductTab == idx + 1 ? 'chat-msg__item__active' : '']"
+        :key="item"
 				class="chat-msg__item chat-content__left"
 			>
 				<div class="chat-content__img">
 					<img
-						src="~/assets/img/cabinet/avatar.png"
-						alt=""
-						class="chat-content__img-avatar"
-					/>
-					<img
-						src="~/assets/img/promotions/1.jpg"
-						alt=""
+          :src="'/_nuxt/assets/img/chat/' + item.image"
+          alt="users"
 						class="chat-content__img-bg"
 					/>
 				</div>
 				<div class="chat-content__info">
-					<div class="chat-content__name h3">Светлана</div>
+					<h4 class="chat-content__name h3">Светлана</h4>
+          <span>Массаж в 4 руки... | 2000 ₽</span>
 					<div class="chat-content__text h4">
-						Массаж в 4 руки | 2000 р. <br />
-						Здравствуйте
+            Здравствуйте<br>
+            вторая строка сообщения
 					</div>
 				</div>
 				<div class="chat-content__checked h4-mini">
-					<img src="~/assets/img/chat/checked.svg" alt="" /> 13:00
+          13:00
+          <span class="text-span">1</span>
 				</div>
-			</nuxt-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -129,41 +172,61 @@
 		}
 	}
 
+  .chat-content__info span {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: #3E3E51;
+  }
+  .h4-mini {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 9px;
+    color: #8F99BA;
+  }
+
 	.nav {
 		display: flex;
 		align-items: flex-start;
 		&__inner {
 			display: flex;
+      margin: 0 auto;
 		}
 		&__item {
-			cursor: pointer;
-			padding: 2.15rem 3.4rem 1.95rem;
-			border-top: 1px solid rgb(56%, 60%, 73%, 0.15);
-			border-right: 1px solid rgb(56%, 60%, 73%, 0.15);
-			border-radius: 6px 6px 0px 0px;
-			display: flex;
-			align-items: center;
-			gap: 0.8rem;
+      cursor: pointer;
+      padding: 1.5rem 3rem 1.5rem;
+      border-top: 1px solid rgba(143, 153, 186, 0.15);
+      border-right: 1px solid rgba(143, 153, 186, 0.15);
+      border-radius: 6px 6px 0px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      font-family: "Lato", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #3E3E51;
 
 			& span {
-				background-color: $green-color;
-				color: white;
-				border-radius: 50%;
-				width: 2rem;
-				height: 2rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+        font-size: 10px;
+        display: flex;
+        background: #32BD1B;
+        color: white;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        padding: 3px;
+        align-items: center;
+        justify-content: center;
 			}
 			&:nth-child(1) {
 				border-left: 1px solid rgb(56%, 60%, 73%, 0.15);
 			}
 			&_active {
-				color: $green-color;
-				padding: 2.35rem 3.4rem 1.95rem;
+				color: #32BD1B;
 				border: none;
 				background: #ffffff;
-				box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
+				box-shadow: 0px -3px 9px rgba(136, 152, 206, 0.19);
 				border-radius: 6px 6px 0px 0px;
 			}
 		}
@@ -173,26 +236,28 @@
 		&__help {
 			display: flex;
 			align-items: center;
-			margin-top: 5rem;
-			margin-bottom: 3.5rem;
+			margin-top: 1.5rem;
 			gap: 1.4rem;
-
-			@media screen and (max-width: 768px) {
-				display: none;
-			}
-		}
-
-		&__info {
+      background: #FFFFFF;
+      border: 2px solid #32BD1B33;
+      border-radius: 12px;
+      padding: 15px;
 		}
 
 		&__help-name {
 			color: $mainFontColor;
 			margin-bottom: 0.5rem;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
 		}
 
 		&__help-text {
 			color: $secondary-color;
-		}
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+    }
 
 		&__row {
 			@media screen and (max-width: 768px) {
@@ -204,24 +269,43 @@
 		}
 
 		&__item {
-			padding-top: 2rem;
-			padding-bottom: 2.5rem;
-			border-bottom: 1px solid $secondary-color;
-			transition: all 0.2s linear;
-			cursor: pointer;
+      margin: 10px 0;
+      border-bottom: 1px solid rgba(143, 153, 186, 0.1333333333);
+      transition: all 0.2s linear;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 12px;
+      gap: 1.5rem;
 
-			@media screen and (max-width: 768px) {
+      @media screen and (max-width: 768px) {
 				box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.15);
 				border: none;
 				border-radius: 12px;
 				padding: 1rem 2rem;
 			}
-			&:hover {
-				box-shadow: 0px 11px 48px rgba(123, 129, 148, 0.15);
+			&__active {
+        background: #FFFFFF;
+        box-shadow: 5px 5px 21px rgba(136, 152, 206, 0.19);
 			}
 			&:last-child {
 				border: none;
 			}
 		}
 	}
+  .text-span {
+    font-size: 10px;
+    display: flex;
+    background: #32BD1B;
+    color: white;
+    border-radius: 50%;
+    width: 10px;
+    height: 11px;
+    padding: 3px;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(30px) translateX(10px);
+  }
+  .help-logo{
+    width: 50px;
+  }
 </style>

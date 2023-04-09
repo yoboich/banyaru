@@ -9,9 +9,12 @@
 	},
 	"devDependencies": {
 		"@nuxt/image-edge": "^1.0.0-27919678.2f5b64b",
+		"agora-rtm-sdk": "^1.5.1",
 		"nuxt": "^3.1.0",
 		"sass": "^1.57.1",
-		"sass-loader": "^13.2.0"
+		"sass-loader": "^13.2.0",
+		"uuid": "^8.3.2",
+		"vue": "^3.2.25"
 	},
 	"dependencies": {
 		"@vuepic/vue-datepicker": "^3.6.7",
