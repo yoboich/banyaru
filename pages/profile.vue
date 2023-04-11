@@ -1,424 +1,884 @@
 <script setup>
-	import { useWindowSize } from '@vueuse/core';
-	const route = useRoute();
-	const isLarge = ref(true);
-	const navIsShown = ref(true);
-	const breadcrumbs = ref(['Главная', 'Избранное']);
+import { useWindowSize } from '@vueuse/core';
+import AgoraRTM from 'agora-rtm-sdk';
+import { v4 as uuidv4 } from 'uuid';
+import { ref, onMounted, nextTick, defineExpose } from 'vue';
 
-	const { width } = useWindowSize();
-	watchEffect(() => {
-		if (route.name.includes('chat-') && width.value <= 768) {
-			navIsShown.value = false;
-		} else {
-			navIsShown.value = true;
-		}
-		if (width.value <= 768) {
-			isLarge.value = false;
-		} else {
-			isLarge.value = true;
-		}
-	});
-	onMounted(() => {
-		if (route.name.includes('chat-') && width.value <= 768) {
-			navIsShown.value = false;
-		} else {
-			navIsShown.value = true;
-		}
-		if (width.value <= 768) {
-			console.log('hello');
-			isLarge.value = false;
-		} else {
-			isLarge.value = true;
-		}
-	});
+const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
+const CHANNEL = 'wdj';
+let client = AgoraRTM.createInstance(APP_ID);
+let uid = uuidv4();
+let text = ref('');
+let messagesRef = ref(null);
+let messages = ref([]);
+let channel;
+const route = useRoute();
+const isLarge = ref(true);
+const navIsShown = ref(true);
+const input = ref('')
+const { width } = useWindowSize();
+let activeTab = ref(1);
+const products = [
+  {
+    image: "no-photos.png",
+  },
+  {
+    image: "girlla.png",
+  },
+  {
+    image: "girlla.png",
+  },
+  {
+    image: "girlla.png",
+  },
+]
 
-	let activeTab = ref(1);
-	const tabs = [
-		{
-			text: 'Активнх',
-			notif: '22',
-		},
-		{
-			text: 'Завершенных',
-			notif: '41',
-		},
-	];
+defineExpose({ messagesRef });
+const appendMessage = async (message) => {
+  messages.value.push(message);
+  await nextTick();
+  messagesRef.value.scrollTop =
+      messagesRef.value.scrollHeight;
+};
 
-	const modalVisible = ref(false);
-	const openModal = () => {
-		modalVisible.value = true;
+watchEffect(() => {
+  if (route.name.includes('chat-') && width.value <= 768) {
+    navIsShown.value = false;
+  } else {
+    navIsShown.value = true;
+  }
+  if (width.value <= 768) {
+    isLarge.value = false;
+  } else {
+    isLarge.value = true;
+  }
+});
+onMounted(async () => {
+  await client.login({ uid, token: null });
+  channel = await client.createChannel(CHANNEL);
+  await channel.join();
+  channel.on('ChannelMessage', (message, peerId) => {
+    appendMessage({
+      text: message.text,
+      uid: peerId,
+    });
+  });
+  if (route.name.includes('chat-') && width.value <= 768) {
+    navIsShown.value = false;
+  } else {
+    navIsShown.value = true;
+  }
+  if (width.value <= 768) {
+    console.log('hello');
+    isLarge.value = false;
+  } else {
+    isLarge.value = true;
+  }
+});
 
-		document.body.classList.add('lock');
-	};
+function sendMessage() {
+  document.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      if (text.value === '') return;
+      channel.sendMessage({ text: text.value, type: 'text' });
+      appendMessage({
+        text: text.value,
+        uid,
+      });
+      text.value = '';
+    }
+  })
+}
 
-	const closeModal = () => {
-		modalVisible.value = false;
-
-		document.body.classList.remove('lock');
-	};
-
-	definePageMeta({
-		layout: 'cabinet',
-	});
+definePageMeta({
+  layout: 'cabinet',
+});
 </script>
 
 <template>
-	<div class="profile">
-		<div class="container">
-			<div class="profile__inner">
-				<UIBreadcrumbs
-					class="profile__bread"
-					:items="breadcrumbs"
-					v-if="isLarge"
-				/>
-				<div class="card profile-card">
-					<div class="profile-card__content">
-						<IconArrow v-if="!isLarge" class="green rotate" />
-						<div class="profile-card__title h1">Профиль</div>
-						<IconShare v-if="!isLarge" class="black" />
-					</div>
-					<div class="profile-card__top">
-						<div class="profile-card__info">
-							<img
-								src="~/assets/img/cabinet/avatar.png"
-								alt=""
-								class="profile-card__avatar"
-							/>
-							<div class="profile-info">
-								<div class="profile-info__top">
-									<div class="profile-info__name h2-lite">Анатолий</div>
-									<div class="profile-info__status h4-mini">в сети</div>
-								</div>
-								<div class="profile-info__desc h4">
-									На Баня.ру с декабря 2015
-								</div>
-								<div class="card__review">
-									<UIStars :rate="true" />
-									|
-									<div class="card__feedback h5-mini">11 отзывов</div>
-								</div>
-							</div>
-						</div>
-						<div class="nav" v-if="isLarge">
-							<div class="nav__inner">
-								<div
-									v-for="(item, idx) in tabs"
-									:key="item"
-									@click="activeTab = idx + 1"
-									:class="[activeTab == idx + 1 ? 'nav__item_active' : '']"
-									class="nav__item"
-								>
-									{{ item.text }}
-									<span v-if="item.notif">{{ item.notif }}</span>
-								</div>
-							</div>
-						</div>
-						<div class="profile-card__btns">
-							<button
-								class="profile-card__btn btn btn-green"
-								@click="openModal"
-							>
-								Позвонить
-							</button>
-							<button class="profile-card__btn btn btn-white">Написать</button>
-							<button class="profile-card__share btn btn-white" v-if="isLarge">
-								<IconShare class="black" />
-							</button>
-						</div>
-						<div class="nav" v-if="!isLarge">
-							<div class="nav__inner">
-								<div
-									v-for="(item, idx) in tabs"
-									:key="item"
-									@click="activeTab = idx + 1"
-									:class="[activeTab == idx + 1 ? 'nav__item_active' : '']"
-									class="nav__item"
-								>
-									{{ item.text }}
-									<span v-if="item.notif">{{ item.notif }}</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="profile-card__row">
-						<div class="profile-card-ads__item" v-for="_ in 12">
-							<UIBadje :class="['free', 'profile__badje']">
-								Бесплатное
-							</UIBadje>
-							<div class="profile-card-ads__right">
-								<img
-									class="profile-card-ads__img"
-									src="~/assets/img/promotions/1.jpg"
-									alt=""
-								/>
-								<div class="profile-card-ads__status h4-mini"></div>
-							</div>
-							<div class="profile-card-ads__left">
-								<div class="profile-card-ads__name h4">Сауны</div>
-								<div class="profile-card-ads__text h4">Сауна Дионис-СПА</div>
-								<div class="profile-card-ads__price h3">22 300 ₽</div>
-								<div class="profile-card-ads__adress h4-mini">
-									ул. Тимирязьева, м. Могилевская
-								</div>
-								<div class="profile-card-ads__action">
-									<div class="profile-card-ads__view">
-										<img src="~/assets/img/icon/eye.svg" alt="" /> 0
-									</div>
-									<div class="profile-card-ads__like">
-										<img src="~/assets/img/icon/like.svg" alt="" /> 0
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<ProfileModal :visible="modalVisible" @close-modal="closeModal" />
-		</div>
-	</div>
+  <div class="chat">
+    <div class="container width">
+      <div class="chat__inner">
+        <div class="card chat-card">
+          <div class="chat-card__content">
+            <div class="chat-header">
+              <div class="header-title">
+                <h4 class="chat-aside__title h1">Профиль</h4>
+              </div>
+            </div>
+            <div class="chats">
+              <div class="websoket-chat">
+                <div class="websoket-chat__content">
+                  <div class="flex-wrapper">
+                    <div class="profiles">
+                      <div class="profile">
+                        <img src="../assets/img/chat/profile-users.png" alt="profile-users">
+                        <div class="profile-text">
+                          <div class="profile-text-box">
+                            <h4>Анатолий</h4>
+                            <span>в сети</span>
+                          </div>
+                          <p>На Баня.ру с декабря 2015</p>
+                          <img src="../assets/img/chat/profile-like.png" alt="profile-like">
+                        </div>
+                      </div>
+                      <div class="nav">
+                        <div class="nav__inner">
+                          <div
+                              @click="activeTab = 1"
+                              :class="[activeTab == 1 ? 'nav__item_active' : '']"
+                              class="nav__item"
+                          >
+                            Активнх <span>22</span>
+                          </div>
+                          <div
+                              @click="activeTab = 2"
+                              :class="[activeTab == 2 ? 'nav__item_active' : '']"
+                              class="nav__item"
+                          >
+                            Завершенных <span>41</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="phone-btn-wrapper">
+                      <button class="phone-btn-wrapper__btn">+77 777 77 7..</button>
+                      <button class="phone-btn-wrapper__message">
+                        <img src="../assets/img/chat/btn-message.png" alt="message">
+                        Чат
+                      </button>
+                      <img src="../assets/img/chat/importas.png" alt="importas">
+                    </div>
+                  </div>
+                  <div class="chat-wrap">
+                    <div class="chat-child-flex">
+                      <div class="chat-wrap-product" v-for="item in products">
+                        <div class="product-imagesss">
+                          <img :src="'/_nuxt/assets/img/chat/' + item.image" alt="free">
+                        </div>
+                        <div class="chat-wrap-product-text">
+                          <div class="flex">
+                            <h4>Сауны</h4>
+                            <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="2.29688" cy="2.95312" r="2" fill="#32BD1B"/>
+                              <circle cx="10.2969" cy="2.95312" r="2" fill="#32BD1B"/>
+                              <circle cx="18.2969" cy="2.95312" r="2" fill="#32BD1B"/>
+                            </svg>
+                          </div>
+                          <h4>Сауна Дионис-СПА</h4>
+                          <h2>22 300 ₽ </h2>
+                          <span>ул. Тимирязьева, м. Могилевская</span>
+                          <img src="../assets/img/chat/product-like.png" alt="product-like" class="product-like">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="chat-child-flex">
+                    <div class="chat-wrap-product" v-for="item in products">
+                      <div class="products-images">
+                        <img src="../assets/img/chat/freees.png" alt="free">
+                      </div>
+                      <div class="chat-wrap-product-text">
+                        <div class="flex">
+                          <h4>Сауны</h4>
+                          <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="2.29688" cy="2.95312" r="2" fill="#32BD1B"/>
+                            <circle cx="10.2969" cy="2.95312" r="2" fill="#32BD1B"/>
+                            <circle cx="18.2969" cy="2.95312" r="2" fill="#32BD1B"/>
+                          </svg>
+                        </div>
+                        <h4>Сауна Дионис-СПА</h4>
+                        <h2>22 300 ₽ </h2>
+                        <span>ул. Тимирязьева, м. Могилевская</span>
+                        <img src="../assets/img/chat/product-like.png" alt="product-like" class="product-like">
+                      </div>
+                    </div>
+                  </div>
+                    <div class="chat-child-flex">
+                      <div class="chat-wrap-product" v-for="item in products">
+                        <div class="products-images">
+                          <img src="../assets/img/chat/freees.png" alt="free">
+                        </div>
+                        <div class="chat-wrap-product-text">
+                          <div class="flex">
+                            <h4>Сауны</h4>
+                            <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="2.29688" cy="2.95312" r="2" fill="#32BD1B"/>
+                              <circle cx="10.2969" cy="2.95312" r="2" fill="#32BD1B"/>
+                              <circle cx="18.2969" cy="2.95312" r="2" fill="#32BD1B"/>
+                            </svg>
+                          </div>
+                          <h4>Сауна Дионис-СПА</h4>
+                          <h2>22 300 ₽ </h2>
+                          <span>ул. Тимирязьева, м. Могилевская</span>
+                          <img src="../assets/img/chat/product-like.png" alt="product-like" class="product-like">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-	.profile__badje {
-		z-index: 1;
-		padding: 0.2rem 0.2rem 0.2rem 0.6rem;
-		font-size: 1.2rem;
-		color: $secondary-color;
-		gap: 0.5rem;
-		left: 0.5rem;
-		top: 0.5rem;
+.chat-wrap-product-text-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & .boxs {
+    display: flex;
+    align-items: center;
+    & h4 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      color: #3E3E51;
+      margin: 0 10px 0;
+    }
+  }
+  & img {
+    width: 24px;
+    height: 6px;
+  }
+}
+.green {
+  background-color: #32BD1B;
+}
+.red {
+  background-color: #EA4E3D;
+}
+.purple {
+  background-color: #A169F7;
+}
+.range {
+  background-color: #FABA17;
+}
+.silver {
+  background-color: #8F99BA;
+}
+.wrap-background {
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+}
+.chat {
+  margin-top: 2.5rem;
+  flex: 1 1 auto;
 
-		@media screen and (max-width: 768px) {
-			font-size: 1rem;
-			left: 0;
-		}
-	}
-	.card__review {
-		margin: 0;
-	}
-	.nav {
-		display: flex;
-		align-items: flex-start;
-		flex: 1;
-		&__inner {
-			display: flex;
-		}
-		&__item {
-			cursor: pointer;
-			padding: 2.15rem 3.4rem 1.95rem;
-			border-top: 1px solid rgb(56%, 60%, 73%, 0.15);
-			border-right: 1px solid rgb(56%, 60%, 73%, 0.15);
-			border-radius: 6px 6px 0px 0px;
-			display: flex;
-			align-items: center;
-			gap: 0.8rem;
+  @media screen and (max-width: 768px) {
+    margin: 0;
+    overflow: hidden;
+  }
+}
+.chat-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0 30px;
+}
+.chat-card {
+  padding: 0;
+  height: 77rem;
+  overflow: hidden;
+  margin: 10px 0 0;
+  @media(max-width: 1400px) {
+    height: 89rem;
+  }
+}
+.chat-aside {
+  width: 40%;
+  padding: 5px 10px 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 60vh;
+  @media(max-width: 1400px) {
+    height: 64vh;
+  }
 
-			& span {
-				color: $secondary-color;
-			}
-			&:nth-child(1) {
-				border-left: 1px solid rgb(56%, 60%, 73%, 0.15);
-			}
-			&_active {
-				color: $green-color;
-				padding: 2.35rem 3.4rem 1.95rem;
-				border: none;
-				background: #ffffff;
-				box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
-				border-radius: 6px 6px 0px 0px;
-			}
-		}
-	}
+  @media(max-height: 800px) {
+    height: 64vh!important;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    border: none;
+    padding: 1.8rem;
+  }
+  &__title {
+    color: $mainFontColor;
+    padding: 33px 30px 5px;
+    width: fit-content;
 
-	.profile {
-		&__inner {
-		}
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+.chat-main {
+  width: 100%;
+}
 
-		&__bread {
-			margin: 3rem 0;
-		}
-	}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+  box-shadow: inset 0px 0px 6px rgba(136, 152, 206, 0.46);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #8F99BA;
+  border-radius: 6px;
+  max-height: 20px;
+  height: 20px;
+}
+.chat-header {
+  display: flex;
+  align-items: center;
+  &__item {
+    width: 100%;
+    padding: 5px 30px 10px 10px;
+    border-left: 1px solid #8F99BA22;
+    &__image {
+      display: flex;
+      align-items: center;
+      & img {
+        width: 96px;
+      }
+      &__text {
+        margin: 0 20px 0;
+        & h4 {
+          font-family: 'Lato', sans-serif;
+          font-weight: 700;
+          font-size: 14px;
+          color: #3E3E51;
+        }
+        & span {
 
-	.profile-card {
-		@media screen and (max-width: 768px) {
-			border-radius: 0 0 2.3rem 2.3rem;
-		}
-		&__title {
-			color: $mainFontColor;
-			margin-bottom: 2.5rem;
-			@media screen and (max-width: 768px) {
-				margin: 0;
-			}
-		}
-		&__content {
-			@media screen and (max-width: 768px) {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				margin-bottom: 2rem;
-			}
-		}
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          font-size: 12px;
+          color: #3E3E51;
+        }
+        & p {
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          font-size: 14px;
+          color: #32BD1B;
+        }
+      }
+    }
+  }
+}
 
-		&__top {
-			display: flex;
-			gap: 1rem;
-			margin-bottom: 7rem;
+.left-images {
+  width: 60px;
+  transform: translateY(10px) !important;
+}
+.left-transform {
+  transform: translateY(63px) !important;
+}
+.right-chats img {
+  width: 60px;
+  transform: translateY(10px);
+}
+.right-messages, .left-messages {
+  margin: 10px 0 0;
+}
+.right-chats {
+  background: #D8FFD1;
+  margin: 0 10px 0;
+  padding: 10px 13px;
+  border-radius: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #3E3E51;
+  }
+}
+.right {
+  background: #D8FFD1!important;
+}
+.widthsss {
+  width: 382px;
+  margin: 10px 52px 0!important;
+  & h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #3E3E51;
+  }
+}
+.websoket-chat {
+  width: 100%;
+  margin: 0 6px 0;
+  position: relative;
+  .websoket-chat__content {
+    padding: 15px 10px 0;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #8F99BA22;
+    position: relative;
+    &__date {
+      width: 58px;
+      height: 17px;
+      background: #D3D9EA;
+      border-radius: 100px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      & span {
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 11px;
+        color: #FFFFFF;
+      }
+    }
+    &__left {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 0;
+      &__image {
+        width: 41px;
+        height: 41px;
+        background: #FFFFFF;
+        border: 3px solid #FFFFFF;
+        box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+    }
+    .left-chats {
+      background: #F1F3F8;
+      margin: 0 10px 10px;
+      padding: 10px 13px;
+      border-radius: 23px;
+      width: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h4 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        color: #3E3E51;
+      }
+    }
+  }
+  &__form {
+    background: #FFFFFF;
+    box-shadow: 0px 11px 29px rgba(123, 129, 148, 0.19);
+    border-radius: 23px;
+    width: 98%;
+    height: 140px;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    transform: translateY(-20px);
 
-			@media screen and (max-width: 768px) {
-				flex-direction: column;
-				margin-bottom: 2rem;
-			}
-		}
+    @media(max-width: 1500px) {
+      bottom: auto;
+      transform: translateY(-13px);
+    }
+  }
+}
+.websoket-chat__form{
+  & h4 {
+    padding: 10px 20px 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #3E3E51;
+  }
+}
+.chat-block{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .chat-form {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    & button {
+      width: 157px;
+      height: 30px;
+      background: #FFFFFF;
+      box-shadow: 1px 7px 21px rgba(166, 175, 205, 0.22);
+      border-radius: 100px;
+      border: none;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #3E3E51;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+    }
+  }
+  & img {
+    width: 60px;
+    height: 60px;
+    transform: translateX(-20px);
+  }
+}
+.chat-inputs {
+  display: flex;
+  align-items: center;
+  padding: 0 19px 0;
+  & img {
+    width: 27px;
+    height: 27px;
+  }
+  .inputs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin: 0 0 0 20px;
+    & img {
+      position: absolute;
+      right: 0;
+      transform: translateX(-20px);
+    }
+    & input {
+      width: 100%;
+      height: 34px;
+      background: #FFFFFF;
+      border: 2px solid #DCE1F0;
+      border-radius: 1000px;
+      padding: 0 10px 0;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #8F99BA;
+      outline: none;
 
-		&__info {
-			display: flex;
-			gap: 1rem;
-			margin-right: 5rem;
+      &::placeholder {
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: #8F99BA;
+      }
+    }
+  }
+}
+.left-messages {
+  margin: 10px 40px 0;
+}
+.header-title {
+  width: 44.8%;
+  @media(max-width: 1400px) {
+    width: 36.2%;
+  }
+}
+.chats{
+  display: flex;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.message {
+  display: flex;
+  margin: 20px 52px 0;
+  width: 382px;
+}
+.user-self {
+  color: green;
+}
+.user-them {
+  color: red;
+  position: absolute;
+  right: 0;
+}
+form {
+  position: relative;
+  display: flex;
+}
+input {
+  width: 100%;
+  border: none;
+  height: 20px;
+  padding: 8px;
+  border-top: 1px solid #999;
+  border-radius: 0px;
+  outline: none;
+}
+button {
+  border: none;
+  outline: none;
+  background: none;
+  position: absolute;
+  right: 3px;
+  top: 4px;
+  font-size: 24px;
+}
+.content-right {
+  position: absolute;
+  right: 0;
+  transform: translateY(72px);
+}
+.nav {
+  margin: 0 35px 0;
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+  &__item {
+    width: fit-content;
+    cursor: pointer;
+    padding: 2rem 3.4rem 1rem;
+    border-top: 1px solid rgb(56%, 60%, 73%, 0.15);
+    border-right: 1px solid rgb(56%, 60%, 73%, 0.15);
+    border-radius: 6px 6px 0px 0px;
+    &:nth-child(1) {
+      border-left: 1px solid rgb(56%, 60%, 73%, 0.15);
+    }
+    &_active {
+      color: $green-color;
+      padding: 2rem 3.4rem 1rem;
+      border: none;
+      background: #ffffff;
+      box-shadow: 0px -12px 15px rgba(136, 152, 206, 0.19);
+      border-radius: 6px 6px 0px 0px;
+    }
+  }
+}
+.products-images {
+  width: 110px;
+  height: 100px;
+  background-image: url("assets/img/chat/girl-sauna.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+}
+.chat-wrap-product {
+  display: flex;
+  align-items: center;
+  margin: 11px 0;
+}
+.product-imagesss img{
+  width: 110px;
+  height: 100px;
+}
+.chat-wrap-product-text {
+  margin: 0 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  & img {
+    transform: translateX(-8px);
+    width: 100px;
+  }
+  & h4 {
+    font-size: 14px;
+    color: #3E3E51;
+  }
+  & h2 {
+    font-weight: 700;
+    font-size: 16px;
+    color: #3E3E51;
+  }
 
-			@media screen and (max-width: 768px) {
-				align-items: center;
-				margin: 0;
-				margin-bottom: 3.5rem;
-			}
-		}
-
-		&__avatar {
-		}
-
-		&__btns {
-			display: flex;
-			align-items: center;
-			gap: 1.8rem;
-
-			@media screen and (max-width: 768px) {
-				margin-bottom: 1.5rem;
-			}
-		}
-
-		&__btn {
-			padding-top: 1.5rem;
-			padding-bottom: 1.5rem;
-
-			@media screen and (max-width: 768px) {
-				flex: 1;
-			}
-		}
-
-		&__share {
-			width: 5rem;
-			height: 5rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 0;
-			border-radius: 50%;
-		}
-
-		&__row {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			row-gap: 2.7rem;
-		}
-	}
-	.profile-aside {
-		&__title {
-		}
-	}
-	.profile-info {
-		&__top {
-			display: flex;
-			align-items: center;
-			gap: 1.5rem;
-		}
-
-		&__name {
-			margin-bottom: 0.5rem;
-			color: $mainFontColor;
-
-			@media screen and (max-width: 768px) {
-				margin-bottom: 0.5rem;
-			}
-		}
-
-		&__status {
-			color: $green-color;
-		}
-
-		&__desc {
-			color: $secondary-color;
-			margin-bottom: 1.1rem;
-
-			@media screen and (max-width: 768px) {
-				margin-bottom: 0.5rem;
-			}
-		}
-	}
-
-	.profile-card-ads {
-		&__item {
-			position: relative;
-			display: flex;
-			gap: 2rem;
-		}
-
-		&__right {
-		}
-
-		&__img {
-			max-width: 21rem;
-			filter: drop-shadow(1px 7px 22px rgba(166, 175, 205, 0.58));
-			border-radius: 12px;
-		}
-
-		&__status {
-		}
-
-		&__left {
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-		}
-
-		&__name {
-			color: $secondary-color;
-		}
-
-		&__text {
-			color: $mainFontColor;
-		}
-
-		&__price {
-			color: $mainFontColor;
-		}
-
-		&__adress {
-			color: $secondary-color;
-		}
-
-		&__action {
-			display: flex;
-			align-items: center;
-			gap: 1.5rem;
-			margin-bottom: 1rem;
-		}
-
-		&__view {
-			display: flex;
-			align-items: center;
-			gap: 0.3rem;
-			color: $secondary-color;
-		}
-
-		&__like {
-			display: flex;
-			align-items: center;
-			gap: 0.3rem;
-			color: $secondary-color;
-
-			& img {
-				width: 2.5rem;
-			}
-		}
-	}
+  & span{
+    font-weight: 500;
+    font-size: 11px;
+    color: #8F99BA;
+  }
+  & .product-like {
+    width: 210px!important;
+    display: block;
+    margin: 6px 0 0;
+    transform: translateX(1px);
+  }
+}
+.chat-btns {
+  display: flex;
+  align-items: center;
+  margin-top: 55px;
+  bottom: 0;
+  @media(max-width: 1400px) {
+    margin-top: 100px;
+  }
+  & button {
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 21px rgba(166, 175, 205, 0.22);
+    border-radius: 100px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #32BD1B;
+    position: relative !important;
+    justify-content: center;
+    margin: 0 20px 0;
+  }
+}
+.chat-footer-texts {
+  position: absolute;
+  bottom: 0;
+  margin: 0 43px;
+  transform: translateY(-30px);
+  width: 24%;
+  cursor: pointer;
+  @media(max-width: 1400px) {
+    margin: 0 20px;
+  }
+  & h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3E3E51;
+  }
+}
+.chat-footer-texts-flex {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 10px;
+  justify-content: space-between;
+  width: 100%;
+  & h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3E3E51;
+  }
+}
+.products-images img {
+  width: 60px;
+}
+.profiles {
+  display: flex;
+  align-items: flex-end;
+  padding: 3px 20px 35px;
+  @media(max-width: 1500px) {
+    padding: 3px 20px 0;
+  }
+  .profile {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    .profile-text {
+      font-family: 'Lato', sans-serif;
+      margin: 0 10px 0;
+      & p {
+        font-weight: 500;
+        font-size: 14px;
+        color: #8F99BA;
+      }
+      & img {
+        width: 210px;
+        height: 20px;
+      }
+      .profile-text-box {
+        font-family: 'Lato', sans-serif;
+        display: flex;
+        align-items: flex-end;
+        h4 {
+          font-weight: 500;
+          font-size: 20px;
+          color: #3E3E51;
+        }
+        span {
+          font-weight: 500;
+          font-size: 11px;
+          color: #32BD1B;
+          margin: 0 20px 0;
+        }
+      }
+    }
+  }
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & h4 {
+    color: #8F99BA;
+  }
+}
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.phone-btn-wrapper {
+  display: flex;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+  &__btn {
+    width: 161px;
+    height: 50px;
+    background: #32BD1B;
+    border-radius: 100px;
+    border: none;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #FFFFFF;
+    position: relative;
+  }
+  &__message {
+    width: 162px;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+    border-radius: 100px;
+    border: none;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #3E3E51;
+    position: relative;
+    margin: 0 20px 0;
+    & img {
+      width: 25.19px!important;
+      height: 23.23px!important;
+      margin-right: 10px;
+      transform: translateX(0) !important;
+    }
+  }
+  & img {
+    width: 81px;
+    height: 81px;
+    transform: translateX(-20px);
+  }
+}
 </style>

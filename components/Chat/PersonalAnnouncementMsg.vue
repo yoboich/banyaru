@@ -17,64 +17,53 @@ const tabs = [
 ];
 const users = [
   {
-    image: "box.png",
-    name: "Заказы",
-    icon: "numbers.png",
-    to: "/personal-order"
+    name: "Мои объявления",
   },
   {
-    image: "korzina.png",
-    name: "Корзина",
-    icon: "one.png",
-    to: "/personal-basket",
+    name: "Избранное",
+  },
+  {
+    name: "Уведомление",
+    icon: "Objects and Tools.jpg",
+  },
+  {
+    name: "Обратная связь",
+    icon: "questionmark.bubble.fill.jpg",
+  },
+  {
+    name: "Позвонить нам",
+    icon: "Communication.jpg",
+  },
+  {
+    name: "Приложение",
+    title: "Установить",
     class: "green"
   },
   {
-    image: "your.png",
-    name: "Мои объявления",
-    icon: "fifti.png",
-    to: "/personal-area"
-  },
-  {
-    image: "hearts.png",
-    name: "Избранное",
-    to: "/personal-favorites",
-  },
-  {
-    image: "support.png",
-    name: "Поддержка",
-    to: "/personal-order"
-  },
-  {
-    image: "application.png",
-    name: "Приложение",
-    icon: "texts.png",
-    to: "/personal-order"
-  },
-  {
-    image: "notification.png",
-    name: "Уведомления",
-    to: "/personal-order"
-  },
-  {
-    image: "key.png",
     name: "Конфеденциальность",
-    to: "/personal-order"
+    icon: "Objects and Tools-1.jpg",
   },
   {
-    image: "send.png",
     name: "Поделиться приложением",
-    to: "/personal-order"
+    icon: "Group 699.jpg",
   },
   {
-    image: "about.png",
     name: "О нас",
-    to: "/personal-order"
+    icon: "Group 697.jpg",
   },
   {
-    image: "box.png",
     name: "Выйти",
-    to: "/personal-order"
+    icon: "Group 698.jpg",
+    to: '/'
+  },
+  {
+    name: "Удалить аккаунт",
+    icon: "deletes.jpg",
+  },
+  {
+    name: "Версия 1.2.3 | 10.11.22",
+    icon: "rights.png",
+    classes: "widths",
   },
 ]
 </script>
@@ -103,12 +92,7 @@ const users = [
         </div>
     </div>
     <div class="chat-plus">
-      <img src="../../assets/img/chat/plus.png" alt="plus">
-      <h2>Привилегии и полный доступ</h2>
-      <h4>Истекает: 21.06.23 </h4>
-    </div>
-    <div class="border-box">
-      <img src="../../assets/img/chat/border.png" alt="border" class="borders">
+      <h2>Настройки</h2>
     </div>
     <div class="chat-msg__sec-tab">
       <div
@@ -126,26 +110,19 @@ const users = [
         Пропущенные
       </div>
     </div>
-    <div class="chat-msg__row"  v-for="(item, idx) in users">
+    <div class="chat-msg__row"  v-for="(item, idx) in users" :key="item">
       <nuxt-link :to="item.to">
         <div
-            @click="activeProductTab = idx + 1"
-            :class="[activeProductTab == idx + 1 ? 'chat-msg__item__active' : '']"
-            :key="item"
             class="chat-msg__item chat-content__left1 paddings9"
         >
           <div class="chat-content__img1">
-            <img
-                :src="'/_nuxt/assets/img/chat/' + item.image"
-                alt="users"
-                class="chat-content__img-bg1"
-            />
             <div class="chat-content__info">
-              <h4 class="chat-content__name1 h3" :class="item.class">{{ item.name }}</h4>
+              <h4 class="chat-content__name1 h3 marginss chat-texts">{{ item.name }}</h4>
             </div>
           </div>
-          <div class="chat-content__checked imagess">
-            <img :src="'/_nuxt/assets/img/chat/' + item.icon" v-if="item.icon">
+          <div class="chat-content__checked imagess chat-flex">
+            <img :src="'/_nuxt/assets/img/chat/' + item.icon" v-if="item.icon" :class="item.classes">
+            <h4 v-if="item.title" :class="item.class">{{ item.title }}</h4>
           </div>
         </div>
       </nuxt-link>
@@ -156,6 +133,25 @@ const users = [
 <style lang="scss" scoped>
 .green {
   color: #32BD1B;
+}
+.widths {
+  width: 7px!important;
+}
+.chat-flex {
+  & img {
+    width: 20px;
+  }
+  & h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+  }
+}
+.chat-texts {
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #3E3E51;
 }
 .chat-msg {
   &__sec-tab {
@@ -261,7 +257,9 @@ const users = [
     }
   }
 }
-
+.marginss {
+  margin: 0 3px .5rem!important;
+}
 .paddings9 {
   padding: 10px!important;
 }
@@ -303,8 +301,7 @@ const users = [
   }
 
   &__item {
-    margin: 10px 0;
-    border-bottom: 1px solid rgba(143, 153, 186, 0.1333333333);
+    border-bottom: 1px solid #8F99BA22!important;
     transition: all 0.2s linear;
     cursor: pointer;
     padding: 15px;
@@ -403,12 +400,10 @@ const users = [
     width: 62px;
   }
   & h2 {
-    font-size: 11px;
-    color: #8F99BA;
-    margin-right: 5px;
-    @media(max-width: 1400px) {
-      margin: 0 17px;
-    }
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #3E3E51;
   }
   & h4 {
     font-size: 11px;

@@ -1,7 +1,7 @@
 <script setup>
 let activeTab = ref(1);
 let secActiveTab = ref(1);
-let activeProductTab = ref(3);
+let activeProductTab = ref(2);
 
 const tabs = [
   {
@@ -38,7 +38,7 @@ const users = [
   {
     image: "hearts.png",
     name: "Избранное",
-    to: "/personal-favorites",
+    to: "/personal-order"
   },
   {
     image: "support.png",
@@ -154,9 +154,6 @@ const users = [
 </template>
 
 <style lang="scss" scoped>
-.green {
-  color: #32BD1B;
-}
 .chat-msg {
   &__sec-tab {
     background: #ffffff;
@@ -264,6 +261,9 @@ const users = [
 
 .paddings9 {
   padding: 10px!important;
+}
+.green {
+  color: #32BD1B;
 }
 
 .chat-msg {

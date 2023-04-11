@@ -18,70 +18,71 @@ const navIsShown = ref(true);
 const input = ref('')
 const { width } = useWindowSize();
 let activeTab = ref(1);
-const products = [
+const count = ref(2);
+const count2 = ref(2);
+const count3 = ref(2);
+const count4 = ref(2);
+const product1 = ref(true);
+const product2 = ref(true);
+const product3 = ref(true);
+const product4 = ref(true);
+
+const minus = () => {
+  count.value--
+}
+const plus = () => {
+  count.value++
+}
+const close1 = () => {
+  product1.value = false
+}
+const close2 = () => {
+  product2.value = false
+}
+const close3 = () => {
+  product3.value = false
+}
+const close4 = () => {
+  product4.value = false
+}
+const product = [
   {
-    background: "no-photo.png",
-    image: "free.png",
-    class: "red",
-    title: "Отменен"
+    title: "Дубовый веник",
+    price: "22 300 ₽"
   },
   {
-    background: "girl-sauna.png",
-    image: "bornss.png",
-    class: "green",
-    title: "Оплачен"
+    title: "Дубовый веник",
+    price: "22 300 ₽"
   },
   {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "red",
-    title: "Отменен"
+    title: "Дубовый веник",
+    price: "22 300 ₽"
   },
   {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
+    title: "Дубовый веник",
+    price: "22 300 ₽"
   },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
-  }
 ]
-const catalog = [
-  {
-    background: "no-photo.png",
-    image: "free.png",
-    class: "red",
-    title: "Отменен"
-  },
-  {
-    background: "delete-image.png",
-    image: "bornss.png",
-    class: "green",
-    title: "Оплачен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "red",
-    title: "Отменен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
-  }
-]
+
+const minus2 = () => {
+  count2.value--
+}
+const plus2 = () => {
+  count2.value++
+}
+
+const minus3 = () => {
+  count3.value--
+}
+const plus3 = () => {
+  count3.value++
+}
+const minus4 = () => {
+  count4.value--
+}
+const plus4 = () => {
+  count4.value++
+}
 
 defineExpose({ messagesRef });
 const appendMessage = async (message) => {
@@ -167,104 +168,108 @@ definePageMeta({
               </div>
               <div class="chat-header__item">
                 <div class="header-title">
-                  <h4 class="chat-aside__title h1">Избранное</h4>
+                  <h4 class="chat-aside__title h1">Корзина</h4>
                 </div>
               </div>
             </div>
             <div class="chats">
                 <div class="chat-aside" v-if="navIsShown">
-                  <ChatPersonalFavoritesMsg />
+                  <ChatPersonalBasketMsg />
                 </div>
               <div class="websoket-chat">
                 <div class="websoket-chat__content">
-                  <div class="nav">
-                    <div class="nav__inner">
-                      <div
-                          @click="activeTab = 1"
-                          :class="[activeTab == 1 ? 'nav__item_active' : '']"
-                          class="nav__item"
-                      >
-                        Все
-                      </div>
-                      <div
-                          @click="activeTab = 2"
-                          :class="[activeTab == 2 ? 'nav__item_active' : '']"
-                          class="nav__item"
-                      >
-                        Услуги
-                      </div>
-                      <div
-                          @click="activeTab = 3"
-                          :class="[activeTab == 3 ? 'nav__item_active' : '']"
-                          class="nav__item"
-                      >
-                        Товары
-                      </div>
-                    </div>
-                  </div>
                   <div class="chat-wrap">
-                    <div class="chat-child-flex" v-if="products">
-                      <div class="chat-wrap-product" v-for="item in products">
-                        <img :src="'/_nuxt/assets/img/chat/' + item.background" alt="products" class="products-images">
+                    <div class="chat-child-flex" v-if="product1">
+                      <div class="chat-wrap-product">
+                        <div class="products-images"></div>
                         <div class="chat-wrap-product-text">
-                          <h4>Сауны</h4>
-                          <h4>Сауна Дионис-СПА</h4>
+                          <h4>Дубовый веник</h4>
                           <h2>22 300 ₽ </h2>
-                          <span>ул. Тимирязьева, м. Могилевская</span>
-                          <img src="../assets/img/chat/eyess.png" alt="eyes">
-                        </div>
-                        <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="2.29688" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="10.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="18.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="chat-child-flex mt" v-if="catalog">
-                      <div class="chat-wrap-product" v-for="item in catalog">
-                        <img :src="'/_nuxt/assets/img/chat/' + item.background" alt="products" class="products-images">
-                        <div class="chat-wrap-product-text">
-                          <h4>Сауны</h4>
-                          <h4>Сауна Дионис-СПА</h4>
-                          <h2>22 300 ₽ </h2>
-                          <span>ул. Тимирязьева, м. Могилевская</span>
-                          <img src="../assets/img/chat/eyess.png" alt="eyes">
-                        </div>
-                        <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="2.29688" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="10.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="18.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="else" v-else>
-                      <div class="titless">
-                        <p>Вы можете начать свой выбор с <span>главной<br> страницы</span> или выбрать <span>категорию</span></p>
-                        <div class="flex-boxes">
-                          <h4>Недавно вы смотрели</h4>
-                          <img src="../assets/img/chat/sliders.png" alt="slider">
-                        </div>
-                      </div>
-                      <div class="chat-wrap">
-                        <div class="chat-child-flex">
-                          <div class="chat-wrap-product" v-for="item in products">
-                            <div class="products-images">
-                              <img :src="'/_nuxt/assets/img/chat/' + item.image" alt="girl-sauna">
-                              <div class="chat-wrap-product-text">
-                                <img src="../assets/img/chat/likes-image.png" alt="like" class="like-image">
-                                <h4>Сауна Дионис-СПА</h4>
-                                <div class="middle-box">
-                                  <div class="circle-box"></div>
-                                  <h4>Павелецкая</h4>
-                                </div>
-                                <h2>22 300 ₽/час</h2>
-                              </div>
-                            </div>
+                          <div class="counter">
+                            <button @click="minus">-</button>
+                            <button class="btn-number">{{ count }}</button>
+                            <button @click="plus">+</button>
                           </div>
                         </div>
+                        <div class="product-close" @click="close1">
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L13 13M2 13L13 2" stroke="#8F99BA" stroke-width="3" stroke-linecap="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="chat-child-flex" v-if="product2">
+                      <div class="chat-wrap-product">
+                        <div class="products-images"></div>
+                        <div class="chat-wrap-product-text">
+                          <h4>Дубовый веник</h4>
+                          <h2>22 300 ₽ </h2>
+                          <div class="counter">
+                            <button @click="minus2">-</button>
+                            <button class="btn-number">{{ count2 }}</button>
+                            <button @click="plus2">+</button>
+                          </div>
+                        </div>
+                        <div class="product-close" @click="close2">
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L13 13M2 13L13 2" stroke="#8F99BA" stroke-width="3" stroke-linecap="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="chat-child-flex" v-if="product3">
+                      <div class="chat-wrap-product">
+                        <div class="products-images"></div>
+                        <div class="chat-wrap-product-text">
+                          <h4>Дубовый веник</h4>
+                          <h2>22 300 ₽ </h2>
+                          <div class="counter">
+                            <button @click="minus3">-</button>
+                            <button class="btn-number">{{ count3 }}</button>
+                            <button @click="plus3">+</button>
+                          </div>
+                        </div>
+                        <div class="product-close" @click="close3">
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L13 13M2 13L13 2" stroke="#8F99BA" stroke-width="3" stroke-linecap="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="chat-child-flex" v-if="product4">
+                      <div class="chat-wrap-product">
+                        <div class="products-images"></div>
+                        <div class="chat-wrap-product-text">
+                          <h4>Дубовый веник</h4>
+                          <h2>22 300 ₽ </h2>
+                          <div class="counter">
+                            <button @click="minus4">-</button>
+                            <button class="btn-number">{{ count4 }}</button>
+                            <button @click="plus4">+</button>
+                          </div>
+                        </div>
+                        <div class="product-close" @click="close4">
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2L13 13M2 13L13 2" stroke="#8F99BA" stroke-width="3" stroke-linecap="round"/>
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div class="product-border"></div>
+                  <div class="product-footer-wrap">
+                    <h4 class="text-h4">Итого</h4>
+                    <div class="product-footer-wrap__flex">
+                      <h4 class="text-h4">32 000 ₽</h4>
+                      <span>25 шт.</span>
+                    </div>
+                  </div>
+                  <div class="product-border"></div>
+                  <nuxt-link to="/personal-pay">
+                    <div class="product-footer-btns">
+                      <button>Оплатить</button>
+                    </div>
+                  </nuxt-link>
                 </div>
               </div>
             </div>
@@ -286,9 +291,8 @@ definePageMeta({
   }
 }
 .chat-wrap {
-  display: flex;
-  align-items: center;
-  margin: 10px 0 0 30px;
+  margin: 8px 0 0 30px;
+  height: 57vh;
 }
 .chat-card {
   padding: 0;
@@ -384,9 +388,7 @@ definePageMeta({
     }
   }
 }
-.mt {
-  margin: 0 67px;
-}
+
 .left-images {
   width: 60px;
   transform: translateY(10px) !important;
@@ -439,6 +441,9 @@ definePageMeta({
     flex-direction: column;
     border-left: 1px solid #8F99BA22;
     position: relative;
+    @media(max-width: 1400px) {
+      padding: 26px 10px 0;
+    }
     &__date {
       width: 58px;
       height: 17px;
@@ -661,7 +666,6 @@ button {
   &__inner {
     display: flex;
     align-items: center;
-    margin: 15px 0 5px;
   }
   &__item {
     width: fit-content;
@@ -684,20 +688,23 @@ button {
   }
 }
 .products-images {
-  width: 100px;
-  height: 90px;
+  background-image: url("./assets/img/chat/korzinas.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 120px;
+  height: 110px;
 }
 .chat-wrap-product {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 11px;
 }
 .chat-wrap-product-text {
   margin: 0 20px;
   font-family: 'Lato', sans-serif;
   font-weight: 500;
   & img {
-    width: 70px;
-    display: block;
+    transform: translateX(-8px);
+    width: 100px;
   }
   & h4 {
     font-size: 14px;
@@ -742,6 +749,13 @@ button {
     color: #32BD1B;
     position: relative !important;
     justify-content: center;
+  }
+}
+.product-close {
+  cursor: pointer;
+  svg {
+    width: 11px;
+    height: 11px;
   }
 }
 .chat-footer-texts {
@@ -818,5 +832,73 @@ button {
 .mll {
   margin: 0 50px 0;
 }
-
+.counter {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  & button {
+    background: #FFFFFF;
+    border: 2px solid #DCE1F0;
+    border-radius: 20px;
+    width: 36px;
+    height: 36px;
+    color: #32BD1B;
+    text-align: center;
+    position: relative;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  .btn-number {
+    width: 54px!important;
+    height: 35px!important;
+    color: #8F99BA;
+    font-size: 15px;
+  }
+}
+.product-border {
+  margin: 0 auto;
+  width: 93%;
+  border: 1px solid #8F99BA22;
+  margin-top: 5px;
+}
+.product-footer-btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 5px;
+  cursor: pointer;
+  & button {
+    cursor: pointer;
+    position: relative;
+    width: 167px;
+    height: 50px;
+    background: #32BD1B;
+    border-radius: 100px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+}
+.product-footer-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Lato', sans-serif;
+  padding: 10px 33px 0;
+  & span {
+    font-weight: 500;
+    font-size: 14px;
+    color: #3E3E51;
+    margin-top: 5px;
+  }
+}
+.text-h4 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #3E3E51;
+}
 </style>

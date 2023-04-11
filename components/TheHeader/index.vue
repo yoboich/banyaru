@@ -77,7 +77,7 @@ let activeMenu = ref(0);
           </ul>
         </div>
         <div class="nav-btns">
-          <button to="/advert" class="btn btn-green">Разместить объявление</button>
+          <nuxt-link to="/personal-announcement"><button class="btn btn-green">Разместить объявление</button></nuxt-link>
           <div class="btn-login">
             <img src="@/assets/img/icon/avatar.svg" alt="" />
             <span>Вход</span>

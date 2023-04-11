@@ -55,7 +55,7 @@ const menu = [
           </div>
         </div>
         <div class="nav-btns">
-          <button to="/advert" class="btn btn-green">Разместить объявление</button>
+          <nuxt-link to="/personal-announcement"><button class="btn btn-green">Разместить объявление</button></nuxt-link>
         </div>
       </div>
     </div>

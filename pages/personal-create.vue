@@ -20,67 +20,32 @@ const { width } = useWindowSize();
 let activeTab = ref(1);
 const products = [
   {
-    background: "no-photo.png",
     image: "free.png",
-    class: "red",
-    title: "Отменен"
+    class: "green",
+    title: "Активно"
   },
   {
-    background: "girl-sauna.png",
     image: "bornss.png",
-    class: "green",
-    title: "Оплачен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
     class: "red",
-    title: "Отменен"
+    title: "Отклонено"
   },
   {
-    background: "girl-sauna.png",
     image: "free.png",
     class: "green",
-    title: "Оплачен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
+    title: "Активно"
   }
 ]
 const catalog = [
   {
-    background: "no-photo.png",
-    image: "free.png",
-    class: "red",
-    title: "Отменен"
+    image: "vip.png",
+    class: "silver",
+    title: "Неактивно"
   },
   {
-    background: "delete-image.png",
-    image: "bornss.png",
-    class: "green",
-    title: "Оплачен"
+    image: "plot.png",
+    class: "orange",
+    title: "Проверяется"
   },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "red",
-    title: "Отменен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
-  },
-  {
-    background: "girl-sauna.png",
-    image: "free.png",
-    class: "green",
-    title: "Оплачен"
-  }
 ]
 
 defineExpose({ messagesRef });
@@ -155,114 +120,32 @@ definePageMeta({
               <div class="header-title">
                 <h4 class="chat-aside__title h1">Личный кабинет</h4>
                 <div class="chat-footer-texts">
-                  <h4>Удалить аккаунт</h4>
                   <div class="chat-footer-texts-flex">
-                    <h4>Версия 1.2.3 | 10.11.22</h4>
-                    <img src="../assets/img/chat/right-icons.png" alt="right-icons">
-                  </div>
-                  <div class="chat-btns">
-                    <button>Найти баню, услугу, товары</button>
+                    <h4>Заказы</h4>
+                    <div class="chat-btns">
+                      <button>Найти баню, услугу, товары</button>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="chat-header__item">
-                <div class="header-title">
-                  <h4 class="chat-aside__title h1">Избранное</h4>
-                </div>
+                <div class="chat-header__item__image"></div>
               </div>
             </div>
             <div class="chats">
                 <div class="chat-aside" v-if="navIsShown">
-                  <ChatPersonalFavoritesMsg />
+                  <ChatPersonalAnnouncementMsg />
                 </div>
               <div class="websoket-chat">
-                <div class="websoket-chat__content">
-                  <div class="nav">
-                    <div class="nav__inner">
-                      <div
-                          @click="activeTab = 1"
-                          :class="[activeTab == 1 ? 'nav__item_active' : '']"
-                          class="nav__item"
-                      >
-                        Все
-                      </div>
-                      <div
-                          @click="activeTab = 2"
-                          :class="[activeTab == 2 ? 'nav__item_active' : '']"
-                          class="nav__item"
-                      >
-                        Услуги
-                      </div>
-                      <div
-                          @click="activeTab = 3"
-                          :class="[activeTab == 3 ? 'nav__item_active' : '']"
-                          class="nav__item"
-                      >
-                        Товары
-                      </div>
-                    </div>
+                <div class="product">
+                  <div class="product__flex">
+                    <h2>Избранное</h2>
                   </div>
-                  <div class="chat-wrap">
-                    <div class="chat-child-flex" v-if="products">
-                      <div class="chat-wrap-product" v-for="item in products">
-                        <img :src="'/_nuxt/assets/img/chat/' + item.background" alt="products" class="products-images">
-                        <div class="chat-wrap-product-text">
-                          <h4>Сауны</h4>
-                          <h4>Сауна Дионис-СПА</h4>
-                          <h2>22 300 ₽ </h2>
-                          <span>ул. Тимирязьева, м. Могилевская</span>
-                          <img src="../assets/img/chat/eyess.png" alt="eyes">
-                        </div>
-                        <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="2.29688" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="10.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="18.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="chat-child-flex mt" v-if="catalog">
-                      <div class="chat-wrap-product" v-for="item in catalog">
-                        <img :src="'/_nuxt/assets/img/chat/' + item.background" alt="products" class="products-images">
-                        <div class="chat-wrap-product-text">
-                          <h4>Сауны</h4>
-                          <h4>Сауна Дионис-СПА</h4>
-                          <h2>22 300 ₽ </h2>
-                          <span>ул. Тимирязьева, м. Могилевская</span>
-                          <img src="../assets/img/chat/eyess.png" alt="eyes">
-                        </div>
-                        <svg width="21" height="5" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="2.29688" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="10.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                          <circle cx="18.2969" cy="2.95312" r="2" fill="#3E3E51"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="else" v-else>
-                      <div class="titless">
-                        <p>Вы можете начать свой выбор с <span>главной<br> страницы</span> или выбрать <span>категорию</span></p>
-                        <div class="flex-boxes">
-                          <h4>Недавно вы смотрели</h4>
-                          <img src="../assets/img/chat/sliders.png" alt="slider">
-                        </div>
-                      </div>
-                      <div class="chat-wrap">
-                        <div class="chat-child-flex">
-                          <div class="chat-wrap-product" v-for="item in products">
-                            <div class="products-images">
-                              <img :src="'/_nuxt/assets/img/chat/' + item.image" alt="girl-sauna">
-                              <div class="chat-wrap-product-text">
-                                <img src="../assets/img/chat/likes-image.png" alt="like" class="like-image">
-                                <h4>Сауна Дионис-СПА</h4>
-                                <div class="middle-box">
-                                  <div class="circle-box"></div>
-                                  <h4>Павелецкая</h4>
-                                </div>
-                                <h2>22 300 ₽/час</h2>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  <div class="product__middle">
+                    <div class="boxes">
+                      <img src="../assets/img/chat/product-background.png" alt="product-background">
+                      <h4>Добавляейте объявления <br>в избранное</h4>
+                     <nuxt-link to="/personal-area"><button>Добавить объявление</button></nuxt-link>
                     </div>
                   </div>
                 </div>
@@ -276,6 +159,46 @@ definePageMeta({
 </template>
 
 <style lang="scss" scoped>
+.chat-wrap-product-text-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & .boxs {
+    display: flex;
+    align-items: center;
+    & h4 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      color: #3E3E51;
+      margin: 0 10px 0;
+    }
+  }
+  & img {
+    width: 24px;
+    height: 6px;
+  }
+}
+.green {
+  background-color: #32BD1B;
+}
+.red {
+  background-color: #EA4E3D;
+}
+.purple {
+  background-color: #A169F7;
+}
+.range {
+  background-color: #FABA17;
+}
+.silver {
+  background-color: #8F99BA;
+}
+.wrap-background {
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+}
 .chat {
   margin-top: 2.5rem;
   flex: 1 1 auto;
@@ -287,8 +210,8 @@ definePageMeta({
 }
 .chat-wrap {
   display: flex;
-  align-items: center;
-  margin: 10px 0 0 30px;
+  justify-content: space-between;
+  margin: 0 0 0 30px;
 }
 .chat-card {
   padding: 0;
@@ -305,9 +228,9 @@ definePageMeta({
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 53vh;
+  height: 60vh;
   @media(max-width: 1400px) {
-    height: 57vh;
+    height: 64vh;
   }
 
   @media(max-height: 800px) {
@@ -351,7 +274,7 @@ definePageMeta({
   align-items: center;
   &__item {
     width: 100%;
-    padding: 0 30px 0 10px;
+    padding: 5px 30px 10px 10px;
     border-left: 1px solid #8F99BA22;
     &__image {
       display: flex;
@@ -384,9 +307,7 @@ definePageMeta({
     }
   }
 }
-.mt {
-  margin: 0 67px;
-}
+
 .left-images {
   width: 60px;
   transform: translateY(10px) !important;
@@ -434,7 +355,7 @@ definePageMeta({
   margin: 0 6px 0;
   position: relative;
   .websoket-chat__content {
-    padding: 0 10px 0;
+    padding: 15px 10px 0;
     display: flex;
     flex-direction: column;
     border-left: 1px solid #8F99BA22;
@@ -661,7 +582,6 @@ button {
   &__inner {
     display: flex;
     align-items: center;
-    margin: 15px 0 5px;
   }
   &__item {
     width: fit-content;
@@ -684,20 +604,24 @@ button {
   }
 }
 .products-images {
-  width: 100px;
-  height: 90px;
+  background-image: url("./assets/img/chat/girl-sauna.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
 }
 .chat-wrap-product {
   display: flex;
-  margin-bottom: 10px;
+  align-items: center;
+  margin: 11px 0;
 }
 .chat-wrap-product-text {
   margin: 0 20px;
   font-family: 'Lato', sans-serif;
   font-weight: 500;
   & img {
-    width: 70px;
-    display: block;
+    transform: translateX(-8px);
+    width: 100px;
   }
   & h4 {
     font-size: 14px;
@@ -724,7 +648,6 @@ button {
 .chat-btns {
   display: flex;
   align-items: center;
-  margin-top: 10px;
   bottom: 0;
   & button {
     width: 100%;
@@ -747,8 +670,8 @@ button {
 .chat-footer-texts {
   position: absolute;
   bottom: 0;
-  margin: 0 43px;
-  transform: translateY(-30px);
+  margin: 0 23px;
+  transform: translateY(-20px);
   width: 24%;
   cursor: pointer;
   @media(max-width: 1400px) {
@@ -762,61 +685,88 @@ button {
   }
 }
 .chat-footer-texts-flex {
-  display: flex;
-  align-items: center;
   margin-top: 10px;
-  justify-content: space-between;
-  width: 100%;
   & h4 {
     font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 20px;
     color: #3E3E51;
   }
 }
 .products-images img {
   width: 60px;
 }
-.chat-wrap-product-text-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  & .boxs {
+.product {
+  padding: 30px 45px 0;
+  cursor: pointer;
+  &__flex {
     display: flex;
-    align-items: center;
-    & h4 {
+    justify-content: space-between;
+    & h2 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: #3E3E51;
+      cursor: pointer;
+    }
+    & button {
+      width: 339px;
+      height: 50px;
+      background: #FFFFFF;
+      border: 2px solid #DCE1F0;
+      border-radius: 100px;
       font-family: 'Lato', sans-serif;
       font-weight: 500;
-      font-size: 11px;
-      color: #3E3E51;
-      margin: 0 10px 0;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      color: #32BD1B;
+      position: relative;
+      cursor: pointer;
     }
   }
-  & img {
-    width: 24px;
-    height: 6px;
+  &__middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 90px;
+    cursor: pointer;
+    .boxes {
+      text-align: center;
+      cursor: pointer;
+      img {
+        width: 158px;
+        height: 158px;
+        margin: 0 auto;
+      }
+      h4 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        text-align: center;
+        color: #8F99BA;
+      }
+      & button {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        background: #32BD1B;
+        border-radius: 100px;
+        border: none;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #FFFFFF;
+        margin-top: 40px;
+        cursor: pointer;
+      }
+    }
   }
 }
-.green {
-  background-color: #32BD1B;
-}
-.red {
-  background-color: #EA4E3D;
-}
-.purple {
-  background-color: #A169F7;
-}
-.range {
-  background-color: #FABA17;
-}
-.wrap-background {
-  width: 10px;
-  height: 10px;
-  border-radius: 50px;
-}
-.mll {
-  margin: 0 50px 0;
-}
-
 </style>

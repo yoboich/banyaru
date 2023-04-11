@@ -26,7 +26,7 @@ const users = [
     image: "korzina.png",
     name: "Корзина",
     icon: "one.png",
-    to: "/personal-order",
+    to: "/personal-basket",
     class: "green"
   },
   {
