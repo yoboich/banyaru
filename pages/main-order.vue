@@ -84,7 +84,9 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
   }
 
   &__content {
-    height: 100vh;
+    height: 85vh;
+    width: 100%;
+    position: fixed;
   }
 }
 .swiper-sliders {
