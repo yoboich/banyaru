@@ -95,6 +95,8 @@ let activeTab = ref(1);
   border-radius: 100px;
 }
 	.footer {
+    z-index: 2;
+    position: relative;
     background: #FFFFFF;
     box-shadow: 0px -6px 50px rgba(166, 175, 203, 0.16);
     border-radius: 23px;
