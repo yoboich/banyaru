@@ -32,10 +32,59 @@ const catalog = [
 const greet = () => {
   toast.add({ severity: "info", summary: "Hello " + text.value });
 };
+const now = new Date()
+const dateNow = ref(now)
+
+const nextDay = function () {
+  dateNow.value = new Date(dateNow.value.setDate(dateNow.value.getDate()+1))
+  // dateNow.value = dateNow.value.setDate(now.getDate()+1)
+}
+
+const prevDay = function () {
+  dateNow.value = new Date(dateNow.value.setDate(dateNow.value.getDate()-1))
+  // dateNow.value = dateNow.value.setDate(now.getDate()+1)
+}
+
+
+const selected = ref(false)
+const btn = ref(34)
+const input1 = ref('7:30')
+const input2 = ref('9:30')
+const result = ref(null)
+const ret = ref(false)
+
+const click = (value) => {
+  selected.value = !selected.value
+  if(selected.value === false) {
+    input2.value = value + ':30'
+    const parse1 = parseInt(input1.value)
+    const parse2 = parseInt(input2.value)
+    result.value = parse2 - parse1
+    ret.value = true
+  }
+  if (selected.value === true) {
+    input1.value = value + ':30'
+  }
+}
+
 </script>
 
 <template>
  <div class="calendar">
+   <div class="calendar-header">
+     <button @click="nextDay">
+       <span class="pi pi-angle-left"></span>
+     </button>
+     <div class="boxess">
+       <div>
+         <h4>Сегодня &nbsp; {{dateNow.toLocaleDateString()}}</h4>
+       </div>
+       <p>Мин. время брони, ч: 2</p>
+     </div>
+     <button @click="prevDay">
+       <span class="pi pi-angle-right"></span>
+     </button>
+   </div>
    <div class="calendar__first">
      <button>0:00</button>
      <button>0:30</button>
@@ -63,33 +112,34 @@ const greet = () => {
      </button>
    </div>
    <div class="calendar__fourth">
-     <Calendar v-model="date1" />
+     <input type="text" v-model="input1">
      <div class="middle-btn">
          <img src="../../assets/img/order/watch.png" alt="watch">
-         <h4>02:30</h4>
+         <h4 v-if="ret">{{ result + ':30' }}</h4>
+         <h4 v-else>2:30</h4>
      </div>
-     <Calendar v-model="date2" />
+     <input type="text" v-model="input2">
    </div>
    <div class="calendar__fifth">
-     <button>10:00</button>
+     <button @click="click('10')">10:00</button>
      <button>10:30</button>
-     <button>11:00</button>
-     <button>11:30</button>
-     <button>12:00</button>
+     <button @click="click('11')">11:00</button>
+     <button @click="click('11')">11:30</button>
+     <button @click="click('12')">12:00</button>
    </div>
    <div class="calendar__fifth">
-     <button>13:30</button>
+     <button @click="click('13')">13:30</button>
      <button>14:00</button>
-     <button>14:30</button>
-     <button>15:00</button>
-     <button>15:30</button>
+     <button @click="click('14')">14:30</button>
+     <button @click="click('15')">15:00</button>
+     <button @click="click('15')">15:30</button>
    </div>
    <div class="calendar__fifth">
-     <button>16:00</button>
+     <button @click="click('16')">16:00</button>
      <button>16:30</button>
-     <button>17:00</button>
-     <button>17:30</button>
-     <button>18:00</button>
+     <button @click="click('17')">17:00</button>
+     <button @click="click('17')">17:30</button>
+     <button @click="click('18')">18:00</button>
    </div>
    <div class="calendar__last">
      <button>
@@ -214,7 +264,7 @@ const greet = () => {
       align-items: center;
       justify-content: space-between;
       height: 56px;
-      & button {
+      & input {
         width: 112px;
         height: 56px;
         background: #32BD1B;
@@ -230,6 +280,16 @@ const greet = () => {
         justify-content: center;
         color: #FFFFFF;
         cursor: pointer;
+        &::placeholder {
+          font-family: 'Lato', sans-serif;
+          font-weight: 500;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
+          color: #FFFFFF;
+        }
       }
       .middle-btn {
         display: flex;
@@ -301,6 +361,48 @@ const greet = () => {
     .btn-middle {
       margin: 0 60px 0;
       cursor: pointer;
+    }
+  }
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    & button {
+      cursor: pointer;
+      outline: none;
+      border: none;
+      background: none;
+      font-size: 15px;
+      .pi {
+        font-size: 36px;
+      }
+    }
+    & .boxess {
+      background: #FFFFFF;
+      box-shadow: 1px 7px 21px rgba(166, 175, 205, 0.22);
+      border-radius: 100px;
+      width: 181px;
+      height: 32px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      margin-bottom: 40px;
+      & div {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        & h4 {
+          font-size: 16px;
+          color: #3E3E51;
+        }
+      }
+      & p {
+        font-size: 14px;
+        color: #8F99BA;
+        text-align: center;
+        margin: 20px 0;
+      }
     }
   }
 </style>

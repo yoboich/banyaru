@@ -112,6 +112,9 @@ export default {
       font-family: 'Lato', sans-serif;
       font-weight: 700;
       font-size: 16px;
+      @media(max-width: 600px) {
+        font-size: 13px;
+      }
     }
     .text-h4 {
       color: #8F99BA;

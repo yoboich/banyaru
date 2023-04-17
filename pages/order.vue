@@ -1,6 +1,16 @@
 <script setup>
 	import { useWindowSize } from '@vueuse/core';
 	const isLarge = ref(true);
+  const main = ref(false);
+  const mores = ref(false);
+  const mores1 = ref(false);
+  const mores2 = ref(false);
+  const more1 = () => {
+    mores1.value = true
+  }
+  const more2 = () => {
+    mores2.value = true
+  }
   const product = [
     {
       image: "product-image.png",
@@ -43,7 +53,7 @@
       image: "downn.png",
       class: "width",
       text: "Все",
-      text_class: "text-active"
+      text_class: "text-active",
     },
   ]
 
@@ -72,6 +82,12 @@
         })
         e.classList.add('actives')
       })
+    })
+    let actives = document.querySelector('.width')
+    let mains = document.querySelector('.mains')
+    mains.style.display = 'none'
+    actives.addEventListener('click', () => {
+      mains.style.display = 'block'
     })
   })
 	useHead({ title: 'Баня.ру – портал о банях и саунах России' });
@@ -110,48 +126,63 @@
           </div>
         </div>
       </div>
-      <div class="info">
-        <OrderInfo />
+      <div class="mains">
+        <div class="info">
+          <OrderInfo />
+        </div>
+        <div class="description">
+          <OrderDescription />
+        </div>
+        <div class="price">
+          <OrderPrice />
+        </div>
+        <div class="calendar">
+          <OrderCalendar />
+        </div>
+        <div class="middle-btn">
+          <OrderMiddle-Button />
+        </div>
+        <div class="selected">
+          <OrderSelect />
+        </div>
+        <div class="product">
+          <OrderProduct />
+        </div>
+        <div class="product-wrapper__footer" @click="more1">
+          <button>
+            Смотреть все
+            <img src="../assets/img/order/down.png" alt="down">
+          </button>
+        </div>
+        <div class="more1" v-if="mores1">
+          <div class="cards">
+            <OrderCard />
+          </div>
+          <div class="product-wrapper__footer" @click="more2">
+            <button>
+              Смотреть все
+              <img src="../assets/img/order/down.png" alt="down">
+            </button>
+          </div>
+        </div>
+        <div class="more2" v-if="mores2">
+          <div class="catalog">
+            <OrderCatalog />
+          </div>
+        </div>
+        <div class="announcement">
+          <OrderAnnouncement />
+        </div>
+        <div class="watched">
+          <OrderWatched />
+        </div>
+        <div class="reviews">
+          <OrderReviews />
+        </div>
+        <footer>
+          <OrderFooter />
+        </footer>
       </div>
-      <div class="description">
-        <OrderDescription />
-      </div>
-      <div class="price">
-        <OrderPrice />
-      </div>
-      <div class="calc">
-        <OrderCalc />
-      </div>
-      <div class="calendar">
-        <OrderCalendar />
-      </div>
-      <div class="middle-btn">
-        <OrderMiddle-Button />
-      </div>
-      <div class="selected">
-        <OrderSelect />
-      </div>
-      <div class="product">
-        <OrderProduct />
-      </div>
-      <div class="cards">
-        <OrderCard />
-      </div>
-      <div class="catalog">
-        <OrderCatalog />
-      </div>
-      <div class="announcement">
-        <OrderAnnouncement />
-      </div>
-      <div class="watched">
-        <OrderWatched />
-      </div>
-      <div class="reviews">
-        <OrderReviews />
-      </div>
-      <footer>
-        <OrderFooter />
-      </footer>
     </div>
   </div>
 </template>
@@ -168,6 +199,28 @@
     height: 100vh;
   }
 }
+.calendar {
+  margin-top: 60px;
+}
+.product-wrapper__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+  cursor: pointer;
+  & button {
+    border: none;
+    background: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #32BD1B;
+    cursor: pointer;
+    & img {
+      margin-left: 10px;
+    }
+  }
+}
 .active-width {
   width: 101px !important;
   height: 92px !important;
@@ -176,7 +229,7 @@
   background: #FFFFFF!important;
   box-shadow: 0px 4px 63px rgba(0, 0, 0, 0.25);
   border-radius: 23px;
-  width: 35%;
+  width: 38%;
   height: 98vh;
   margin: 12px 12px 0;
   overflow-y: scroll;
@@ -185,6 +238,9 @@
   padding: 10px 35px;
   @media(max-width: 1500px) {
     width: 46%;
+  }
+  @media(max-width: 600px) {
+    width: 96%;
   }
   &::-webkit-scrollbar-track
   {
@@ -237,6 +293,9 @@
   .product-content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    @media(max-width: 600px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
   .product-content-wrap {
     margin: 0 auto;
@@ -257,8 +316,8 @@
     }
   }
   .width {
-    width: 80px!important;
-    height: 68px!important;
+    width: 67px !important;
+    height: 64px !important;
     margin-bottom: 20px;
   }
   .text-active {

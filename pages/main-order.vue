@@ -49,7 +49,9 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
     </button>
   </section>
   <section class="page_1">
-    <MainOrderHeader/>
+    <div class="fixed">
+      <MainOrderHeader />
+    </div>
   </section>
   <div class="body">
     <div class="container">
@@ -96,7 +98,6 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
   width: 101px !important;
   height: 92px !important;
 }
-
 .body {
   background: #FFFFFF !important;
   box-shadow: 0px 4px 63px rgba(0, 0, 0, 0.25);
@@ -106,6 +107,8 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
   position: absolute;
   top: 0;
   padding: 10px 35px;
+  overflow-y: scroll;
+  height: 100vh;
   @media(max-width: 1500px) {
     width: 47% !important;
   }
@@ -129,7 +132,9 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
   }
 
 }
-
+footer {
+  margin-top: 300px;
+}
 .add-advert {
   font-weight: 700;
   font-size: 1.6rem;
@@ -142,7 +147,6 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
 .mobile-container {
   padding: 0 2rem;
 }
-
 .order-btn {
   width: 100%;
   height: 50px;
@@ -224,17 +228,22 @@ useHead({title: 'Баня.ру – портал о банях и саунах Р
 }
 
 .page_1 {
-  height: 135vh;
+  height: 43vh;
   display: flex;
   justify-content: center;
-  transform: translateX(187px) translateY(-111px);
+  transform: translateX(187px) translateY(-82px);
+  position: fixed;
+  right: 50%;
+  z-index: 2;
+  @media(max-width: 1500px) {
+    right: 29%;
+  }
 }
 
 .page {
   display: flex;
-  justify-content: center;
   justify-content: space-between;
-  position: absolute;
+  position: fixed;
   top: 0;
   text-align: center;
   left: 36%;

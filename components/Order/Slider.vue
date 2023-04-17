@@ -35,6 +35,7 @@
 	const images = ref([img1, img2, img3, img4, img5, img6, img7]);
 
 	const modalVisible = ref(false);
+  const date = ref('Сегодня, 10.20.2022')
 
 	// swiper
 
@@ -89,6 +90,7 @@
         <button class="swiper-btns">Сегодня, 10.20.2023</button>
         <h4 class="swiper-text">Мин. время брони, ч: 2</h4>
       </swiper-slide>
+      <Calendar v-model="date" />
       <swiper-slide>
         <button class="swiper-btns">Сегодня, 10.20.2022</button>
         <h4 class="swiper-text">Мин. время брони, ч: 2</h4>

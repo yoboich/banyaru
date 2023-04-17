@@ -86,6 +86,7 @@
 			class="product-swiper"
 		>
 			<swiper-slide>
+        <nuxt-link to="/modal">
           <div class="product-card-swiper__main">
             <nuxt-img
                 class="product-card-swiper__bg"
@@ -95,180 +96,73 @@
             />
           </div
           >
+        </nuxt-link>
       </swiper-slide>
-			<swiper-slide>
-				<div class="product-card-swiper__main">
-					<nuxt-img
-						class="product-card-swiper__bg"
-            src="/promotions/4.png"
-						quality="90"
-					/></div
-			></swiper-slide>
-			<swiper-slide>
-				<div class="product-card-swiper__main">
-					<nuxt-img
-						class="product-card-swiper__bg"
-            src="/promotions/order-background.png"
-						sizes="sm:100vw md:50vw lg:900px"
-						quality="90"
-					/></div
-			></swiper-slide>
-			<swiper-slide>
-				<div class="product-card-swiper__main">
-					<nuxt-img
-						class="product-card-swiper__bg"
-            src="/promotions/order-background.png"
-						sizes="sm:100vw md:50vw lg:900px"
-						quality="90"
-					/></div
-			></swiper-slide>
-			<swiper-slide>
-				<div class="product-card-swiper__main">
-					<nuxt-img
-						class="product-card-swiper__bg"
-            src="/promotions/order-background.png"
-						sizes="sm:100vw md:50vw lg:900px"
-						quality="90"
-					/></div
-			></swiper-slide>
       <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          />
-        </div
-        ></swiper-slide>
+        <nuxt-link to="/modal">
+          <div class="product-card-swiper__main">
+            <nuxt-img
+                class="product-card-swiper__bg"
+                src="/promotions/order-background.png"
+                sizes="sm:100vw md:50vw lg:900px"
+                quality="90"
+            />
+          </div
+          >
+        </nuxt-link>
+      </swiper-slide>
       <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
+        <nuxt-link to="/modal">
+          <div class="product-card-swiper__main">
+            <nuxt-img
+                class="product-card-swiper__bg"
+                src="/promotions/order-background.png"
+                sizes="sm:100vw md:50vw lg:900px"
+                quality="90"
+            />
+          </div
+          >
+        </nuxt-link>
+      </swiper-slide>
       <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
+        <nuxt-link to="/modal">
+          <div class="product-card-swiper__main">
+            <nuxt-img
+                class="product-card-swiper__bg"
+                src="/promotions/order-background.png"
+                sizes="sm:100vw md:50vw lg:900px"
+                quality="90"
+            />
+          </div
+          >
+        </nuxt-link>
+      </swiper-slide>
       <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
+        <nuxt-link to="/modal">
+          <div class="product-card-swiper__main">
+            <nuxt-img
+                class="product-card-swiper__bg"
+                src="/promotions/order-background.png"
+                sizes="sm:100vw md:50vw lg:900px"
+                quality="90"
+            />
+          </div
+          >
+        </nuxt-link>
+      </swiper-slide>
       <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          />
-        </div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          />
-        </div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
-      <swiper-slide>
-        <div class="product-card-swiper__main">
-          <nuxt-img
-              class="product-card-swiper__bg"
-              src="/promotions/order-background.png"
-              sizes="sm:100vw md:50vw lg:900px"
-              quality="90"
-          /></div
-        ></swiper-slide>
+        <nuxt-link to="/modal">
+          <div class="product-card-swiper__main">
+            <nuxt-img
+                class="product-card-swiper__bg"
+                src="/promotions/order-background.png"
+                sizes="sm:100vw md:50vw lg:900px"
+                quality="90"
+            />
+          </div
+          >
+        </nuxt-link>
+      </swiper-slide>
 			<div
 				class="product-card-swiper__arrow arrow-left pos opacity-background"
 				v-if="premium"
@@ -308,5 +202,8 @@
 }
 .product-card-swiper__bg {
   max-height: 71vh!important;
+}
+.product-card-swiper__main {
+  cursor: pointer;
 }
 </style>

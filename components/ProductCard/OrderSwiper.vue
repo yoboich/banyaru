@@ -66,28 +66,28 @@ onMounted(() => {
 <template>
   <swiper :navigation="true" :modules="modules" class="mySwiper">
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image backgrounds hover1">
           <img src="../../assets/img/order/background.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image hover2">
           <img src="../../assets/img/promotions/room2.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image backgrounds hover3">
           <img src="../../assets/img/order/background.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image hover4">
           <img src="../../assets/img/promotions/room2.png" alt="room">
         </div>
@@ -334,7 +334,7 @@ body {
 
 .map-btns {
   transform: translateX(1200px) translateY(-500px) !important;
-  position: absolute;
+  position: fixed;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   @media(max-width: 1500px) {

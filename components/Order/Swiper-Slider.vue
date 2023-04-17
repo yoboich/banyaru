@@ -66,42 +66,42 @@ onMounted(() => {
 <template>
   <swiper :navigation="true" :modules="modules" class="mySwiper">
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image backgrounds hover15">
           <img src="../../assets/img/order/background.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image hover16">
           <img src="../../assets/img/promotions/product-image.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image hover17">
           <img src="../../assets/img/promotions/room2.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image hover18">
           <img src="../../assets/img/promotions/room2.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link to="/modal">
+      <nuxt-link to="/order">
         <div class="swiper-image">
           <img src="../../assets/img/promotions/product-image.png" alt="room">
         </div>
       </nuxt-link>
     </swiper-slide>
     <swiper-slide>
-      <nuxt-link tp="/modal">
+      <nuxt-link tp="/order">
         <div class="swiper-image">
           <img src="../../assets/img/promotions/room2.png" alt="room">
         </div>
@@ -306,8 +306,8 @@ body {
   }
 }
 .map-btns1 {
+  position: fixed;
   transform: translateX(1200px) translateY(-1054px) !important;
-  position: absolute;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   @media(max-width: 1500px) {

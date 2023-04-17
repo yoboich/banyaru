@@ -104,8 +104,8 @@ export default {
 
 .menu-wrapper {
   display: flex;
-  justify-content: center;
-  margin: 30px auto;
+  justify-content: space-between;
+  margin: 30px 0;
 
   .menu {
     list-style: none;
