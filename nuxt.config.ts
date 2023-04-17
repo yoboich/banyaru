@@ -25,11 +25,14 @@ export default defineNuxtConfig({
 		'normalize.css/normalize.css',
 		'assets/styles/main.scss',
 		'vue-multiselect/dist/vue-multiselect.css',
+		"primevue/resources/themes/lara-light-blue/theme.css",
+		// "primevue/resources/primevue.css",
+		// "primeicons/primeicons.css"
 	],
 	build: {
-		transpile: ['@vuepic/vue-datepicker'],
+		transpile: ['@vuepic/vue-datepicker', 'prime'],
 	},
-	ssr: false
+	ssr: false,
 });
 
 

@@ -46,10 +46,10 @@ const menu = [
           <img src="@/assets/img/logo.png" alt="Баня"/>
         </NuxtLink>
         <div class="menu-items">
-          <div class="nav-icons">
-            <div class="nav-icons__item"
+          <div class="nav-icons1">
+            <div class="nav-icons1__item1"
                  v-for="(item, idx) in menu" :key="item" @click="activeTab = idx + 1"
-                 :class="[activeTab == idx + 1 ? 'nav__item_active' : '']">
+                 :class="[activeTab == idx + 1 ? 'nav1__item1_active' : '']">
               <div v-html="item.icon"></div>
             </div>
           </div>
@@ -63,6 +63,9 @@ const menu = [
 </template>
 
 <style lang="scss" scoped>
+* {
+  box-sizing: content-box!important;
+}
 .paddings {
   padding: 0 !important;
 }
@@ -117,7 +120,7 @@ const menu = [
 }
 
 
-.nav-icons__item {
+.nav-icons1__item1 {
   width: 26.02px;
   height: 26.25px;
   margin: 0 10px 0;
@@ -136,7 +139,7 @@ const menu = [
   margin: 0 auto;
 }
 
-.nav {
+.nav1 {
   display: flex;
   gap: 2.8rem;
   align-items: center;
@@ -145,7 +148,7 @@ const menu = [
   margin: 0 0 0 45px;
   padding: 13px 0 0;
 
-  &__item {
+  &__item1 {
     cursor: pointer;
     position: relative;
     font-family: 'Lato', sans-serif;
@@ -166,7 +169,7 @@ const menu = [
   }
 }
 
-.nav-icons {
+.nav-icons1 {
   display: flex;
   align-items: center;
   background: #FFFFFF;
@@ -178,7 +181,7 @@ const menu = [
     fill: red !important;
   }
 
-  &__item {
+  &__item1 {
     position: relative;
 
     div {

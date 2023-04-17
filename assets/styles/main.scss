@@ -65,7 +65,7 @@ body {
 	font-family: $mainFont;
 	font-size: $mainFontSize;
 	font-weight: $mainFontWeight;
-	background-color: $mainBackgroundColor;
+	background-color: #fff;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
@@ -73,6 +73,9 @@ body {
 	&.lock {
 		overflow-y: hidden;
 	}
+}
+#__nuxt {
+	background-color: $mainBackgroundColor!important;
 }
 button {
 	border: none;

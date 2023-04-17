@@ -17,7 +17,7 @@ let activeMenu = ref(0);
         <transition name="fade">
           <TheHeaderCitySelect />
         </transition>
-        <div class="menu-items">
+        <div class="menu-items1">
           <ul class="nav paddings">
             <li
               @click="(activeMenu = 1), (isActive = true)"
@@ -144,7 +144,7 @@ let activeMenu = ref(0);
   margin: 0 30px 0 0;
 }
 
-.menu-items {
+.menu-items1 {
   display: flex;
   align-items: center;
   gap: 3.8rem;
