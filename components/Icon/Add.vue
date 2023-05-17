@@ -1,26 +1,26 @@
-<script setup></script>
-
 <template>
-	<svg
-		width="20"
-		height="5"
-		viewBox="0 0 20 5"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-	>
-		<circle cx="2" cy="2.78125" r="2" fill="white" />
-		<circle cx="10" cy="2.78125" r="2" fill="white" />
-		<circle cx="18" cy="2.78125" r="2" fill="white" />
-	</svg>
+  <svg
+    class="icon-arrow"
+    width="20"
+    height="5"
+    viewBox="0 0 20 5"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="2" cy="2.78125" r="2" fill="white" />
+    <circle cx="10" cy="2.78125" r="2" fill="white" />
+    <circle cx="18" cy="2.78125" r="2" fill="white" />
+  </svg>
 </template>
 
-<style lang="scss" scoped>
-	svg {
-		& circle {
-			fill: $green-color;
-		}
-	}
-	.white circle {
-		fill: white;
-	}
+<style lang="scss">
+svg.icon-arrow {
+  fill: $green-color;
+  & circle {
+    fill: inherit;
+  }
+}
+// .white circle {
+//   fill: white;
+// }
 </style>

@@ -1,12 +1,12 @@
 <script setup>
-import AgoraRTM from 'agora-rtm-sdk';
-import { v4 as uuidv4 } from 'uuid';
-import { ref, onMounted, nextTick, defineExpose } from 'vue';
-const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
-const CHANNEL = 'wdj';
+import AgoraRTM from "agora-rtm-sdk";
+import { v4 as uuidv4 } from "uuid";
+import { ref, onMounted, nextTick, defineExpose } from "vue";
+const APP_ID = "452f99a0814b44d29d9a446ec20356fc";
+const CHANNEL = "wdj";
 let client = AgoraRTM.createInstance(APP_ID);
 let uid = uuidv4();
-let text = ref('');
+let text = ref("");
 let messagesRef = ref(null);
 let messages = ref([]);
 let channel;
@@ -14,14 +14,13 @@ defineExpose({ messagesRef });
 const appendMessage = async (message) => {
   messages.value.push(message);
   await nextTick();
-  messagesRef.value.scrollTop =
-      messagesRef.value.scrollHeight;
+  messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
 };
 onMounted(async () => {
   await client.login({ uid, token: null });
   channel = await client.createChannel(CHANNEL);
   await channel.join();
-  channel.on('ChannelMessage', (message, peerId) => {
+  channel.on("ChannelMessage", (message, peerId) => {
     appendMessage({
       text: message.text,
       uid: peerId,
@@ -29,13 +28,13 @@ onMounted(async () => {
   });
 });
 function sendMessage() {
-  if (text.value === '') return;
-  channel.sendMessage({ text: text.value, type: 'text' });
+  if (text.value === "") return;
+  channel.sendMessage({ text: text.value, type: "text" });
   appendMessage({
     text: text.value,
     uid,
   });
-  text.value = '';
+  text.value = "";
 }
 </script>
 
@@ -43,14 +42,8 @@ function sendMessage() {
   <div class="panel">
     <div class="messages" ref="messagesRef">
       <div class="inner">
-        <div
-            :key="index"
-            v-for="(message, index) in messages"
-            class="message"
-        >
-          <div v-if="message.uid === uid" class="user-self">
-            You:&nbsp;
-          </div>
+        <div :key="index" v-for="(message, index) in messages" class="message">
+          <div v-if="message.uid === uid" class="user-self">You:&nbsp;</div>
           <div v-else class="user-them">Them:&nbsp;</div>
           <div class="text">{{ message.text }}</div>
         </div>
@@ -64,11 +57,12 @@ function sendMessage() {
   </div>
 </template>
 
-<style>
+<style scoped>
 body {
   margin: 0;
   height: 400px;
 }
+
 #app {
   padding: 2em;
   height: 100%;
@@ -77,10 +71,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: linear-gradient(
-      90deg,
-      rgba(188, 255, 147, 1) 0%,
-      rgba(88, 245, 158, 1) 53%,
-      rgba(0, 237, 69, 1) 100%
+    90deg,
+    rgba(188, 255, 147, 1) 0%,
+    rgba(88, 245, 158, 1) 53%,
+    rgba(0, 237, 69, 1) 100%
   );
 }
 .panel {
