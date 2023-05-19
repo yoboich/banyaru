@@ -50,7 +50,14 @@ document.addEventListener("keydown", (e) => {
 
 watch(triggerPageRender, (value) => {
   fillSelected();
+  tryUpdateMonth();
 });
+
+const tryUpdateMonth = () => {
+  if (calendar.value.selectedMonth !== props.month) {
+    emits("monthChange", calendar.value.selectedMonth);
+  }
+};
 
 const options = {
   DOMTemplates: {
@@ -90,9 +97,7 @@ const options = {
         duration,
       });
 
-      if (calendar.value.selectedMonth !== props.month) {
-        emits("monthChange", calendar.value.selectedMonth);
-      }
+      tryUpdateMonth();
     },
     clickArrow(event, dates) {
       triggerPageRender.value = !triggerPageRender.value;
@@ -138,6 +143,7 @@ const fillSelected = () => {
   );
 
   const range = [...selected.value];
+  let nightsCount = 0;
 
   if (calendar.value?.selectedDates?.length > 1) {
     const { selectedDates } = calendar.value;
@@ -152,6 +158,8 @@ const fillSelected = () => {
     const [dateStart, dateEnd] = selectedDate[0].split(":");
     const mDateStart = moment(dateStart);
     const mDateEnd = moment(dateEnd);
+
+    nightsCount = Math.abs(mDateEnd.diff(mDateStart, "days"));
 
     const elements = [];
     let firstElIndex = null;
@@ -218,7 +226,7 @@ const fillSelected = () => {
         elements[i].insertAdjacentHTML(
           "beforeend",
           getDurationTemplate(
-            elements.length - 1,
+            nightsCount,
             distance || "200%",
             freeElements,
             row

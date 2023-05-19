@@ -61,7 +61,7 @@ const { width } = useWindowSize();
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      // opacity: 0;
+      opacity: 0;
       // transform: scaleX(0);
       transition: all 0.3s;
 
@@ -139,12 +139,12 @@ const { width } = useWindowSize();
           top: 0;
         }
 
-        // &-active {
-        //   .slider__content {
-        // transform: scaleX(1);
-        // opacity: 1;
-        //   }
-        // }
+        &-active {
+          .slider__content {
+            // transform: scaleX(1);
+            opacity: 1;
+          }
+        }
       }
     }
   }

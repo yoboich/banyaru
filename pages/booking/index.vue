@@ -15,6 +15,5 @@ useHead({ title: "Баня.ру – портал о банях и саунах �
 <style lang="scss">
 .booking {
   height: 100%;
-  // padding-top: 20px;
 }
 </style>
