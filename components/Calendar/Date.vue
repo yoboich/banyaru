@@ -176,14 +176,12 @@ const fillSelected = () => {
         if (i === elements.length - 1) elements[i].classList.add("last");
       }
 
-      if (i == 1) {
+      if (i == 1 && selectedDate[1] !== "disabled") {
         const lastElIndex = firstElIndex + elements.length - 1;
         let freeElements;
         let row = 0; // 0 - same | 1 - empty left | 2 - empty right | 3 - empty
         let distance;
         let maxIndexInRow = firstElIndex + (7 - ((firstElIndex + 1) % 7));
-
-        console.log(firstElIndex + 1, maxIndexInRow, lastElIndex);
 
         if ((firstElIndex + 1) % 7 === 0) {
           if (maxIndexInRow < lastElIndex) {
