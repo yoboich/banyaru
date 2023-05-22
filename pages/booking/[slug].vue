@@ -377,23 +377,25 @@ const infoItems = ref([
       margin-bottom: 15px;
     }
 
-    // &-slider {
-    //   .slider__arrow {
-    //     transform: translateY(-165%);
-    //     width: 40px;
-    //     height: 40px;
-    //     background: rgba($color: #fff, $alpha: 0.6);
-    //   }
+    &-slider {
+      & :deep(.slider__arrow) {
+      }
+      .slider__arrow {
+        transform: translateY(-140%);
+        width: 40px;
+        height: 40px;
+        background: rgba($color: #fff, $alpha: 0.6);
+      }
 
-    //   .slider__arrow.next {
-    //     right: 10px;
-    //     transform: translateY(-165%) rotate(180deg);
-    //   }
+      .slider__arrow.next {
+        right: 10px;
+        transform: translateY(-140%) rotate(180deg);
+      }
 
-    //   .slider__arrow.prev {
-    //     left: 10px;
-    //   }
-    // }
+      .slider__arrow.prev {
+        left: 10px;
+      }
+    }
   }
   // ANNOUNCE
   &__announce {

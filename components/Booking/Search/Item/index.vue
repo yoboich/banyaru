@@ -129,7 +129,6 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
           object-position: center;
         }
       }
-
       & .slider__arrow {
         &.prev {
           left: 10px;

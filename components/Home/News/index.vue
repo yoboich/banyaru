@@ -1,6 +1,8 @@
 <template>
   <div class="news home__news">
-    <h1 class="news-title">Новости</h1>
+    <h1 class="news-title">
+      <nuxt-link to="/news">Новости</nuxt-link>
+    </h1>
     <div class="news__items">
       <HomeNewsItem v-for="i of 3" :key="i" />
     </div>
@@ -27,6 +29,7 @@ const props = defineProps({
     font-weight: 700;
     font-size: 28px;
     line-height: 100%;
+    margin-bottom: 40px;
   }
 
   &.mobile {

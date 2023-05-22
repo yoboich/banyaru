@@ -2,7 +2,7 @@
   <div class="news__item">
     <div class="news__item-header">
       <h1 class="news__item-title">
-        <nuxt-link to="#">Новые бани в Москве</nuxt-link>
+        <nuxt-link to="/news/test-item">Новые бани в Москве</nuxt-link>
       </h1>
       <div class="news__item-stats">
         <div class="reviews">
@@ -18,7 +18,7 @@
         <span class="date"> 20.03.2023 </span>
       </div>
     </div>
-    <nuxt-link to="#">
+    <nuxt-link to="/news/test-item">
       <div class="news__item-image">
         <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
       </div>
