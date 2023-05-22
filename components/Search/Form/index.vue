@@ -2,6 +2,7 @@
   <section class="search-form show">
     <div class="search-form__searchbox">
       <UISearchInput
+        @focus="isSearchFocused = true"
         v-model="searchTerm"
         placeholder="Поиск по г. Москва"
         hint
@@ -20,7 +21,7 @@
       </div>
       <div class="search-form__history" v-else>
         <div class="history-item" v-for="i of 5" :key="i">
-          <img src="~/assets/img/icon/clock-gray-filled.svg" alt="" />
+          <img src="~/assets/icons/clock-filled-gray.svg" alt="" />
           <div class="history-item__content">
             <h3 class="history-item__name">Маркса 3</h3>
             <span class="history-item__address">Россия, Москва</span>
@@ -33,10 +34,17 @@
 
 <script setup>
 const searchTerm = ref("");
+const triggerScrollUpdate = useState("triggerScrollUpdate");
+
+const isSearchFocused = useState("searchFocused", () => false);
+
+// watch(searchTerm, (val) => {
+//   triggerScrollUpdate.value = !triggerScrollUpdate.value;
+// });
 
 const data = [
   {
-    icon: "logo-gray",
+    icon: "logo-icon",
     title: "Названия объекта",
     items: [
       {
@@ -50,7 +58,7 @@ const data = [
     ],
   },
   {
-    icon: "marker-gray",
+    icon: "marker",
     title: "Адреса",
     items: [
       {
@@ -64,7 +72,7 @@ const data = [
     ],
   },
   {
-    icon: "phone-gray",
+    icon: "phone",
     title: "Номера телефонов",
     items: [
       {
@@ -102,7 +110,7 @@ const data = [
     ],
   },
   {
-    icon: "number-gray",
+    icon: "number",
     title: "Номера Объявлений",
     items: [
       {
@@ -126,8 +134,6 @@ const data = [
 }
 .search-form {
   height: 100%;
-  display: flex;
-  flex-direction: column;
 
   &.show {
     .search-form__suggestion {
@@ -149,7 +155,6 @@ const data = [
     padding: 15px 20px;
     background: #fff;
     border-radius: 25px 25px 0 0;
-    margin-bottom: 15px;
     border: 1px solid #dadeec;
     border-bottom: none;
 
@@ -158,9 +163,9 @@ const data = [
     align-items: center;
     gap: 15px;
 
-    position: fixed;
-    top: 20px;
-    left: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 20;
 
     label {
@@ -203,12 +208,9 @@ const data = [
 
   &__suggestion {
     display: none;
-    margin-top: 80px;
+    margin-top: 90px;
 
     &-items {
-      overflow: auto;
-      flex: 1 1 auto;
-
       &::-webkit-scrollbar {
         display: none;
       }
@@ -216,7 +218,7 @@ const data = [
   }
 
   &__history {
-    margin-top: 80px;
+    margin-top: 90px;
     padding-bottom: 25px;
     display: none;
 
@@ -229,7 +231,7 @@ const data = [
       transition: all 0.2s;
 
       &:hover {
-        color: $green-color;
+        color: $green;
       }
 
       &__name {
@@ -242,7 +244,7 @@ const data = [
         font-weight: 500;
         font-size: 11px;
         line-height: 13px;
-        color: $secondary-color;
+        color: $gray;
       }
 
       &:not(:last-of-type) {

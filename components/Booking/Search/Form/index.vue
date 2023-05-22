@@ -9,7 +9,11 @@
         <div class="booking-search__filter-info">
           <div class="booking-search__filter-found">
             <span>1 936 объявлений</span>
-            <IconRevert />
+            <img
+              class="booking-search__filter-sort"
+              src="~/assets/icons/sort-gray.svg"
+              alt=""
+            />
           </div>
           <nuxt-link class="booking-search__filter-more" to="/search/filter">
             <div
@@ -18,18 +22,23 @@
             >
               {{ selectedFilters.length }}
             </div>
-            <IconFilter />
+            <img src="~/assets/icons/filter-gray.svg" alt="" />
           </nuxt-link>
         </div>
         <div
           class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
           data-filter="first"
         >
-          <button class="booking-search__filter-btn">
-            <IconArrow />
+          <button
+            class="booking-search__filter-btn booking-search__filter-btn--slide-left"
+          >
+            <img src="~/assets/icons/arrow-left-gray.svg" alt="" />
           </button>
-          <button class="booking-search__filter-btn" @click="resetFilters">
-            <IconClose />
+          <button
+            class="booking-search__filter-btn booking-search__filter-btn--clear"
+            @click="resetFilters"
+          >
+            <img src="~/assets/icons/close-gray.svg" alt="" />
           </button>
           <BookingSearchFormTag
             v-for="(tagName, i) of BookingSearchTagsFirst"
@@ -53,10 +62,11 @@
         </div>
       </div>
     </div>
-    <div class="test"></div>
-    <div class="booking-search__results">
-      <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i" />
-    </div>
+    <client-only>
+      <div class="booking-search__results">
+        <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i" />
+      </div>
+    </client-only>
   </div>
 </template>
 
@@ -99,41 +109,30 @@ const toggleTag = (tagName) => {
 </script>
 
 <style lang="scss" scoped>
-.booking {
-  .booking-search {
-    padding: 305px 15px 0 !important;
-    background: transparent;
-
-    &.p-x {
-      padding: 0;
-    }
-
-    &__header {
-      padding: 20px 15px;
-      position: fixed;
-      z-index: 20;
-      top: 20px;
-      left: 20px;
-      width: 600px;
-      border: 1px solid #dadeec;
-      border-bottom: none;
-    }
-  }
-}
 .booking-search {
   border-radius: 20px;
   box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
   display: flex;
   flex-direction: column;
-  overflow: auto;
   background: #fff;
   height: 100%;
-  padding: 20px 15px;
+
+  &.p-x {
+    padding: 0 15px;
+  }
 
   &__header {
-    padding: 0 15px 20px;
+    // padding: 0 15px 20px;
     background: #fff;
     border-radius: 25px 25px 0 0;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 15px;
+    max-width: 600px;
+    width: 100%;
+    z-index: 20;
   }
 
   &__searchbox {
@@ -154,6 +153,10 @@ const toggleTag = (tagName) => {
       margin-bottom: 20px;
     }
 
+    &-sort {
+      cursor: pointer;
+    }
+
     &-found {
       display: flex;
       align-items: center;
@@ -164,14 +167,6 @@ const toggleTag = (tagName) => {
         font-size: 24px;
         line-height: 130%;
         color: #3e3e51;
-      }
-
-      svg.icon-revert {
-        cursor: pointer;
-
-        &:hover {
-          fill: #32bd1b;
-        }
       }
     }
 
@@ -189,7 +184,7 @@ const toggleTag = (tagName) => {
 
         width: 22px;
         height: 22px;
-        background: #32bd1b;
+        background: $green;
         border: 1px solid #ffffff;
         border-radius: 50%;
 
@@ -218,21 +213,6 @@ const toggleTag = (tagName) => {
         margin-bottom: 0;
       }
 
-      // &::-webkit-scrollbar {
-      //   height: 4px;
-      // }
-
-      // &::-webkit-scrollbar-track {
-      //   background: $light-gray-color;
-      //   border-radius: 5px;
-      // }
-
-      // &::-webkit-scrollbar-thumb {
-      //   width: 100px;
-      //   background: $secondary-color;
-      //   border-radius: 2px;
-      // }
-
       & > * {
         flex-shrink: 0;
       }
@@ -249,30 +229,50 @@ const toggleTag = (tagName) => {
 
       border-radius: 50%;
       border: 2px solid #dadeec;
-      background: #fff;
+      background-color: #fff;
+      transition: background-color 0.2s border-color 0.2s;
 
       cursor: pointer;
-      transition: all 0.2s;
 
-      svg.icon-arrow {
-        transform: translateX(-10%);
+      &--slide-left {
+        @include bg-img-fill(11px 18px, 9px, content-box);
+
+        img {
+          transform: translateX(-10%);
+        }
+
+        &:hover {
+          background-image: url(~/assets/icons/arrow-left-white.svg);
+          img {
+            opacity: 0;
+          }
+        }
+      }
+
+      &--clear {
+        &:hover {
+          @include bg-img-fill(15px 16px, center, content-box);
+
+          background-image: url(~/assets/icons/close-white.svg);
+
+          img {
+            opacity: 0;
+          }
+        }
       }
 
       &:hover {
-        background: #32bd1b;
-        border-color: #32bd1b;
-        svg.icon-arrow {
-          fill: #fff;
-        }
-        svg.icon-close {
-          stroke: #fff;
-        }
+        background-color: $green;
+        border-color: $green;
       }
     }
   }
 
   &__results {
-    margin-bottom: 30px;
+    padding-top: 305px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     & > div {
       &:last-of-type {

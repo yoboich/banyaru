@@ -1,29 +1,19 @@
-<script setup>
-import { useWindowSize } from "@vueuse/core";
-
-const { width, height } = useWindowSize();
-</script>
-
 <template>
-  <ClientOnly fallback-tag="span" fallback="Loading comments...">
-    <div class="wrapper">
-      <TheHeader v-if="width > 1000" />
-      <!-- <Filter v-if="isLarge" /> -->
-      <MobileHeader v-else />
-      <!-- <div class="wrapper-content"> -->
+  <div>
+    <Header />
+    <main>
       <slot />
-      <!-- </div> -->
+    </main>
+    <Footer v-if="width > 1000" />
 
-      <!-- <TheFooter v-if="width > 1000" /> -->
-      <Footer v-if="width > 1000" />
-    </div>
-  </ClientOnly>
+    <!-- <TheHeader v-if="width > 1000" /> -->
+    <!-- <MobileHeader v-else /> -->
+  </div>
 </template>
 
-<style scoped lang="scss">
-.wrapper-content {
-  @media screen and (max-width: 768px) {
-    margin: 0;
-  }
-}
-</style>
+<script setup>
+import { useWindowSize } from "@vueuse/core";
+const { width } = useWindowSize();
+</script>
+
+<style scoped lang="scss"></style>

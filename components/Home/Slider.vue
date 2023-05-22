@@ -1,6 +1,6 @@
 <template>
   <section class="home__slider">
-    <Slider
+    <SwiperSlider
       :slidesPerView="width > 1000 ? 1.2 : 1.05"
       :spaceBetween="width > 1000 ? 40 : 10"
       :navigation="width > 1000"
@@ -12,9 +12,9 @@
           <h2 class="slider__content-suptitle">С нами теплее</h2>
           <UIButton>Смотреть</UIButton>
         </div>
-        <img src="@/assets/img/home/Slider.png" alt="" />
+        <img src="@/assets/images/preview/home-slider.png" alt="" />
       </swiper-slide>
-    </Slider>
+    </SwiperSlider>
   </section>
 </template>
 
@@ -56,13 +56,11 @@ const { width } = useWindowSize();
     &__content {
       padding: 60px 60px 40px;
       height: 100%;
-      // height: 460px;
 
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      opacity: 0;
-      // transform: scaleX(0);
+
       transition: all 0.3s;
 
       @media (max-width: 768px) {
@@ -116,22 +114,27 @@ const { width } = useWindowSize();
 
     & .swiper {
       & .swiper-slide {
-        background: linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.36),
-            rgba(0, 0, 0, 0.36)
-          ),
-          url(image.png);
         border-radius: 23px;
         overflow: hidden;
         position: relative;
         color: #fff;
 
-        img {
-          height: 100%;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
           width: 100%;
-          object-fit: cover;
-          object-position: center;
+          height: 100%;
+          background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.16),
+            rgba(0, 0, 0, 0.16)
+          );
+        }
+
+        img {
+          @include img-fill-all;
 
           position: absolute;
           z-index: -1;
@@ -139,10 +142,9 @@ const { width } = useWindowSize();
           top: 0;
         }
 
-        &-active {
+        &:not(&-active) {
           .slider__content {
-            // transform: scaleX(1);
-            opacity: 1;
+            opacity: 0;
           }
         }
       }

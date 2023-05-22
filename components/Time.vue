@@ -1,7 +1,7 @@
 <template>
   <div class="work-time">
     <img
-      :src="getLocalUrl(`img/icon/time-${props.closed ? 'red' : 'green'}.svg`)"
+      :src="getLocalUrl(`/icons/time-${props.closed ? 'red' : 'green'}.svg`)"
       alt=""
     />
     <span

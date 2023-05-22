@@ -56,7 +56,7 @@ const cities = getCities();
       content: "";
       width: 100%;
       height: 1px;
-      background: $green-color;
+      background: $green;
       border-radius: 2px;
 
       position: absolute;
@@ -70,7 +70,7 @@ const cities = getCities();
 
   &:hover {
     span {
-      color: $green-color;
+      color: $green;
       &::after {
         transform: scaleX(1);
       }
@@ -112,13 +112,13 @@ const cities = getCities();
 //     //   background-repeat: no-repeat;
 //     //   // background-image: url("@/assets/img/icon/select.svg");
 //     //   mask: url("@/assets/img/icon/select.svg") no-repeat center;
-//     //   background-color: $secondary-color;
+//     //   background-color: $gray;
 //     //   transition: all 0.2s;
 //     // }
 
 //     &_active {
 //       &::after {
-//         background-color: $green-color;
+//         background-color: $green;
 //         transition: all 0.2s;
 //       }
 //     }
@@ -155,7 +155,7 @@ const cities = getCities();
 //     margin-bottom: 1.9rem;
 //   }
 //   &__info {
-//     color: $secondary-color;
+//     color: $gray;
 //     margin-bottom: 3.5rem;
 //   }
 //   & input {
@@ -166,7 +166,7 @@ const cities = getCities();
 //     border-radius: 10rem;
 //     margin-bottom: 5.2rem;
 //     &::placeholder {
-//       color: $secondary-color;
+//       color: $gray;
 //     }
 //   }
 //   &__overlay {
@@ -187,11 +187,11 @@ const cities = getCities();
 //   &__item {
 //     cursor: pointer;
 //     &:hover {
-//       color: $green-color;
+//       color: $green;
 //       transition: all 0.2s ease;
 //     }
 //     &.active {
-//       color: $green-color;
+//       color: $green;
 //     }
 //   }
 // }

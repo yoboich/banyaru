@@ -1,10 +1,10 @@
 <template>
   <div class="controls">
     <button>
-      <IconMore />
+      <img src="~/assets/icons/dots-gray.svg" alt="" />
     </button>
     <button>
-      <IconHeart />
+      <img src="~/assets/icons/favorite-gray.svg" alt="" />
     </button>
   </div>
 </template>
@@ -28,7 +28,7 @@
 
     &:hover {
       svg.icon-more {
-        fill: $green-color;
+        fill: $green;
       }
       svg.icon-heart {
         fill: red;

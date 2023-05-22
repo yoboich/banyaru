@@ -20,19 +20,5 @@ const { width } = useWindowSize();
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  // filter: blur(0.5rem);
-}
-
-.app {
-  background-color: $mainBackgroundColor;
-  &.mobile {
-    background: #fff;
-  }
-}
-
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
 }
 </style>

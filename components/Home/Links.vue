@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import image from "~/assets/img/promotions/4.png";
+import image from "~/assets/images/preview/links-image.png";
 
 const items = [
   {
@@ -151,11 +151,11 @@ const items = [
       grid-template-columns: 1fr;
     }
 
-    & > *:first-child {
-      order: 2;
-    }
+    // & > *:first-child {
+    //   order: 2;
+    // }
 
-    &:nth-child(2n) {
+    &:nth-child(2n + 1) {
       & > *:first-child {
         order: 2;
       }
@@ -281,7 +281,7 @@ const items = [
 //       gap: 1rem;
 //     }
 //     &__name {
-//       color: $green-color;
+//       color: $green;
 //     }
 //     &__quantity {
 //       color: #8f99ba;

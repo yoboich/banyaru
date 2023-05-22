@@ -8,7 +8,7 @@
           <div class="flex">
             <img
               :src="
-                getLocalUrl(`img/icon/star-${i !== 5 ? 'green' : 'gray'}.svg`)
+                getLocalUrl(`/icons/star-${i !== 5 ? 'green' : 'gray'}.svg`)
               "
               v-for="i of 5"
               :key="i"
@@ -18,11 +18,11 @@
           <span>112 оценок</span>
         </div>
       </div>
-      <img src="~/assets/img/order/user.png" alt="" />
+      <img src="~/assets/images/preview/user.png" alt="" />
       <span>Оцените и напишите отзыв</span>
       <div class="booking-page__reviews-rates">
         <img
-          src="~/assets/img/icon/star-gray.svg"
+          src="~/assets/icons/star-gray.svg"
           v-for="i of 5"
           :key="i"
           alt=""
@@ -35,22 +35,29 @@
       :data="{ author: 'Name', text: 'Отличные бани. Цена-качество,уровнь!' }"
     />
     <h2 class="booking-page__reviews-heading">112 отзывов</h2>
-    <div class="booking-page__reviews-items">
+    <div
+      class="booking-page__reviews-items"
+      :class="{ open: isOpen }"
+      ref="el"
+      :style="{
+        maxHeight: isOpen ? scrollHeight + 'px' : '360px',
+      }"
+    >
       <BookingReviewsItem
         v-for="review of reviews"
         :key="review.text"
         :data="review"
       />
     </div>
-    <button class="booking-page__more-btn">
+    <button class="booking-page__more-btn" @click="isOpen = !isOpen">
       <span>Смотреть все</span>
-      <img src="~/assets/img/icon/arrow-green.svg" alt="" />
+      <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
     </button>
   </div>
 </template>
 
 <script setup>
-const reviews = [
+const reviews = ref([
   {
     author: "Ангелина",
     text: "Неизменное место, всегда собираемся тут попариться с друзьями.  Если думаете идти или нет, то однозначно идите, не пожалеете. Все классно и на высшем уровне!!!",
@@ -61,7 +68,25 @@ const reviews = [
     text: "Отличные бани. Цена-качество,уровнь!",
     rating: 21,
   },
-];
+  {
+    author: "Ден",
+    text: "Неизменное место, всегда собираемся тут попариться с друзьями.  Если думаете идти или нет, то однозначно идите, не пожалеете. Все классно и на высшем уровне!!!",
+  },
+  {
+    author: "ID:42313",
+    images: true,
+    text: "Отличные бани. Цена-качество,уровнь!",
+    rating: 10,
+  },
+]);
+
+const el = ref();
+const isOpen = ref(false);
+const scrollHeight = ref(0);
+
+onMounted(() => {
+  scrollHeight.value = el.value.scrollHeight;
+});
 </script>
 
 <style lang="scss">
@@ -105,7 +130,7 @@ const reviews = [
 
     .flex {
       gap: 2px;
-      margin-top: 5px;
+      margin-bottom: 5px;
 
       img {
         width: 14px;
@@ -118,7 +143,7 @@ const reviews = [
     height: 220px;
     padding: 30px 20px;
     border-radius: 25px;
-    border: 1px solid $light-gray-color;
+    border: 1px solid $light-gray;
     position: relative;
 
     display: flex;
@@ -142,7 +167,7 @@ const reviews = [
       font-weight: 500;
       font-size: 14px;
       line-height: 18px;
-      color: $secondary-color;
+      color: $gray;
     }
   }
 
@@ -152,8 +177,16 @@ const reviews = [
   }
 
   &-items {
+    overflow: hidden;
+    transition: all 0.3s;
     & > div:last-of-type {
       margin-bottom: 15px;
+    }
+
+    &.open + .booking-page__more-btn {
+      img {
+        transform: rotate(90deg);
+      }
     }
   }
 }

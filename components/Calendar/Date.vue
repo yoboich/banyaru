@@ -130,7 +130,7 @@ const getDurationTemplate = (amount, left, free, row) => {
     <div class="duration ${amount > 2 ? "large" : ""} ${
     amount === 1 ? "colored" : ""
   }" style="left: ${left || "auto"}" data-free="${free}" data-row=${row}>
-        <img src="${getLocalUrl("img/icon/icon-moon.svg")}" alt="" />
+        <img src="${getLocalUrl("/icons/moon-black.svg")}" alt="" />
         <span class="text">Ночей</span>
         <span>${amount}</span>  
     </div>

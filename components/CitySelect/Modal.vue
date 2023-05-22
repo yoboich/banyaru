@@ -2,12 +2,18 @@
   <div class="modal city-select__modal">
     <div class="modal__overflow" @click="emits('closeModal')"></div>
     <div class="modal__content">
-      <IconClose class="modal-close" @click="emits('closeModal')" />
+      <!-- <IconClose class="modal-close" @click="emits('closeModal')" /> -->
+      <Icon
+        type="button"
+        icon="close"
+        class="modal-close"
+        @click="emits('closeModal')"
+      />
       <h1 class="modal-title">Выбор города</h1>
       <p class="modal-text">10 578 объявлений в 1 154 городах</p>
       <div class="modal__search">
         <UISearchInput v-model="searchTerm" placeholder="Поиск города" />
-        <UIButtonClose @click="resetSearch" />
+        <UIButtonClose type="button" @click="resetSearch" />
       </div>
       <div>
         <transition-group name="list" tag="div" class="modal__items">
@@ -114,7 +120,7 @@ const filteredCities = computed(() =>
       }
     }
 
-    svg.icon-close {
+    button.modal-close {
       position: absolute;
       right: 20px;
       top: 20px;
@@ -140,7 +146,7 @@ const filteredCities = computed(() =>
       font-weight: 500;
       font-size: 14px;
       line-height: 18px;
-      color: $secondary-color;
+      color: $gray;
       margin-bottom: 30px;
 
       @media (max-width: 768px) {
@@ -210,7 +216,7 @@ const filteredCities = computed(() =>
 
         &.active {
           span {
-            color: $green-color;
+            color: $green;
           }
         }
 
@@ -218,7 +224,7 @@ const filteredCities = computed(() =>
           cursor: pointer;
 
           &:hover {
-            color: $green-color;
+            color: $green;
           }
         }
       }

@@ -1,23 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: { pageTransition: { name: "page", mode: "out-in" } },
-  modules: ["@nuxt/image-edge", "@vite-pwa/nuxt"],
-  image: {
-    provider: "ipx",
-    dir: "assets/img",
-    screens: {
-      sm: 320,
-      md: 768,
-      lg: 1000,
+  app: {
+    head: {
+      title: "Баня.ру – портал о банях и саунах России",
+      link: [],
     },
   },
-
+  modules: ["@vite-pwa/nuxt"],
   pwa: {
-    // registerType: "autoUpdate",
+    registerType: "autoUpdate",
     manifest: {
-      name: "БАНЯ.РУ",
-      short_name: "БАНЯ.РУ",
-      description: "Описание",
+      name: "Баня.ру",
+      short_name: "Баня.ру",
+      description: "Баня.ру – портал о банях и саунах России",
       theme_color: "#ffffff",
       icons: [
         {
@@ -63,26 +58,15 @@ export default defineNuxtConfig({
       type: "module",
     },
   },
-
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/styles/vars.scss";',
+          additionalData: '@use "@/assets/styles/_vars.scss" as *;',
         },
       },
     },
   },
-  css: [
-    "normalize.css/normalize.css",
-    "assets/styles/main.scss",
-    "vue-multiselect/dist/vue-multiselect.css",
-    "primevue/resources/themes/lara-light-blue/theme.css",
-    "primevue/resources/primevue.css",
-    "primeicons/primeicons.css",
-  ],
-  build: {
-    transpile: ["@vuepic/vue-datepicker", "prime"],
-  },
+  css: ["normalize.css/normalize.css", "@/assets/styles/main.scss"],
   ssr: false,
 });

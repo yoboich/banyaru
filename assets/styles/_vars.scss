@@ -1,0 +1,31 @@
+$black: #3e3e51;
+$green: #32bd1b;
+$whiteSmoke: #f5f5f5;
+$gray: #8f99ba;
+$light-gray: #e1e5f2;
+
+@mixin flex-center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin img-fill-all($fit: cover) {
+  width: 100%;
+  height: 100%;
+  object-fit: $fit;
+  object-position: center;
+}
+
+@mixin bg-img-fill($size: cover, $posX: center, $posY: center) {
+  background-size: $size;
+  background-position: $posX $posY;
+  background-repeat: no-repeat;
+}
+
+@mixin bg-img-fill($size, $position, $origin) {
+  background-size: $size !important;
+  background-position: $position !important;
+  background-origin: $origin;
+  background-repeat: no-repeat !important;
+}

@@ -6,6 +6,7 @@
           v-model="searchTerm"
           placeholder="Поиск по г. Москва"
           hint
+          @focus="isSearchFocused = true"
         />
         <UIButtonClose type="button" @click="resetSearch" />
       </div>
@@ -19,7 +20,7 @@
         :key="i"
       >
         <div class="search-filter__category-image">
-          <img :src="getLocalUrl(`img/search/cat-${i}.svg`)" alt="" />
+          <img :src="getLocalUrl(`/icons/categories/cat-${i}.svg`)" alt="" />
         </div>
         <h4 class="search-filter__category-name">Категория</h4>
       </nuxt-link>
@@ -42,7 +43,7 @@
           <span>Где:</span>
           <div class="city" @click="toggleModal">
             <span>{{ selectedCity }}</span>
-            <img src="~/assets/img/icon/arrow-green.svg" alt="" />
+            <Icon tag="i" icon="arrow-left" color="green" />
           </div>
           <CitySelectModal
             v-show="isModalOpen"
@@ -58,7 +59,8 @@
             id="address"
             placeholder="Метро, район, улица, название"
           />
-          <img src="~/assets/img/search/location-green.svg" alt="" />
+          <!-- <img src="~/assets/img/search/location-green.svg" alt="" /> -->
+          <Icon tag="i" icon="geolocation" color="green" />
         </label>
         <div class="search-filter__block">
           <h2 class="search-filter__block-title">Место отдыха</h2>
@@ -76,11 +78,13 @@
               type="button"
               @click="counter > 1 ? counter-- : 1"
             >
-              <img src="~/assets/img/icon/decrement.svg" alt="" />
+              <!-- <img src="~/assets/img/icon/decrement.svg" alt="" /> -->
+              <Icon tag="i" icon="decrement" color="green" />
             </button>
             <span class="counter__count">{{ counter }}</span>
             <button class="counter__btn" type="button" @click="counter++">
-              <img src="~/assets/img/icon/increment.svg" alt="" />
+              <Icon tag="i" icon="increment" color="green" />
+              <!-- <img src="~/assets/img/icon/increment.svg" alt="" /> -->
             </button>
           </div>
         </div>
@@ -104,24 +108,32 @@
           </div>
           <div class="search-filter__block-checkbox">
             <label for="elite-apartments">
-              <img src="~/assets/img/search/crown.png" alt="" />
+              <img src="~/assets/icons/crown.png" alt="" />
               <span>Элитные аппартаменты</span>
             </label>
             <label class="checkbox-label" for="elite-apartments">
               <input type="checkbox" id="elite-apartments" />
-              <img src="~/assets/img/search/check-green.svg" alt="" />
+              <Icon tag="i" icon="filter-check" color="green" />
+              <!-- <img src="~/assets/img/search/check-green.svg" alt="" /> -->
             </label>
           </div>
         </div>
         <div class="search-filter__block search-filter__block--price">
           <h2 class="search-filter__block-title">Цена</h2>
           <button type="button" class="search-filter__price-btn">
-            <img src="~/assets/img/icon/heart-red.svg" alt="" />
+            <!-- <img src="~/assets/img/icon/heart-red.svg" alt="" /> -->
+            <Icon tag="i" icon="favorite" color="red" :hover="false" />
             <span>18+</span>
-            <img
+            <!-- <img
               class="search-filter__price-arrow"
               src="~/assets/img/icon/arrow-green.svg"
               alt=""
+            /> -->
+            <Icon
+              class="search-filter__price-arrow"
+              tag="i"
+              icon="arrow-left"
+              color="green"
             />
           </button>
           <button
@@ -129,7 +141,8 @@
             class="search-filter__price-btn search-filter__price-btn--more"
           >
             <span>Еще фильтры</span>
-            <img src="~/assets/img/icon/arrow-green.svg" alt="" />
+            <!-- <img src="~/assets/img/icon/arrow-green.svg" alt="" /> -->
+            <Icon tag="i" icon="arrow-left" color="green" />
           </button>
         </div>
         <div class="flex search-filter__controls">
@@ -154,6 +167,7 @@
 <script setup>
 const searchTerm = ref("");
 const resetSearch = () => (searchTerm.value = "");
+const isSearchFocused = useState("searchFocused", () => false);
 
 const pageTabs = ["Категории", "Фильтр"];
 const activeSwitchTab = ref(0);
@@ -220,7 +234,6 @@ const counter = ref(1);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 80px 40px;
-    overflow: auto;
     padding-bottom: 100px;
     margin-top: 180px;
 
@@ -232,7 +245,7 @@ const counter = ref(1);
   &__category {
     &:hover {
       .search-filter__category-image {
-        border-color: $green-color;
+        border-color: $green;
       }
     }
 
@@ -291,14 +304,14 @@ const counter = ref(1);
         position: absolute;
         bottom: 0;
         left: 0;
-        background: $green-color;
+        background: $green;
         transform: scaleX(0);
         transition: all 0.2s;
       }
 
       &.active,
       &:hover {
-        color: $green-color;
+        color: $green;
 
         &::after {
           transform: scaleX(1);
@@ -317,7 +330,7 @@ const counter = ref(1);
       gap: 5px;
 
       & > span {
-        color: $secondary-color;
+        color: $gray;
       }
 
       .city {
@@ -327,8 +340,12 @@ const counter = ref(1);
         display: flex;
         align-items: center;
         gap: 5px;
-        color: $green-color;
+        color: $green;
         cursor: pointer;
+
+        i {
+          transform: rotate(180deg) scale(0.7);
+        }
 
         span {
           border-bottom: 2px solid transparent;
@@ -336,7 +353,7 @@ const counter = ref(1);
 
         &:hover {
           span {
-            border-color: $green-color;
+            border-color: $green;
           }
         }
       }
@@ -355,9 +372,10 @@ const counter = ref(1);
         line-height: 20px;
         padding: 10px 0;
         border: none;
+        padding-right: 70px;
 
         &::placeholder {
-          color: $secondary-color;
+          color: $gray;
         }
 
         &:focus {
@@ -365,7 +383,7 @@ const counter = ref(1);
         }
       }
 
-      img {
+      i {
         position: absolute;
         right: 0;
         top: 50%;
@@ -441,7 +459,7 @@ const counter = ref(1);
         background: #ffffff;
         border: 2px solid #dadeec;
         border-radius: 100px;
-        color: $secondary-color;
+        color: $gray;
 
         &:focus {
           outline: none;
@@ -456,7 +474,7 @@ const counter = ref(1);
         font-weight: 500;
         font-size: 14px;
         line-height: 18px;
-        color: $secondary-color;
+        color: $gray;
       }
 
       &::after {
@@ -482,7 +500,7 @@ const counter = ref(1);
         align-items: center;
         gap: 15px;
 
-        & > img {
+        & > i {
           cursor: pointer;
         }
       }
@@ -500,7 +518,7 @@ const counter = ref(1);
         cursor: pointer;
         position: relative;
 
-        img {
+        i {
           opacity: 0;
           transition: all 0.2s;
         }
@@ -511,7 +529,7 @@ const counter = ref(1);
           position: absolute;
           z-index: -1;
 
-          &:checked + img {
+          &:checked + i {
             opacity: 1;
           }
         }
@@ -582,21 +600,22 @@ const counter = ref(1);
 
     &--more {
       justify-content: center;
-      color: $green-color;
+      color: $green;
 
-      img {
-        transform: rotate(90deg);
+      i {
+        transform: rotate(-90deg);
       }
     }
   }
 
   &__price-arrow {
     margin-left: auto;
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
 
   &__controls {
     justify-content: space-between;
+    padding-bottom: 30px;
   }
 
   &__btn {
@@ -612,7 +631,7 @@ const counter = ref(1);
       width: 40%;
       background: #fff;
       border: 2px solid #dadeec;
-      color: $green-color;
+      color: $green;
 
       &:hover {
         background: rgba(0, 0, 0, 0.05);
@@ -622,10 +641,10 @@ const counter = ref(1);
     &--show {
       width: 55%;
       color: #fff;
-      background: $green-color;
+      background: $green;
 
       &:hover {
-        background: rgba($color: $green-color, $alpha: 0.7);
+        background: rgba($color: $green, $alpha: 0.7);
       }
     }
   }

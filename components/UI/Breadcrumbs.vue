@@ -1,36 +1,74 @@
-<script lang="ts" setup>
-	defineProps(['items']);
-</script>
-
 <template>
-	<ul class="breadcrumbs">
-		<template v-for="item in items" :key="item">
-			<li class="breadcrumbs__item">{{ item }}</li>
-			<IconArrow class="breadcrumbs__arr" />
-		</template>
-	</ul>
+  <div v-if="breadcrumbs.length" class="breadcrumbs">
+    <nuxt-link class="breadcrumbs__item" to="/">
+      <Icon icon="logo-icon" :hover="false" />
+      <Icon icon="breadcrumb-arrow" :hover="false" />
+    </nuxt-link>
+    <nuxt-link
+      class="breadcrumbs__item"
+      :to="route.path"
+      v-for="(route, i) of breadcrumbs"
+      :key="route"
+    >
+      <span>{{ translatedRoutes[route.label] || "Страница" }}</span>
+      <Icon
+        v-if="i !== breadcrumbs?.length - 1"
+        icon="breadcrumb-arrow"
+        :hover="false"
+      />
+    </nuxt-link>
+  </div>
 </template>
 
+<script setup>
+const route = useRoute();
+
+const breadcrumbs = computed(() => {
+  return getBreadcrumbs(route.path);
+});
+
+function getBreadcrumbs(fullpath) {
+  const breadcrumbs = [];
+  const pathArray = fullpath.split("/");
+  let path = "";
+
+  for (let i = 0; i < pathArray.length; i++) {
+    if (pathArray[i] !== "") {
+      path += "/" + pathArray[i];
+      breadcrumbs.push({ label: pathArray[i], path: path });
+    }
+  }
+  return breadcrumbs;
+}
+
+const translatedRoutes = ref({
+  news: "Новости",
+  booking: "Бронирование",
+  chat: "Чат",
+});
+</script>
+
 <style lang="scss" scoped>
-	.breadcrumbs {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		&__item {
-			cursor: pointer;
-			font-family: 'Lato';
-			font-weight: 400;
-			font-size: 13.5px;
-			color: #8f99ba;
-		}
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-		&__arr {
-			width: 1.4rem;
-			height: 1.6rem;
+  position: absolute;
+  left: 20px;
+  top: 0;
 
-			&:last-child {
-				display: none;
-			}
-		}
-	}
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $gray;
+
+    &:first-of-type {
+      .icon:first-of-type {
+        width: 18px;
+      }
+    }
+  }
+}
 </style>

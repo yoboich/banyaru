@@ -1,6 +1,7 @@
 <template>
   <footer class="footer">
     <div class="container">
+      <UIBreadcrumbs />
       <ul class="footer__nav">
         <li
           class="footer__nav-item"
@@ -15,7 +16,9 @@
       <div class="footer__inner">
         <div class="footer__inner-col">
           <div class="flex">
-            <img src="~/assets/img/logo-gray-text.svg" alt="" />
+            <nuxt-link clas="footer__logo" to="/">
+              <img src="/logo-gray.svg" alt="" />
+            </nuxt-link>
             <p class="footer__text">
               Ведущий тематический портал о банях и саунах России, банных
               услугах и товарах* * По данным сервиса SimilarWeb на февраль 2021
@@ -42,12 +45,10 @@
             <form action="" class="footer__subscribe-form flex">
               <input
                 class="footer__subscribe-input"
-                type="text"
+                type="email"
                 placeholder="Адрес электроной почты"
               />
-              <button type="button" class="footer__subscribe-btn">
-                Подписаться
-              </button>
+              <button class="footer__subscribe-btn">Подписаться</button>
             </form>
           </div>
         </div>
@@ -66,7 +67,7 @@
             v-for="{ icon, link } of socials"
             :key="icon"
           >
-            <img :src="getLocalUrl(`img/socials/${icon}.svg`)" alt="" />
+            <img :src="getLocalUrl(`/images/socials/${icon}.svg`)" alt="" />
           </a>
         </div>
         <div class="footer__bottom-age">18+</div>
@@ -117,6 +118,91 @@ const socials = [
   margin: 15px 15px 80px;
   position: relative;
 
+  .container {
+    position: relative;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  &.mobile {
+    margin: 0;
+    border: none;
+    .container {
+      padding: 0;
+    }
+    .footer__nav {
+      display: none;
+    }
+
+    .footer__inner {
+      padding: 20px 15px 40px;
+      flex-direction: column;
+      border-bottom: 1px solid #dadeec;
+      border-radius: 25px;
+
+      &-col {
+        width: 100%;
+        max-width: none;
+        .flex {
+          align-items: center;
+          margin-top: 20px;
+
+          &:first-of-type {
+            flex-direction: column;
+
+            .footer__text {
+              margin-bottom: 60px;
+            }
+          }
+        }
+      }
+    }
+
+    .footer__subscribe-form {
+      gap: 20px;
+      .footer__subscribe-input {
+        padding: 8px 20px;
+        max-width: none;
+      }
+
+      .footer__subscribe-btn {
+        width: 100%;
+      }
+    }
+
+    .footer__bottom {
+      position: static;
+      transform: none;
+      width: 100%;
+      border: none;
+      padding-bottom: 0;
+
+      .container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+      }
+
+      &-socials {
+        margin-left: 0;
+      }
+
+      &-social {
+        width: 22px;
+        height: 22px;
+      }
+
+      &-copyright {
+        width: 100%;
+        order: 3;
+      }
+    }
+  }
+
   &__nav {
     display: flex;
     justify-content: center;
@@ -134,7 +220,7 @@ const socials = [
 
       &.active {
         .footer__nav-btn {
-          color: $green-color;
+          color: $green;
         }
 
         &::before {
@@ -146,7 +232,7 @@ const socials = [
         content: "";
         width: 100%;
         height: 3px;
-        background: $green-color;
+        background: $green;
         border-radius: 3px;
 
         position: absolute;
@@ -251,7 +337,7 @@ const socials = [
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
-    color: $secondary-color;
+    color: $gray;
   }
 
   &__subscribe {
@@ -317,7 +403,7 @@ const socials = [
       font-weight: 400;
       font-size: 14px;
       line-height: 18px;
-      color: $secondary-color;
+      color: $gray;
     }
 
     &-socials {

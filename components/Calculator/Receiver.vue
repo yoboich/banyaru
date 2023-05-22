@@ -26,6 +26,7 @@ const calculatorData = useState("calculatorData");
     border: 2px solid #dadeec;
     border-radius: 100px;
     filter: drop-shadow(0px 4px 24px rgba(166, 175, 203, 0.32));
+    background: transparent;
 
     max-width: 200px;
     padding: 8px 20px;

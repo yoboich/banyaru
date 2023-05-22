@@ -7,16 +7,16 @@
 </template>
 
 <script setup>
+const calculatorData = useState("calculatorData", () => ({
+  guests: 1,
+  receiver: "",
+}));
+
 const isTimeCalendar = ref(false);
 
 const onCalendarTypeChange = (calendarType) => {
   isTimeCalendar.value = calendarType === "time";
 };
-
-const calculatorData = useState("calculatorData", () => ({
-  guests: 1,
-  receiver: "",
-}));
 </script>
 
 <style lang="scss" scoped>

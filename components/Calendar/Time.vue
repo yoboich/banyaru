@@ -33,7 +33,7 @@
         @click="selectTime(date)"
       >
         <div class="duration" v-if="isTimer(date)">
-          <img src="~/assets/img/icon/icon-clock.svg" alt="" />
+          <img src="~/assets/icons/clock-black.svg" alt="" />
           {{ getSelectedDuration(date) }}
         </div>
         <div class="time">{{ date.format("HH:mm") }}</div>
@@ -48,6 +48,8 @@ import moment from "moment";
 definePageMeta({
   layout: "empty",
 });
+
+const emits = defineEmits(["dateSelected"]);
 
 const generateTimeDates = (year, month, day) => {
   let date = moment(new Date(year, month, day)).startOf("day");
@@ -286,6 +288,12 @@ const selectTime = (date) => {
   if (!userSelection[0]) {
     selectedDates.value[0][0] = `${dateStr}/${dateStr}`;
 
+    emits("dateSelected", {
+      dateStart: date.format("D MMM (ddd.) kk:mm"),
+      dateEnd: null,
+      duration: null,
+    });
+
     setDateBoundary(dateStr);
   } else {
     const [dateStart, dateEnd] = userSelection[0]
@@ -300,7 +308,27 @@ const selectTime = (date) => {
       const dateData = [dateStr, dateStartStr].sort();
 
       selectedDates.value[0][0] = dateData.join("/");
+
+      const mDateStart = moment(dateData[0]);
+      const mDateEnd = moment(dateData[1]);
+      const format = (d) => d.format("D MMM (ddd.) kk:mm");
+
+      const fullMinutes = Math.abs(mDateEnd.diff(mDateStart, "minutes"));
+
+      emits("dateSelected", {
+        dateStart: format(mDateStart),
+        dateEnd: format(mDateEnd),
+        duration: `${addZero(Math.floor(fullMinutes / 60))} ч. ${addZero(
+          fullMinutes % 60
+        )} мин.`,
+      });
     } else {
+      emits("dateSelected", {
+        dateStart: date.format("D MMM (ddd.) kk:mm"),
+        dateEnd: null,
+        duration: null,
+      });
+
       selectedDates.value[0][0] = `${dateStr}/${dateStr}`;
 
       setDateBoundary(dateStr);
@@ -327,13 +355,13 @@ const selectTime = (date) => {
 
     &::-webkit-scrollbar-track {
       // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background: $light-gray-color;
+      background: $light-gray;
       border-radius: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
       width: 100px;
-      background: $secondary-color;
+      background: $gray;
       border-radius: 2px;
     }
 
@@ -361,7 +389,7 @@ const selectTime = (date) => {
 
       &:hover,
       &.active {
-        background: $green-color;
+        background: $green;
         color: #fff;
 
         .calendar__days-name {
@@ -537,7 +565,7 @@ const selectTime = (date) => {
       &.last {
         &.ongoing {
           .time {
-            background: $green-color;
+            background: $green;
             color: #fff;
           }
         }

@@ -1,6 +1,6 @@
 <template>
   <div class="rate">
-    <img src="~/assets/img/icon/star-green.svg" alt="" />
+    <img src="~/assets/icons/star-green.svg" alt="" />
     <span>
       {{ props.rate }}
     </span>
@@ -27,7 +27,7 @@ const props = defineProps({
     font-size: 14px;
     line-height: 20px;
 
-    background: $green-color;
+    background: $green;
     color: #fff;
     padding: 0 5px;
     border-radius: 5px;

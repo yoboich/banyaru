@@ -9,7 +9,9 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+const isSearchFocused = useState("searchFocused");
+</script>
 
 <style lang="scss" scoped>
 .map {

@@ -24,7 +24,9 @@ const props = defineProps({
   padding: 40px 30px 40px;
 
   &-title {
-    display: none;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
   }
 
   &.mobile {

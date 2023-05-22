@@ -61,7 +61,11 @@
         v-if="activeCalendar === 'days'"
         @date-selected="onDateSelected"
       />
-      <CalendarTime :month="currentMonth" v-else />
+      <CalendarTime
+        :month="currentMonth"
+        @date-selected="onDateSelected"
+        v-else
+      />
 
       <div class="calendar__status flex">
         <div
@@ -82,12 +86,14 @@
             v-for="item of orderData"
             :key="item.label"
           >
-            <img
+            <Icon
               v-if="item.value"
               class="calendar__order-check"
-              src="~/assets/img/order/check-green.svg"
-              alt=""
+              icon="booking-check"
+              color="green"
+              :hover="false"
             />
+
             <div class="calendar__order-round" v-else></div>
             <div class="calendar__order-text">
               {{ item.label }}:
@@ -107,7 +113,7 @@
         >
       </div>
       <button class="calendar__favorite-btn">
-        <img src="~/assets/img/order/heart-green-filled.svg" alt="" />
+        <Icon tag="i" icon="heart-filled" color="green" :hover="false" />
         Добавить баню в избранное
       </button>
     </div>
@@ -190,7 +196,7 @@ const statuses = [
 const orderData = ref({
   guests: {
     label: "Гостей",
-    value: 2,
+    value: 1,
   },
   dateStart: {
     label: "Дата заезда",
@@ -204,6 +210,13 @@ const orderData = ref({
     label: "Размещение",
     value: "",
   },
+});
+
+const calculatorData = useState("calculatorData");
+
+watch(calculatorData.value, () => {
+  const data = calculatorData.value;
+  if (data.guests) orderData.value.guests.value = data.guests;
 });
 </script>
 
@@ -268,7 +281,7 @@ const orderData = ref({
       font-size: 14px;
       line-height: 18px;
 
-      color: $secondary-color;
+      color: $gray;
       text-transform: uppercase;
       background: transparent;
       cursor: pointer;
@@ -298,7 +311,7 @@ const orderData = ref({
       font-weight: 500;
       font-size: 14px;
       line-height: 18px;
-      color: $secondary-color;
+      color: $gray;
 
       &:not(:last-of-type) {
         margin-bottom: 10px;
@@ -342,7 +355,7 @@ const orderData = ref({
 
       &.ongoing {
         .calendar__status-round {
-          background: $green-color;
+          background: $green;
         }
       }
 
@@ -354,7 +367,7 @@ const orderData = ref({
 
       &.disabled {
         .calendar__status-round {
-          background: rgba($color: $secondary-color, $alpha: 0.5);
+          background: rgba($color: $gray, $alpha: 0.5);
         }
       }
     }
@@ -381,7 +394,7 @@ const orderData = ref({
     &-round {
       width: 5px;
       height: 5px;
-      background: $secondary-color;
+      background: $gray;
       border-radius: 50%;
       flex-shrink: 0;
       position: absolute;
@@ -402,7 +415,7 @@ const orderData = ref({
       font-weight: 500;
       font-size: 14px;
       line-height: 18px;
-      color: $secondary-color;
+      color: $gray;
 
       span.colored {
         color: #3e3e51;
@@ -428,13 +441,15 @@ const orderData = ref({
       line-height: 100%;
 
       &--clear {
-        padding: 15px 50px;
-        border: 2px solid $light-gray-color;
+        // padding: 15px 50px;
+        width: 200px;
+        border: 2px solid $light-gray;
         background: transparent;
         color: #3e3e51;
       }
 
       &--book {
+        width: 320px;
         background: #8e58ff;
         display: flex;
         align-items: center;
@@ -451,7 +466,7 @@ const orderData = ref({
     width: 100%;
     padding: 15px;
     background: #ffffff;
-    border: 2px solid $light-gray-color;
+    border: 2px solid $light-gray;
     border-radius: 100px;
 
     display: flex;
@@ -462,12 +477,12 @@ const orderData = ref({
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
-    color: $green-color;
+    color: $green;
     cursor: pointer;
     transition: all 0.2s;
 
     &:hover {
-      border-color: $green-color;
+      border-color: $green;
     }
   }
 }

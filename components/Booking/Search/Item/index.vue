@@ -1,6 +1,6 @@
 <template>
   <div class="item" :class="{ wide: props.wide }">
-    <Slider
+    <SwiperSlider
       v-if="props.wide"
       class="item-preview"
       navigation
@@ -10,13 +10,13 @@
       <swiper-slide v-for="i of 3" :key="i">
         <nuxt-link to="/booking/test-slug"
           ><div class="item-preview__content">
-            <img src="~/assets/img/promotions/1.jpg" alt="" /></div
+            <img src="~/assets/images/preview/slider-girl.jpg" alt="" /></div
         ></nuxt-link>
       </swiper-slide>
-    </Slider>
+    </SwiperSlider>
     <div class="item-preview" v-else>
       <nuxt-link to="/booking/test-slug">
-        <img src="~/assets/img/promotions/1.jpg" alt="" />
+        <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
       </nuxt-link>
     </div>
     <div class="item__content">
@@ -48,7 +48,7 @@
         <div class="item__contact-btns">
           <UIButton>+7 999 333 14 ...</UIButton>
           <UIButton class="chat-btn">
-            <img src="~/assets/img/icon/chat.svg" alt="" />
+            <img src="~/assets/icons/message-white.svg" alt="" />
           </UIButton>
         </div>
       </div>
@@ -83,7 +83,7 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
   .spacer {
     width: 1px;
     height: 20px;
-    background: $light-gray-color;
+    background: $light-gray;
   }
 
   &__hint {
@@ -130,7 +130,7 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
         }
       }
 
-      & .slider-arrow {
+      & .slider__arrow {
         &.prev {
           left: 10px;
         }
@@ -240,7 +240,7 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
         padding-right: 8px;
         margin-right: 8px;
 
-        border-right: 1px solid $light-gray-color;
+        border-right: 1px solid $light-gray;
       }
 
       .location {

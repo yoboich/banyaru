@@ -1,7 +1,7 @@
 <template>
   <button class="booking-tag">
     <span>{{ name }}</span>
-    <IconClose />
+    <img class="icon-close" src="~/assets/icons/close-white.svg" alt="" />
   </button>
 </template>
 
@@ -35,31 +35,26 @@ defineProps({
   transition: all 0.2s;
   cursor: pointer;
 
-  svg.icon-close {
+  .icon-close {
     // display: none;
     width: 0;
+    transition: all 0.2s;
   }
 
   &:hover {
     color: #f1f3f9;
-    background: #32bd1b;
-    border-color: #32bd1b;
+    background: $green;
+    border-color: $green;
   }
 
   &.active {
-    background: #32bd1b;
-    border-color: #32bd1b;
+    background: $green;
+    border-color: $green;
     color: #f1f3f9;
     padding: 6px 10px;
 
-    svg.icon-close {
-      stroke: #fff;
-      //   display: block;
+    .icon-close {
       width: 15px;
-    }
-
-    &:hover {
-      opacity: 0.8;
     }
   }
 }

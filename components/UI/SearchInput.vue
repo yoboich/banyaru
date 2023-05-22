@@ -10,13 +10,15 @@
       type="text"
       :placeholder="props.placeholder"
       :value="props.modelValue"
+      @focus="emits('focus')"
+      @blur="emits('blur')"
     />
-    <button v-if="props.hint" class="hint-btn">плюс</button>
+    <button type="button" v-if="props.hint" class="hint-btn">плюс</button>
   </label>
 </template>
 
 <script setup>
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(["update:modelValue", "focus", "blur"]);
 
 const props = defineProps({
   hint: {
@@ -66,6 +68,7 @@ const props = defineProps({
   input {
     border: 2px solid #dadeec;
     border-radius: 100px;
+    transition: all 0.2s;
 
     width: 100%;
     padding: 15px 25px;

@@ -11,7 +11,9 @@
       <div class="flex">
         <div class="booking-page__review-rate">
           <img
-            :src="getLocalUrl(`img/icon/star${i !== 5 ? '-green' : ''}.svg`)"
+            :src="
+              getLocalUrl(`/icons/star-${i !== 5 ? 'green' : 'lightgray'}.svg`)
+            "
             v-for="i of 5"
             :key="i"
             alt=""
@@ -26,7 +28,7 @@
 
       <div class="booking-page__review-images" v-if="props.data.images">
         <div class="booking-page__review-image" v-for="i of 3" :key="i">
-          <img src="~/assets/img/order/room.png" alt="" />
+          <img src="~/assets/images/preview/room.jpg" alt="" />
         </div>
       </div>
 
@@ -34,9 +36,11 @@
         class="booking-page__review-rating"
         v-if="!props.moderation && props.data.rating"
       >
-        <img src="~/assets/img/order/like-green.svg" />
+        <!-- <img src="~/assets/img/order/like-green.svg" /> -->
+        <Icon class="booking-page__review-like" icon="like" />
         <span>{{ props.data.rating }}</span>
-        <img src="~/assets/img/order/like-gray.svg" />
+        <Icon class="booking-page__review-like" icon="like" />
+        <!-- <img src="~/assets/img/order/like-gray.svg" /> -->
       </div>
 
       <UIButton class="booking-page__review-btn" v-if="props.moderation"
@@ -89,14 +93,14 @@ const props = defineProps({
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    color: $secondary-color;
+    color: $gray;
   }
 
   &-text {
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
-    color: $secondary-color;
+    color: $gray;
   }
 
   &-rate {
@@ -109,11 +113,13 @@ const props = defineProps({
   }
 
   &-btn {
-    padding: 5px 15px !important;
+    width: 130px;
+    padding: 5px 10px;
+    border-color: $gray;
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
-    background: $secondary-color;
+    background: $gray;
     pointer-events: none;
 
     margin-top: 15px;
@@ -149,16 +155,13 @@ const props = defineProps({
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
-    color: $green-color;
+    // color: $green;
     margin-top: 10px;
+  }
 
-    img {
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        opacity: 0.7;
-      }
+  &-like {
+    &:last-of-type {
+      transform: rotate(180deg);
     }
   }
 }

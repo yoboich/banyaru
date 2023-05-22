@@ -5,7 +5,7 @@
       <span>{{ props.place }}</span>
     </div>
     <div class="location-time">
-      <img src="~/assets/img/icon/human_run.svg" alt="" />
+      <img src="~/assets/icons/human-gray.svg" alt="" />
       <span>{{ props.time }}</span>
     </div>
   </div>
@@ -44,7 +44,7 @@ const props = defineProps({
     .dot {
       width: 12px;
       height: 12px;
-      background: $secondary-color;
+      background: $gray;
       border-radius: 50%;
     }
   }
@@ -58,7 +58,7 @@ const props = defineProps({
       font-weight: 500;
       font-size: 16px;
       line-height: 18px;
-      color: $secondary-color;
+      color: $gray;
     }
   }
 }

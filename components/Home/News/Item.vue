@@ -6,12 +6,12 @@
       </h1>
       <div class="news__item-stats">
         <div class="reviews">
-          <IconReview class="grey" />
+          <img src="~/assets/icons/comment-gray.svg" alt="" />
           <span>2</span>
         </div>
         <div class="spacer"></div>
         <div class="views">
-          <IconEye class="grey" />
+          <img src="~/assets/icons/views-gray.svg" alt="" />
           <span>124</span>
         </div>
         <div class="spacer"></div>
@@ -20,7 +20,7 @@
     </div>
     <nuxt-link to="#">
       <div class="news__item-image">
-        <img src="~/assets/img/promotions/2.jpg" alt="" />
+        <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
       </div>
     </nuxt-link>
     <div class="news__item-description">
@@ -29,13 +29,15 @@
     <div class="news__item-footer">
       <nuxt-link to="#">
         <div class="author">
-          <img src="~/assets/img/banyaru.png" alt="" />
+          <img src="~/assets/images/preview/banyaru.png" alt="" />
           <span>Баня.ру</span>
         </div>
       </nuxt-link>
       <div class="likes">
         <span>3</span>
-        <IconLike class="hover-green" />
+        <button class="likes__btn">
+          <img src="~/assets/icons/like-gray.svg" alt="" />
+        </button>
       </div>
     </div>
   </div>
@@ -154,10 +156,15 @@
         line-height: 18px;
       }
 
-      svg {
+      &__btn {
+        @include bg-img-fill(auto, auto, content-box);
+        background-color: transparent;
+        cursor: pointer;
+
         &:hover {
-          path {
-            fill: #32bd1b !important;
+          background-image: url(~/assets/icons/like-green.svg);
+          img {
+            opacity: 0;
           }
         }
       }

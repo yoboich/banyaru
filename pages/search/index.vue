@@ -6,15 +6,13 @@
 
 <script setup>
 definePageMeta({
-  layout: "map-page",
+  layout: "map",
 });
-
-useHead({ title: "Баня.ру – портал о банях и саунах России" });
 </script>
 
 <style lang="scss">
 .search {
   height: 100%;
-  padding: 20px 25px;
+  padding: 0 25px;
 }
 </style>

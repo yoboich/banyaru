@@ -1,15 +1,22 @@
-<script setup>
-import { useWindowSize } from "@vueuse/core";
-const { width } = useWindowSize();
-
-const isMobile = computed(() => width.value <= 1000);
-
-useHead({ title: "Баня.ру – портал о банях и саунах России" });
-</script>
-
 <template>
   <div>
-    <div v-if="isMobile">
+    <div class="container" v-if="width > 1000">
+      <HomeSlider />
+      <section class="home__content">
+        <div class="home__content-column">
+          <BookingSearchForm />
+        </div>
+        <div class="home__content-column">
+          <HomeMap />
+          <HomeLinks />
+          <HomeFilterSliderPlace title="Популярные бани" />
+          <HomeFilterSliderPlace title="Популярные услуги" ads />
+          <HomeFilterSliderRecentPlace title="Недавно вы смотрели" />
+          <HomeNews />
+        </div>
+      </section>
+    </div>
+    <!-- <div v-if="isMobile">
       <TheHeaderNav class="mobile" />
       <div class="container container-mobile">
         <HomeSlider />
@@ -44,39 +51,23 @@ useHead({ title: "Баня.ру – портал о банях и саунах �
           <HomeNews />
         </div>
       </main>
-
-      <!-- <HomeMap /> -->
-      <!-- <HomeDiscount /> -->
-      <!-- <HomePopular /> -->
-      <!-- <HomePremium /> -->
-      <!-- <HomeInfo /> -->
-    </div>
-
-    <!-- <div v-if="false">
-    <HomeMobileTop />
-    <div class="add-advert">+ Разместить объявление</div>
-    <HomeMobileSearch />
-    <HomeMobileCatalog />
-    <HomeMobileServices />
-    <HomeMobileAdvert />
-    <HomeMobileLinks />
-    <HomeMobileAdvertsLocation />
-    <HomeMobileFooter />
-  </div> -->
+    </div> -->
   </div>
 </template>
 
+<script setup>
+import { useWindowSize } from "@vueuse/core";
+const { width } = useWindowSize();
+</script>
+
 <style lang="scss" scoped>
-.add-advert {
-  font-weight: 700;
-  font-size: 1.6rem;
-  line-height: 2rem;
-  margin-top: 5rem;
-  padding: 0 2rem;
-  color: $green-color;
-}
-// .mobile-container {
+// .add-advert {
+//   font-weight: 700;
+//   font-size: 1.6rem;
+//   line-height: 2rem;
+//   margin-top: 5rem;
 //   padding: 0 2rem;
+//   color: $green;
 // }
 
 .container-mobile {
@@ -98,6 +89,11 @@ useHead({ title: "Баня.ру – портал о банях и саунах �
     flex-direction: column;
     gap: 20px;
     min-width: 0;
+    position: relative;
+
+    &:first-of-type {
+      padding-top: 15px;
+    }
   }
 }
 </style>

@@ -1,0 +1,256 @@
+<template>
+  <section class="news-item">
+    <div class="container">
+      <div class="news-item__col">
+        <div class="news-item__row">
+          <div class="news-item__header">
+            <h1 class="news-item__title">Новые бани в Москве</h1>
+            <div class="news-item__details">
+              <span class="news-item__comments">
+                <Icon icon="comment" :hover="false" />
+                2
+              </span>
+              <span class="news-item__views">
+                124
+                <Icon icon="views" :hover="false" />
+              </span>
+              <span class="news-item__date">12.12.2020</span>
+            </div>
+          </div>
+          <img
+            src="~/assets/images/preview/room.jpg"
+            alt=""
+            class="news-item__image"
+          />
+          <div class="news-item__description">
+            <h3>Основные выводы</h3>
+            <p>
+              Существует несколько типов криптокошельков, включая аппаратные,
+              программные и кастодиальные. При выборе кошелька следует учитывать
+              четыре ключевых фактора: безопасность, удобство, совместимость и
+              возможности контроля. Всегда проводите собственное исследование.
+              Остерегайтесь подозрительных платформ и выбирайте надежные
+              кошелькиљ
+            </p>
+            <p>
+              Всем, кто работает с криптовалютой, особенно новичкам, следует
+              разобраться, какие способы ее хранения доступны. Кошельки можно
+              разделить на аппаратные, программные и кастодиальные. Какой же
+              выбрать? Мы в Binance считаем, что на этот вопрос нет однозначного
+              ответа. Каждый из кошельков имеет свои преимущества и недостатки.
+              Например, многие наши пользователи предпочитают удобство
+              централизованной биржи, в то время как другим лучше подходит
+              автономное решение, защищенное от кибератак — так называемый
+              аппаратный кошелек.
+            </p>
+          </div>
+          <div class="news-item__footer">
+            <div class="news-item__author">
+              <span>Автор: </span>
+              <nuxt-link class="news-item__username" to="#">
+                <span>Баня.ру</span>
+                <img
+                  class="news-item__avatar"
+                  src="~/assets/images/preview/user.png"
+                  alt=""
+                />
+              </nuxt-link>
+            </div>
+            <div class="flex">
+              <div class="news-item__share">
+                <span>Поделиться:</span>
+                <div class="news-item__socials">
+                  <a
+                    href="#"
+                    class="news-item__social"
+                    v-for="social of socials"
+                    :key="social"
+                  >
+                    <Icon tag="i" :icon="social" />
+                  </a>
+                </div>
+              </div>
+              <div class="news-item__like">
+                <span>3</span>
+                <Icon icon="like" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="news-item__row">
+          <NewsComments />
+        </div>
+      </div>
+      <div class="news-item__col">
+        <h1 class="news-item__suptitle">Популярные темы</h1>
+        <NewsItem v-for="i of 2" :key="i" />
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+definePageMeta({
+  layout: "header-only",
+});
+
+const socials = ref(["twitter", "facebook", "vk", "telegram"]);
+</script>
+
+<style lang="scss" scoped>
+.news-item {
+  .container {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    gap: 20px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__details {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      color: $gray;
+
+      &:not(:last-of-type) {
+        border-right: 1px solid rgba($color: $gray, $alpha: 0.2);
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 420px;
+    border-radius: 25px;
+    object-fit: cover;
+    margin-bottom: 40px;
+  }
+
+  &__description {
+    margin-bottom: 70px;
+
+    h3 {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 20px;
+      margin: 0 0 20px;
+    }
+
+    p {
+      color: $gray;
+
+      &:not(:last-of-type) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  &__row {
+    padding: 40px;
+    background: #fff;
+    border-radius: 25px;
+  }
+
+  .news-item__suptitle,
+  .news-item__title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
+  }
+
+  .news-item__suptitle {
+    margin-bottom: 20px;
+  }
+
+  &__col {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__col:last-of-type {
+    padding: 25px 20px;
+    background: #fff;
+    border-radius: 25px;
+
+    .news__item {
+      padding: 20px 0px;
+      border-bottom: 1px solid rgba($color: $gray, $alpha: 0.2);
+
+      &:first-of-type {
+        padding-top: 0;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__author,
+  &__author a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__author > span {
+    color: $gray;
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .flex {
+    align-items: center;
+  }
+
+  &__share {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+
+    span {
+      color: $gray;
+    }
+  }
+
+  &__socials {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__like {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid $light-gray;
+      padding: 15px;
+    }
+  }
+}
+</style>
