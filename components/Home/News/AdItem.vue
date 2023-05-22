@@ -1,6 +1,6 @@
 <template>
   <nuxt-link to="#" class="news__ad-item">
-    <img src="~/assets/img/promotions/ad.png" alt="" />
+    <img src="~/assets/images/preview/ad.png" alt="" />
   </nuxt-link>
 </template>
 

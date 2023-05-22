@@ -20,7 +20,8 @@
       <h2 class="booking-page__price">
         от 2 000 ₽/час
         <div class="booking-page__price-action">
-          <img src="~/assets/img/icon/arrow-green.svg" alt="" />
+          <!-- <img src="~/assets/img/icon/arrow-green.svg" alt="" /> -->
+          <Icon icon="arrow-left" color="green" :hover="false" />
         </div>
       </h2>
       <ul class="booking-page__tags">
@@ -30,8 +31,9 @@
       </ul>
       <div class="flex">
         <h3 class="booking-page__place">
-          <span>Сауна цветы</span>
-          <img src="~/assets/img/icon/info.svg" alt="" />
+          Сауна цветы
+          <!-- <img src="~/assets/img/icon/info.svg" alt="" /> -->
+          <Icon icon="info" color="black" :hover="false" />
         </h3>
         <Rate rate="4.2" />
         <Reviews text="122 отзыва" />

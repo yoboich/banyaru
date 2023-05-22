@@ -40,12 +40,12 @@
           <button class="booking-page__announce-btn">Объявление</button>
           <div class="booking-page__announce-controls">
             <button class="booking-page__announce-control">
-              <img src="~/assets/img/icon/arrow-green.svg" alt="" />
+              <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
               Предыдущее
             </button>
             <button class="booking-page__announce-control">
               Следующее
-              <img src="~/assets/img/icon/arrow-green.svg" alt="" />
+              <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
             </button>
           </div>
         </div>
@@ -176,7 +176,7 @@ const infoItems = ref([
         // height: 8px;
         object-fit: contain;
         object-position: center;
-        transform: rotate(90deg);
+        transform: rotate(-90deg);
       }
     }
   }
@@ -437,10 +437,8 @@ const infoItems = ref([
       font-size: 16px;
       line-height: 18px;
 
-      &:first-of-type {
-        img {
-          transform: rotate(180deg);
-        }
+      &:last-of-type i {
+        transform: rotate(180deg);
       }
     }
   }

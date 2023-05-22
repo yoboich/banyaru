@@ -1,6 +1,6 @@
 <template>
   <div @click="toggleModal" class="city-select">
-    <img src="@/assets/img/icon/geo.svg" alt="" />
+    <!-- <img src="@/assets/icons/geo.svg" alt="" /> -->
     <span>{{ selectedCity }}</span>
   </div>
   <CitySelectModal
