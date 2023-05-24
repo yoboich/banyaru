@@ -3,16 +3,13 @@
     <ul class="header__nav-list">
       <li
         class="header__nav-item"
-        :class="[
-          `header__nav-item--${key}`,
-          isRoute(routeData.link) ? 'active' : '',
-        ]"
-        v-for="(routeData, key) of routes"
+        :class="[`item-${key}`, isRoute(link) ? 'active' : '']"
+        v-for="({ icon, link }, key) of routes"
         :key="key"
       >
         <button class="header__nav-btn">
-          <nuxt-link :to="routeData.link" class="header__nav-link">
-            <img :src="routeData.iconPath" alt="" />
+          <nuxt-link :to="link" class="header__nav-link">
+            <IconBase :icon="icon" color="gray" />
           </nuxt-link>
         </button>
       </li>
@@ -25,23 +22,23 @@ const route = useRoute();
 
 const routes = {
   home: {
-    iconPath: getLocalUrl("/icons/logo-icon-gray.svg"),
+    icon: "logo",
     link: "/",
   },
   search: {
-    iconPath: getLocalUrl("/icons/search-gray.svg"),
+    icon: "search",
     link: "/search",
   },
   favorite: {
-    iconPath: getLocalUrl("/icons/nav-favorite-gray.svg"),
+    icon: "nav-favorite",
     link: "/favorite",
   },
   chat: {
-    iconPath: getLocalUrl("/icons/chat-gray.svg"),
+    icon: "chat",
     link: "/chat",
   },
   profile: {
-    iconPath: getLocalUrl("/icons/profile-gray.svg"),
+    icon: "profile",
     link: "/profile",
   },
 };
@@ -60,15 +57,6 @@ const isRoute = (name) => {
 </script>
 
 <style lang="scss" scoped>
-@mixin setImage($path) {
-  &:hover,
-  &.active {
-    button {
-      background: url($path);
-    }
-  }
-}
-
 .header__nav {
   background: #ffffff;
   box-shadow: 0px 6px 50px rgba(166, 175, 203, 0.28);
@@ -126,40 +114,24 @@ const isRoute = (name) => {
     cursor: pointer;
     transition: all 0.2s;
 
-    &--home {
-      @include setImage("~/assets/icons/logo-icon-white.svg");
-    }
-
-    &--search {
-      @include setImage("~/assets/icons/search-white.svg");
-    }
-
-    &--favorite {
-      @include setImage("~/assets/icons/nav-favorite-white.svg");
-    }
-
-    &--chat {
-      @include setImage("~/assets/icons/chat-white.svg");
-    }
-
-    &--profile {
-      @include setImage("~/assets/icons/profile-white.svg");
+    &.item-home {
+      svg {
+        max-width: 28px;
+      }
     }
 
     &:hover,
     &.active {
       background: $green;
 
-      img {
-        opacity: 0;
+      svg {
+        --icon-color: #{white};
       }
     }
   }
 
   &-btn {
     background: transparent;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
   }
 
   &-link,

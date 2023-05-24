@@ -4,7 +4,7 @@
       class="booking-page__action booking-page__action--back"
       to="/booking"
     >
-      <Icon tag="i" icon="arrow-left" />
+      <IconBase icon="arrow-left" color="gray" />
     </nuxt-link>
     <div class="booking-page__preview">
       <BookingPreviewImage />
@@ -19,9 +19,15 @@
       </div>
     </div>
     <div class="booking-page__actions">
-      <Icon class="booking-page__action" icon="share" color="green" />
-      <Icon class="booking-page__action" icon="favorite" color="green" />
-      <Icon class="booking-page__action" icon="more" color="green" />
+      <button class="booking-page__action">
+        <IconBase icon="share" color="green" />
+      </button>
+      <button class="booking-page__action">
+        <IconBase icon="favorite" color="green" />
+      </button>
+      <button class="booking-page__action btn-more">
+        <IconBase icon="more" color="green" />
+      </button>
     </div>
   </div>
 </template>
@@ -96,11 +102,19 @@
     background: transparent;
     padding: 0;
     cursor: pointer;
-    height: 24px;
-    aspect-ratio: 1;
+
+    &.btn-more {
+      max-width: 24px;
+    }
+    // height: 24px;
+    // aspect-ratio: 1;
 
     &--back {
-      height: 24px;
+      &:hover {
+        svg {
+          --icon-color: #{$green};
+        }
+      }
     }
   }
 }

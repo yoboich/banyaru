@@ -7,12 +7,12 @@
             <h1 class="news-item__title">Новые бани в Москве</h1>
             <div class="news-item__details">
               <span class="news-item__comments">
-                <Icon icon="comment" :hover="false" />
+                <IconBase icon="comment" color="gray" />
                 2
               </span>
               <span class="news-item__views">
                 124
-                <Icon icon="views" :hover="false" />
+                <IconBase icon="views" color="gray" />
               </span>
               <span class="news-item__date">12.12.2020</span>
             </div>
@@ -66,13 +66,15 @@
                     v-for="social of socials"
                     :key="social"
                   >
-                    <Icon tag="i" :icon="social" />
+                    <IconBase :icon="social" color="gray" />
                   </a>
                 </div>
               </div>
               <div class="news-item__like">
                 <span>3</span>
-                <Icon icon="like" />
+                <button class="news-item__like-btn">
+                  <IconBase icon="like" />
+                </button>
               </div>
             </div>
           </div>
@@ -119,7 +121,7 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
     & > span {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 10px;
       padding: 0 10px;
       color: $gray;
 
@@ -239,17 +241,35 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
     gap: 15px;
   }
 
+  &__social {
+    &:hover {
+      svg {
+        --icon-color: #{$green};
+      }
+    }
+  }
+
   &__like {
     display: flex;
     align-items: center;
     gap: 10px;
 
-    .icon {
+    &-btn {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       border: 2px solid $light-gray;
       padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: $green;
+
+        svg {
+          --icon-color: white;
+        }
+      }
     }
   }
 }

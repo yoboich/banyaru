@@ -113,7 +113,7 @@
         >
       </div>
       <button class="calendar__favorite-btn">
-        <Icon tag="i" icon="heart-filled" color="green" :hover="false" />
+        <IconBase icon="favorite-filled" color="green" />
         Добавить баню в избранное
       </button>
     </div>

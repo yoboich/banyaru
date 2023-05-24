@@ -1,13 +1,9 @@
 <template>
   <dialog class="gallery" :open="open" ref="gallery">
     <header class="gallery__header">
-      <Icon
-        class="gallery__btn"
-        icon="gallery-close"
-        color="white"
-        hover-color="green"
-        @click="close"
-      />
+      <button class="gallery__btn" @click="close">
+        <IconBase icon="gallery-close" color="white" />
+      </button>
       <div class="gallery__preview">
         <BookingPreviewImage />
         <div class="gallery__preview-info">
@@ -21,21 +17,14 @@
           <span class="gallery__last-online">был(а) 15 мин. назад</span>
         </div>
       </div>
-      <Icon
-        class="gallery__btn"
-        icon="more"
-        color="white"
-        hover-color="green"
-        @click="isReport = true"
-      />
+      <button class="gallery__btn btn-more" @click="isReport = true">
+        <IconBase icon="more" color="white" @click="close" />
+      </button>
     </header>
     <dialog ref="reportDialog" class="report" :open="isReport">
-      <Icon
-        class="report__close-btn"
-        icon="close"
-        :hover="false"
-        @click="isReport = false"
-      />
+      <button class="report__close-btn" @click="isReport = false">
+        <IconBase icon="close" />
+      </button>
       <h1 class="report__title">Раскажите, в чем заключается проблема.</h1>
       <ul class="report__list">
         <li
@@ -65,31 +54,31 @@
     </SwiperSlider>
     <div class="gallery__actions">
       <button class="gallery__action-btn">
-        <Icon tag="i" icon="phone" color="white" :hover="false" />
+        <IconBase icon="phone" color="white" />
         <span>+7 999 333 14 ...</span>
       </button>
       <button class="gallery__action-btn">
-        <Icon tag="i" icon="message" color="white" :hover="false" />
+        <IconBase icon="message" color="white" />
         <span>Чат</span>
       </button>
       <button class="gallery__action-btn">
-        <Icon tag="i" icon="booking" color="white" :hover="false" />
+        <IconBase icon="booking" color="white" />
         Расчет брони
       </button>
       <button class="gallery__action-btn">
-        <Icon tag="i" icon="share" color="white" :hover="false" />
+        <IconBase icon="share" color="white" />
         Отправить
       </button>
       <button class="gallery__action-btn">
-        <Icon tag="i" icon="route" color="white" :hover="false" />
+        <IconBase icon="route" color="white" />
         Маршрут
       </button>
       <button class="gallery__action-btn">
-        <Icon tag="i" icon="car" color="white" :hover="false" />
+        <IconBase icon="car" color="white" />
         Такси
       </button>
-      <button class="gallery__action-btn gallery__action-btn--favorite">
-        <Icon tag="i" icon="favorite" color="white" :hover="false" />
+      <button class="gallery__action-btn btn-favorite">
+        <IconBase icon="favorite" color="white" />
       </button>
     </div>
   </dialog>
@@ -144,6 +133,13 @@ const reportItems = ref([
     position: absolute;
     right: 20px;
     top: 20px;
+    cursor: pointer;
+
+    &:hover {
+      svg {
+        --icon-color: #{$red};
+      }
+    }
   }
 
   &__title {
@@ -197,12 +193,29 @@ const reportItems = ref([
   }
 
   &__btn {
-    padding: 20px;
+    @include flex-center-all;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     background: rgba($color: #000000, $alpha: 0.6);
     box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+    cursor: pointer;
+
+    &:hover {
+      svg {
+        --icon-color: #{$green};
+      }
+    }
+
+    &.btn-more {
+      svg {
+        max-width: 30px;
+      }
+    }
+
+    svg {
+      max-width: 20px;
+    }
 
     &:last-of-type {
       padding: 15px;
@@ -255,6 +268,7 @@ const reportItems = ref([
   }
 
   &__action-btn {
+    height: 50px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -273,9 +287,11 @@ const reportItems = ref([
       box-shadow: 0px 4px 21px rgba(143, 153, 186, 0.7);
     }
 
-    &--favorite {
+    &.btn-favorite {
+      @include flex-center-all;
       border-radius: 50%;
-      padding: 10px;
+      padding: 0;
+      width: 50px;
     }
 
     i {

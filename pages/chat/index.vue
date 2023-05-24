@@ -20,11 +20,7 @@
         </div>
         <div class="chat__sidebar-items">
           <div class="chat__help">
-            <img
-              src="~/assets/icons/logo-icon-green.svg"
-              alt=""
-              class="chat__help-image"
-            />
+            <IconBase icon="logo" color="green" />
             <div class="chat__help-info">
               <h3 class="chat__help-title">Поддержка баня.ру</h3>
               <p class="chat__help-text">
@@ -47,7 +43,9 @@
               <span class="chat__content-status">в сети</span>
             </div>
           </div>
-          <Icon icon="phone" color="green" :hover="false" />
+          <button class="btn-call">
+            <IconBase icon="phone" color="green" />
+          </button>
         </div>
         <div class="chat__main">
           <span class="chat__main-date">21.01.23</span>
@@ -121,18 +119,20 @@
                 </div>
               </div>
               <button class="chat__inputbox-btn">
-                <img src="~/assets/icons/chat-arrow-down-gray.svg" alt="" />
+                <IconBase icon="chat-arrow-down" color="gray" />
                 <div class="chat__inputbox-unread">12</div>
               </button>
             </div>
             <div class="chat__inputbox-content">
               <label for="file-input" class="chat__inputbox-file">
                 <input id="file-input" type="file" />
-                <img src="~/assets/icons/clip-gray.svg" alt="" />
+                <IconBase icon="clip" color="gray" />
               </label>
               <label for="" class="chat__inputbox-input">
                 <input type="text" placeholder="Написать сообщение" />
-                <Icon icon="camera" color="green" />
+                <button class="btn-camera">
+                  <IconBase icon="camera" color="gray" />
+                </button>
               </label>
             </div>
           </div>
@@ -201,6 +201,11 @@ const changeTab = (i) => {
 
     &-text {
       color: $gray;
+    }
+
+    svg {
+      width: 60px !important;
+      height: 60px !important;
     }
   }
 
@@ -290,6 +295,10 @@ const changeTab = (i) => {
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba($color: $gray, $alpha: 0.2);
+
+      .btn-call {
+        cursor: pointer;
+      }
     }
 
     &-info {
@@ -412,10 +421,14 @@ const changeTab = (i) => {
 
       &:hover {
         background: rgba($color: $light-gray, $alpha: 0.7);
+
+        svg {
+          --icon-color: #{$green};
+        }
       }
 
-      img {
-        transform: translateY(15%);
+      svg {
+        transform: translateY(20%);
       }
     }
 
@@ -450,13 +463,20 @@ const changeTab = (i) => {
 
     &-content {
       display: flex;
-      align-items: center;
+      // align-items: center;
       gap: 10px;
     }
 
     &-file {
+      @include flex-center-all;
       position: relative;
       cursor: pointer;
+
+      &:hover {
+        svg {
+          --icon-color: #{$green};
+        }
+      }
 
       input {
         display: none;
@@ -475,11 +495,18 @@ const changeTab = (i) => {
         padding: 10px 60px 10px 10px;
       }
 
-      button {
+      .btn-camera {
         position: absolute;
         top: 50%;
         right: 20px;
         transform: translateY(-50%);
+        cursor: pointer;
+
+        &:hover {
+          svg {
+            --icon-color: #{$green};
+          }
+        }
       }
     }
   }

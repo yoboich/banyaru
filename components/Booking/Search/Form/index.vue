@@ -9,11 +9,9 @@
         <div class="booking-search__filter-info">
           <div class="booking-search__filter-found">
             <span>1 936 объявлений</span>
-            <img
-              class="booking-search__filter-sort"
-              src="~/assets/icons/sort-gray.svg"
-              alt=""
-            />
+            <button class="booking-search__sort-btn">
+              <IconBase icon="sort" color="gray" />
+            </button>
           </div>
           <nuxt-link class="booking-search__filter-more" to="/search/filter">
             <div
@@ -22,23 +20,21 @@
             >
               {{ selectedFilters.length }}
             </div>
-            <img src="~/assets/icons/filter-gray.svg" alt="" />
+            <IconBase icon="filter" color="black" />
           </nuxt-link>
         </div>
         <div
           class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
           data-filter="first"
         >
-          <button
-            class="booking-search__filter-btn booking-search__filter-btn--slide-left"
-          >
-            <img src="~/assets/icons/arrow-left-gray.svg" alt="" />
+          <button class="booking-search__filter-btn slide-left">
+            <IconBase icon="arrow-left" color="gray" />
           </button>
           <button
-            class="booking-search__filter-btn booking-search__filter-btn--clear"
+            class="booking-search__filter-btn clear"
             @click="resetFilters"
           >
-            <img src="~/assets/icons/close-gray.svg" alt="" />
+            <IconBase icon="close" color="gray" />
           </button>
           <BookingSearchFormTag
             v-for="(tagName, i) of BookingSearchTagsFirst"
@@ -144,6 +140,16 @@ const toggleTag = (tagName) => {
     margin-bottom: 20px;
   }
 
+  &__sort-btn {
+    cursor: pointer;
+
+    &:hover {
+      svg {
+        --icon-color: #{$green};
+      }
+    }
+  }
+
   &__filter {
     &-info {
       display: flex;
@@ -151,10 +157,6 @@ const toggleTag = (tagName) => {
       align-items: center;
 
       margin-bottom: 20px;
-    }
-
-    &-sort {
-      cursor: pointer;
     }
 
     &-found {
@@ -234,29 +236,25 @@ const toggleTag = (tagName) => {
 
       cursor: pointer;
 
-      &--slide-left {
-        @include bg-img-fill(11px 18px, 9px, content-box);
+      // &--slide-left {
+      // }
 
-        img {
-          transform: translateX(-10%);
+      &.slide-left {
+        &:hover {
+          svg {
+            --icon-color: white;
+          }
         }
 
-        &:hover {
-          background-image: url(~/assets/icons/arrow-left-white.svg);
-          img {
-            opacity: 0;
-          }
+        svg {
+          transform: translateX(-10%);
         }
       }
 
-      &--clear {
+      &.clear {
         &:hover {
-          @include bg-img-fill(15px 16px, center, content-box);
-
-          background-image: url(~/assets/icons/close-white.svg);
-
-          img {
-            opacity: 0;
+          svg {
+            --icon-color: white;
           }
         }
       }

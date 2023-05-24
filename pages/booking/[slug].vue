@@ -40,12 +40,12 @@
           <button class="booking-page__announce-btn">Объявление</button>
           <div class="booking-page__announce-controls">
             <button class="booking-page__announce-control">
-              <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
+              <IconBase icon="arrow-left" color="green" />
               Предыдущее
             </button>
             <button class="booking-page__announce-control">
               Следующее
-              <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
+              <IconBase icon="arrow-left" color="green" />
             </button>
           </div>
         </div>
@@ -139,7 +139,7 @@ const infoItems = ref([
 
     transition: all 0.2s;
 
-    img {
+    svg {
       transform: rotate(-90deg);
     }
   }
@@ -167,15 +167,7 @@ const infoItems = ref([
       transition: all 0.2s;
       cursor: pointer;
 
-      &:hover {
-        background: rgba($color: #000000, $alpha: 0.05);
-      }
-
-      img {
-        // width: 14px;
-        // height: 8px;
-        object-fit: contain;
-        object-position: center;
+      svg {
         transform: rotate(-90deg);
       }
     }
@@ -288,7 +280,7 @@ const infoItems = ref([
 
       &.open {
         & + .booking-page__more-btn {
-          img {
+          svg {
             transform: rotate(90deg);
           }
         }
@@ -359,7 +351,7 @@ const infoItems = ref([
       transition: all 0.3s;
 
       &.open + .booking-page__more-btn {
-        img {
+        svg {
           transform: rotate(90deg);
         }
       }
@@ -439,8 +431,8 @@ const infoItems = ref([
       font-size: 16px;
       line-height: 18px;
 
-      &:last-of-type i {
-        transform: rotate(180deg);
+      &:last-of-type svg {
+        transform: rotate(-180deg);
       }
     }
   }

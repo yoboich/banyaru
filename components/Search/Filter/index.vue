@@ -20,7 +20,10 @@
         :key="i"
       >
         <div class="search-filter__category-image">
-          <img :src="getLocalUrl(`/icons/categories/cat-${i}.svg`)" alt="" />
+          <img
+            :src="getLocalUrl(`/images/icons/categories/cat-${i}.svg`)"
+            alt=""
+          />
         </div>
         <h4 class="search-filter__category-name">Категория</h4>
       </nuxt-link>
@@ -43,7 +46,7 @@
           <span>Где:</span>
           <div class="city" @click="toggleModal">
             <span>{{ selectedCity }}</span>
-            <Icon tag="i" icon="arrow-left" color="green" />
+            <IconBase icon="arrow-left" color="green" />
           </div>
           <CitySelectModal
             v-show="isModalOpen"
@@ -60,7 +63,9 @@
             placeholder="Метро, район, улица, название"
           />
           <!-- <img src="~/assets/img/search/location-green.svg" alt="" /> -->
-          <Icon tag="i" icon="geolocation" color="green" />
+          <div class="address-icon">
+            <IconBase icon="geolocation" color="green" />
+          </div>
         </label>
         <div class="search-filter__block">
           <h2 class="search-filter__block-title">Место отдыха</h2>
@@ -79,11 +84,11 @@
               @click="counter > 1 ? counter-- : 1"
             >
               <!-- <img src="~/assets/img/icon/decrement.svg" alt="" /> -->
-              <Icon tag="i" icon="decrement" color="green" />
+              <IconBase icon="decrement" color="green" />
             </button>
             <span class="counter__count">{{ counter }}</span>
             <button class="counter__btn" type="button" @click="counter++">
-              <Icon tag="i" icon="increment" color="green" />
+              <IconBase icon="increment" color="green" />
               <!-- <img src="~/assets/img/icon/increment.svg" alt="" /> -->
             </button>
           </div>
@@ -108,12 +113,12 @@
           </div>
           <div class="search-filter__block-checkbox">
             <label for="elite-apartments">
-              <img src="~/assets/icons/crown.png" alt="" />
+              <img src="~/assets/images/icons/crown.png" alt="" />
               <span>Элитные аппартаменты</span>
             </label>
             <label class="checkbox-label" for="elite-apartments">
               <input type="checkbox" id="elite-apartments" />
-              <Icon tag="i" icon="filter-check" color="green" />
+              <IconBase icon="filter-check" color="green" />
               <!-- <img src="~/assets/img/search/check-green.svg" alt="" /> -->
             </label>
           </div>
@@ -122,7 +127,7 @@
           <h2 class="search-filter__block-title">Цена</h2>
           <button type="button" class="search-filter__price-btn">
             <!-- <img src="~/assets/img/icon/heart-red.svg" alt="" /> -->
-            <Icon tag="i" icon="favorite" color="red" :hover="false" />
+            <IconBase icon="favorite" color="red" />
             <span>18+</span>
             <!-- <img
               class="search-filter__price-arrow"
@@ -136,13 +141,10 @@
               color="green"
             />
           </button>
-          <button
-            type="button"
-            class="search-filter__price-btn search-filter__price-btn--more"
-          >
+          <button type="button" class="search-filter__price-btn btn-more">
             <span>Еще фильтры</span>
             <!-- <img src="~/assets/img/icon/arrow-green.svg" alt="" /> -->
-            <Icon tag="i" icon="arrow-left" color="green" />
+            <IconBase icon="arrow-left" color="green" />
           </button>
         </div>
         <div class="flex search-filter__controls">
@@ -343,7 +345,7 @@ const counter = ref(1);
         color: $green;
         cursor: pointer;
 
-        i {
+        svg {
           transform: rotate(180deg) scale(0.7);
         }
 
@@ -383,7 +385,7 @@ const counter = ref(1);
         }
       }
 
-      i {
+      .address-icon {
         position: absolute;
         right: 0;
         top: 50%;
@@ -518,7 +520,7 @@ const counter = ref(1);
         cursor: pointer;
         position: relative;
 
-        i {
+        svg {
           opacity: 0;
           transition: all 0.2s;
         }
@@ -529,7 +531,7 @@ const counter = ref(1);
           position: absolute;
           z-index: -1;
 
-          &:checked + i {
+          &:checked + svg {
             opacity: 1;
           }
         }
@@ -598,11 +600,11 @@ const counter = ref(1);
       margin-bottom: 10px;
     }
 
-    &--more {
+    &.btn-more {
       justify-content: center;
       color: $green;
 
-      i {
+      svg {
         transform: rotate(-90deg);
       }
     }

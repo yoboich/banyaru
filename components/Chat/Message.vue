@@ -50,7 +50,7 @@ const props = defineProps({
       background: #d8ffd1;
 
       &::after {
-        content: url(~/assets/icons/message-corner-green.svg);
+        content: url(~/assets/images/icons/message-corner-green.svg);
         bottom: -8px;
         transform: rotate(126deg);
         right: -16px;
@@ -99,7 +99,7 @@ const props = defineProps({
     }
 
     &::after {
-      content: url(~/assets/icons/message-corner.svg);
+      content: url(~/assets/images/icons/message-corner-gray.svg);
       width: 30px;
       height: 30px;
       position: absolute;

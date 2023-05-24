@@ -6,12 +6,12 @@
       </h1>
       <div class="news__item-stats">
         <div class="reviews">
-          <img src="~/assets/icons/comment-gray.svg" alt="" />
+          <IconBase icon="comment" color="gray" />
           <span>2</span>
         </div>
         <div class="spacer"></div>
         <div class="views">
-          <img src="~/assets/icons/views-gray.svg" alt="" />
+          <IconBase icon="views" color="gray" />
           <span>124</span>
         </div>
         <div class="spacer"></div>
@@ -36,7 +36,7 @@
       <div class="likes">
         <span>3</span>
         <button class="likes__btn">
-          <img src="~/assets/icons/like-gray.svg" alt="" />
+          <IconBase icon="like" color="gray" />
         </button>
       </div>
     </div>
@@ -157,14 +157,11 @@
       }
 
       &__btn {
-        @include bg-img-fill(auto, auto, content-box);
-        background-color: transparent;
         cursor: pointer;
 
         &:hover {
-          background-image: url(~/assets/icons/like-green.svg);
-          img {
-            opacity: 0;
+          svg {
+            --icon-color: #{$green};
           }
         }
       }

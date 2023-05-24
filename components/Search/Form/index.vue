@@ -21,7 +21,7 @@
       </div>
       <div class="search-form__history" v-else>
         <div class="history-item" v-for="i of 5" :key="i">
-          <img src="~/assets/icons/clock-filled-gray.svg" alt="" />
+          <IconBase icon="clock-filled" color="gray" />
           <div class="history-item__content">
             <h3 class="history-item__name">Маркса 3</h3>
             <span class="history-item__address">Россия, Москва</span>
@@ -44,7 +44,7 @@ const isSearchFocused = useState("searchFocused", () => false);
 
 const data = [
   {
-    icon: "logo-icon",
+    icon: "logo",
     title: "Названия объекта",
     items: [
       {

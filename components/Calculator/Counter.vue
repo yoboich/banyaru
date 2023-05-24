@@ -6,13 +6,13 @@
     </div>
     <div class="counter__controls">
       <button type="button" class="counter__controls-btn" @click="decrement">
-        <img src="~/assets/icons/decrement-green.svg" alt="" />
+        <IconBase icon="decrement" color="green" />
       </button>
       <span class="counter__controls-count">
         {{ calculatorData.guests }}
       </span>
       <button type="button" class="counter__controls-btn" @click="increment">
-        <img src="~/assets/icons/increment-green.svg" alt="" />
+        <IconBase icon="increment" color="green" />
       </button>
     </div>
   </div>

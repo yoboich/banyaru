@@ -22,10 +22,10 @@
       </div>
       <div class="filter__controls-arrows">
         <button ref="arrowPrev" class="filter__controls-arrow prev">
-          <img src="~/assets/icons/arrow-left-gray.svg" alt="" />
+          <IconBase icon="arrow-left" color="gray" />
         </button>
         <button ref="arrowNext" class="filter__controls-arrow next">
-          <img src="~/assets/icons/arrow-left-gray.svg" alt="" />
+          <IconBase icon="arrow-left" color="gray" />
         </button>
       </div>
     </div>
@@ -285,23 +285,13 @@ const moveLine = (e, tabIdx) => {
       cursor: pointer;
 
       &:hover {
-        @include bg-img-fill(contain, center, content-box);
-
-        background-image: url(~/assets/icons/arrow-left-green.svg);
-
-        img {
-          opacity: 0;
+        svg {
+          --icon-color: #{$green};
         }
       }
 
       &:last-of-type {
         transform: rotate(180deg);
-      }
-
-      &:hover {
-        svg {
-          fill: #32bd1b;
-        }
       }
     }
 

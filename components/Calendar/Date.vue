@@ -34,9 +34,9 @@ watch(props, () => {
 });
 
 const selected = ref([
-  ["2023-05-07:2023-05-15", "reserved"],
-  ["2023-05-23:2023-05-25", "pending"],
-  ["2023-05-18", "disabled"],
+  // ["2023-05-07:2023-05-15", "reserved"],
+  // ["2023-05-23:2023-05-29", "pending"],
+  // ["2023-05-18", "disabled"],
 ]);
 
 document.addEventListener("keydown", (e) => {
@@ -130,7 +130,7 @@ const getDurationTemplate = (amount, left, free, row) => {
     <div class="duration ${amount > 2 ? "large" : ""} ${
     amount === 1 ? "colored" : ""
   }" style="left: ${left || "auto"}" data-free="${free}" data-row=${row}>
-        <img src="${getLocalUrl("/icons/moon-black.svg")}" alt="" />
+        <img src="${getLocalUrl("/images/icons/moon.svg")}" alt="" />
         <span class="text">Ночей</span>
         <span>${amount}</span>  
     </div>

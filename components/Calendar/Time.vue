@@ -33,7 +33,7 @@
         @click="selectTime(date)"
       >
         <div class="duration" v-if="isTimer(date)">
-          <img src="~/assets/icons/clock-black.svg" alt="" />
+          <IconBase icon="clock" color="black" />
           {{ getSelectedDuration(date) }}
         </div>
         <div class="time">{{ date.format("HH:mm") }}</div>

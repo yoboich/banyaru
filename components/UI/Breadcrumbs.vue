@@ -1,8 +1,8 @@
 <template>
   <div v-if="breadcrumbs.length" class="breadcrumbs">
     <nuxt-link class="breadcrumbs__item" to="/">
-      <Icon icon="logo-icon" :hover="false" />
-      <Icon icon="breadcrumb-arrow" :hover="false" />
+      <IconBase class="icon-logo" icon="logo" color="gray" />
+      <IconBase icon="breadcrumb-arrow" color="light-gray" />
     </nuxt-link>
     <nuxt-link
       class="breadcrumbs__item"
@@ -11,10 +11,10 @@
       :key="route"
     >
       <span>{{ translatedRoutes[route.label] || "Страница" }}</span>
-      <Icon
+      <IconBase
         v-if="i !== breadcrumbs?.length - 1"
         icon="breadcrumb-arrow"
-        :hover="false"
+        color="light-gray"
       />
     </nuxt-link>
   </div>
@@ -58,11 +58,27 @@ const translatedRoutes = ref({
   left: 20px;
   top: 0;
 
+  .icon-logo {
+    width: 18px;
+
+    &:hover {
+      --icon-color: #{$green};
+    }
+  }
+
   &__item {
     display: flex;
     align-items: center;
     gap: 10px;
     color: $gray;
+
+    span {
+      transition: all 0.2s;
+
+      &:hover {
+        color: $green;
+      }
+    }
 
     &:first-of-type {
       .icon:first-of-type {

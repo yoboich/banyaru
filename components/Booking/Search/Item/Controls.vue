@@ -1,10 +1,10 @@
 <template>
-  <div class="controls">
-    <button>
-      <img src="~/assets/icons/dots-gray.svg" alt="" />
+  <div class="booking__item-controls">
+    <button class="booking__item-btn more">
+      <IconBase icon="more" color="gray" />
     </button>
-    <button>
-      <img src="~/assets/icons/favorite-gray.svg" alt="" />
+    <button class="booking__item-btn">
+      <IconBase icon="favorite" color="gray" />
     </button>
   </div>
 </template>
@@ -12,29 +12,28 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-.controls {
+.booking__item-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+
+  &.more {
+    max-width: 20px;
+  }
+
+  &:hover {
+    svg {
+      --icon-color: #{$green};
+    }
+  }
+}
+.booking__item-controls {
   display: flex;
   align-items: center;
   gap: 15px;
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: transparent;
-    cursor: pointer;
-    padding: 0;
-
-    &:hover {
-      svg.icon-more {
-        fill: $green;
-      }
-      svg.icon-heart {
-        fill: red;
-        stroke: red;
-      }
-    }
-  }
 }
 </style>

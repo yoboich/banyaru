@@ -1,7 +1,7 @@
 <template>
   <button class="booking-tag">
     <span>{{ name }}</span>
-    <img class="icon-close" src="~/assets/icons/close-white.svg" alt="" />
+    <IconBase class="icon-close" icon="close" color="white" />
   </button>
 </template>
 

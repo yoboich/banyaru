@@ -10,13 +10,11 @@
 
       <div class="flex">
         <div class="booking-page__review-rate">
-          <img
-            :src="
-              getLocalUrl(`/icons/star-${i !== 5 ? 'green' : 'lightgray'}.svg`)
-            "
+          <IconBase
+            icon="star"
+            :color="i !== 5 ? 'green' : 'light-gray'"
             v-for="i of 5"
             :key="i"
-            alt=""
           />
         </div>
         <div class="booking-page__review-date">06.09.2021</div>
@@ -37,9 +35,13 @@
         v-if="!props.moderation && props.data.rating"
       >
         <!-- <img src="~/assets/img/order/like-green.svg" /> -->
-        <Icon class="booking-page__review-like" icon="like" />
+        <button class="booking-page__review-like">
+          <IconBase icon="like" color="gray" />
+        </button>
         <span>{{ props.data.rating }}</span>
-        <Icon class="booking-page__review-like" icon="like" />
+        <button class="booking-page__review-like">
+          <IconBase icon="like" color="gray" />
+        </button>
         <!-- <img src="~/assets/img/order/like-gray.svg" /> -->
       </div>
 
@@ -106,9 +108,8 @@ const props = defineProps({
   &-rate {
     gap: 3px;
 
-    img {
-      width: 14px;
-      object-fit: contain;
+    svg {
+      max-width: 14px;
     }
   }
 
@@ -160,6 +161,12 @@ const props = defineProps({
   }
 
   &-like {
+    cursor: pointer;
+    &:hover {
+      svg {
+        --icon-color: #{$green};
+      }
+    }
     &:last-of-type {
       transform: rotate(180deg);
     }

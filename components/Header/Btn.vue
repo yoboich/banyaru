@@ -1,6 +1,6 @@
 <template>
   <UIButton class="header__btn">
-    <Icon tag="i" icon="nav-plus" color="white" :hover="false" />
+    <IconBase icon="nav-plus" color="white" />
     Разместить объявление
   </UIButton>
 </template>

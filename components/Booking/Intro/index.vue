@@ -15,13 +15,13 @@
     <div class="booking-page__card">
       <div class="booking-page__paid-hint">
         <span>Платное</span>
-        <Icon tag="i" icon="info" color="green" :hover="false" />
+        <IconBase icon="info" color="green" />
       </div>
       <h2 class="booking-page__price">
         от 2 000 ₽/час
         <div class="booking-page__price-action">
           <!-- <img src="~/assets/img/icon/arrow-green.svg" alt="" /> -->
-          <Icon icon="arrow-left" color="green" :hover="false" />
+          <IconBase icon="arrow-left" color="green" />
         </div>
       </h2>
       <ul class="booking-page__tags">
@@ -32,26 +32,25 @@
       <div class="flex">
         <h3 class="booking-page__place">
           Сауна цветы
-          <!-- <img src="~/assets/img/icon/info.svg" alt="" /> -->
-          <Icon icon="info" color="black" :hover="false" />
+          <IconBase icon="info" color="black" />
         </h3>
-        <Rate rate="4.2" />
+        <BookingSearchItemRate rate="4.2" />
         <Reviews text="122 отзыва" />
       </div>
-      <Location place="Пражская" time="13 мин" />
+      <BookingSearchItemLocation place="Пражская" time="13 мин" />
       <p class="booking-page__street">г. Москва, ул. Большая Очаковская, 35</p>
-      <Time time="9:00" closed />
+      <WorkTime time="9:00" closed />
       <div class="booking-page__card-actions flex">
         <UIButton class="booking-page__card-action--phone flex">
-          <Icon tag="i" icon="phone" color="white" :hover="false" />
+          <IconBase icon="phone" color="white" />
           <span>+7 999 333 14 ...</span>
         </UIButton>
         <UIButton class="booking-page__card-action--chat flex">
-          <Icon tag="i" icon="message" color="white" :hover="false" />
+          <IconBase icon="message" color="white" />
           <div class="unread">3</div>
         </UIButton>
         <UIButton class="booking-page__card-action--calc flex">
-          <Icon tag="i" icon="calc" color="white" :hover="false" />
+          <IconBase icon="calc" color="white" />
           <span>Калькулятор</span>
         </UIButton>
       </div>

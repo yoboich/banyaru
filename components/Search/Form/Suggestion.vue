@@ -1,8 +1,7 @@
 <template>
   <div class="search-suggestion">
     <h2 class="search-suggestion__title">
-      <!-- <img :src="getLocalUrl(`/icons/${data.icon}.svg`)" alt="" /> -->
-      <Icon tag="i" :icon="data.icon" :hover="false" />
+      <IconBase :icon="data.icon" color="gray" />
       {{ data.title }}
     </h2>
     <ul class="search-suggestion__items">
@@ -39,7 +38,8 @@ const props = defineProps({
 
     position: relative;
 
-    i {
+    svg {
+      width: 25px;
       position: absolute;
       top: 50%;
       left: -40px;

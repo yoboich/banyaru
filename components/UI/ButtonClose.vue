@@ -1,13 +1,11 @@
 <template>
   <button class="btn-close">
-    <img src="~/assets/icons/close-gray.svg" alt="" />
+    <IconBase icon="close" color="gray" />
   </button>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .btn-close {
-  @include bg-img-fill(15px, center, content-box);
-  background-image: none;
   width: 35px;
   height: 35px;
   padding: 0;
@@ -23,14 +21,13 @@
 
   cursor: pointer;
 
-  transition: background 0.2s;
+  transition: all 0.2s;
 
   &:hover {
-    background: $green;
-    background-image: url(~/assets/icons/close-white.svg);
-
-    img {
-      opacity: 0;
+    background: $red;
+    border-color: white;
+    svg {
+      --icon-color: white;
     }
   }
 }

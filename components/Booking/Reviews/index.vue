@@ -6,12 +6,11 @@
         <h2>4,6</h2>
         <div class="booking-page__reviews-preview">
           <div class="flex">
-            <img
-              :src="
-                getLocalUrl(`/icons/star-${i !== 5 ? 'green' : 'gray'}.svg`)
-              "
+            <IconBase
               v-for="i of 5"
               :key="i"
+              icon="star"
+              :color="i !== 5 ? 'green' : 'gray'"
               alt=""
             />
           </div>
@@ -21,12 +20,7 @@
       <img src="~/assets/images/preview/user.png" alt="" />
       <span>Оцените и напишите отзыв</span>
       <div class="booking-page__reviews-rates">
-        <img
-          src="~/assets/icons/star-gray.svg"
-          v-for="i of 5"
-          :key="i"
-          alt=""
-        />
+        <IconBase icon="star" color="gray" v-for="i of 5" :key="i" />
       </div>
     </div>
     <h2 class="booking-page__reviews-heading">Ваш отзыв</h2>
@@ -40,7 +34,7 @@
       :class="{ open: isOpen }"
       ref="el"
       :style="{
-        maxHeight: isOpen ? scrollHeight + 'px' : '360px',
+        maxHeight: isOpen ? scrollHeight + 'px' : '370px',
       }"
     >
       <BookingReviewsItem
@@ -51,7 +45,7 @@
     </div>
     <button class="booking-page__more-btn" @click="isOpen = !isOpen">
       <span>Смотреть все</span>
-      <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
+      <IconBase icon="arrow-left" color="green" />
     </button>
   </div>
 </template>
@@ -132,9 +126,8 @@ onMounted(() => {
       gap: 2px;
       margin-bottom: 5px;
 
-      img {
-        width: 14px;
-        object-fit: contain;
+      svg {
+        max-width: 14px;
       }
     }
   }
@@ -179,12 +172,13 @@ onMounted(() => {
   &-items {
     overflow: hidden;
     transition: all 0.3s;
+
     & > div:last-of-type {
       margin-bottom: 15px;
     }
 
     &.open + .booking-page__more-btn {
-      img {
+      svg {
         transform: rotate(90deg);
       }
     }

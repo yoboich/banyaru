@@ -13,7 +13,7 @@
     </div>
     <button class="booking-page__more-btn" @click="toggleCollapse">
       <span>Смотреть все</span>
-      <Icon tag="i" icon="arrow-left" color="green" :hover="false" />
+      <IconBase icon="arrow-left" color="green" />
     </button>
   </div>
 </template>

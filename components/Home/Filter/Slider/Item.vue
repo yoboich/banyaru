@@ -3,23 +3,22 @@
     <nuxt-link to="#" class="filter-item__image">
       <img src="~/assets/images/preview/place-image.png" alt="" />
       <button class="play">
-        <img src="~/assets/icons/play-white.svg" alt="" />
+        <IconBase icon="play" color="white" />
       </button>
     </nuxt-link>
     <div class="filter-item__info">
       <div class="filter-item__info-top">
         <div class="filter-item__rating">
-          <div class="rate">
-            <img src="~/assets/icons/star-green.svg" alt="" />
-            <span>4,2</span>
-          </div>
+          <BookingSearchItemRate rate="4,2" />
           <span class="spacer"></span>
           <div class="reviews">
             <span>11</span>
-            <img src="~/assets/icons/comment-green.svg" />
+            <IconBase icon="comment" color="green" />
           </div>
         </div>
-        <img src="~/assets/icons/favorite-gray.svg" alt="" class="favorite" />
+        <button class="favorite">
+          <IconBase icon="favorite" color="black" />
+        </button>
       </div>
       <div class="filter-item__info-main">
         <h3 class="title"><nuxt-link to="#">Сауна Дионис-СПА</nuxt-link></h3>
@@ -57,6 +56,10 @@
       gap: 5px;
 
       cursor: pointer;
+
+      svg {
+        max-width: 16px;
+      }
     }
 
     .rate span {
@@ -85,16 +88,17 @@
       margin-bottom: 10px;
 
       .favorite {
-        width: 20px;
-        height: 20px;
-        stroke: #3e3e51;
+        svg {
+          max-width: 20px;
+        }
 
         cursor: pointer;
         transition: all 0.2s;
 
         &:hover {
-          stroke: red;
-          fill: red;
+          svg {
+            --icon-color: #{$red};
+          }
         }
       }
     }
@@ -173,7 +177,7 @@
         background: rgba(0, 0, 0, 0.6);
       }
 
-      img {
+      svg {
         object-fit: contain;
         transform: translateX(10%);
       }

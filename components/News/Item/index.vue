@@ -18,15 +18,15 @@
         <span class="news__item-date">20.03.2023</span>
         <div class="news__item-stats">
           <span class="news__item-comments">
-            <Icon tag="i" icon="comment" :hover="false" />
+            <IconBase icon="comment" />
             1
           </span>
           <span class="news__item-views">
-            <Icon tag="i" icon="views" :hover="false" />
+            <IconBase icon="views" />
             0
           </span>
           <span class="news__item-likes">
-            <Icon tag="i" icon="like" :hover="false" />
+            <IconBase icon="like" />
             1
           </span>
         </div>

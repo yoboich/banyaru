@@ -18,7 +18,7 @@
         </p>
         <button class="comment__item-btn">Ответить</button>
         <div class="comment__item-like">
-          <Icon icon="like" />
+          <IconBase icon="like" color="gray" />
           <span>21</span>
         </div>
       </div>

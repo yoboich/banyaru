@@ -1,22 +1,38 @@
 <template>
   <div class="slider">
-    <Icon
+    <button
+      class="slider__arrow prev"
+      ref="arrowPrev"
+      v-show="props.navigation"
+    >
+      <IconBase icon="arrow-left" :color="arrowColor" />
+    </button>
+
+    <button
+      class="slider__arrow next"
+      ref="arrowNext"
+      v-show="props.navigation"
+    >
+      <IconBase icon="arrow-left" :color="arrowColor" />
+    </button>
+
+    <!-- <Icon
       class="slider__arrow prev"
       v-show="props.navigation"
       ref="arrowPrev"
       icon="arrow-left"
       :color="arrowColor"
       :hoverColor="arrowHoverColor"
-    />
+    /> -->
 
-    <Icon
+    <!-- <Icon
       class="slider__arrow next"
       v-show="props.navigation"
       ref="arrowNext"
       icon="arrow-left"
       :color="arrowColor"
       :hoverColor="arrowHoverColor"
-    />
+    /> -->
     <div class="slider__counter" v-if="props.counter" :key="currentSlide">
       <span>{{ currentSlide }} </span> |
       <span>{{ slidesAmount }}</span>
@@ -32,8 +48,8 @@
         :modules="modules"
         :navigation="
           props.navigation && {
-            nextEl: arrowNext?.$el,
-            prevEl: arrowPrev?.$el,
+            nextEl: arrowNext,
+            prevEl: arrowPrev,
           }
         "
         :pagination="props.pagination && { clickable: true }"
@@ -196,6 +212,9 @@ defineExpose({
 
     &:hover {
       background: $green;
+      svg {
+        --icon-color: white;
+      }
     }
 
     &.next {

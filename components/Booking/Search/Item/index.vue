@@ -21,7 +21,7 @@
     </div>
     <div class="item__content">
       <div class="item__content-top" v-if="props.wide">
-        <Time :time="'9:00'" />
+        <WorkTime :time="'9:00'" />
         <div class="item__hint">Этот баннер привлекает внимание!</div>
         <BookingSearchItemControls />
       </div>
@@ -40,15 +40,15 @@
       </div>
       <div class="item__content-bottom">
         <div class="item__content-info">
-          <Location place="Пражская" time="13 мин" />
-          <Time v-if="!props.wide" :time="'9:00'" />
-          <Rate rate="4,2" />
+          <BookingSearchItemLocation place="Пражская" time="13 мин" />
+          <WorkTime v-if="!props.wide" :time="'9:00'" />
+          <BookingSearchItemRate rate="4,2" />
           <Reviews text="11 отзывов" />
         </div>
         <div class="item__contact-btns">
           <UIButton>+7 999 333 14 ...</UIButton>
           <UIButton class="chat-btn">
-            <img src="~/assets/icons/message-white.svg" alt="" />
+            <IconBase icon="message" color="white" />
           </UIButton>
         </div>
       </div>
