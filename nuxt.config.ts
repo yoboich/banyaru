@@ -67,6 +67,11 @@ export default defineNuxtConfig({
         },
       },
     },
+    vue: {
+      script: {
+        defineModel: true,
+      },
+    },
   },
   css: ["normalize.css/normalize.css", "@/assets/styles/main.scss"],
   ssr: false,

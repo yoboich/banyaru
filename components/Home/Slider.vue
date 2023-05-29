@@ -7,7 +7,7 @@
       pagination
     >
       <swiper-slide v-for="i of 4" :key="i">
-        <div class="home__slider slider__content">
+        <div class="slider__content">
           <h1 class="slider__content-title">Баня.ру</h1>
           <h2 class="slider__content-suptitle">С нами теплее</h2>
           <UIButton>Смотреть</UIButton>
@@ -32,6 +32,14 @@ const { width } = useWindowSize();
 
   @media (max-width: 768px) {
     margin-bottom: 30px;
+  }
+
+  &.mobile {
+    .slider__content {
+      .btn {
+        width: 150px;
+      }
+    }
   }
 
   & .slider {
@@ -114,7 +122,7 @@ const { width } = useWindowSize();
 
     & .swiper {
       & .swiper-slide {
-        border-radius: 23px;
+        border-radius: 25px;
         overflow: hidden;
         position: relative;
         color: #fff;

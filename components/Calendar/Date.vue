@@ -246,6 +246,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+
+
 #calendar {
   width: 100%;
   padding: 0;
@@ -255,13 +257,16 @@ onMounted(() => {
     // gap: 15px 0;
     display: flex;
     flex-wrap: wrap;
-    max-width: 578px;
+    //max-width: 578px;
+    margin: 0 auto;
   }
 
   & .vanilla-calendar-week {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 578px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    //max-width: 578px;
+    margin: 0 auto;
 
     &__day {
       // width: 74px;
@@ -269,8 +274,16 @@ onMounted(() => {
       height: 50px;
       margin-bottom: 10px;
 
+      @media (max-width: 500px) {
+        width: calc((100% - 18px) / 7);
+      }
+
       &:not(:nth-of-type(7n + 7)) {
         margin-right: 10px;
+
+        @media (max-width: 500px) {
+          margin-right: 3px;
+        }
       }
     }
   }
@@ -285,6 +298,10 @@ onMounted(() => {
     font-size: 14px;
     line-height: 18px;
     text-transform: uppercase;
+
+    @media (max-width: 500px) {
+      padding: 0;
+    }
   }
 
   & .vanilla-calendar-day {
@@ -293,6 +310,10 @@ onMounted(() => {
     height: 50px;
     margin-bottom: 10px;
     justify-content: flex-start;
+
+    @media (max-width: 500px) {
+      width: calc((100% - 18px) / 7);
+    }
 
     &:nth-last-of-type(-n + 7) {
       margin-bottom: 0;
@@ -341,11 +362,19 @@ onMounted(() => {
 
     &:not(:nth-of-type(7n + 7)) {
       margin-right: 10px;
+
+      @media (max-width: 500px) {
+        margin-right: 3px;
+      }
     }
 
     &:nth-of-type(7n + 7) {
       // width: 74px !important;
       width: calc((100% - 60px) / 7) !important;
+
+      @media (max-width: 500px) {
+        width: calc((100% - 18px) / 7) !important;
+      }
 
       .duration {
         // left: 0 !important;
@@ -398,6 +427,10 @@ onMounted(() => {
 
           width: calc(100% - 10px);
 
+          @media (max-width: 500px) {
+            width: calc(100% - 3px);
+          }
+
           // z-index: 10;
         }
       }
@@ -406,6 +439,10 @@ onMounted(() => {
         margin-right: 0;
         // width: 84px;
         width: calc(((100% - 60px) / 7) + 10px);
+
+        @media (max-width: 500px) {
+          width: calc(((100% - 18px) / 7) + 3px);
+        }
       }
 
       &:not(.first):not(.last) {
@@ -460,11 +497,19 @@ onMounted(() => {
         background: #99df8d;
         margin-right: 0 !important;
 
+        @media (max-width: 500px) {
+          width: calc(((100% - 18px) / 7) + 3px);
+        }
+
         &:nth-of-type(7n + 7) {
           border-radius: 25px;
           overflow: hidden;
           // width: 74px !important;
           width: calc((100% - 60px) / 7) !important;
+
+          @media (max-width: 500px) {
+            width: calc((100% - 18px) / 7) !important;
+          }
 
           button {
             width: 100%;
@@ -474,6 +519,10 @@ onMounted(() => {
         button {
           width: calc(100% - 10px);
           color: #fff !important;
+
+          @media (max-width: 500px) {
+            width: calc(100% - 3px);
+          }
         }
       }
 
@@ -496,6 +545,10 @@ onMounted(() => {
         &:not(:nth-of-type(7n + 1)) {
           .duration {
             width: calc(100% - 10px) !important;
+
+            @media (max-width: 500px) {
+              width: calc(100% - 3px) !important;
+            }
           }
         }
 
@@ -530,6 +583,10 @@ onMounted(() => {
             width: calc((100% - 60px) / 7) !important;
             border-radius: 0 25px 25px 0;
             overflow: hidden;
+
+            @media (max-width: 500px) {
+              width: calc((100% - 18px) / 7) !important;
+            }
           }
         }
 
@@ -538,6 +595,10 @@ onMounted(() => {
           width: calc(((100% - 60px) / 7) + 10px);
           margin-right: 0;
           background: #99df8d;
+
+          @media (max-width: 500px) {
+            width: calc(((100% - 18px) / 7) + 3px);
+          }
         }
 
         button {

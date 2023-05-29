@@ -6,8 +6,9 @@
       :class="{ open: isOpen }"
       ref="el"
       :style="{
-        maxHeight: isOpen ? scrollHeight + 'px' : '250px',
+        maxHeight: isOpen ? el?.scrollHeight + 'px' : (el?.scrollHeight / 5 * 2.5) + 'px',
       }"
+      v-if="width > 1700"
     >
       <BookingIntroRoomItem
         v-for="room of rooms"
@@ -20,20 +21,30 @@
         :isCollapseBtn="isCollapseBtn(room)"
       />
     </div>
+    <div class="booking-page__room-slider" v-else>
+      <SwiperSlider :slides-per-view="width > 700 ? 5 : 3.5" :grid="{rows: 2, fill: 'row' }" :space-between="20">
+        <swiper-slide v-for="room of rooms" :key="room">
+          <BookingIntroRoomItem
+              @click="changeRoom(room)"
+              :unavailable="isUnavailable(room)"
+              :active="selectedRoom === room"
+          />
+        </swiper-slide>
+      </SwiperSlider>
+    </div>
   </div>
 </template>
 
 <script setup>
+import {SwiperSlide} from "swiper/vue";
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize()
+
 const selectedRoom = ref(1);
 const isOpen = ref(false);
 
 const el = ref();
-
-const scrollHeight = ref(0);
-
-onMounted(() => {
-  scrollHeight.value = el.value.scrollHeight;
-});
 
 const rooms = ref(
   Array(20)
@@ -82,6 +93,10 @@ watch(isOpen, () => {
     gap: 20px 35px;
     transition: all 0.3s;
     overflow: hidden;
+
+    @media (max-width: 1500px) {
+      gap: 20px 10px;
+    }
   }
 
   &-item {
@@ -112,15 +127,10 @@ watch(isOpen, () => {
       }
 
       .booking-page__room-image {
+        @include  flex-center-all;
         background: $light-gray;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        padding: 25px 25px 25px 20px;
-        transform: rotate(-90deg);
-        // margin-right: 0;
-        // margin-left: 10px;
+        transform: rotate(-90deg) scale(0.95);
         border-radius: 50%;
       }
     }

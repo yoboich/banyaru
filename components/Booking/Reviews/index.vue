@@ -34,7 +34,7 @@
       :class="{ open: isOpen }"
       ref="el"
       :style="{
-        maxHeight: isOpen ? scrollHeight + 'px' : '370px',
+        maxHeight: isOpen ? scrollHeight * 2 + 'px' : initialHeight + 'px',
       }"
     >
       <BookingReviewsItem
@@ -44,7 +44,7 @@
       />
     </div>
     <button class="booking-page__more-btn" @click="isOpen = !isOpen">
-      <span>Смотреть все</span>
+      <span>Смотреть все 26 отзывов</span>
       <IconBase icon="arrow-left" color="green" />
     </button>
   </div>
@@ -77,16 +77,26 @@ const reviews = ref([
 const el = ref();
 const isOpen = ref(false);
 const scrollHeight = ref(0);
+const initialHeight = ref(0)
 
-onMounted(() => {
+onMounted(async () => {
   scrollHeight.value = el.value.scrollHeight;
+  await nextTick(() => {
+    const children = el.value.children
+
+    for (let i = 0; i < 3; i++) {
+      initialHeight.value += children[i].offsetHeight
+    }
+
+    initialHeight.value += 45 * 3
+  })
 });
 </script>
 
 <style lang="scss">
 .booking-page__reviews {
   &.p-x {
-    padding: 0 20px 35px !important;
+    padding: 0 15px 35px !important;
   }
 
   &-title {

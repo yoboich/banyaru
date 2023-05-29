@@ -2,23 +2,23 @@
   <div class="calendar">
     <div class="calendar__switch">
       <div
-        class="calendar__switch-active"
-        :class="{
+          class="calendar__switch-active"
+          :class="{
           times: activeCalendar === 'time',
           dates: activeCalendar === 'days',
         }"
       ></div>
       <button
-        type="button"
-        class="calendar__switch-btn"
-        @click="changeCalendarType('days')"
+          type="button"
+          class="calendar__switch-btn"
+          @click="changeCalendarType('days')"
       >
         Сутки
       </button>
       <button
-        type="button"
-        class="calendar__switch-btn"
-        @click="changeCalendarType('time')"
+          type="button"
+          class="calendar__switch-btn"
+          @click="changeCalendarType('time')"
       >
         Часы
       </button>
@@ -34,45 +34,45 @@
     <div class="calendar__content">
       <div class="calendar__months flex">
         <button
-          type="button"
-          class="calendar__months-item calendar__months-item--prev"
-          @click="changeMonth(prevMonth)"
+            type="button"
+            class="calendar__months-item calendar__months-item--prev"
+            @click="changeMonth(prevMonth)"
         >
           {{ months[prevMonth] }}
         </button>
         <button
-          type="button"
-          class="calendar__months-item calendar__months-item--current"
+            type="button"
+            class="calendar__months-item calendar__months-item--current"
         >
           {{ months[currentMonth] }}
         </button>
         <button
-          type="button"
-          class="calendar__months-item calendar__months-item--next"
-          @click="changeMonth(nextMonth)"
+            type="button"
+            class="calendar__months-item calendar__months-item--next"
+            @click="changeMonth(nextMonth)"
         >
           {{ months[nextMonth] }}
         </button>
       </div>
 
       <CalendarDate
-        :month="currentMonth"
-        @month-change="changeMonth"
-        v-if="activeCalendar === 'days'"
-        @date-selected="onDateSelected"
+          :month="currentMonth"
+          @month-change="changeMonth"
+          v-if="activeCalendar === 'days'"
+          @date-selected="onDateSelected"
       />
       <CalendarTime
-        :month="currentMonth"
-        @date-selected="onDateSelected"
-        v-else
+          :month="currentMonth"
+          @date-selected="onDateSelected"
+          v-else
       />
 
       <div class="calendar__status flex">
         <div
-          class="calendar__status-hint"
-          v-for="{ status, name } of statuses"
-          :key="name"
-          :class="[status]"
+            class="calendar__status-hint"
+            v-for="{ status, name } of statuses"
+            :key="name"
+            :class="[status]"
         >
           <div class="calendar__status-round"></div>
           <span class="calendar__status-name">{{ name }}</span>
@@ -82,38 +82,43 @@
         <h3 class="calendar__order-title">Ваш заказ</h3>
         <ul class="calendar__order-list">
           <li
-            class="calendar__order-item"
-            v-for="item of orderData"
-            :key="item.label"
+              class="calendar__order-item"
+              v-for="item of orderData"
+              :key="item.label"
           >
-            <Icon
-              v-if="item.value"
-              class="calendar__order-check"
-              icon="booking-check"
-              color="green"
-              :hover="false"
+            <IconBase
+                v-if="item.value"
+                class="calendar__order-check"
+                icon="booking-check"
+                color="green"
             />
 
             <div class="calendar__order-round" v-else></div>
             <div class="calendar__order-text">
               {{ item.label }}:
               <span :class="[item.value && 'colored']">{{
-                item.value || "Выбрать"
-              }}</span>
+                  item.value || "Выбрать"
+                }}</span>
             </div>
           </li>
         </ul>
       </div>
       <div class="calendar__actions">
         <UIButton class="calendar__actions-btn calendar__actions-btn--clear"
-          >Очистить</UIButton
+                  v-if="width > 1000"
+        >Очистить
+        </UIButton
         >
+        <button class="calendar__actions-btn calendar__actions-btn--chat" v-else>
+          <IconBase icon="message" color="white"/>
+        </button>
         <UIButton class="calendar__actions-btn calendar__actions-btn--book"
-          >Заказать <span>•</span> 12 000 ₽</UIButton
+        >Заказать <span>•</span> 12 000 ₽
+        </UIButton
         >
       </div>
       <button class="calendar__favorite-btn">
-        <IconBase icon="favorite-filled" color="green" />
+        <IconBase icon="favorite-filled" color="green"/>
         Добавить баню в избранное
       </button>
     </div>
@@ -123,6 +128,9 @@
 <script setup>
 import moment from "moment";
 import "moment/dist/locale/ru";
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize()
 
 moment.locale("ru");
 
@@ -321,6 +329,7 @@ watch(calculatorData.value, () => {
 
   &__status {
     gap: 15px;
+    flex-wrap: wrap;
     margin-bottom: 40px;
 
     &-round {
@@ -375,6 +384,7 @@ watch(calculatorData.value, () => {
 
   &__order {
     margin-bottom: 30px;
+
     &-title {
       font-weight: 500;
       font-size: 16px;
@@ -424,8 +434,8 @@ watch(calculatorData.value, () => {
   }
 
   &__actions {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns:2fr 3fr;
     gap: 10px;
 
     margin-bottom: 40px;
@@ -434,26 +444,44 @@ watch(calculatorData.value, () => {
     box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
     border-radius: 100px;
 
+    @media (max-width: 1000px) {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+    }
+
     &-btn {
-      padding: 15px 60px;
+      //padding: 15px 60px;
       font-weight: 500;
       font-size: 20px;
       line-height: 100%;
+      height: 50px;
 
       &--clear {
         // padding: 15px 50px;
-        width: 200px;
+        width: auto;
+        //width: 200px;
         border: 2px solid $light-gray;
         background: transparent;
         color: #3e3e51;
       }
 
+      &--chat {
+        @include flex-center-all;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: $green;
+      }
+
+
       &--book {
-        width: 320px;
+        //width: 320px;
+        width: auto;
         background: #8e58ff;
         display: flex;
         align-items: center;
         gap: 10px;
+        border-color: $purple;
 
         span {
           font-size: 12px;

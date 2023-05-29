@@ -15,24 +15,24 @@
         <BookingServices />
         <!-- ACCESSORIES -->
         <BookingAccessories />
-        <!-- SIMILAR -->
-        <BookingSimilar />
         <!-- RECENTS -->
         <div class="p-x booking-page__recents">
           <h1 class="booking-page__title booking-page__recents-title">
-            Похожие объявления
+            Вы смотрели
           </h1>
           <SwiperSlider
-            class="booking-page__recents-slider"
-            slidesPerView="3"
-            :spaceBetween="10"
-            navigation
+              class="booking-page__recents-slider"
+              :slidesPerView="width > 1000 ? 3 : 2"
+              :spaceBetween="10"
+              navigation
           >
             <swiper-slide v-for="i of 12" :key="i">
               <BookingCardItem favorite />
             </swiper-slide>
           </SwiperSlider>
         </div>
+        <!-- SIMILAR -->
+        <BookingSimilar />
         <!-- REVIEWS -->
         <BookingReviews class="p-x" />
         <!-- ANNOUNCE -->
@@ -65,7 +65,7 @@
             </div>
           </div>
         </div>
-        <!-- <OrderFooter /> -->
+        <!-- <Footer /> -->
         <Footer class="mobile" />
       </div>
     </div>
@@ -74,6 +74,9 @@
 
 <script setup>
 import { SwiperSlide } from "swiper/vue";
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize()
 
 definePageMeta({
   layout: "map",
@@ -104,6 +107,14 @@ const infoItems = ref([
   flex-direction: column;
   height: 100%;
   margin-top: 95px;
+
+  .footer {
+    @media (max-width: 1000px) {
+      .breadcrumbs {
+        display: none;
+      }
+    }
+  }
 
   &__title {
     font-weight: 700;
@@ -138,6 +149,10 @@ const infoItems = ref([
     cursor: pointer;
 
     transition: all 0.2s;
+
+    @media (max-width: 1000px) {
+      margin: 0 0 0 auto;
+    }
 
     svg {
       transform: rotate(-90deg);
@@ -179,11 +194,12 @@ const infoItems = ref([
     line-height: 20px;
 
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 5px;
 
-    img {
+    .icon-base {
       cursor: pointer;
+      width: 14px;
     }
   }
 
@@ -208,8 +224,9 @@ const infoItems = ref([
     align-items: center;
     gap: 5px;
 
-    img {
+    .icon-base {
       cursor: pointer;
+      height: 14px;
     }
   }
 
@@ -225,7 +242,7 @@ const infoItems = ref([
   &__description {
     margin-bottom: 25px;
     &.p-x {
-      padding: 0 20px 30px !important;
+      padding: 0 15px 30px !important;
     }
 
     &-title {
@@ -236,6 +253,10 @@ const infoItems = ref([
       display: grid;
       align-items: flex-start;
       grid-template-columns: 2fr 4fr;
+      
+      @media (max-width: 600px) {
+        grid-template-columns: 2fr 2fr;
+      }
 
       &:not(:last-of-type) {
         margin-bottom: 20px;
@@ -266,7 +287,7 @@ const infoItems = ref([
   &__prices,
   &__discounts {
     &.p-x {
-      padding: 0 20px 30px !important;
+      padding: 0 15px 30px !important;
     }
 
     &-title {
@@ -335,7 +356,7 @@ const infoItems = ref([
   &__services,
   &__accessories {
     &.p-x {
-      padding: 0 20px 20px !important;
+      padding: 0 15px 20px !important;
     }
     &-title {
       margin-bottom: 15px;
@@ -350,6 +371,10 @@ const infoItems = ref([
       overflow: hidden;
       transition: all 0.3s;
 
+      @media (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
       &.open + .booking-page__more-btn {
         svg {
           transform: rotate(90deg);
@@ -363,7 +388,7 @@ const infoItems = ref([
   &__similar,
   &__recents {
     &.p-x {
-      padding: 0 20px 40px !important;
+      padding: 0 15px 40px !important;
     }
     &-title {
       margin-bottom: 15px;
@@ -392,7 +417,7 @@ const infoItems = ref([
   // ANNOUNCE
   &__announce {
     &.p-x {
-      padding: 0 20px 45px !important;
+      padding: 0 15px 45px !important;
     }
 
     &-btn {
@@ -440,7 +465,7 @@ const infoItems = ref([
   &__info {
     &.p-x {
       margin-bottom: 0;
-      padding: 0 20px 30px !important;
+      padding: 0 15px 30px !important;
     }
 
     &-title {

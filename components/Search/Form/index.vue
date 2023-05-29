@@ -132,6 +132,13 @@ const data = [
 .v-leave-to {
   opacity: 0;
 }
+
+.mobile {
+  .search-form__suggestion {
+    padding-bottom: 100px !important;
+  }
+}
+
 .search-form {
   height: 100%;
 
@@ -151,7 +158,8 @@ const data = [
   }
 
   &__searchbox {
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
     padding: 15px 20px;
     background: #fff;
     border-radius: 25px 25px 0 0;
@@ -168,6 +176,10 @@ const data = [
     left: 0;
     z-index: 20;
 
+    @media (max-width: 1000px) {
+      max-width: 100%;
+    }
+
     label {
       max-width: 430px;
     }
@@ -178,6 +190,10 @@ const data = [
       line-height: 18px;
       padding: 15px 30px;
       display: none;
+
+      @media (max-width: 1000px) {
+        width: 100px;
+      }
     }
   }
 

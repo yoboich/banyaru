@@ -1,24 +1,26 @@
 <template>
-  <div class="chat__item">
-    <ChatImageThumb :online="!!props.unread" />
-    <div class="chat__item-inner">
-      <div class="chat__item-details">
-        <div class="chat__item-info">
-          <h3 class="chat__item-username">Светлана</h3>
-          <span class="chat__item-service">Массаж в 4 руки... | 2000 ₽</span>
+    <div class="chat__item">
+      <nuxt-link to="/chat/user">
+      <ChatImageThumb :online="!!props.unread"/>
+      <div class="chat__item-inner">
+        <div class="chat__item-details">
+          <div class="chat__item-info">
+            <h3 class="chat__item-username">Светлана</h3>
+            <span class="chat__item-service">Массаж в 4 руки... | 2000 ₽</span>
+          </div>
+          <span class="chat__item-time">13:00</span>
         </div>
-        <span class="chat__item-time">13:00</span>
+        <p class="chat__item-message">
+          Здравствуйте
+          <br/>
+          вторая строка сообщения
+        </p>
+        <div class="chat__item-unread" v-if="props.unread">
+          {{ props.unread }}
+        </div>
       </div>
-      <p class="chat__item-message">
-        Здравствуйте
-        <br />
-        вторая строка сообщения
-      </p>
-      <div class="chat__item-unread" v-if="props.unread">
-        {{ props.unread }}
-      </div>
+      </nuxt-link>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -30,15 +32,18 @@ const props = defineProps({
 <style lang="scss" scoped>
 .chat__item {
   width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 15px 10px 25px 25px;
   border: 1px solid transparent;
   border-bottom-color: #dadeec;
   position: relative;
   transition: all 0.2s;
   cursor: pointer;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 10px 25px 25px;
+  }
 
   &:hover {
     border-radius: 25px;

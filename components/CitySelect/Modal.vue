@@ -2,10 +2,9 @@
   <div class="modal city-select__modal">
     <div class="modal__overflow" @click="emits('closeModal')"></div>
     <div class="modal__content">
-      <!-- <IconClose class="modal-close" @click="emits('closeModal')" /> -->
-      <Icon
-        type="button"
+      <IconBase
         icon="close"
+        color="gray"
         class="modal-close"
         @click="emits('closeModal')"
       />
@@ -15,7 +14,7 @@
         <UISearchInput v-model="searchTerm" placeholder="Поиск города" />
         <UIButtonClose type="button" @click="resetSearch" />
       </div>
-      <div>
+<!--      <div>-->
         <transition-group name="list" tag="div" class="modal__items">
           <div
             class="modal__items-city"
@@ -27,7 +26,7 @@
           </div>
           <p v-if="!filteredCities.length">Город не найден</p>
         </transition-group>
-      </div>
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -102,6 +101,9 @@ const filteredCities = computed(() =>
       border-radius: 6px;
       padding: 35px;
 
+      display: flex;
+      flex-direction: column;
+
       position: absolute;
       left: 50%;
       top: 50%;
@@ -111,7 +113,7 @@ const filteredCities = computed(() =>
       width: 100%;
 
       height: 80%;
-      overflow: scroll;
+      //overflow: scroll;
 
       @media (max-width: 768px) {
         height: 90%;
@@ -120,14 +122,15 @@ const filteredCities = computed(() =>
       }
     }
 
-    button.modal-close {
+    .modal-close {
       position: absolute;
       right: 20px;
       top: 20px;
       cursor: pointer;
 
       &:hover {
-        opacity: 0.7;
+        svg {}
+        --icon-color: #{$red};
       }
     }
 
@@ -185,17 +188,29 @@ const filteredCities = computed(() =>
     }
 
     .modal__items {
-      max-height: 500px;
-      height: 100%;
+      //max-height: 500px;
+      overflow: scroll;
+      flex-grow: 1;
 
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 18px;
+      //display: flex;
+      //flex-direction: column;
+      //flex-wrap: wrap;
+      columns: 3;
+      column-gap: 40px;
 
       @media (max-width: 768px) {
         gap: 15px;
-        max-height: 100%;
+      }
+      
+      @media (max-width: 700px) {
+        columns: 2;
+        .modal__items-city {
+          margin-bottom: 15px;
+        }
+      }
+
+      @media (max-width: 450px) {
+        columns: 1;
       }
 
       p {
@@ -209,6 +224,7 @@ const filteredCities = computed(() =>
         font-size: 14px;
         line-height: 18px;
         transition: all 0.2s ease;
+        margin-bottom: 20px;
 
         @media (max-width: 768px) {
           font-size: 16px;

@@ -44,11 +44,16 @@
   left: 0;
   z-index: 20;
   background: #fff;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 25px 25px 0 0;
   padding: 15px 20px;
   border: 1px solid #dadeec;
   border-bottom: none;
+
+  @media (max-width: 1000px) {
+    max-width: 100%;
+  }
 
   & .booking-page__last-online {
     font-weight: 500;
@@ -59,10 +64,12 @@
 
   & .booking-page__preview {
     display: flex;
+    align-items: center;
     gap: 11px;
 
     &-image {
       width: 96px;
+      height: 76px;
       // overflow: hidden;
       position: relative;
       border-radius: 10px;
@@ -80,12 +87,20 @@
       font-weight: 500;
       font-size: 16px;
       line-height: 18px;
+
+      @media (max-width: 500px) {
+        font-size: 14px;
+      }
     }
 
     &-price {
       font-weight: 700;
       font-size: 16px;
       line-height: 20px;
+      
+      @media (max-width: 500px) {
+        font-size: 14px;
+      }
     }
   }
 
@@ -95,6 +110,12 @@
     gap: 20px;
 
     margin-left: auto;
+
+
+
+    @media (max-width: 500px) {
+      gap: 10px;
+    }
   }
 
   & .booking-page__action {
@@ -105,6 +126,10 @@
 
     &.btn-more {
       max-width: 24px;
+
+      @media (max-width: 1000px) {
+        display: none;
+      }
     }
     // height: 24px;
     // aspect-ratio: 1;

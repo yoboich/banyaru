@@ -2,67 +2,65 @@
   <div class="booking-search p-x">
     <div class="booking-search__header">
       <div class="booking-search__searchbox">
-        <UISearchInput v-model="searchTerm" placeholder="Поиск Баня.ру" hint />
-        <UIButtonClose @click="resetSearch" />
+        <UISearchInput v-model="searchTerm" placeholder="Поиск Баня.ру" hint/>
+        <UIButtonClose @click="resetSearch"/>
       </div>
       <div class="booking-search__filter">
         <div class="booking-search__filter-info">
           <div class="booking-search__filter-found">
             <span>1 936 объявлений</span>
             <button class="booking-search__sort-btn">
-              <IconBase icon="sort" color="gray" />
+              <IconBase icon="sort" color="gray"/>
             </button>
           </div>
           <nuxt-link class="booking-search__filter-more" to="/search/filter">
             <div
-              class="count"
-              v-show="selectedFilters.length && selectedFilters.length < 10"
+                class="count"
+                v-show="selectedFilters.length && selectedFilters.length < 10"
             >
               {{ selectedFilters.length }}
             </div>
-            <IconBase icon="filter" color="black" />
+            <IconBase icon="filter" color="black"/>
           </nuxt-link>
         </div>
         <div
-          class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
-          data-filter="first"
+            class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
+            data-filter="first"
         >
           <button class="booking-search__filter-btn slide-left">
-            <IconBase icon="arrow-left" color="gray" />
+            <IconBase icon="arrow-left" color="gray"/>
           </button>
           <button
-            class="booking-search__filter-btn clear"
-            @click="resetFilters"
+              class="booking-search__filter-btn clear"
+              @click="resetFilters"
           >
-            <IconBase icon="close" color="gray" />
+            <IconBase icon="close" color="gray"/>
           </button>
           <BookingSearchFormTag
-            v-for="(tagName, i) of BookingSearchTagsFirst"
-            :key="i"
-            :name="tagName"
-            :class="{ active: selectedFilters.includes(tagName) }"
-            @click="toggleTag(tagName)"
+              v-for="(tagName, i) of BookingSearchTagsFirst"
+              :key="i"
+              :name="tagName"
+              :class="{ active: selectedFilters.includes(tagName) }"
+              @click="toggleTag(tagName)"
           />
         </div>
         <div
-          class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
-          data-filter="second"
+            class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
+            data-filter="second"
         >
           <BookingSearchFormTag
-            v-for="(tagName, i) of BookingSearchTagsSecond"
-            :key="i"
-            :name="tagName"
-            :class="{ active: selectedFilters.includes(tagName) }"
-            @click="toggleTag(tagName)"
+              v-for="(tagName, i) of BookingSearchTagsSecond"
+              :key="i"
+              :name="tagName"
+              :class="{ active: selectedFilters.includes(tagName) }"
+              @click="toggleTag(tagName)"
           />
         </div>
       </div>
     </div>
-    <client-only>
-      <div class="booking-search__results">
-        <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i" />
-      </div>
-    </client-only>
+    <div class="booking-search__results">
+      <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i"/>
+    </div>
   </div>
 </template>
 
@@ -96,7 +94,7 @@ const resetFilters = () => {
 const toggleTag = (tagName) => {
   if (selectedFilters.value.includes(tagName)) {
     selectedFilters.value = selectedFilters.value.filter(
-      (tag) => tag !== tagName
+        (tag) => tag !== tagName
     );
   } else {
     selectedFilters.value.push(tagName);
@@ -151,6 +149,8 @@ const toggleTag = (tagName) => {
   }
 
   &__filter {
+    transition: all .2s;
+
     &-info {
       display: flex;
       justify-content: space-between;
@@ -267,7 +267,9 @@ const toggleTag = (tagName) => {
   }
 
   &__results {
-    padding-top: 305px;
+    padding-top: 310px;
+    padding-bottom: 50px;
+
     &::-webkit-scrollbar {
       display: none;
     }

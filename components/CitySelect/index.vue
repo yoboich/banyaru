@@ -1,5 +1,6 @@
 <template>
   <div @click="toggleModal" class="city-select">
+    <IconBase icon="marker" color="gray" />
     <span>{{ selectedCity }}</span>
   </div>
   <CitySelectModal

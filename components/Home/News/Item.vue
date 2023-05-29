@@ -27,7 +27,7 @@
       Бани краткое описание, что входит, отдых
     </div>
     <div class="news__item-footer">
-      <nuxt-link to="#">
+      <nuxt-link to="/profile/user">
         <div class="author">
           <img src="~/assets/images/preview/banyaru.png" alt="" />
           <span>Баня.ру</span>

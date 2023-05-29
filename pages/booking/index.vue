@@ -1,10 +1,15 @@
 <template>
   <section class="booking">
-    <BookingSearchForm class="p-x" />
+    <BookingSearchForm v-if="width > 1000" class="p-x"/>
+    <BookingMobileSearchForm v-else />
   </section>
 </template>
 
 <script setup>
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize()
+
 definePageMeta({
   layout: "map",
 });

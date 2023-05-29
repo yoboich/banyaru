@@ -1,21 +1,23 @@
 <template>
   <div class="booking-card__item">
-    <nuxt-link to="#">
+    <nuxt-link to="/booking/item">
       <div class="booking-card__item-image">
-        <img src="~/assets/images/preview/girl-bath.png" alt="" />
+        <img src="~/assets/images/preview/girl-bath.png" alt=""/>
       </div>
     </nuxt-link>
     <div class="flex">
       <span class="booking-card__item-tag">По-черному</span>
-      <Icon
-        class="booking-card__item-favorite"
-        v-if="props.favorite"
-        icon="favorite"
-        color="gray"
-      />
+      <button class="booking-card__item-favorite"
+              v-if="props.favorite"
+      >
+        <IconBase
+            icon="favorite"
+            color="gray"
+        />
+      </button>
     </div>
     <h3 class="booking-card__item-name">
-      <nuxt-link to="#">Сибирский сруб</nuxt-link>
+      <nuxt-link to="/booking/item">Сибирский сруб</nuxt-link>
     </h3>
     <p class="booking-card__item-price">22 300 ₽/час</p>
   </div>
@@ -80,7 +82,12 @@ const props = defineProps({
   }
 
   &-favorite {
-    width: 25px;
+    cursor: pointer;
+    &:hover {
+      svg {
+        --icon-color: #{red};
+      }
+    }
   }
 
   &-name {

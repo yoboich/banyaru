@@ -31,7 +31,7 @@ const routes = {
   },
   favorite: {
     icon: "nav-favorite",
-    link: "/favorite",
+    link: "/profile/purchases?tab=favorite",
   },
   chat: {
     icon: "chat",
@@ -44,14 +44,23 @@ const routes = {
 };
 
 const isRoute = (name) => {
-  if (name === "/search") {
-    return ["booking", "booking-slug", "search", "search-filter"].includes(
-      route.name
-    );
-  } else if (name === "/") {
-    return ["index", "news", "news-slug"].includes(route.name);
-  } else {
-    return name.substring(1) === route.name;
+  switch (name) {
+    case "/search":
+      return ["booking", "booking-slug", "search", "search-filter"].includes(
+        route.name
+      );
+      break;
+    case "/":
+      return ["index", "news", "news-slug"].includes(route.name);
+      break;
+    case "/profile":
+      return ["profile-posts", 'profile'].includes(route.name);
+      break;
+    case '/profile/purchases?tab=favorite':
+      return ['profile-purchases'].includes(route.name)
+      break;
+    default:
+      return name.substring(1) === route.name;
   }
 };
 </script>

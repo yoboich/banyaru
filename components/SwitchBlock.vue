@@ -4,6 +4,7 @@
     :class="{
       active: activeTab,
     }"
+    ref="btnElements"
   >
     <button
       type="button"
@@ -11,7 +12,6 @@
       v-for="(tab, i) of tabs"
       :key="tab"
       @click="selectTab(i)"
-      ref="btnElements"
     >
       {{ tab }}
     </button>
@@ -24,12 +24,22 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  activeTab: {
+    type: Number,
+    default: () => 0
+  }
 });
 
 const emits = defineEmits(["tabChanged"]);
 const btnElements = ref();
 
-const activeTab = ref(0);
+const btns = ref()
+
+onMounted(() => {
+  btns.value = btnElements.value.querySelectorAll('.switch__btn')
+})
+
+const activeTab = ref(props.activeTab);
 
 const btnWidth = 100 / props.tabs.length;
 
@@ -43,6 +53,10 @@ const selectTab = (i) => {
   activeTab.value = i;
   emits("tabChanged", activeTab.value);
 };
+
+defineExpose({
+  activeTab,
+});
 </script>
 
 <style lang="scss" scoped>

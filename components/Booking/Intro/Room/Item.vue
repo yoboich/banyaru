@@ -4,13 +4,12 @@
     class="booking-page__room-item booking-page__room-item--expand"
     @click="emits('open')"
   >
-    <Icon
-      class="booking-page__room-image"
-      tag="i"
-      icon="arrow-left"
-      color="white"
-      :hover="false"
-    />
+    <div class="booking-page__room-image">
+      <IconBase
+          icon="arrow-left"
+          color="white"
+      />
+    </div>
     <div class="booking-page__room-price">Все</div>
   </div>
 

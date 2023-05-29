@@ -404,7 +404,7 @@ const selectTime = (date) => {
     // grid-template-columns: 1fr 1fr 1fr 1fr;
     display: flex;
     flex-wrap: wrap;
-    max-width: 565px;
+    //max-width: 565px;
 
     &-item {
       // width: 130px;

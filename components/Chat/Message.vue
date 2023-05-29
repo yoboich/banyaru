@@ -7,12 +7,10 @@
       <p class="message__content-text">{{ props.message }}</p>
       <div class="message__status">
         <span class="message__status-time">13:00</span>
-        <Icon
+        <IconBase
           v-if="props.read"
-          tag="i"
           icon="read"
-          color="green"
-          :hover="false"
+          color="gray"
         />
       </div>
       <span class="message__answer-time" v-if="props.last"
@@ -93,6 +91,10 @@ const props = defineProps({
     background: #f1f3f8;
     padding: 10px 50px 10px 15px;
     border-radius: 20px;
+
+    @media (max-width: 1000px) {
+      max-width: 80%;
+    }
 
     &.wide {
       padding-right: 70px;

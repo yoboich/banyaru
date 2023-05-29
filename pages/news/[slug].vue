@@ -7,20 +7,20 @@
             <h1 class="news-item__title">Новые бани в Москве</h1>
             <div class="news-item__details">
               <span class="news-item__comments">
-                <IconBase icon="comment" color="gray" />
+                <IconBase icon="comment" color="gray"/>
                 2
               </span>
               <span class="news-item__views">
                 124
-                <IconBase icon="views" color="gray" />
+                <IconBase icon="views" color="gray"/>
               </span>
               <span class="news-item__date">12.12.2020</span>
             </div>
           </div>
           <img
-            src="~/assets/images/preview/room.jpg"
-            alt=""
-            class="news-item__image"
+              src="~/assets/images/preview/room.jpg"
+              alt=""
+              class="news-item__image"
           />
           <div class="news-item__description">
             <h3>Основные выводы</h3>
@@ -50,9 +50,9 @@
               <nuxt-link class="news-item__username" to="#">
                 <span>Баня.ру</span>
                 <img
-                  class="news-item__avatar"
-                  src="~/assets/images/preview/user.png"
-                  alt=""
+                    class="news-item__avatar"
+                    src="~/assets/images/preview/user.png"
+                    alt=""
                 />
               </nuxt-link>
             </div>
@@ -61,37 +61,44 @@
                 <span>Поделиться:</span>
                 <div class="news-item__socials">
                   <a
-                    href="#"
-                    class="news-item__social"
-                    v-for="social of socials"
-                    :key="social"
+                      href="#"
+                      class="news-item__social"
+                      v-for="social of socials"
+                      :key="social"
                   >
-                    <IconBase :icon="social" color="gray" />
+                    <IconBase :icon="social" color="gray"/>
                   </a>
                 </div>
               </div>
               <div class="news-item__like">
                 <span>3</span>
                 <button class="news-item__like-btn">
-                  <IconBase icon="like" />
+                  <IconBase icon="like"/>
                 </button>
               </div>
             </div>
           </div>
         </div>
         <div class="news-item__row">
-          <NewsComments />
+          <NewsComments/>
         </div>
       </div>
       <div class="news-item__col">
         <h1 class="news-item__suptitle">Популярные темы</h1>
-        <NewsItem v-for="i of 2" :key="i" />
+        <div class="news-item__list">
+          <NewsItem v-for="i of 8" :key="i"/>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import {useWindowSize} from "@vueuse/core";
+import {SwiperSlide} from 'swiper/vue'
+
+const {width} = useWindowSize()
+
 definePageMeta({
   layout: "header-only",
 });
@@ -101,10 +108,32 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
 
 <style lang="scss" scoped>
 .news-item {
+
+  &__list {
+    @media (max-width: 1200px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+
+      & :deep(.news__item) {
+        padding-top: 0 !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .container {
     display: grid;
     grid-template-columns: 5fr 2fr;
     gap: 20px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__header {
@@ -112,6 +141,11 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 30px;
+    }
   }
 
   &__details {
@@ -137,10 +171,22 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
     border-radius: 25px;
     object-fit: cover;
     margin-bottom: 40px;
+
+    @media (max-width: 700px) {
+      height: 300px;
+    }
+
+    @media (max-width: 500px) {
+      height: 200px;
+    }
   }
 
   &__description {
     margin-bottom: 70px;
+
+    @media (max-width: 600px) {
+      margin-bottom: 40px;
+    }
 
     h3 {
       font-weight: 700;
@@ -162,6 +208,10 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
     padding: 40px;
     background: #fff;
     border-radius: 25px;
+
+    @media (max-width: 500px) {
+      padding: 20px;
+    }
   }
 
   .news-item__suptitle,
@@ -201,6 +251,17 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      .flex {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
   }
 
   &__author,
@@ -222,12 +283,22 @@ const socials = ref(["twitter", "facebook", "vk", "telegram"]);
 
   .flex {
     align-items: center;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
   }
 
   &__share {
     display: flex;
     align-items: center;
     margin-right: 40px;
+
+    @media (max-width: 600px) {
+      margin-right: 0;
+    }
 
     span {
       color: $gray;

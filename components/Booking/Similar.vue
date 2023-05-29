@@ -5,7 +5,7 @@
     </h1>
     <SwiperSlider
       class="booking-page__similar-slider"
-      slidesPerView="3"
+      :slidesPerView="width > 1000 ? 3 : 2"
       :spaceBetween="10"
       navigation
     >
@@ -18,6 +18,9 @@
 
 <script setup>
 import { SwiperSlide } from "swiper/vue";
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize()
 </script>
 
 <style lang="scss" scoped></style>

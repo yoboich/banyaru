@@ -15,24 +15,6 @@
     >
       <IconBase icon="arrow-left" :color="arrowColor" />
     </button>
-
-    <!-- <Icon
-      class="slider__arrow prev"
-      v-show="props.navigation"
-      ref="arrowPrev"
-      icon="arrow-left"
-      :color="arrowColor"
-      :hoverColor="arrowHoverColor"
-    /> -->
-
-    <!-- <Icon
-      class="slider__arrow next"
-      v-show="props.navigation"
-      ref="arrowNext"
-      icon="arrow-left"
-      :color="arrowColor"
-      :hoverColor="arrowHoverColor"
-    /> -->
     <div class="slider__counter" v-if="props.counter" :key="currentSlide">
       <span>{{ currentSlide }} </span> |
       <span>{{ slidesAmount }}</span>
@@ -46,6 +28,9 @@
         :slides-per-view="props.slidesPerView"
         :space-between="props.spaceBetween"
         :modules="modules"
+        :grid="grid"
+        :slides-per-group="slidesPerGroup"
+        :thumbs="thumbs"
         :navigation="
           props.navigation && {
             nextEl: arrowNext,
@@ -63,12 +48,14 @@
 
 <script setup>
 import { Swiper } from "swiper/vue";
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Grid, Thumbs } from "swiper";
 
 import "swiper/css";
+import "swiper/css/grid";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import "swiper/css/thumbs";
 
 const props = defineProps({
   slidesPerView: {
@@ -77,6 +64,12 @@ const props = defineProps({
   spaceBetween: {
     type: [Number, String],
     default: 40,
+  },
+  grid: {
+    type: Object
+  },
+  slidesPerGroup: {
+    default: 1,
   },
   navigation: {
     type: Boolean,
@@ -106,9 +99,12 @@ const props = defineProps({
     type: String,
     default: "white",
   },
+  thumbs: {
+    type: Object
+  }
 });
 
-const modules = [Pagination, Navigation];
+const modules = [Pagination, Navigation, Grid, Thumbs];
 
 const arrowNext = ref();
 const arrowPrev = ref();

@@ -1,12 +1,12 @@
 <template>
   <div class="map-page">
     <Map />
-    <HeaderNav class="map-page__nav" />
+    <HeaderNav :class="{mobile: width <= 1000}" class="map-page__nav" />
     <div
       class="map-page__inner"
       :class="{
         'search-only':
-          !isSearchFocused && ['search', 'search-filter'].includes(route.name),
+          width > 1000 && !isSearchFocused && ['search', 'search-filter'].includes(route.name),
       }"
     >
       <div class="scrollbar" ref="scrollbarElement">
@@ -16,7 +16,7 @@
           :style="{ height: scrollHeight + 'px' }"
         ></div>
       </div>
-      <div class="map-page__content" ref="contentElement">
+      <div class="map-page__content" :class="{hide: toBottom}" ref="contentElement">
         <slot />
       </div>
     </div>
@@ -25,12 +25,20 @@
 </template>
 
 <script setup>
+import {toRefs, useScroll} from '@vueuse/core'
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize()
+
 const contentElement = ref();
 const scrollbarElement = ref();
 const route = useRoute();
 const isSearchFocused = useState("searchFocused");
 
 const triggerScrollUpdate = useState("triggerScrollUpdate", () => false);
+
+const {directions} = useScroll(contentElement)
+const {top: toTop, bottom: toBottom} = toRefs(directions)
 
 function firstElScroll(e) {
   contentElement.value.scrollTop = scrollbarElement.value.scrollTop;
@@ -71,6 +79,26 @@ watch(route, () => {
 
 <style lang="scss">
 $pageHeight: calc(100vh - 40px);
+
+.mobile {
+  .header__btn {
+    display: none;
+  }
+
+  .map-page {
+    &__inner {
+      left: 0;
+      bottom: 0;
+      top: auto;
+      width: 100vw;
+      max-width: none;
+      height: 70vh;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
 .map-page {
   width: 100vw;
   height: 100vh;
@@ -96,19 +124,28 @@ $pageHeight: calc(100vh - 40px);
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+
+    @media (max-width: 1800px) {
+      right: 20px;
+      left: auto;
+      transform: none;
+    }
   }
 
   &__inner {
     position: absolute;
     top: 20px;
     left: 20px;
-    width: 600px;
+    width: 35vw;
+    max-width: 600px;
     height: $pageHeight;
     background: #fff;
     border-radius: 25px;
     border: 1px solid #dadeec;
     box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
-    // transition: background 0.9s;
+    @media (max-width: 1400px) {
+      width: 45vw;
+    }
 
     &.search-only {
       max-height: 90px;

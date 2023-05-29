@@ -3,160 +3,152 @@
     <div class="search-filter__header">
       <div class="search-filter__searchbox">
         <UISearchInput
-          v-model="searchTerm"
-          placeholder="Поиск по г. Москва"
-          hint
-          @focus="isSearchFocused = true"
+            v-model="searchTerm"
+            placeholder="Поиск по г. Москва"
+            hint
+            @focus="isSearchFocused = true"
         />
-        <UIButtonClose type="button" @click="resetSearch" />
+        <UIButtonClose type="button" @click="resetSearch"/>
       </div>
-      <SwitchBlock :tabs="pageTabs" @tab-changed="onTabChange" />
+      <SwitchBlock :tabs="pageTabs" @tab-changed="onTabChange"/>
     </div>
     <div class="search-filter__categories" v-if="activeSwitchTab === 0">
       <nuxt-link
-        to="#"
-        class="search-filter__category"
-        v-for="i of 14"
-        :key="i"
+          to="#"
+          class="search-filter__category"
+          v-for="i of 14"
+          :key="i"
       >
         <div class="search-filter__category-image">
           <img
-            :src="getLocalUrl(`/images/icons/categories/cat-${i}.svg`)"
-            alt=""
+              :src="getLocalUrl(`/images/icons/categories/cat-${i}.svg`)"
+              alt=""
           />
         </div>
         <h4 class="search-filter__category-name">Категория</h4>
       </nuxt-link>
     </div>
     <div class="search-filter__tabs" v-else>
-      <div class="search-filter__tabs-items">
-        <button
-          v-for="(tab, i) of tabs"
-          :key="tab"
-          class="search-filter__tabs-item"
-          :class="{ active: activeTab === i }"
-          type="button"
-          @click="activeTab = i"
-        >
-          {{ tab }}
-        </button>
-      </div>
+      <ProfileTabs class="search-filter__tabs-items" :tabs="tabs" />
       <div class="search-filter__tabs-inner">
         <div class="search-filter__tabs-location">
           <span>Где:</span>
           <div class="city" @click="toggleModal">
             <span>{{ selectedCity }}</span>
-            <IconBase icon="arrow-left" color="green" />
+            <IconBase icon="arrow-left" color="green"/>
           </div>
           <CitySelectModal
-            v-show="isModalOpen"
-            @close-modal="toggleModal"
-            @change-city="changeCity"
-            :cities="cities"
-            :selectedCity="selectedCity"
+              v-show="isModalOpen"
+              @close-modal="toggleModal"
+              @change-city="changeCity"
+              :cities="cities"
+              :selectedCity="selectedCity"
           />
         </div>
         <label for="address" class="search-filter__tabs-address">
           <input
-            type="text"
-            id="address"
-            placeholder="Метро, район, улица, название"
+              type="text"
+              id="address"
+              placeholder="Метро, район, улица, название"
           />
-          <!-- <img src="~/assets/img/search/location-green.svg" alt="" /> -->
           <div class="address-icon">
-            <IconBase icon="geolocation" color="green" />
+            <IconBase icon="geolocation" color="green"/>
           </div>
         </label>
         <div class="search-filter__block">
           <h2 class="search-filter__block-title">Место отдыха</h2>
-          <SwitchBlock :tabs="placeTabs" />
+          <SwitchBlock :tabs="placeTabs" @tab-changed="onPlaceTabChange" />
         </div>
-        <div class="search-filter__block">
-          <h2 class="search-filter__block-title">Время</h2>
-          <SwitchBlock :tabs="timeTabs" />
+        <div v-if="activeSwitchPlaceTab === 0">
+          <div class="search-filter__block">
+            <h2 class="search-filter__block-title">Вид парной</h2>
+            <ul class="search-filter__list">
+              <li class="search-filter__list-item" v-for="tag of tagList" :key="tag" @click="toggleTag(tag)"
+              :class="{active: activeTags.includes(tag)}"
+              >
+                <span>{{ tag }}</span>
+                <IconBase icon="close" color="white" />
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="search-filter__block">
-          <h2 class="search-filter__block-title">Количество гостей</h2>
-          <div class="counter">
-            <button
-              class="counter__btn"
-              type="button"
-              @click="counter > 1 ? counter-- : 1"
-            >
-              <!-- <img src="~/assets/img/icon/decrement.svg" alt="" /> -->
-              <IconBase icon="decrement" color="green" />
+        <div v-else>
+          <div class="search-filter__block">
+            <h2 class="search-filter__block-title">Время</h2>
+            <SwitchBlock :tabs="timeTabs"/>
+          </div>
+          <div class="search-filter__block">
+            <h2 class="search-filter__block-title">Количество гостей</h2>
+            <div class="counter">
+              <button
+                  class="counter__btn"
+                  type="button"
+                  @click="counter > 1 ? counter-- : 1"
+              >
+                <IconBase icon="decrement" color="green"/>
+              </button>
+              <span class="counter__count">{{ counter }}</span>
+              <button class="counter__btn" type="button" @click="counter++">
+                <IconBase icon="increment" color="green"/>
+              </button>
+            </div>
+          </div>
+          <div class="search-filter__block">
+            <h2 class="search-filter__block-title">Цена</h2>
+            <div class="flex">
+              <label
+                  for="min-price"
+                  :class="{ filled: minPrice }"
+                  class="search-filter__block-input"
+              >
+                <input type="text" v-model="minPrice" id="min-price"/>
+              </label>
+              <label
+                  for="max-price"
+                  :class="{ filled: maxPrice }"
+                  class="search-filter__block-input"
+              >
+                <input type="text" v-model="maxPrice" id="max-price"/>
+              </label>
+            </div>
+            <div class="search-filter__block-checkbox">
+              <label for="elite-apartments">
+                <img src="~/assets/images/icons/crown.png" alt=""/>
+                <span>Элитные аппартаменты</span>
+              </label>
+              <label class="checkbox-label" for="elite-apartments">
+                <input type="checkbox" id="elite-apartments"/>
+                <IconBase icon="filter-check" color="green"/>
+              </label>
+            </div>
+          </div>
+          <div class="search-filter__block search-filter__block--price">
+            <h2 class="search-filter__block-title">Цена</h2>
+            <button type="button" class="search-filter__price-btn">
+              <IconBase icon="favorite" color="red"/>
+              <span>18+</span>
+              <IconBase
+                  class="search-filter__price-arrow"
+                  icon="arrow-left"
+                  color="green"
+              />
             </button>
-            <span class="counter__count">{{ counter }}</span>
-            <button class="counter__btn" type="button" @click="counter++">
-              <IconBase icon="increment" color="green" />
-              <!-- <img src="~/assets/img/icon/increment.svg" alt="" /> -->
+            <button type="button" class="search-filter__price-btn btn-more">
+              <span>Еще фильтры</span>
+              <IconBase icon="arrow-left" color="green"/>
             </button>
           </div>
-        </div>
-        <div class="search-filter__block">
-          <h2 class="search-filter__block-title">Цена</h2>
-          <div class="flex">
-            <label
-              for="min-price"
-              :class="{ filled: minPrice }"
-              class="search-filter__block-input"
-            >
-              <input type="text" v-model="minPrice" id="min-price" />
-            </label>
-            <label
-              for="max-price"
-              :class="{ filled: maxPrice }"
-              class="search-filter__block-input"
-            >
-              <input type="text" v-model="maxPrice" id="max-price" />
-            </label>
-          </div>
-          <div class="search-filter__block-checkbox">
-            <label for="elite-apartments">
-              <img src="~/assets/images/icons/crown.png" alt="" />
-              <span>Элитные аппартаменты</span>
-            </label>
-            <label class="checkbox-label" for="elite-apartments">
-              <input type="checkbox" id="elite-apartments" />
-              <IconBase icon="filter-check" color="green" />
-              <!-- <img src="~/assets/img/search/check-green.svg" alt="" /> -->
-            </label>
-          </div>
-        </div>
-        <div class="search-filter__block search-filter__block--price">
-          <h2 class="search-filter__block-title">Цена</h2>
-          <button type="button" class="search-filter__price-btn">
-            <!-- <img src="~/assets/img/icon/heart-red.svg" alt="" /> -->
-            <IconBase icon="favorite" color="red" />
-            <span>18+</span>
-            <!-- <img
-              class="search-filter__price-arrow"
-              src="~/assets/img/icon/arrow-green.svg"
-              alt=""
-            /> -->
-            <Icon
-              class="search-filter__price-arrow"
-              tag="i"
-              icon="arrow-left"
-              color="green"
-            />
-          </button>
-          <button type="button" class="search-filter__price-btn btn-more">
-            <span>Еще фильтры</span>
-            <!-- <img src="~/assets/img/icon/arrow-green.svg" alt="" /> -->
-            <IconBase icon="arrow-left" color="green" />
-          </button>
         </div>
         <div class="flex search-filter__controls">
           <button
-            type="button"
-            class="search-filter__btn search-filter__btn--clear"
+              type="button"
+              class="search-filter__btn search-filter__btn--clear"
           >
             Очистить
           </button>
           <button
-            type="button"
-            class="search-filter__btn search-filter__btn--show"
+              type="button"
+              class="search-filter__btn search-filter__btn--show"
           >
             Показать 120 объявлений
           </button>
@@ -173,16 +165,32 @@ const isSearchFocused = useState("searchFocused", () => false);
 
 const pageTabs = ["Категории", "Фильтр"];
 const activeSwitchTab = ref(0);
+const activeSwitchPlaceTab = ref(0);
 
 const placeTabs = ["Баня / Сауна", "Номер"];
-const timeTabs = ["На час", "На ночь", "Посуточно"];
+const timeTabs = ["На час", "На ночь", "На сутки"];
 
 const tabs = ["Снять", "Услуги", "Купить"];
 const activeTab = ref(0);
 
+const tagList = ref(['Баня', 'Сауна','Баня по-черному', 'Тег 1','Тег 2','Тег 3','Тег 4'])
+const activeTags = ref([])
+
+const toggleTag = (tag) => {
+  if (activeTags.value.includes(tag)) {
+    activeTags.value = activeTags.value.filter(t => t !== tag)
+  } else {
+    activeTags.value.push(tag)
+  }
+}
+
 const onTabChange = (tabIdx) => {
   activeSwitchTab.value = tabIdx;
 };
+
+const onPlaceTabChange = (tabIdx) => {
+  activeSwitchPlaceTab.value = tabIdx;
+}
 
 const selectedCity = ref("Москва");
 const isModalOpen = ref(false);
@@ -204,6 +212,40 @@ const counter = ref(1);
 
 <style lang="scss" scoped>
 .search-filter {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    &-item {
+      @include flex-center-all;
+      padding: 8px 12px;
+      border: 2px solid #DADEEC;
+      border-radius: 25px;
+      font-size: 16px;
+      line-height: 18px;
+      transition: all .2s;
+
+      span {
+        margin-right: 5px;
+      }
+
+      &.active {
+        background: $green;
+        border-color: $green;
+        color: #fff;
+
+        svg {
+          opacity: 1;
+        }
+      }
+
+      svg {
+        opacity: 1;
+      }
+    }
+  }
+
   &__form {
     height: 100%;
     display: flex;
@@ -215,14 +257,25 @@ const counter = ref(1);
   }
 
   &__header {
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
     background: #fff;
     border-radius: 25px 25px 0 0;
-    position: fixed;
-    top: 20px;
-    left: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 20;
     padding: 20px;
+
+    & :deep(.switch) {
+      .switch__btn {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      max-width: 100%;
+    }
   }
 
   &__searchbox {
@@ -236,8 +289,16 @@ const counter = ref(1);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 80px 40px;
-    padding-bottom: 100px;
+    padding-bottom: 150px;
     margin-top: 180px;
+
+    @media (max-width: 1000px) {
+      gap: 30px;
+    }
+
+    @media (max-width: 500px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     &::-webkit-scrollbar {
       display: none;
@@ -282,10 +343,14 @@ const counter = ref(1);
     padding-bottom: 10px;
 
     &-items {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      //display: flex;
+      //justify-content: space-between;
+      //align-items: center;
       margin-bottom: 40px;
+      width: 100% !important;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;;
     }
 
     &-item {
@@ -400,6 +465,12 @@ const counter = ref(1);
   &__block {
     padding: 30px 0;
     border-bottom: 1px solid rgba(225, 229, 242, 0.5);
+
+    & :deep(.switch) {
+      .switch__btn {
+        font-size: 20px;
+      }
+    }
 
     &--price {
       border-bottom: none;
@@ -617,7 +688,7 @@ const counter = ref(1);
 
   &__controls {
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding-bottom: 120px;
   }
 
   &__btn {
@@ -635,6 +706,10 @@ const counter = ref(1);
       border: 2px solid #dadeec;
       color: $green;
 
+      @media (max-width: 1000px) {
+        display: none;
+      }
+
       &:hover {
         background: rgba(0, 0, 0, 0.05);
       }
@@ -644,6 +719,10 @@ const counter = ref(1);
       width: 55%;
       color: #fff;
       background: $green;
+
+      @media (max-width: 1000px) {
+        width: 100%;
+      }
 
       &:hover {
         background: rgba($color: $green, $alpha: 0.7);

@@ -1,13 +1,13 @@
 <template>
   <div class="booking-page__preview">
     <div class="booking-page__preview-image">
-      <nuxt-link to="#user"
+      <nuxt-link to="/profile/user"
         ><img
           class="booking-page__owner"
           src="~/assets/images/preview/user.png"
           alt=""
       /></nuxt-link>
-      <nuxt-link to="#">
+      <nuxt-link to="/booking/item">
         <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
       </nuxt-link>
     </div>
@@ -54,6 +54,7 @@
 
   &-image {
     width: 96px;
+    max-height: 76px;
     // overflow: hidden;
     position: relative;
     border-radius: 10px;

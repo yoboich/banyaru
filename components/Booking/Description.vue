@@ -11,7 +11,7 @@
         :key="item.label"
       >
         <div class="booking-page__description-label">
-          <img :src="getLocalUrl(`img/icon/${item.icon}.svg`)" alt="" />
+          <IconBase :icon="item.icon" color="gray" subpath="/booking" />
           <span>{{ item.label }}</span>
         </div>
         <div class="booking-page__description-text">
@@ -30,27 +30,27 @@ const descriptionItems = ref([
     text: "Русская баня на дровах / Банный Чан",
   },
   {
-    icon: "aqua-zone",
+    icon: "aquazone",
     label: "Аквазона",
     text: "Бассейн / Купель ледяная / Обливное устройство",
   },
   {
-    icon: "sizes",
+    icon: "size",
     label: "Размер бассейна",
     text: "до 15%",
   },
   {
-    icon: "users",
+    icon: "capacity",
     label: "Вместимость",
     text: "9",
   },
   {
-    icon: "room",
+    icon: "beds",
     label: "Комнаты отдыха",
     text: "Русская баня, Сауна / Финская",
   },
   {
-    icon: "shop",
+    icon: "cart",
     label: "Магазин",
     text: "Банные пренадлежности",
   },
@@ -60,7 +60,7 @@ const descriptionItems = ref([
     text: "SPA-терапия / Ароматерапия / Банщик / Веники / Массаж / Парения / Банные принадлежности / Обливное ведро / Чайная церемония / Ароматы для парной / Ледяная купель",
   },
   {
-    icon: "cutlery",
+    icon: "restaurants",
     label: "Кухня",
     text: "Бар / Ресторан",
   },
@@ -75,7 +75,7 @@ const descriptionItems = ref([
     text: "Беседка летняя / Беседка теплая / Отель / Гостевые номера / Парковка / Выход к водоему / Можно с детьми",
   },
   {
-    icon: "service",
+    icon: "star",
     label: "Сервис",
     text: "9",
   },

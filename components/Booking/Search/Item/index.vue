@@ -29,7 +29,7 @@
         <div class="item__details-info">
           <div>
             <h4 class="item-title">
-              <nuxt-link to="#"> Сауна цветы </nuxt-link>
+              <nuxt-link to="/booking/item"> Сауна цветы </nuxt-link>
             </h4>
             <h3 class="item-price">от 2 000 ₽/час</h3>
           </div>
@@ -175,6 +175,13 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
         object-position: center;
       }
     }
+
+    .item__contact-btns .btn {
+      &:not(.chat-btn) {
+        width: 150px;
+      }
+    }
+
   }
 
   &-title {

@@ -1,5 +1,5 @@
 <template>
-  <dialog class="gallery" :open="open" ref="gallery">
+  <dialog class="gallery" ref="gallery">
     <header class="gallery__header">
       <button class="gallery__btn" @click="close">
         <IconBase icon="gallery-close" color="white" />
@@ -17,12 +17,12 @@
           <span class="gallery__last-online">был(а) 15 мин. назад</span>
         </div>
       </div>
-      <button class="gallery__btn btn-more" @click="isReport = true">
-        <IconBase icon="more" color="white" @click="close" />
+      <button class="gallery__btn btn-more" @click="reportDialog.showModal()">
+        <IconBase icon="more" color="white" />
       </button>
     </header>
-    <dialog ref="reportDialog" class="report" :open="isReport">
-      <button class="report__close-btn" @click="isReport = false">
+    <dialog ref="reportDialog" class="report">
+      <button class="report__close-btn" @click="reportDialog.close()">
         <IconBase icon="close" />
       </button>
       <h1 class="report__title">Раскажите, в чем заключается проблема.</h1>
@@ -86,9 +86,6 @@
 
 <script setup>
 import { SwiperSlide } from "swiper/vue";
-const props = defineProps({
-  open: Boolean,
-});
 
 const emits = defineEmits(["close"]);
 
@@ -100,7 +97,6 @@ const close = () => {
 const gallery = ref();
 const reportDialog = ref();
 
-const isReport = ref(false);
 const sendReport = (item) => {
   reportDialog.value.close();
 };
@@ -113,6 +109,10 @@ const reportItems = ref([
   "Спам",
   "Контент, запрещенный авторскими правами",
 ]);
+
+defineExpose({
+  gallery
+})
 </script>
 
 <style lang="scss" scoped>
@@ -128,6 +128,11 @@ const reportItems = ref([
   border-radius: 25px;
   border: none;
   margin: 0;
+  font-family: Lato;
+
+  @media (max-width: 600px) {
+    width: 90vw;
+  }
 
   &__close-btn {
     position: absolute;
@@ -174,7 +179,12 @@ const reportItems = ref([
   top: 0;
   border: none;
   padding: 0;
+  margin: 0;
   background: #000;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+  font-family: Lato;
 
   &__preview {
     color: #fff;
@@ -200,6 +210,23 @@ const reportItems = ref([
     background: rgba($color: #000000, $alpha: 0.6);
     box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
     cursor: pointer;
+    flex-shrink: 0;
+
+    @media (max-width: 1000px) {
+      width: 40px;
+      height: 40px;
+      padding: 0 !important;
+
+      &.btn-more {
+       svg {
+         width: 20px;
+       }
+      }
+
+      svg {
+        height: 14px;
+      }
+    }
 
     &:hover {
       svg {
@@ -232,6 +259,12 @@ const reportItems = ref([
     display: flex;
     align-items: center;
     gap: 40px;
+
+    @media (max-width: 1000px) {
+      gap: 10px;
+      left: 20px;
+      width: calc(100% - 40px);
+    }
   }
 
   &__slider {
@@ -242,10 +275,18 @@ const reportItems = ref([
       background: rgba($color: #000000, $alpha: 0.6);
       &.prev {
         left: 35px;
+
+        @media (max-width: 1000px) {
+          left: 20px;
+        }
       }
 
       &.next {
         right: 35px;
+
+        @media (max-width: 1000px) {
+          right: 20px;
+        }
       }
     }
 
@@ -265,6 +306,21 @@ const reportItems = ref([
     display: flex;
     align-items: center;
     gap: 15px;
+
+    @media (max-width: 1300px) {
+      width: 100%;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+    }
+
+    @media (max-width: 1000px) {
+      left: 20px;
+      padding-right: 50px;
+    }
   }
 
   &__action-btn {
@@ -281,6 +337,7 @@ const reportItems = ref([
     line-height: 100%;
     cursor: pointer;
     transition: all 0.2s;
+    flex-shrink: 0;
 
     &:hover {
       background: rgba(255, 255, 255, 0.3);

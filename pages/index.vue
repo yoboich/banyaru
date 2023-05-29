@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <div class="container" v-if="width > 1000">
       <HomeSlider />
       <section class="home__content">
@@ -16,10 +16,10 @@
         </div>
       </section>
     </div>
-    <!-- <div v-if="isMobile">
-      <TheHeaderNav class="mobile" />
+    <div v-else>
+      <HeaderNav class="mobile"/>
       <div class="container container-mobile">
-        <HomeSlider />
+        <HomeSlider class="mobile" />
         <HomeMobileSearchServices />
         <HomeMobileServices />
       </div>
@@ -36,22 +36,6 @@
       </div>
       <HomeMobileFooter />
     </div>
-    <div class="container" v-else>
-      <HomeSlider />
-      <main class="home__content">
-        <div class="home__content-column">
-          <BookingSearchForm />
-        </div>
-        <div class="home__content-column">
-          <HomeMap />
-          <HomeLinks />
-          <HomeFilterSliderPlace title="Популярные бани" />
-          <HomeFilterSliderPlace title="Популярные услуги" ads />
-          <HomeFilterSliderRecentPlace title="Недавно вы смотрели" />
-          <HomeNews />
-        </div>
-      </main>
-    </div> -->
   </div>
 </template>
 
@@ -61,15 +45,6 @@ const { width } = useWindowSize();
 </script>
 
 <style lang="scss" scoped>
-// .add-advert {
-//   font-weight: 700;
-//   font-size: 1.6rem;
-//   line-height: 2rem;
-//   margin-top: 5rem;
-//   padding: 0 2rem;
-//   color: $green;
-// }
-
 .container-mobile {
   padding-left: 20px;
   padding-right: 0;

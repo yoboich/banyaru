@@ -8,7 +8,7 @@
       :class="{ open: isOpen }"
       ref="el"
       :style="{
-        maxHeight: isOpen ? scrollHeight + 'px' : '520px',
+        maxHeight: isOpen ? el?.scrollHeight + 'px' : initialHeight + 'px',
       }"
     >
       <BookingCardItem v-for="i of 12" :key="i" />
@@ -21,13 +21,14 @@
 </template>
 
 <script setup>
-const el = ref();
-const isOpen = ref(false);
-const scrollHeight = ref(0);
+import {useWindowSize} from "@vueuse/core";
 
-onMounted(() => {
-  scrollHeight.value = el.value.scrollHeight;
-});
+const {width} = useWindowSize()
+
+const el = ref();
+const initialHeight = computed(() => (el.value?.scrollHeight / 12) * (width.value > 1000 ? 3 : 2) * 2)
+
+const isOpen = ref(false);
 </script>
 
 <style lang="scss" scoped></style>
