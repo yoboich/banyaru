@@ -17,6 +17,7 @@
   background: #fff;
   transition: all 0.2s;
   cursor: pointer;
+  text-align: center;
 
   a {
     display: block;

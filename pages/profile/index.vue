@@ -24,23 +24,28 @@
         <img src="~/assets/images/profile/no-posts.svg" alt=""/>
       </div>
       <p class="no-posts__text">Нет активных объявлений</p>
-      <button class="no-posts__btn">Разместить объявление</button>
+      <nuxt-link to="/create-post">
+        <button class="no-posts__btn">Разместить объявление</button>
+      </nuxt-link>
     </div>
     <div class="profile__controls" v-if="posts.length">
       <ProfileBtn>
         <nuxt-link to="/search">Найти баню, услугу, товары</nuxt-link>
       </ProfileBtn>
-      <ProfileBtn>
-        <nuxt-link to="/create-post">Разместить объявление</nuxt-link>
-      </ProfileBtn>
+      <nuxt-link to="/create-post">
+        <ProfileBtn>
+          Разместить объявление
+        </ProfileBtn>
+      </nuxt-link>
     </div>
   </section>
-  <ProfileMobile :posts="posts" v-else />
+  <ProfileMobile :posts="posts" v-else/>
 </template>
 
 <script setup>
 import {SwiperSlide} from "swiper/vue";
 import {useWindowSize} from "@vueuse/core";
+
 const {width} = useWindowSize()
 
 definePageMeta({
@@ -146,6 +151,11 @@ const posts = ref([
     align-items: center;
     gap: 40px;
     margin-top: auto;
+
+    a {
+      display: block;
+      width: 100%;
+    }
 
     @media (max-width: 1600px) {
       flex-direction: column;

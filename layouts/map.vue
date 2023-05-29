@@ -4,9 +4,11 @@
     <HeaderNav :class="{mobile: width <= 1000}" class="map-page__nav" />
     <div
       class="map-page__inner"
+      :style="{height: width <= 1000 && route.name === 'booking-slug' ? '100vh' : ''}"
       :class="{
         'search-only':
-          width > 1000 && !isSearchFocused && ['search', 'search-filter'].includes(route.name),
+          !isSearchFocused && ['search', 'search-filter'].includes(route.name),
+          search: ['search', 'search-filter'].includes(route.name)
       }"
     >
       <div class="scrollbar" ref="scrollbarElement">
@@ -95,6 +97,46 @@ $pageHeight: calc(100vh - 40px);
       height: 70vh;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+
+      &.search-only {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 400px;
+
+        .search-form__searchbox {
+          width: 400px !important;
+          padding-left: 0;
+          padding-right: 0;
+
+          .search-input {
+            width: 400px;
+          }
+        }
+
+        .scrollbar {
+          display: none;
+        }
+
+        .map-page__content {
+          display: flex;
+        }
+
+        .search {
+          width: 100%;
+          padding: 0;
+          display: flex;
+
+          & > .search-form  {
+            width: 100%;
+
+            &-history {
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 }

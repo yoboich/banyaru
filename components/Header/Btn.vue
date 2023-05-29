@@ -1,8 +1,10 @@
 <template>
+  <nuxt-link to="/create-post">
   <UIButton class="header__btn">
-    <IconBase icon="nav-plus" color="white" />
-    Разместить объявление
+      <IconBase icon="nav-plus" color="white" />
+      Разместить объявление
   </UIButton>
+  </nuxt-link>
 </template>
 
 <script setup></script>

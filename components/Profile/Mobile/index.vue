@@ -1,20 +1,20 @@
 <template>
   <div class="profile">
     <div class="profile__user">
-      <img
-          class="profile__user-image"
-          src="~/assets/images/preview/user.png"
-          alt=""
-      />
-      <div class="profile__user-info">
-        <h3 class="profile__user-name">Светлана</h3>
-        <span class="profile__user-phone">+7 985 123 33 34</span>
-      </div>
-      <button class="profile__user-btn">
-        <nuxt-link to="/profile/settings">
+      <nuxt-link to="/profile/settings">
+        <img
+            class="profile__user-image"
+            src="~/assets/images/preview/user.png"
+            alt=""
+        />
+        <div class="profile__user-info">
+          <h3 class="profile__user-name">Светлана</h3>
+          <span class="profile__user-phone">+7 985 123 33 34</span>
+        </div>
+        <button class="profile__user-btn">
           <IconBase icon="arrow-left" color="green"/>
-        </nuxt-link>
-      </button>
+        </button>
+      </nuxt-link>
       <div class="profile__balance">
         <span class="profile__balance-amount">15 300 ₽</span>
         <button class="profile__balance-btn">
@@ -39,19 +39,19 @@
     <div class="profile__block">
       <h2 class="profile__block-title">Мои объявления</h2>
       <div class="profile__block-items">
-        <ProfilePost :data="posts[0]" />
-        <ProfilePost :data="posts[1]" />
+        <ProfilePost :data="posts[0]"/>
+        <ProfilePost :data="posts[1]"/>
       </div>
       <ProfileBtn>
         <nuxt-link to="/profile/posts">
           Все объявления
         </nuxt-link>
       </ProfileBtn>
-      <ProfileBtn>
-        <nuxt-link to="/create-post">
+      <nuxt-link to="/create-post">
+        <ProfileBtn>
           Разместить объявление
-        </nuxt-link>
-      </ProfileBtn>
+        </ProfileBtn>
+      </nuxt-link>
     </div>
     <div class="profile__block">
       <h2 class="profile__block-title">Заказы</h2>
@@ -85,7 +85,7 @@ const props = defineProps(['posts'])
 
 <style lang="scss" scoped>
 .profile {
-  padding: 20px ;
+  padding: 20px;
 
   &-btn {
     width: 100%;
@@ -95,6 +95,13 @@ const props = defineProps(['posts'])
   &__user {
     margin: 0 0 40px;
     gap: 10px;
+
+    a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
 
     &-image, &-btn, &-info {
       margin: 0;
@@ -149,6 +156,7 @@ const props = defineProps(['posts'])
 
     &-items {
       margin-bottom: 50px;
+
       .post {
         &:not(:last-of-type) {
           margin-bottom: 30px;

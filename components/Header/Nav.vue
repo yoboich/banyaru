@@ -54,7 +54,7 @@ const isRoute = (name) => {
       return ["index", "news", "news-slug"].includes(route.name);
       break;
     case "/profile":
-      return ["profile-posts", 'profile'].includes(route.name);
+      return ["profile-posts", 'profile', 'profile-settings', 'profile-notifications'].includes(route.name);
       break;
     case '/profile/purchases?tab=favorite':
       return ['profile-purchases'].includes(route.name)

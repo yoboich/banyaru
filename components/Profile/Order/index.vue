@@ -75,6 +75,7 @@ const data = ref([
     margin: 0 auto;
     padding: 15px;
     display: flex;
+    text-align: center;
   }
 
   & :deep(.profile-tabs) {

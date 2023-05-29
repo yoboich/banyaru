@@ -24,18 +24,22 @@
         <img src="~/assets/images/profile/no-posts.svg" alt=""/>
       </div>
       <p class="no-posts__text">Нет активных объявлений</p>
-      <button class="no-posts__btn">Разместить объявление</button>
+      <nuxt-link to="/create-post">
+        <button class="no-posts__btn">Разместить объявление</button>
+      </nuxt-link>
     </div>
     <div class="profile__controls" v-if="posts.length">
       <ProfileBtn>
         <nuxt-link to="/search">Найти баню, услугу, товары</nuxt-link>
       </ProfileBtn>
-      <ProfileBtn>
-        <nuxt-link to="/create-post">Разместить объявление</nuxt-link>
-      </ProfileBtn>
+      <nuxt-link to="/create-post">
+        <ProfileBtn>
+          Разместить объявление
+        </ProfileBtn>
+      </nuxt-link>
     </div>
   </section>
-  <ProfilePosts :posts="posts" v-else />
+  <ProfilePosts :posts="posts" v-else/>
 </template>
 
 <script setup>
