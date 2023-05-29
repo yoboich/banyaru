@@ -31,7 +31,7 @@
     </div>
     <div class="filter__items">
       <div class="loading" :class="{ visible: isLoading }" v-show="isLoading">
-        <img src="~/assets/icons/spinner-gray.svg" alt="" />
+        <img src="~/assets/images/icons/spinner-gray.svg" alt="" />
       </div>
       <client-only>
         <swiper
