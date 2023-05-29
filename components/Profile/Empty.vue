@@ -3,12 +3,17 @@
     <h1 class="empty-title">{{ props.title }}</h1>
     <p class="empty-text">
       Вы можете начать свой выбор с
-      <nuxt-link to="/">главной страницы</nuxt-link> или выбрать
+      <nuxt-link to="/">главной страницы</nuxt-link>
+      или выбрать
       <nuxt-link to="/search/filter">категорию</nuxt-link>
     </p>
-    <ProfileSlider title="Недавно вы смотрели" />
-    <ProfileSlider title="Избранное" />
-    <ProfileBtn> <nuxt-link to="/search">Найти баню, услугу, товары</nuxt-link> </ProfileBtn>
+    <ProfileSlider title="Недавно вы смотрели"/>
+    <ProfileSlider title="Избранное"/>
+    <nuxt-link to="/search">
+      <ProfileBtn>
+        Найти баню, услугу, товары
+      </ProfileBtn>
+    </nuxt-link>
   </div>
 </template>
 

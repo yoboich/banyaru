@@ -106,12 +106,14 @@ $pageHeight: calc(100vh - 40px);
         max-width: 400px;
 
         .search-form__searchbox {
-          width: 400px !important;
-          padding-left: 0;
-          padding-right: 0;
+          max-width: 400px !important;
+          width: 100% !important;
+          padding-left: 10px !important;
+          padding-right: 10px !important;
 
           .search-input {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
           }
         }
 

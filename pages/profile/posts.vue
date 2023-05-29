@@ -29,9 +29,11 @@
       </nuxt-link>
     </div>
     <div class="profile__controls" v-if="posts.length">
-      <ProfileBtn>
-        <nuxt-link to="/search">Найти баню, услугу, товары</nuxt-link>
-      </ProfileBtn>
+      <nuxt-link to="/search">
+        <ProfileBtn>
+          Найти баню, услугу, товары
+        </ProfileBtn>
+      </nuxt-link>
       <nuxt-link to="/create-post">
         <ProfileBtn>
           Разместить объявление

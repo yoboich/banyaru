@@ -20,7 +20,9 @@
       <div class="order__items" v-else>
         <ProfileOrderItem v-for="(item, i) of data" :key="i" :data="item" />
       </div>
+      <nuxt-link to="/search">
       <ProfileBtn>Найти баню, услугу, товары</ProfileBtn>
+      </nuxt-link>
     </div>
   </div>
 </template>

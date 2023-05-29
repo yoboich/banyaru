@@ -55,11 +55,11 @@
     </div>
     <div class="profile__block">
       <h2 class="profile__block-title">Заказы</h2>
-      <ProfileBtn>
-        <nuxt-link to="/search">
+      <nuxt-link to="/search">
+        <ProfileBtn>
           Найти баню, услугу, товары
-        </nuxt-link>
-      </ProfileBtn>
+        </ProfileBtn>
+      </nuxt-link>
     </div>
   </div>
 </template>

@@ -15,7 +15,9 @@
         </SwiperSlider>
       </div>
       <ProfileMobileFavorite v-else />
-      <ProfileBtn>Найти баню, услугу, товары</ProfileBtn>
+      <nuxt-link to="/search">
+        <ProfileBtn>Найти баню, услугу, товары</ProfileBtn>
+      </nuxt-link>
     </div>
   </div>
 </template>

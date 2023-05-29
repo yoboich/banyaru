@@ -2,7 +2,7 @@
   <div class="cart">
     <div v-if="cart.length">
       <div class="cart__items">
-        <ProfileCartItem v-for="i of 3" :key="i" />
+        <ProfileCartItem v-for="i of 3" :key="i"/>
       </div>
       <div class="cart__result">
         <h3 class="cart__result-title">Итого</h3>
@@ -12,13 +12,15 @@
         </div>
       </div>
       <div class="cart__controls">
-        <ProfileBtn>
-          <nuxt-link to="/search">Найти баню, услугу, товары</nuxt-link>
-        </ProfileBtn>
+        <nuxt-link to="/search">
+          <ProfileBtn>
+            Найти баню, услугу, товары
+          </ProfileBtn>
+        </nuxt-link>
         <ProfileBtn class="btn-pay">Оплатить</ProfileBtn>
       </div>
     </div>
-    <ProfileEmpty title="Пока в корзине ничего нет" v-else />
+    <ProfileEmpty title="Пока в корзине ничего нет" v-else/>
   </div>
 </template>
 
