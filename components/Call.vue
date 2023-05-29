@@ -268,6 +268,10 @@ defineExpose({
       flex-wrap: wrap;
       width: 100%;
 
+      @media (max-width: 600px) {
+        padding: 0 20px;
+      }
+
       .call__actions-btn {
         display: flex;
         flex-direction: column;
