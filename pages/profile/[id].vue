@@ -1,20 +1,18 @@
 <template>
   <div class="profile-user">
     <Teleport to="body">
-      <Call ref="callElement" />
+      <Call ref="callElement"/>
     </Teleport>
     <div class="container">
       <div class="profile-user__inner">
         <div class="profile-mobile__header" v-if="width <= 1000">
-          <button class="profile-mobile__header-btn">
-            <nuxt-link to="/profile">
-              <IconBase icon="arrow-left" color="green"/>
-            </nuxt-link>
-          </button>
+          <nuxt-link class="profile-mobile__header-btn" to="/profile">
+            <IconBase icon="arrow-left" color="green"/>
+          </nuxt-link>
           <h1 class="profile-mobile__title">Профиль</h1>
-          <button class="profile-mobile__header-btn">
+          <nuxt-link class="profile-mobile__header-btn" to="/profile">
             <IconBase icon="more" color="green"/>
-          </button>
+          </nuxt-link>
         </div>
         <h1 class="profile-user__title" v-else>Профиль</h1>
         <div class="profile-user__header">
@@ -53,19 +51,16 @@
             </button>
           </div>
           <div class="profile-user__actions">
-            <button class="profile-user__action action-call" v-if="width > 1200" @click="callUser">
-              +77 777 77 7..
-            </button>
-            <button class="profile-user__action action-call" v-else @click="callUser">
-              Вызов
-            </button>
-            <button class="profile-user__action action-chat">
+            <UIButton class="profile-user__action action-call green" @click="callUser">
+              {{ width > 1200 ? 'Позвонить' : 'Вызов' }}
+            </UIButton>
+            <UIButton class="profile-user__action action-chat gray">
               <IconBase icon="message" color="gray"/>
               <span>Чат</span>
-            </button>
-            <button class="profile-user__action action-share">
+            </UIButton>
+            <UIButton class="profile-user__action action-share gray">
               <IconBase icon="share" color="black"/>
-            </button>
+            </UIButton>
           </div>
         </div>
         <div class="profile-user__content">
@@ -195,9 +190,14 @@ const callUser = () => callElement.value?.dialog.showModal()
       width: 100%;
       order: 2;
       margin-top: 35px;
+
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
+
+      .profile-user__action {
+        width: auto;
+      }
     }
   }
 
@@ -208,27 +208,20 @@ const callUser = () => callElement.value?.dialog.showModal()
     line-height: 100%;
     cursor: pointer;
 
-    &.action-call {
-      background: $green;
-      color: #fff;
-    }
+    //&.action-call {
+    //  background: $green;
+    //  color: #fff;
+    //}
 
     &.action-chat {
-      @include flex-center-all;
       gap: 10px;
-      border: 2px solid #dadeec;
-      width: 150px;
-
-      @media (max-width: 1000px) {
-        width: auto;
-      }
+      //border: 2px solid #dadeec;
+      //width: 150px;
     }
 
     &.action-share {
       width: 50px;
-      height: 50px;
       border-radius: 50%;
-      border: 2px solid #dadeec;
       padding: 0;
 
       @media (max-width: 1000px) {

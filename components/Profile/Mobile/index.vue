@@ -42,24 +42,12 @@
         <ProfilePost :data="posts[0]"/>
         <ProfilePost :data="posts[1]"/>
       </div>
-      <ProfileBtn>
-        <nuxt-link to="/profile/posts">
-          Все объявления
-        </nuxt-link>
-      </ProfileBtn>
-      <nuxt-link to="/create-post">
-        <ProfileBtn>
-          Разместить объявление
-        </ProfileBtn>
-      </nuxt-link>
+      <UIButton class="full profile__block-btn" to="/profile/posts">Все объявления</UIButton>
+      <UIButton class="full profile__block-btn btn-create" to="/create-post">Разместить объявление</UIButton>
     </div>
     <div class="profile__block">
       <h2 class="profile__block-title">Заказы</h2>
-      <nuxt-link to="/search">
-        <ProfileBtn>
-          Найти баню, услугу, товары
-        </ProfileBtn>
-      </nuxt-link>
+      <UIButton class="full profile__block-btn" to="/search">Найти баню, услугу, товары</UIButton>
     </div>
   </div>
 </template>
@@ -87,11 +75,6 @@ const props = defineProps(['posts'])
 .profile {
   padding: 20px;
 
-  &-btn {
-    width: 100%;
-    padding: 15px;
-  }
-
   &__user {
     margin: 0 0 40px;
     gap: 10px;
@@ -103,7 +86,7 @@ const props = defineProps(['posts'])
       gap: 10px;
     }
 
-    &-image, &-btn, &-info {
+    &-image, &-info {
       margin: 0;
     }
   }
@@ -147,6 +130,12 @@ const props = defineProps(['posts'])
       margin-bottom: 40px;
     }
 
+    &-btn {
+      &.btn-create {
+        margin-top: 20px;
+      }
+    }
+
     &-title {
       font-weight: 700;
       font-size: 28px;
@@ -162,13 +151,6 @@ const props = defineProps(['posts'])
           margin-bottom: 30px;
         }
       }
-    }
-
-    .profile-btn {
-      &:first-of-type {
-        margin-bottom: 20px;
-      }
-
     }
   }
 }

@@ -34,18 +34,16 @@
         class="booking-page__review-rating"
         v-if="!props.moderation && props.data.rating"
       >
-        <!-- <img src="~/assets/img/order/like-green.svg" /> -->
-        <button class="booking-page__review-like">
+        <UIButton class="booking-page__review-like custom">
           <IconBase icon="like" color="gray" />
-        </button>
+        </UIButton>
         <span>{{ props.data.rating }}</span>
-        <button class="booking-page__review-like">
+        <UIButton class="booking-page__review-like custom">
           <IconBase icon="like" color="gray" />
-        </button>
-        <!-- <img src="~/assets/img/order/like-gray.svg" /> -->
+        </UIButton>
       </div>
 
-      <UIButton class="booking-page__review-btn" v-if="props.moderation"
+      <UIButton class="booking-page__review-btn custom" v-if="props.moderation"
         >На модерации</UIButton
       >
     </div>
@@ -114,15 +112,12 @@ const props = defineProps({
   }
 
   &-btn {
-    width: 130px;
-    padding: 5px 10px;
-    border-color: $gray;
-    font-weight: 500;
     font-size: 14px;
     line-height: 18px;
     background: $gray;
+    border-color: $gray;
     pointer-events: none;
-
+    color: #fff;
     margin-top: 15px;
   }
 
@@ -161,7 +156,10 @@ const props = defineProps({
   }
 
   &-like {
-    cursor: pointer;
+    padding: 0;
+    height: fit-content;
+    border: none;
+
     &:hover {
       svg {
         --icon-color: #{$green};

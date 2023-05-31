@@ -46,8 +46,8 @@
           <Reviews text="11 отзывов" />
         </div>
         <div class="item__contact-btns">
-          <UIButton>+7 999 333 14 ...</UIButton>
-          <UIButton class="chat-btn">
+          <UIButton class="green">+7 999 333 14 ...</UIButton>
+          <UIButton class="green chat-btn">
             <IconBase icon="message" color="white" />
           </UIButton>
         </div>
@@ -203,9 +203,8 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    .btn {
-      padding: 15px 20px;
 
+    .btn {
       &:not(.chat-btn) {
         flex-grow: 1;
       }
@@ -213,10 +212,14 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
       &.chat-btn {
         width: 50px;
         height: 50px;
-        padding: 12px;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0;
+
+        .icon-base {
+          width: 25px;
+        }
       }
     }
   }

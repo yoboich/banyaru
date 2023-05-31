@@ -10,11 +10,9 @@
         <div class="header__location">
           <CitySelect />
         </div>
-        <nuxt-link to="/create-post">
-          <UIButton class="header__btn">
+          <UIButton to="/create-post" class="green header-mobile__btn">
             <IconBase icon="plus" color="white" />
           </UIButton>
-        </nuxt-link>
       </div>
     </div>
   </header>
@@ -31,6 +29,12 @@
       align-items: center;
       padding: 0;
     }
+
+    &__btn {
+      padding: 0;
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &__btns {
@@ -38,16 +42,6 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-
-    .btn {
-      padding: 12px;
-      width: 40px;
-      height: 40px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
   }
 }
 </style>

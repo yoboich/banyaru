@@ -15,9 +15,7 @@
         </SwiperSlider>
       </div>
       <ProfileMobileFavorite v-else />
-      <nuxt-link to="/search">
-        <ProfileBtn>Найти баню, услугу, товары</ProfileBtn>
-      </nuxt-link>
+      <UIButton class="favorite__btn" to="/search">Найти баню, услугу, товары</UIButton>
     </div>
   </div>
 </template>
@@ -45,13 +43,17 @@ const items = ref([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 21, , 33, 2, 32]);
     }
   }
 
-  .profile-btn {
-    padding: 15px !important;
-    width: 100%;
-  }
 
   &__items {
     margin-bottom: 50px;
+  }
+
+  &__btn {
+    padding: 0 60px;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
   }
 }
 </style>

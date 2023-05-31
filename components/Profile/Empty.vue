@@ -1,5 +1,5 @@
 <template>
-  <div class="empty" v-if="!items">
+  <div class="empty">
     <h1 class="empty-title">{{ props.title }}</h1>
     <p class="empty-text">
       Вы можете начать свой выбор с
@@ -9,16 +9,13 @@
     </p>
     <ProfileSlider title="Недавно вы смотрели"/>
     <ProfileSlider title="Избранное"/>
-    <nuxt-link to="/search">
-      <ProfileBtn>
-        Найти баню, услугу, товары
-      </ProfileBtn>
-    </nuxt-link>
+    <UIButton to="/search">
+      Найти баню, услугу, товары
+    </UIButton>
   </div>
 </template>
 
 <script setup>
-
 const props = defineProps({
   title: String,
 });
@@ -26,14 +23,6 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .empty {
-
-  @media (max-width: 1000px) {
-    .profile-btn {
-      padding: 15px;
-      width: 100%;
-      max-width: 400px;
-    }
-  }
 
   &-title {
     text-align: center;

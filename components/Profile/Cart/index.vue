@@ -12,12 +12,10 @@
         </div>
       </div>
       <div class="cart__controls">
-        <nuxt-link to="/search">
-          <ProfileBtn>
-            Найти баню, услугу, товары
-          </ProfileBtn>
-        </nuxt-link>
-        <ProfileBtn class="btn-pay">Оплатить</ProfileBtn>
+        <UIButton class="cart__btn-search" to="/search">
+          Найти баню, услугу, товары
+        </UIButton>
+        <UIButton class="green cart__btn-pay">Оплатить</UIButton>
       </div>
     </div>
     <ProfileEmpty title="Пока в корзине ничего нет" v-else/>
@@ -34,9 +32,6 @@ const cart = ref([1, 2]);
     margin-bottom: 30px;
   }
 
-  .profile-btn {
-    padding: 15px;
-  }
 
   &__result {
     border-top: 1px solid rgba($color: $gray, $alpha: 0.2);
@@ -75,13 +70,26 @@ const cart = ref([1, 2]);
     justify-content: space-between;
 
     @media (max-width: 700px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
       gap: 20px;
     }
+  }
 
-    .btn-pay {
-      background: $green;
-      color: #fff;
+  &__btn {
+    &-pay {
+      padding: 0 40px;
+
+      @media (max-width: 700px) {
+        width: 100%;
+      }
+    }
+
+    &-search {
+      padding: 0 60px;
+
+      @media (max-width: 700px) {
+        width: 100%;
+      }
     }
   }
 

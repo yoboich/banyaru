@@ -1,28 +1,70 @@
 <template>
-  <button class="btn">
-    <slot />
+  <nuxt-link v-if="props.to" class="btn" :to="props.to">
+    <slot/>
+  </nuxt-link>
+  <button class="btn" v-else>
+    <slot/>
   </button>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  to: {
+    type: String
+  }
+})
+</script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .btn {
-  padding: 20px 10px;
-  width: 240px;
+  width: fit-content;
+  height: 50px;
+  padding: 0 15px;
+  border-radius: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  color: #fff;
-
+  gap: 5px;
+  font-weight: 500;
   font-size: 20px;
   line-height: 100%;
+  text-align: center;
 
-  border-radius: 100px;
-  border: 1px solid $green;
-  background: $green;
+  color: $green;
+  border: 2px solid #DADEEC;
+  background: #fff;
 
+  transition: all .2s;
   cursor: pointer;
+
+  &.full {
+    width: 100%;
+  }
+
+  &:not(.green):not(.purple):not(.gray):not(.custom):hover {
+    background: $green;
+    color: #fff;
+    border-color: $green;
+  }
+
+  &.gray {
+    color: $black;
+  }
+
+  &.green {
+    background: $green;
+    border-color: $green;
+    color: #fff;
+  }
+
+  &.purple {
+    background: $purple;
+    border-color: $purple;
+    color: #fff;
+    
+    &:hover {
+      color: #fff;
+    }
+  }
 }
 </style>

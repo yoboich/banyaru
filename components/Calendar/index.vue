@@ -104,23 +104,21 @@
         </ul>
       </div>
       <div class="calendar__actions">
-        <UIButton class="calendar__actions-btn calendar__actions-btn--clear"
-                  v-if="width > 1000"
-        >Очистить
-        </UIButton
-        >
-        <button class="calendar__actions-btn calendar__actions-btn--chat" v-else>
+        <UIButton class="calendar__actions-btn btn-clear gray" v-if="width > 1000">
+          Очистить
+        </UIButton>
+        <UIButton class="calendar__actions-btn btn-chat green" v-else>
           <IconBase icon="message" color="white"/>
-        </button>
-        <UIButton class="calendar__actions-btn calendar__actions-btn--book"
+        </UIButton>
+        <UIButton class="calendar__actions-btn btn-book purple"
         >Заказать <span>•</span> 12 000 ₽
         </UIButton
         >
       </div>
-      <button class="calendar__favorite-btn">
+      <UIButton class="calendar__favorite-btn custom">
         <IconBase icon="favorite-filled" color="green"/>
         Добавить баню в избранное
-      </button>
+      </UIButton>
     </div>
   </div>
 </template>
@@ -260,19 +258,7 @@ watch(calculatorData.value, () => {
     }
 
     &-btn {
-      padding: 12px;
       background: transparent;
-      border-radius: 100px;
-
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 100%;
-      color: #3e3e51;
-
-      position: relative;
-      z-index: 2;
-
-      cursor: pointer;
     }
   }
 
@@ -450,38 +436,14 @@ watch(calculatorData.value, () => {
     }
 
     &-btn {
-      //padding: 15px 60px;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 100%;
-      height: 50px;
-
-      &--clear {
-        // padding: 15px 50px;
-        width: auto;
-        //width: 200px;
-        border: 2px solid $light-gray;
-        background: transparent;
-        color: #3e3e51;
-      }
-
-      &--chat {
-        @include flex-center-all;
+      &.btn-chat {
         width: 50px;
-        height: 50px;
         border-radius: 50%;
-        background: $green;
       }
 
 
-      &--book {
-        //width: 320px;
-        width: auto;
-        background: #8e58ff;
-        display: flex;
-        align-items: center;
+      &.btn-book {
         gap: 10px;
-        border-color: $purple;
 
         span {
           font-size: 12px;
@@ -492,25 +454,11 @@ watch(calculatorData.value, () => {
 
   &__favorite-btn {
     width: 100%;
-    padding: 15px;
-    background: #ffffff;
-    border: 2px solid $light-gray;
-    border-radius: 100px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
-
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    color: $green;
-    cursor: pointer;
-    transition: all 0.2s;
 
     &:hover {
       border-color: $green;
+      background: #fff;
     }
   }
 }

@@ -29,16 +29,12 @@
       </nuxt-link>
     </div>
     <div class="profile__controls" v-if="posts.length">
-      <nuxt-link to="/search">
-        <ProfileBtn>
-          Найти баню, услугу, товары
-        </ProfileBtn>
-      </nuxt-link>
-      <nuxt-link to="/create-post">
-        <ProfileBtn>
-          Разместить объявление
-        </ProfileBtn>
-      </nuxt-link>
+      <UIButton class="full" to="/search">
+        Найти баню, услугу, товары
+      </UIButton>
+      <UIButton class="full" to="/create-post">
+        Разместить объявление
+      </UIButton>
     </div>
   </section>
   <ProfileMobile :posts="posts" v-else/>

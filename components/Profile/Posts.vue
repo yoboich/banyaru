@@ -34,17 +34,8 @@
         </nuxt-link>
       </div>
       <div v-if="!props.posts?.length">
-        <nuxt-link to="/search">
-          <ProfileBtn>
-            Найти баню, услугу, товары
-          </ProfileBtn>
-        </nuxt-link>
-        <nuxt-link to="/create-post">
-          <ProfileBtn>
-            Разместить объявление
-          </ProfileBtn>
-        </nuxt-link>
-
+        <UIButton to="/search">Найти баню, услугу, товары</UIButton>
+        <UIButton to="/create-post">Разместить объявление</UIButton>
       </div>
     </div>
   </div>
@@ -79,18 +70,6 @@ const props = defineProps(['posts'])
     flex-grow: 1;
     overflow: auto;
     margin-bottom: 30px;
-  }
-
-  & .profile-btn {
-    padding: 15px;
-
-    &:first-of-type {
-      margin-bottom: 20px;
-    }
-
-    &:last-of-type {
-      margin-bottom: 110px;
-    }
   }
 
   &__item {

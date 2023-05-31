@@ -22,7 +22,7 @@
         <slot />
       </div>
     </div>
-    <HeaderBtn />
+    <HeaderButton />
   </div>
 </template>
 
@@ -83,7 +83,7 @@ watch(route, () => {
 $pageHeight: calc(100vh - 40px);
 
 .mobile {
-  .header__btn {
+  .header-btn {
     display: none;
   }
 
@@ -153,14 +153,10 @@ $pageHeight: calc(100vh - 40px);
     padding: 0 15px;
   }
 
-  .header__btn {
+  .header-btn {
     position: absolute;
     top: 20px;
     right: 20px;
-    height: 58px;
-    font-size: 16px;
-    line-height: 18px;
-    padding: 20px 10px;
   }
 
   &__nav {

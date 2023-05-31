@@ -20,9 +20,7 @@
       <div class="order__items" v-else>
         <ProfileOrderItem v-for="(item, i) of data" :key="i" :data="item" />
       </div>
-      <nuxt-link to="/search">
-      <ProfileBtn>Найти баню, услугу, товары</ProfileBtn>
-      </nuxt-link>
+      <UIButton class="order__btn"  to="/search">Найти баню, услугу, товары</UIButton>
     </div>
   </div>
 </template>
@@ -72,14 +70,6 @@ const data = ref([
     }
   }
 
-  .profile-btn {
-    width: 100%;
-    margin: 0 auto;
-    padding: 15px;
-    display: flex;
-    text-align: center;
-  }
-
   & :deep(.profile-tabs) {
     margin: 20px auto 50px;
 
@@ -89,6 +79,14 @@ const data = ref([
       @media (max-width: 700px) {
         padding: 0 40px 10px;
       }
+    }
+  }
+
+  &__btn {
+    padding: 0 60px;
+
+    @media (max-width: 1000px) {
+      width: 100%;
     }
   }
 }

@@ -46,17 +46,15 @@
       <p class="booking-page__street">г. Москва, ул. Большая Очаковская, 35</p>
       <WorkTime time="9:00" closed/>
       <div class="booking-page__card-actions flex">
-        <UIButton class="booking-page__card-action--phone flex" @click="callUser">
+        <UIButton class="green booking-page__card-action action-phone flex" @click="callUser">
           <IconBase icon="phone" color="white"/>
           <span>+7 999 333 14</span>
         </UIButton>
-        <UIButton class="booking-page__card-action--chat">
-          <nuxt-link class="flex" to="/chat/test">
-            <IconBase icon="message" color="white"/>
-            <div class="unread">3</div>
-          </nuxt-link>
+        <UIButton class="green booking-page__card-action action-chat" to="/chat">
+          <IconBase icon="message" color="white"/>
+          <div class="unread">3</div>
         </UIButton>
-        <UIButton class="booking-page__card-action--calc flex">
+        <UIButton class="booking-page__card-action purple action-calc flex">
           <IconBase icon="calc" color="white"/>
           <span>Калькулятор</span>
         </UIButton>
@@ -151,7 +149,7 @@ const callUser = () => callElement.value?.dialog.showModal()
 
     &-actions {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1.5fr auto 1fr;
       gap: 10px;
       padding: 15px;
       box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
@@ -163,21 +161,12 @@ const callUser = () => callElement.value?.dialog.showModal()
     }
 
     &-action {
-      &--phone,
-      &--chat,
-      &--calc {
-        align-items: center;
-        flex-shrink: 0;
-        gap: 15px;
-        height: 50px;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        width: auto;
-        font-size: 18px;
-      }
+      align-items: center;
+      //flex-shrink: 0;
+      gap: 15px;
+      font-size: 18px;
 
-      &--phone {
-        //width: 250px;
+      &.action-phone {
         @media (max-width: 1200px) {
           width: 50px;
           height: 50px;
@@ -189,13 +178,11 @@ const callUser = () => callElement.value?.dialog.showModal()
         }
       }
 
-      &--chat {
+      &.action-chat {
         width: 50px;
         height: 50px;
         aspect-ratio: 1;
-        justify-content: center;
-        align-items: center;
-        padding: 0 !important;
+        padding: 0;
         position: relative;
 
         .unread {
@@ -210,11 +197,10 @@ const callUser = () => callElement.value?.dialog.showModal()
         }
       }
 
-      &--calc {
-        //width: 200px;
-        background: #8e58ff !important;
-        border-color: $purple;
-      }
+      //&.action-calc {
+      //  background: #8e58ff !important;
+      //  border-color: $purple;
+      //}
     }
   }
 }

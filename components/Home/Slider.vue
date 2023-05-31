@@ -10,7 +10,7 @@
         <div class="slider__content">
           <h1 class="slider__content-title">Баня.ру</h1>
           <h2 class="slider__content-suptitle">С нами теплее</h2>
-          <UIButton>Смотреть</UIButton>
+          <UIButton class="green slider__content-btn">Смотреть</UIButton>
         </div>
         <img src="@/assets/images/preview/home-slider.png" alt="" />
       </swiper-slide>
@@ -75,10 +75,13 @@ const { width } = useWindowSize();
         padding: 25px;
       }
 
-      .btn {
+      &-btn {
         margin-top: auto;
         position: relative;
         z-index: 2;
+
+        padding: 20px 45px;
+        box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
 
         @media (max-width: 768px) {
           padding: 10px 20px;

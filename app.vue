@@ -10,6 +10,15 @@
 <script setup>
 import { useWindowSize } from "@vueuse/core";
 const { width } = useWindowSize();
+
+useHead({
+  meta: [
+    {
+      name: 'viewport',
+      content: `width=device-width, initial-scale=${width.value <= 375 ? '0.8' : '1'}`
+    },
+  ]
+})
 </script>
 
 <style lang="scss">

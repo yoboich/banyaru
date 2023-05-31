@@ -5,7 +5,7 @@
         <img class="header__logo" src="/logo.svg" alt="" />
       </nuxt-link>
       <HeaderNav />
-      <HeaderBtn />
+      <HeaderButton />
     </div>
   </header>
   <HeaderMobile v-else />

@@ -43,8 +43,11 @@ services.value = services.value.concat(services.value);
 <style lang="scss" scoped>
 .search-services {
   margin-bottom: 30px;
+
   .search-service {
-    padding: 15px 40px 15px 10px;
+    //padding: 15px 40px 15px 10px;
+    padding: 0 15px;
+    height: 70px;
     border-radius: 25px;
     border: 2px solid #dadeec;
     text-align: left;
