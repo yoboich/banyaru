@@ -1,6 +1,6 @@
 <template>
-  <label :for="inputId" class="checkbox">
-    <input :id="inputId" type="checkbox" />
+  <label :for="inputId" class="checkbox" :class="{checked: isChecked}">
+    <input :id="inputId" type="checkbox" v-model="isChecked" />
     <IconBase icon="new-post-check" color="green" />
   </label>
 </template>
@@ -12,6 +12,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const isChecked = ref(false)
 </script>
 
 <style lang="scss" scoped>
@@ -24,6 +26,11 @@ const props = defineProps({
   position: relative;
   display: block;
   cursor: pointer;
+  transition: all .2s;
+
+  &.checked {
+    border-color: $green;
+  }
 
   .icon-base {
     position: absolute;

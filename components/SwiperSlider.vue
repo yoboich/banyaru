@@ -26,6 +26,7 @@
         :free-mode="props.freeMode"
         :loop="props.loop"
         :slides-per-view="props.slidesPerView"
+        :centered-slides="props.centeredSlides"
         :space-between="props.spaceBetween"
         :modules="modules"
         :grid="grid"
@@ -71,6 +72,7 @@ const props = defineProps({
   slidesPerGroup: {
     default: 1,
   },
+  centeredSlides: Boolean,
   navigation: {
     type: Boolean,
     default: false,

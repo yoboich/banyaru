@@ -1,7 +1,9 @@
 <template>
   <div class="post-period">
-    с <PostInput type="time" v-model="timeStart" placeholder="9:00" /> до
-    <PostInput type="time" v-model="timeEnd" placeholder="18:00" />
+    <span>с</span>
+    <PostInput type="time" v-model="timeStart" placeholder="9:00"/>
+    <span>до</span>
+    <PostInput type="time" v-model="timeEnd" placeholder="18:00"/>
   </div>
 </template>
 

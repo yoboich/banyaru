@@ -88,6 +88,10 @@ const generateURL = (file) => {
     transition: all 0.2s;
     cursor: pointer;
 
+    @media (max-width: 600px) {
+      margin: 0 auto;
+    }
+
     label {
       @include flex-center-all;
       gap: 5px;
@@ -145,6 +149,12 @@ const generateURL = (file) => {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 
+    overflow: scroll;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
     input {
       display: none;
     }
@@ -155,6 +165,7 @@ const generateURL = (file) => {
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 18px;
+      width: 85%;
     }
   }
 }
