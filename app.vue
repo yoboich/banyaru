@@ -11,12 +11,11 @@
 import { useWindowSize } from "@vueuse/core";
 const { width } = useWindowSize();
 
-
 useHead({
   meta: [
     {
       name: 'viewport',
-      content: `width=device-width, initial-scale=${width.value < 375 ? (width.value > 350 ? '0.95' : '0.8') : '1'}`
+      content: `width=device-width, initial-scale=${width.value < 375 ? (width.value > 350 ? '0.95' : '0.8') : '1'} maximum-scale=1.0, user-scalable=no`
     },
   ]
 })
