@@ -88,6 +88,8 @@ const filteredCities = computed(() =>
     width: 100vw;
     height: 100vh;
 
+    font-family: Lato;
+
     .modal__overflow {
       width: 100vw;
       height: 100vh;
@@ -189,7 +191,7 @@ const filteredCities = computed(() =>
 
     .modal__items {
       //max-height: 500px;
-      overflow: scroll;
+      overflow: auto;
       flex-grow: 1;
 
       //display: flex;

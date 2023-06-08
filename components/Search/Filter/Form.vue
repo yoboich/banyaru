@@ -3,10 +3,11 @@
     <div class="search-filter__header">
       <div class="search-filter__searchbox">
         <UISearchInput
+            ref="searchInput"
             v-model="searchTerm"
             placeholder="Поиск по г. Москва"
             hint
-            @focus="isSearchFocused = true"
+            @focus="emits('focus')"
         />
         <UIButtonClose type="button" @click="resetSearch"/>
       </div>
@@ -29,7 +30,7 @@
       </nuxt-link>
     </div>
     <div class="search-filter__tabs" v-else>
-      <ProfileTabs class="search-filter__tabs-items" :tabs="tabs" />
+      <ProfileTabs class="search-filter__tabs-items" :tabs="tabs"/>
       <div class="search-filter__tabs-inner">
         <div class="search-filter__tabs-location">
           <span>Где:</span>
@@ -37,13 +38,15 @@
             <span>{{ selectedCity }}</span>
             <IconBase icon="arrow-left" color="green"/>
           </div>
-          <CitySelectModal
-              v-show="isModalOpen"
-              @close-modal="toggleModal"
-              @change-city="changeCity"
-              :cities="cities"
-              :selectedCity="selectedCity"
-          />
+          <Teleport to="body">
+            <CitySelectModal
+                v-show="isModalOpen"
+                @close-modal="toggleModal"
+                @change-city="changeCity"
+                :cities="cities"
+                :selectedCity="selectedCity"
+            />
+          </Teleport>
         </div>
         <label for="address" class="search-filter__tabs-address">
           <input
@@ -57,17 +60,17 @@
         </label>
         <div class="search-filter__block">
           <h2 class="search-filter__block-title">Место отдыха</h2>
-          <SwitchBlock :tabs="placeTabs" @tab-changed="onPlaceTabChange" />
+          <SwitchBlock :tabs="placeTabs" @tab-changed="onPlaceTabChange"/>
         </div>
         <div v-if="activeSwitchPlaceTab === 0">
-          <div class="search-filter__block">
+          <div class="search-filter__block bath-type">
             <h2 class="search-filter__block-title">Вид парной</h2>
             <ul class="search-filter__list">
               <li class="search-filter__list-item" v-for="tag of tagList" :key="tag" @click="toggleTag(tag)"
-              :class="{active: activeTags.includes(tag)}"
+                  :class="{active: activeTags.includes(tag)}"
               >
                 <span>{{ tag }}</span>
-                <IconBase icon="close" color="white" />
+                <IconBase icon="close" color="white"/>
               </li>
             </ul>
           </div>
@@ -140,18 +143,10 @@
           </div>
         </div>
         <div class="flex search-filter__controls">
-          <button
-              type="button"
-              class="search-filter__btn search-filter__btn--clear"
-          >
-            Очистить
-          </button>
-          <button
-              type="button"
-              class="search-filter__btn search-filter__btn--show"
-          >
+          <UIButton>Очистить</UIButton>
+          <UIButton class="green">
             Показать 120 объявлений
-          </button>
+          </UIButton>
         </div>
       </div>
     </div>
@@ -161,7 +156,8 @@
 <script setup>
 const searchTerm = ref("");
 const resetSearch = () => (searchTerm.value = "");
-const isSearchFocused = useState("searchFocused", () => false);
+
+const emits = defineEmits(['focus'])
 
 const pageTabs = ["Категории", "Фильтр"];
 const activeSwitchTab = ref(0);
@@ -171,9 +167,8 @@ const placeTabs = ["Баня / Сауна", "Номер"];
 const timeTabs = ["На час", "На ночь", "На сутки"];
 
 const tabs = ["Снять", "Услуги", "Купить"];
-const activeTab = ref(0);
 
-const tagList = ref(['Баня', 'Сауна','Баня по-черному', 'Тег 1','Тег 2','Тег 3','Тег 4'])
+const tagList = ref(['Баня', 'Сауна', 'Баня по-черному', 'Тег 1', 'Тег 2', 'Тег 3', 'Тег 4'])
 const activeTags = ref([])
 
 const toggleTag = (tag) => {
@@ -186,6 +181,7 @@ const toggleTag = (tag) => {
 
 const onTabChange = (tabIdx) => {
   activeSwitchTab.value = tabIdx;
+  activeSwitchPlaceTab.value = 0
 };
 
 const onPlaceTabChange = (tabIdx) => {
@@ -219,57 +215,70 @@ const counter = ref(1);
 
     &-item {
       @include flex-center-all;
-      padding: 8px 12px;
+      padding: 8px 19px;
       border: 2px solid #DADEEC;
       border-radius: 25px;
       font-size: 16px;
       line-height: 18px;
       transition: all .2s;
+      cursor: pointer;
 
-      span {
-        margin-right: 5px;
+      @media (max-width: 1000px) {
+        font-size: 14px;
+        line-height: 16px;
       }
 
       &.active {
         background: $green;
         border-color: $green;
         color: #fff;
+        padding: 8px 12px;
 
         svg {
-          opacity: 1;
+          width: 14px;
         }
       }
 
       svg {
-        opacity: 1;
+        width: 0;
+        margin-left: 5px;
       }
     }
   }
 
   &__form {
-    height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 20px;
+    position: relative;
+    min-height: 100%;
+    flex-grow: 1;
 
     & > .switch {
       margin-bottom: 30px;
+
+      @media (max-width: 1000px) {
+        margin-bottom: 20px;
+      }
     }
   }
 
   &__header {
-    max-width: 600px;
     width: 100%;
     background: #fff;
-    border-radius: 25px 25px 0 0;
-    position: absolute;
+    position: sticky;
     top: 0;
-    left: 0;
     z-index: 20;
-    padding: 20px;
+    padding: 20px 0;
 
     & :deep(.switch) {
       .switch__btn {
         font-size: 20px;
+
+        @media (max-width: 1000px) {
+          font-size: 16px;
+          line-height: 18px;
+        }
       }
     }
 
@@ -283,21 +292,21 @@ const counter = ref(1);
     align-items: center;
     gap: 20px;
     margin-bottom: 30px;
+
+    @media (max-width: 1000px) {
+      margin-bottom: 20px;
+    }
   }
 
   &__categories {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 80px 40px;
-    padding-bottom: 150px;
-    margin-top: 180px;
+    padding-bottom: 20px;
 
-    @media (max-width: 1000px) {
-      gap: 30px;
-    }
-
-    @media (max-width: 500px) {
-      grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 1400px) {
+      //grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
     &::-webkit-scrollbar {
@@ -313,17 +322,17 @@ const counter = ref(1);
     }
 
     &-image {
+      @include flex-center-all;
       aspect-ratio: 1;
       border-radius: 50%;
       box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
-      padding: 20px;
       margin-bottom: 10px;
       transition: all 0.2s;
       border: 3px solid transparent;
 
       img {
-        width: 100%;
-        height: 100%;
+        width: 70%;
+        height: 70%;
         object-fit: contain;
         object-position: center;
       }
@@ -334,23 +343,46 @@ const counter = ref(1);
       font-size: 20px;
       line-height: 100%;
       text-align: center;
+
+      @media (max-width: 1400px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 1000px) {
+        font-size: 12px;
+      }
     }
   }
 
   &__tabs {
-    height: 100%;
-    margin-top: 180px;
     padding-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
     &-items {
-      //display: flex;
-      //justify-content: space-between;
-      //align-items: center;
       margin-bottom: 40px;
       width: 100% !important;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      text-align: center;;
+      text-align: center;
+
+
+      @media (max-width: 1000px) {
+        margin-bottom: 20px;
+
+        & :deep(.profile-tabs__item) {
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
     }
 
     &-item {
@@ -387,7 +419,7 @@ const counter = ref(1);
     }
 
     &-location {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       font-weight: 500;
       font-size: 16px;
       line-height: 20px;
@@ -395,6 +427,11 @@ const counter = ref(1);
       display: flex;
       align-items: center;
       gap: 5px;
+
+      @media (max-width: 1000px) {
+        font-size: 14px;
+        line-height: 16px;
+      }
 
       & > span {
         color: $gray;
@@ -409,6 +446,11 @@ const counter = ref(1);
         gap: 5px;
         color: $green;
         cursor: pointer;
+
+        @media (max-width: 1000px) {
+          font-size: 14px;
+          line-height: 16px;
+        }
 
         svg {
           transform: rotate(180deg) scale(0.7);
@@ -429,7 +471,6 @@ const counter = ref(1);
     &-address {
       display: block;
       position: relative;
-      padding-bottom: 10px;
       border-bottom: 1px solid rgba(225, 229, 242, 0.5);
 
       input {
@@ -437,9 +478,13 @@ const counter = ref(1);
         font-weight: 500;
         font-size: 16px;
         line-height: 20px;
-        padding: 10px 0;
+        padding: 20px 70px 20px 0;
         border: none;
-        padding-right: 70px;
+
+        @media (max-width: 1000px) {
+          font-size: 14px;
+          line-height: 16px;
+        }
 
         &::placeholder {
           color: $gray;
@@ -466,9 +511,18 @@ const counter = ref(1);
     padding: 30px 0;
     border-bottom: 1px solid rgba(225, 229, 242, 0.5);
 
+    &.bath-type {
+      border-bottom: none;
+    }
+
     & :deep(.switch) {
       .switch__btn {
         font-size: 20px;
+
+        @media (max-width: 1000px) {
+          font-size: 16px;
+          line-height: 18px;
+        }
       }
     }
 
@@ -480,6 +534,11 @@ const counter = ref(1);
         font-size: 20px;
         line-height: 100%;
         margin-bottom: 40px;
+
+        @media (max-width: 1000px) {
+          font-size: 16px;
+          line-height: 18px;
+        }
       }
     }
 
@@ -488,6 +547,11 @@ const counter = ref(1);
       font-size: 24px;
       line-height: 130%;
       margin-bottom: 15px;
+
+      @media (max-width: 1000px) {
+        font-size: 16px;
+        line-height: 18px;
+      }
     }
 
     .flex {
@@ -687,45 +751,23 @@ const counter = ref(1);
   }
 
   &__controls {
-    justify-content: space-between;
-    padding-bottom: 120px;
-  }
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
 
-  &__btn {
-    padding: 15px 25px;
-    border-radius: 100px;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    transition: all 0.2s;
-    cursor: pointer;
+    padding-bottom: 20px;
+    margin-top: auto;
 
-    &--clear {
-      width: 40%;
-      background: #fff;
-      border: 2px solid #dadeec;
-      color: $green;
+    .btn {
+      width: auto;
+
+      @media (max-width: 1200px) {
+        font-size: 18px;
+      }
 
       @media (max-width: 1000px) {
-        display: none;
-      }
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.05);
-      }
-    }
-
-    &--show {
-      width: 55%;
-      color: #fff;
-      background: $green;
-
-      @media (max-width: 1000px) {
-        width: 100%;
-      }
-
-      &:hover {
-        background: rgba($color: $green, $alpha: 0.7);
+        font-size: 16px;
+        line-height: 18px;
       }
     }
   }

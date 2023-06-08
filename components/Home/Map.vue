@@ -6,11 +6,9 @@
       <div class="search-hint">
         <h2 class="search-hint__title">Поиск на карте</h2>
         <p class="search-hint__suptitle">Бани и сауны рядом с вами</p>
-        <nuxt-link to="/search"
-          ><button class="btn search-hint__btn">
-            Показать на карте
-          </button></nuxt-link
-        >
+        <UIButton class="gray search-hint__btn" to="/search">
+          Показать на карте
+        </UIButton>
       </div>
 
       <iframe
@@ -60,39 +58,9 @@
       }
 
       &__btn {
-        padding: 20px 10px;
-        width: 240px;
-        font-size: 20px;
-        border: 2px solid #dadeec;
-        background: #fff;
-        transition: all 0.3s;
-        color: $black;
-
-        &:hover {
-          background: $green;
-          color: #fff;
-          border-color: #fff;
-        }
+        padding: 30px 50px;
       }
     }
   }
 }
-// .map {
-//   margin-top: 11.8rem;
-
-//   &__title {
-//     font-family: "Gilroy";
-//     font-size: 2.6rem;
-//     margin-bottom: 5.4rem;
-//   }
-//   & iframe {
-//     border-radius: 23px;
-//   }
-//   &__content {
-//     border: 26px solid #ffffff;
-//     filter: drop-shadow(0px 20px 56px rgba(123, 129, 148, 0.16));
-//     border-radius: 23px;
-//     height: 64rem;
-//   }
-// }
 </style>

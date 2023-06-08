@@ -1,27 +1,27 @@
 <template>
-  <section class="search-form show">
+  <section class="search-form">
     <div class="search-form__searchbox">
       <UISearchInput
-        @focus="isSearchFocused = true"
-        v-model="searchTerm"
-        placeholder="Поиск по г. Москва"
-        hint
+          ref="searchInput"
+          v-model="searchTerm"
+          placeholder="Поиск по г. Москва"
+          hint
       />
-      <UIButton class="btn">Найти</UIButton>
+      <UIButton class="green">Найти</UIButton>
     </div>
     <Transition mode="out-in">
-      <div class="search-form__suggestion" v-if="searchTerm.length">
+      <div class="search-form__suggestion" v-if="searchTerm.length"  @touchmove="onMove">
         <div class="search-form__tags">
           <button class="search-form__tag">Масла</button>
           <button class="search-form__tag">Массаж</button>
         </div>
         <div class="search-form__suggestion-items">
-          <SearchFormSuggestion v-for="item of data" :key="item" :data="item" />
+          <SearchFormSuggestion v-for="item of data" :key="item" :data="item"/>
         </div>
       </div>
-      <div class="search-form__history" v-else>
-        <div class="history-item" v-for="i of 5" :key="i">
-          <IconBase icon="clock-filled" color="gray" />
+      <div class="search-form__history" v-else  @touchmove="onMove">
+        <div class="history-item" v-for="i of 50" :key="i">
+          <IconBase icon="clock-filled" color="gray"/>
           <div class="history-item__content">
             <h3 class="history-item__name">Маркса 3</h3>
             <span class="history-item__address">Россия, Москва</span>
@@ -34,13 +34,6 @@
 
 <script setup>
 const searchTerm = ref("");
-const triggerScrollUpdate = useState("triggerScrollUpdate");
-
-const isSearchFocused = useState("searchFocused", () => false);
-
-// watch(searchTerm, (val) => {
-//   triggerScrollUpdate.value = !triggerScrollUpdate.value;
-// });
 
 const data = [
   {
@@ -120,6 +113,16 @@ const data = [
     ],
   },
 ];
+
+const searchInput = ref()
+
+onMounted(() => {
+  searchInput.value.setFocus()
+})
+
+const onMove = () => {
+  document.activeElement.blur();
+}
 </script>
 
 <style lang="scss" scoped>
@@ -133,66 +136,31 @@ const data = [
   opacity: 0;
 }
 
-.mobile {
-  .search-form__suggestion {
-    padding-bottom: 100px !important;
-  }
-}
-
 .search-form {
-  height: 100%;
-
-  &.show {
-    .search-form__suggestion {
-      display: block;
-    }
-    .search-form__history {
-      display: block;
-    }
-
-    .search-form__searchbox {
-      .btn {
-        display: block;
-      }
-    }
-  }
+  min-height: 100%;
+  padding: 0 20px;
+  flex-grow: 1;
 
   &__searchbox {
     max-width: 600px;
     width: 100%;
-    padding: 15px 20px;
+    padding: 15px 0;
     background: #fff;
-    border-radius: 25px 25px 0 0;
-    border: 1px solid #dadeec;
-    border-bottom: none;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 15px;
 
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: sticky;
+    top: -1px;
     z-index: 20;
 
     @media (max-width: 1000px) {
-      max-width: 100%;
-    }
-
-    label {
-      max-width: 430px;
-    }
-
-    .btn {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 18px;
-      padding: 15px 30px;
-      display: none;
-
-      @media (max-width: 1000px) {
-        width: 100px;
+      gap: 10px;
+      .btn {
+        font-size: 16px;
+        line-height: 18px;
       }
     }
   }
@@ -223,9 +191,6 @@ const data = [
   }
 
   &__suggestion {
-    display: none;
-    margin-top: 90px;
-
     &-items {
       &::-webkit-scrollbar {
         display: none;
@@ -234,9 +199,7 @@ const data = [
   }
 
   &__history {
-    margin-top: 90px;
     padding-bottom: 25px;
-    display: none;
 
     & .history-item {
       display: flex;

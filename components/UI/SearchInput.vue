@@ -12,12 +12,15 @@
       :value="props.modelValue"
       @focus="emits('focus')"
       @blur="emits('blur')"
+      autocomplete="off"
+      ref="searchInput"
     />
     <button type="button" v-if="props.hint" class="hint-btn">плюс</button>
   </label>
 </template>
 
 <script setup>
+import { useFocus } from '@vueuse/core'
 const emits = defineEmits(["update:modelValue", "focus", "blur"]);
 
 const props = defineProps({
@@ -33,6 +36,18 @@ const props = defineProps({
     type: String,
   },
 });
+
+const searchInput = ref()
+const { focused } = useFocus(searchInput, { initialValue: false })
+
+defineExpose({
+  setFocus() {
+    focused.value = true
+  },
+  setBlur() {
+    focused.value = false
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -77,6 +92,11 @@ const props = defineProps({
     font-size: 24px;
     line-height: 130%;
     color: #3e3e51;
+
+    @media (max-width: 1000px) {
+      font-size: 16px;
+      line-height: 18px;
+    }
 
     &::placeholder {
       color: #8f99ba;
