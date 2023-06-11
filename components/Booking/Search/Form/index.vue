@@ -100,6 +100,7 @@ const toggleTag = (tagName) => {
     selectedFilters.value.push(tagName);
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -116,12 +117,10 @@ const toggleTag = (tagName) => {
   }
 
   &__header {
-    // padding: 0 15px 20px;
     background: #fff;
-    border-radius: 25px 25px 0 0;
     margin-bottom: 20px;
-    position: absolute;
-    top: 0;
+    position: sticky;
+    top: -1px;
     left: 0;
     padding: 20px 15px;
     max-width: 600px;
@@ -267,7 +266,6 @@ const toggleTag = (tagName) => {
   }
 
   &__results {
-    padding-top: 310px;
     padding-bottom: 50px;
 
     &::-webkit-scrollbar {
