@@ -5,7 +5,7 @@
       <nuxt-link class="catalog-link" to="#">Все</nuxt-link>
     </div>
     <div class="catalog__content">
-      <nuxt-link to="/search/filter" class="catalog-item" v-for="i of 4" :key="i">
+      <nuxt-link to="/search" class="catalog-item" v-for="i of 4" :key="i">
         <IconBase icon="hand" subpath="/home" />
         <span>Массаж</span>
       </nuxt-link>

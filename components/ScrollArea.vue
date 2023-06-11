@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-area">
+  <div class="scroll-area" >
     <div class="scroll-area__scrollbar" ref="scrollbarElement" v-show="scrollHeight > windowHeight">
       <div
           id="scroll-content"
@@ -18,6 +18,10 @@ const contentWrapper = ref()
 const contentElement = ref()
 const scrollbarElement = ref()
 const scrollHeight = ref()
+const windowHeight = ref()
+const windowHeightStyle = computed(() => windowHeight.value + 'px')
+
+const route = useRoute()
 
 function firstElScroll(e) {
   contentWrapper.value.scrollTop = scrollbarElement.value.scrollTop;
@@ -25,9 +29,6 @@ function firstElScroll(e) {
 function secondElScroll(e) {
   scrollbarElement.value.scrollTop = contentWrapper.value.scrollTop;
 }
-
-const windowHeight = ref()
-const windowHeightStyle = computed(() => windowHeight.value + 'px')
 
 onMounted(async () => {
   contentElement.value = contentWrapper.value.children[0]
@@ -38,7 +39,7 @@ onMounted(async () => {
 
   const resizeObserver = new ResizeObserver(function() {
     scrollHeight.value = contentElement.value?.scrollHeight;
-    if (contentWrapper.value) {
+    if (contentWrapper.value && route.name === 'search') {
       contentWrapper.value.scrollTop = 0
     }
   });
@@ -46,6 +47,9 @@ onMounted(async () => {
   resizeObserver.observe(contentElement.value);
 });
 
+defineExpose({
+  el: contentWrapper
+})
 </script>
 
 <style lang="scss" scoped>

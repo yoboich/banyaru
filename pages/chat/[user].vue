@@ -1,7 +1,7 @@
 <template>
   <section class="chat">
     <Teleport to="body">
-      <Call ref="callElement" />
+      <Call ref="callElement"/>
     </Teleport>
     <div class="container" v-if="width > 1000">
       <div class="chat__sidebar">
@@ -133,7 +133,9 @@
 
         <div class="chat__content-header">
           <button class="chat-mobile__btn">
-            <nuxt-link to="/chat"><IconBase icon="arrow-left" color="green"/></nuxt-link>
+            <nuxt-link to="/chat">
+              <IconBase icon="arrow-left" color="green"/>
+            </nuxt-link>
           </button>
           <div class="chat__content-info">
             <ChatImageThumb/>
@@ -182,7 +184,7 @@
                 message="
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quae rerum excepturi dolore quam, in asperiores. Cum doloremque eaque a!"
             />
-            <ChatMessage class="from" message="Привет" last />
+            <ChatMessage class="from" message="Привет" last/>
             <ChatMessage
                 class="from"
                 message="Запрос отправлен администратору.
@@ -211,11 +213,18 @@
             />
           </div>
           <div class="chat__inputbox">
-            <div class="chat__inputbox-content">
+            <div class="chat__inputbox-header">
+              <div class="chat__inputbox-suggestions">
+                <button class="chat__inputbox-suggestion">Тестовый вариант</button>
+                <button class="chat__inputbox-suggestion">Баня</button>
+                <button class="chat__inputbox-suggestion">Сауна</button>
+              </div>
               <button class="chat__inputbox-btn">
                 <IconBase icon="chat-arrow-down" color="gray"/>
                 <div class="chat__inputbox-unread">12</div>
               </button>
+            </div>
+            <div class="chat__inputbox-content">
               <label for="file-input" class="chat__inputbox-file">
                 <input id="file-input" type="file"/>
                 <IconBase icon="clip" color="gray"/>
@@ -254,7 +263,7 @@ const callUser = () => callElement.value?.dialog.showModal()
 .mobile {
   .chat {
     &__main {
-      padding: 5px 5px 60px 10px;
+      padding: 0 0 120px;
 
       &-messages {
         &::-webkit-scrollbar {
@@ -286,8 +295,16 @@ const callUser = () => callElement.value?.dialog.showModal()
 
     &__inputbox {
       box-shadow: none;
-      background: transparent;
-      padding: 10px;
+      background: #fff;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      padding: 10px 10px 15px;
+      border-radius: 25px 25px 0 0;
+
+      &-content {
+        align-items: center;
+      }
 
       &-btn {
         position: absolute;
@@ -305,6 +322,11 @@ const callUser = () => callElement.value?.dialog.showModal()
         height: 30px;
         border-radius: 50%;
         background: $green;
+
+        @media (max-width: 1000px) {
+          width: 55px;
+          height: 55px;
+        }
       }
 
       &-input {
@@ -312,6 +334,24 @@ const callUser = () => callElement.value?.dialog.showModal()
         input {
           height: 30px;
           padding: 10px;
+
+          @media (max-width: 1000px) {
+            height: 55px;
+          }
+        }
+      }
+
+      &-file {
+        @media (max-width: 1000px) {
+          width: 55px;
+          height: 55px;
+          background: $green;
+          border-radius: 50%;
+
+          .icon-base {
+            --icon-color: white;
+            width: 20px;
+          }
         }
       }
     }

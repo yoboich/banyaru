@@ -3,7 +3,7 @@
     <h2 class="footer__links-title">Объявления по всей россии</h2>
     <ul class="footer__links-items">
       <li class="footer__links-item" v-for="region of regions" :key="region">
-        <nuxt-link to="/search/filter">
+        <nuxt-link to="/search">
           <span>{{ region }}</span>
           <IconBase icon="arrow-left" color="green" />
         </nuxt-link>

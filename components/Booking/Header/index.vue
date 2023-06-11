@@ -39,20 +39,20 @@
   display: flex;
   align-items: center;
   gap: 25px;
-  position: absolute;
-  top: 0;
+  position: sticky;
+  top: -1px;
   left: 0;
   z-index: 20;
   background: #fff;
   width: 100%;
   max-width: 600px;
-  border-radius: 25px 25px 0 0;
   padding: 15px 20px;
   border: 1px solid #dadeec;
   border-bottom: none;
 
   @media (max-width: 1000px) {
     max-width: 100%;
+    border: none;
   }
 
   & .booking-page__last-online {

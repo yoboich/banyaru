@@ -5,7 +5,7 @@
       Вы можете начать свой выбор с
       <nuxt-link to="/">главной страницы</nuxt-link>
       или выбрать
-      <nuxt-link to="/search/filter">категорию</nuxt-link>
+      <nuxt-link to="/search">категорию</nuxt-link>
     </p>
     <ProfileSlider title="Недавно вы смотрели"/>
     <ProfileSlider title="Избранное"/>

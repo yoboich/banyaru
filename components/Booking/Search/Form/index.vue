@@ -13,7 +13,7 @@
               <IconBase icon="sort" color="gray"/>
             </button>
           </div>
-          <nuxt-link class="booking-search__filter-more" to="/search/filter">
+          <nuxt-link class="booking-search__filter-more" to="/search">
             <div
                 class="count"
                 v-show="selectedFilters.length && selectedFilters.length < 10"

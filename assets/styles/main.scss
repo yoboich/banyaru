@@ -407,6 +407,11 @@ li {
       margin-top: 15px;
       display: flex;
       gap: 20px;
+
+      @media (max-width: 1000px) {
+        gap: 10px;
+        margin: 0;
+      }
     }
 
     &-left {
@@ -514,6 +519,54 @@ li {
           }
         }
       }
+    }
+  }
+}
+
+// SEARCH
+.search {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  &__btn--create {
+    @include flex-center-all;
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .header-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  &__sidebar {
+    max-width: 600px;
+    width: 40vw;
+    height: calc(100% - 40px);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    &-content {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

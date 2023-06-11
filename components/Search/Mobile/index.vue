@@ -19,6 +19,11 @@ const emits = defineEmits(['close'])
 const limits = ref({})
 
 const isMiddle = computed(() => cardY.value === limits.value.middle)
+const route = useRoute()
+
+const props = defineProps({
+  open: Boolean
+})
 
 const openCard = () => {
   cardY.value = limits.value.max
@@ -28,7 +33,7 @@ const moveEnd = (e) => {
   const posY = e.changedTouches[0].clientY
   const config = limits.value
 
-  if (posY > config.min) {
+  if (posY > config.min && !props.open) {
     emits('close')
   } else if (posY >= config.middle) {
     cardY.value = config.middle
@@ -60,11 +65,17 @@ onMounted(() => {
 
   cardY.value = limits.value.max
 
-  const resizeObserver = new ResizeObserver(function() {
-    contentWrapper.value.scrollTop = 0
-  });
+  if (route.name === 'search') {
+    const resizeObserver = new ResizeObserver(function() {
+      contentWrapper.value.scrollTop = 0
+    });
 
-  resizeObserver.observe(contentElement.value);
+    resizeObserver.observe(contentElement.value);
+  }
+})
+
+defineExpose({
+  el: contentWrapper
 })
 </script>
 

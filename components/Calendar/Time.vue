@@ -1,39 +1,41 @@
 <template>
   <div class="calendar">
     <div class="calendar__days" ref="activeDaysContainer">
-      <button
-        v-for="(dayDate, i) of days"
-        :key="i"
-        class="calendar__days-btn"
-        :class="{ active: isDayActive(dayDate) }"
-        type="button"
-        @click="changeDay(getDayDate(dayDate))"
-        :ref="isDayActive(dayDate) ? 'activeDay' : null"
-      >
-        <span
-          class="calendar__days-name"
-          :class="{ red: ['СБ', 'ВС'].includes(getShortDayName(dayDate)) }"
-          >{{ getShortDayName(dayDate) }}</span
+      <div class="calendar__days-item"
+           v-for="(dayDate, i) of days"
+           :key="i">
+        <button
+            class="calendar__days-btn"
+            :class="{ active: isDayActive(dayDate) }"
+            type="button"
+            @click="changeDay(getDayDate(dayDate))"
+            :ref="isDayActive(dayDate) ? 'activeDay' : null"
         >
-        <span class="calendar__days-date">{{ getDayDate(dayDate) }}</span>
-      </button>
+        <span
+            class="calendar__days-name"
+            :class="{ red: ['СБ', 'ВС'].includes(getShortDayName(dayDate)) }"
+        >{{ getShortDayName(dayDate) }}</span
+        >
+          <span class="calendar__days-date">{{ getDayDate(dayDate) }}</span>
+        </button>
+      </div>
     </div>
     <div class="calendar__dates">
       <div
-        class="calendar__dates-item"
-        v-for="date of dates"
-        :key="date.format('HH:mm')"
-        :class="{
+          class="calendar__dates-item"
+          v-for="date of dates"
+          :key="date.format('HH:mm')"
+          :class="{
           [getRangeColor(date)]: true,
           first: isFirstDate(date),
           last: isLastDate(date),
           disabled: isDisabled(date),
           center: isCenter(date),
         }"
-        @click="selectTime(date)"
+          @click="selectTime(date)"
       >
         <div class="duration" v-if="isTimer(date)">
-          <IconBase icon="clock" color="black" />
+          <IconBase icon="clock" color="black"/>
           {{ getSelectedDuration(date) }}
         </div>
         <div class="time">{{ date.format("HH:mm") }}</div>
@@ -91,10 +93,8 @@ const activeDay = ref();
 const activeDaysContainer = ref();
 
 onMounted(() => {
-  const btn = activeDaysContainer.value.querySelector(".active");
-  const { width } = btn.getBoundingClientRect();
-
-  activeDaysContainer.value.scroll({ left: btn.offsetLeft - width });
+  const btn = activeDaysContainer.value.querySelector(".active").closest('.calendar__days-item');
+  activeDaysContainer.value.scroll({left: btn.offsetLeft - 15});
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -120,7 +120,7 @@ watch(day, () => {
 });
 
 watch(days, () => {
-  activeDaysContainer.value.scroll({ left: 0 });
+  activeDaysContainer.value.scroll({left: 0});
 });
 
 const isDayActive = (dayDate) => {
@@ -146,13 +146,13 @@ const isTimer = (date) => {
   const prevDate = date.clone().subtract(30, "minutes");
 
   const isValid =
-    isFirstDate(prevDate) &&
-    !isFirstDate(date) &&
-    !isLastDate(date) &&
-    !["disabled", "not-filled"].includes(getRangeColor(date));
+      isFirstDate(prevDate) &&
+      !isFirstDate(date) &&
+      !isLastDate(date) &&
+      !["disabled", "not-filled"].includes(getRangeColor(date));
 
   if (selectedDate && isValid) {
-    const { dateStart, dateEnd } = getMomentDatesFromString(selectedDate[0]);
+    const {dateStart, dateEnd} = getMomentDatesFromString(selectedDate[0]);
     const durationInMinutes = dateEnd.diff(dateStart, "minutes");
 
     return durationInMinutes >= 120;
@@ -162,14 +162,14 @@ const isTimer = (date) => {
 const findClosestDates = (datesArray, dateString) => {
   const targetDate = moment(dateString);
   const sortedDates = datesArray
-    .map((dateStr) => moment(dateStr.split("/")[0]))
-    .sort((a, b) => a.diff(b));
+      .map((dateStr) => moment(dateStr.split("/")[0]))
+      .sort((a, b) => a.diff(b));
 
   const index = sortedDates.findIndex((date) => date.diff(targetDate) >= 0);
   const previousDate = sortedDates[index - 1] || null;
   const nextDate = sortedDates[index] || null;
 
-  return { closestLeft: previousDate, closestRight: nextDate };
+  return {closestLeft: previousDate, closestRight: nextDate};
 };
 
 function getShortDayName(date) {
@@ -185,7 +185,7 @@ function getFormattedDate(date) {
 }
 
 function setDateBoundary(dateStr) {
-  const { closestLeft: lDate, closestRight: rDate } = getClosestDates(dateStr);
+  const {closestLeft: lDate, closestRight: rDate} = getClosestDates(dateStr);
 
   closestLeft.value = lDate;
   closestRight.value = rDate;
@@ -213,20 +213,20 @@ const isDisabled = (date) => {
 
 function getClosestDates(dateStr) {
   const notUserSelectionDates = selectedDates.value
-    .filter((d) => d[1] !== "ongoing")
-    .map((d) => d[0]);
+      .filter((d) => d[1] !== "ongoing")
+      .map((d) => d[0]);
 
   return findClosestDates(notUserSelectionDates, dateStr);
 }
 
 function getSelectedDateTime(date) {
   const selectedDate = selectedDates.value
-    .filter((d) => d[0] !== null)
-    .find((selected) => {
-      const [dateStart, dateEnd] = selected[0].split("/").map((d) => moment(d));
+      .filter((d) => d[0] !== null)
+      .find((selected) => {
+        const [dateStart, dateEnd] = selected[0].split("/").map((d) => moment(d));
 
-      return date.isBetween(dateStart, dateEnd, "minutes", "[]");
-    });
+        return date.isBetween(dateStart, dateEnd, "minutes", "[]");
+      });
 
   return selectedDate;
 }
@@ -244,20 +244,20 @@ function getRangeColor(date) {
 const isFirstDate = (date) => {
   const selectedDate = getSelectedDateTime(date);
   return selectedDate
-    ? moment(selectedDate[0].split("/")[0]).isSame(date, "minutes")
-    : null;
+      ? moment(selectedDate[0].split("/")[0]).isSame(date, "minutes")
+      : null;
 };
 
 const isLastDate = (date) => {
   const selectedDate = getSelectedDateTime(date);
   return selectedDate
-    ? moment(selectedDate[0].split("/")[1]).isSame(date, "minutes")
-    : null;
+      ? moment(selectedDate[0].split("/")[1]).isSame(date, "minutes")
+      : null;
 };
 
 const isCenter = (date) =>
-  isTimer(date) &&
-  !["0:30", "1:00", "1:30"].includes(getSelectedDuration(date));
+    isTimer(date) &&
+    !["0:30", "1:00", "1:30"].includes(getSelectedDuration(date));
 
 function addZero(number) {
   return number < 10 ? `0${number}` : number;
@@ -265,7 +265,7 @@ function addZero(number) {
 
 function getSelectedDuration(date) {
   const selectedDate = getSelectedDateTime(date);
-  const { dateStart, dateEnd } = getMomentDatesFromString(selectedDate[0]);
+  const {dateStart, dateEnd} = getMomentDatesFromString(selectedDate[0]);
   const durationInMinutes = dateEnd.diff(dateStart, "minutes");
   const durationInHours = dateEnd.diff(dateStart, "hours");
 
@@ -275,7 +275,7 @@ function getSelectedDuration(date) {
 function getMomentDatesFromString(str) {
   const [dateStart, dateEnd] = str.split("/").map((d) => moment(d));
 
-  return { dateStart, dateEnd };
+  return {dateStart, dateEnd};
 }
 
 const selectTime = (date) => {
@@ -297,8 +297,8 @@ const selectTime = (date) => {
     setDateBoundary(dateStr);
   } else {
     const [dateStart, dateEnd] = userSelection[0]
-      .split("/")
-      .map((d) => moment(d));
+        .split("/")
+        .map((d) => moment(d));
 
     if (dateStart.isSame(dateEnd)) {
       if (Math.abs(date.diff(dateStart, "hours")) < 2) return;
@@ -319,7 +319,7 @@ const selectTime = (date) => {
         dateStart: format(mDateStart),
         dateEnd: format(mDateEnd),
         duration: `${addZero(Math.floor(fullMinutes / 60))} ч. ${addZero(
-          fullMinutes % 60
+            fullMinutes % 60
         )} мин.`,
       });
     } else {
@@ -344,7 +344,7 @@ const selectTime = (date) => {
   &__days {
     width: 100%;
     display: flex;
-    gap: 50px;
+    //gap: 50px;
     margin-bottom: 30px;
     overflow: auto;
     padding-bottom: 10px;
@@ -367,6 +367,17 @@ const selectTime = (date) => {
 
     &-name.red {
       color: #fd404d;
+    }
+
+    &-item {
+      display: flex;
+      justify-content: flex-start;
+      width: calc(100% / 7);
+      flex-shrink: 0;
+
+      &:last-of-type {
+        flex-shrink: 1;
+      }
     }
 
     &-btn {
@@ -484,6 +495,7 @@ const selectTime = (date) => {
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
       }
+
       &:nth-of-type(4n + 4) {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
@@ -506,6 +518,7 @@ const selectTime = (date) => {
           }
         }
       }
+
       &.part {
         &:nth-of-type(4n + 3) {
           .duration {

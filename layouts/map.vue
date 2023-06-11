@@ -1,7 +1,7 @@
 <template>
   <div class="map-page">
     <Map />
-    <HeaderNav :class="{mobile: width <= 1000}" class="map-page__nav" />
+<!--    <HeaderNav :class="{mobile: width <= 1000}" class="map-page__nav" />-->
     <div
       class="map-page__inner"
       :style="{height: width <= 1000 && route.name === 'booking-slug' ? '100vh' : ''}"

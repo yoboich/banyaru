@@ -12,7 +12,7 @@
         >
         <span class="favorite-item__deleted" v-else>Удалено</span>
         <button class="favorite-item__btn">
-          <IconBase icon="close" color="gray" />
+          <IconBase icon="favorite-filled" color="green" />
         </button>
       </div>
       <span class="favorite-item__name">Сауна Дионис-СПА</span>
@@ -20,16 +20,17 @@
       <span class="favorite-item__location"
         >ул. Тимирязьева, м. Могилевская</span
       >
-      <div class="favorite-item__stats">
-        <div class="favorite-item__stat">
-          <IconBase class="icon-views" icon="views" color="gray" />
-          <span>0</span>
-        </div>
-        <div class="favorite-item__stat">
-          <IconBase class="icon-favorite" icon="favorite" color="gray" />
-          <span>0</span>
-        </div>
-      </div>
+<!--      <div class="favorite-item__stats">-->
+<!--        <div class="favorite-item__stat">-->
+<!--          <IconBase class="icon-views" icon="views" color="gray" />-->
+<!--          <span>0</span>-->
+<!--        </div>-->
+<!--        <div class="favorite-item__stat">-->
+<!--          <IconBase class="icon-favorite" icon="favorite" color="gray" />-->
+<!--          <span>0</span>-->
+<!--        </div>-->
+<!--      </div>-->
+      <UIButton class="green favorite-item__btn-cart">В корзину</UIButton>
     </div>
   </div>
 </template>
@@ -119,6 +120,13 @@ const props = defineProps({
       height: 13px !important;
       width: 13px !important;
     }
+  }
+
+  &__btn-cart {
+    height: 30px;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 150px;
   }
 }
 </style>

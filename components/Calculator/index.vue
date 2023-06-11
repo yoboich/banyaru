@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="" class="calculator">
+  <form @submit.prevent="" class="calculator" id="calculator">
     <CalculatorDialog ref="dialog" />
     <h1 class="booking-page__title calculator-title">
       <span>Калькулятор заказа </span>

@@ -34,7 +34,7 @@ watch(props, () => {
 });
 
 const selected = ref([
-  // ["2023-05-07:2023-05-15", "reserved"],
+  ["2023-06-14:2023-06-15", "reserved"],
   // ["2023-05-23:2023-05-29", "pending"],
   // ["2023-05-18", "disabled"],
 ]);
@@ -117,7 +117,6 @@ const options = {
     visibility: {
       theme: "light",
       daysOutside: true,
-      weekend: false,
       today: false,
     },
   },
@@ -174,6 +173,11 @@ const fillSelected = () => {
         }
         elements.push(dayElements[i]);
       }
+    }
+
+    if (elements.length === 2) {
+      elements[0].classList.add('single')
+      elements[1].classList.add('single')
     }
 
     for (let i = 0; i < elements.length; i++) {
@@ -409,10 +413,14 @@ onMounted(() => {
       &.last {
         border-top-right-radius: 25px;
         border-bottom-right-radius: 25px;
-        overflow: hidden;
+        //overflow: hidden;
 
         &:nth-of-type(7n + 1) {
           border-radius: 25px;
+
+          .duration {
+            display: none;
+          }
 
           button {
             width: 100%;
@@ -422,10 +430,16 @@ onMounted(() => {
 
       &.first,
       &.last {
+        .duration {
+          background: transparent !important;
+        }
+
         button {
-          color: #3e3e51;
+          //color: #3e3e51;
+          border-radius: 25px;
 
           width: calc(100% - 10px);
+          color: #fff;
 
           @media (max-width: 500px) {
             width: calc(100% - 3px);
@@ -490,9 +504,9 @@ onMounted(() => {
     // }
 
     &_selected {
+
       &-first {
         border-radius: 25px 0 0 25px;
-        // width: 84px;
         width: calc(((100% - 60px) / 7) + 10px);
         background: #99df8d;
         margin-right: 0 !important;
@@ -560,6 +574,14 @@ onMounted(() => {
       &-first,
       &-last {
         background: #99df8d;
+
+        &.single {
+          background: $green !important;
+
+          .duration {
+            background: transparent !important;
+          }
+        }
 
         button {
           background: #32bd1b !important;

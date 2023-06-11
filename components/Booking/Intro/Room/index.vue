@@ -1,75 +1,12 @@
 <template>
   <div class="booking-page__room">
     <h3 class="booking-page__room-name">Зал: <span>Горячий сруб</span></h3>
-    <div
-      class="booking-page__room-items"
-      :class="{ open: isOpen }"
-      ref="el"
-      :style="{
-        maxHeight: isOpen ? el?.scrollHeight + 'px' : (el?.scrollHeight / 5 * 2.5) + 'px',
-      }"
-      v-if="width > 1700"
-    >
-      <BookingIntroRoomItem
-        v-for="room of rooms"
-        :class="{ open: isCollapseBtn(room) && isOpen }"
-        :key="room"
-        @click="changeRoom(room)"
-        @open="isOpen = !isOpen"
-        :unavailable="isUnavailable(room)"
-        :active="selectedRoom === room"
-        :isCollapseBtn="isCollapseBtn(room)"
-      />
-    </div>
-    <div class="booking-page__room-slider" v-else>
-      <SwiperSlider :slides-per-view="width > 700 ? 5 : 3.5" :grid="{rows: 2, fill: 'row' }" :space-between="20">
-        <swiper-slide v-for="room of rooms" :key="room">
-          <BookingIntroRoomItem
-              @click="changeRoom(room)"
-              :unavailable="isUnavailable(room)"
-              :active="selectedRoom === room"
-          />
-        </swiper-slide>
-      </SwiperSlider>
-    </div>
+    <BookingIntroRoomSlider/>
+    <BookingIntroRoomSlider/>
   </div>
 </template>
 
 <script setup>
-import {SwiperSlide} from "swiper/vue";
-import {useWindowSize} from "@vueuse/core";
-
-const {width} = useWindowSize()
-
-const selectedRoom = ref(1);
-const isOpen = ref(false);
-
-const el = ref();
-
-const rooms = ref(
-  Array(20)
-    .fill("")
-    .map((_, i) => i + 1)
-);
-
-const isCollapseBtn = (room) => {
-  return collapseBtn.value && collapseBtn.value === room;
-};
-
-const isUnavailable = (room) => {
-  return room === 3;
-};
-
-const collapseBtn = ref(rooms.value.length > 10 ? 10 : null);
-
-const changeRoom = (room) => {
-  if (room === 3 || room === collapseBtn.value) return;
-  selectedRoom.value = room;
-};
-
-watch(isOpen, () => {
-  collapseBtn.value = isOpen.value ? rooms.value.length : 10;
-});
 </script>
 
 <style lang="scss">
@@ -84,6 +21,10 @@ watch(isOpen, () => {
 
     span {
       font-weight: bold;
+    }
+
+    & + div {
+      margin-bottom: 10px;
     }
   }
 
@@ -127,7 +68,7 @@ watch(isOpen, () => {
       }
 
       .booking-page__room-image {
-        @include  flex-center-all;
+        @include flex-center-all;
         background: $light-gray;
 
         transform: rotate(-90deg) scale(0.95);
@@ -148,6 +89,7 @@ watch(isOpen, () => {
 
     &.unavailable {
       cursor: default;
+
       .booking-page__room-price {
         color: #fd404d;
       }
@@ -159,7 +101,7 @@ watch(isOpen, () => {
     margin-bottom: 10px;
     overflow: hidden;
     aspect-ratio: 1;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     transition: all 0.2s;
   }
 

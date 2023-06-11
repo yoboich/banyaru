@@ -94,6 +94,7 @@ const props = defineProps({
 
     @media (max-width: 1000px) {
       max-width: 80%;
+      padding: 15px 50px 15px 15px;
     }
 
     &.wide {

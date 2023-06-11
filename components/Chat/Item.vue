@@ -45,11 +45,6 @@ const props = defineProps({
     padding: 15px 10px 25px 25px;
   }
 
-  &:hover {
-    border-radius: 25px;
-    border-color: #dadeec;
-  }
-
   &-inner {
     flex: 1;
   }

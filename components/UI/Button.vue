@@ -41,7 +41,7 @@ const props = defineProps({
     width: 100%;
   }
 
-  &:not(.green):not(.purple):not(.gray):not(.custom):hover {
+  &:not(.green):not(.purple):not(.gray):not(.custom):not(.disabled):hover {
     background: $green;
     color: #fff;
     border-color: $green;
@@ -54,6 +54,11 @@ const props = defineProps({
   &.green {
     background: $green;
     border-color: $green;
+    color: #fff;
+  }
+
+  &.disabled {
+    background: #DADEEC;
     color: #fff;
   }
 

@@ -1,28 +1,6 @@
 <template>
   <div class="calendar">
-    <div class="calendar__switch">
-      <div
-          class="calendar__switch-active"
-          :class="{
-          times: activeCalendar === 'time',
-          dates: activeCalendar === 'days',
-        }"
-      ></div>
-      <button
-          type="button"
-          class="calendar__switch-btn"
-          @click="changeCalendarType('days')"
-      >
-        Сутки
-      </button>
-      <button
-          type="button"
-          class="calendar__switch-btn"
-          @click="changeCalendarType('time')"
-      >
-        Часы
-      </button>
-    </div>
+    <SwitchBlock :tabs="['Часы', 'Сутки']" @tabChanged="onTabChange"/>
 
     <div class="calendar__details" v-if="activeCalendar === 'days'">
       <h4 class="calendar__details-title">Выбрать дату</h4>
@@ -132,10 +110,15 @@ const {width} = useWindowSize()
 
 moment.locale("ru");
 
-const activeCalendar = ref("days");
+const activeCalendar = ref("time");
 const date = ref(new Date());
 
 const emits = defineEmits(["changeCalendarType"]);
+
+const onTabChange = (tabIdx) => {
+  changeCalendarType(tabIdx === 0 ? 'time' : 'days')
+  activeCalendar.value = tabIdx === 0 ? 'time' : 'days'
+}
 
 const changeCalendarType = (calendarType) => {
   activeCalendar.value = calendarType;
@@ -228,37 +211,18 @@ watch(calculatorData.value, () => {
 
 <style lang="scss" scoped>
 .calendar {
-  &__switch {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 30px;
 
-    padding: 5px;
-    background: #f1f3f9;
-    border-radius: 100px;
-    position: relative;
+  & :deep(.switch) {
+    margin-bottom: 45px;
 
-    &-active {
-      position: absolute;
-      left: 5px;
-      top: 5px;
-      width: calc(50% - 5px);
-      height: calc(100% - 10px);
-      background: #fff;
-      border-radius: 100px;
-      transition: all 0.2s;
-
-      &.dates {
-        left: 5px;
-      }
-
-      &.times {
-        left: 50%;
-      }
+    .switch__btn {
+      font-size: 20px;
+      line-height: 100%;
+      font-weight: 500;
     }
 
-    &-btn {
-      background: transparent;
+    &::after {
+      box-shadow: none;
     }
   }
 
@@ -436,9 +400,12 @@ watch(calculatorData.value, () => {
     }
 
     &-btn {
+      width: 100%;
+
       &.btn-chat {
         width: 50px;
         border-radius: 50%;
+        padding: 0;
       }
 
 
