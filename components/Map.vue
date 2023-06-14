@@ -5,13 +5,15 @@
 <script setup>
 import {YandexMap} from 'vue-yandex-maps'
 
-const settings = {
-  apiKey: '45e08e04-037c-40ef-b64d-c6d7b0d3f929', // Индивидуальный ключ API
+const config = useRuntimeConfig()
+
+const settings = ref({
+  apiKey: config.public.YANDEX_API_KEY, // Индивидуальный ключ API
   lang: 'ru_RU', // Используемый язык
   coordorder: 'latlong', // Порядок задания географических координат
   debug: false, // Режим отладки
   version: '2.1', // Версия Я.Карт
-}
+})
 
 const options = {
   suppressMapOpenBlock: true

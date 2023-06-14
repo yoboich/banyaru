@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const { YANDEX_API_KEY } = process.env
+const {YANDEX_API_KEY} = process.env
 
 export default defineNuxtConfig({
     // @ts-ignore
@@ -74,6 +74,11 @@ export default defineNuxtConfig({
                 defineModel: true,
             },
         },
+    },
+    runtimeConfig: {
+        public: {
+            YANDEX_API_KEY,
+        }
     },
     css: ["normalize.css/normalize.css", "@/assets/styles/main.scss"],
     ssr: false,
