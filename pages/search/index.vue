@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <Map class="search__map" />
-    <UISearchInput v-if="step === 0" v-model="searchTerm" hint @click="changeStep"/>
+    <UISearchInput placeholder="Поиск Баня.ру" v-if="step === 0" v-model="searchTerm" hint @click="changeStep"/>
     <MapSidebar v-else @close="resetStep">
       <SearchFilterForm v-if="step === 1" @focus="changeStep"/>
       <SearchForm v-else ref="searchForm" />

@@ -1,26 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const { YANDEX_API_KEY } = process.env
 
 export default defineNuxtConfig({
     // @ts-ignore
     app: {
         head: {
             title: "Баня.ру – портал о банях и саунах России",
-            // meta: [
-            //     {
-            //         name: 'viewport',
-            //         content: 'width=device-width, initial-scale=0.8',
-            //         media: '(max-width: 375px)'
-            //     },
-            //     {
-            //         name: 'viewport',
-            //         content: 'width=device-width, initial-scale=1',
-            //         media: '(min-width: 376px)'
-            //     }
-            // ]
         },
     },
     modules: ["@vite-pwa/nuxt"],
     pwa: {
+        includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
         registerType: "autoUpdate",
         manifest: {
             name: "Баня.ру",

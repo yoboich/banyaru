@@ -1,47 +1,48 @@
 <template>
   <div class="home">
     <div class="container" v-if="width > 1000">
-      <HomeSlider />
+      <HomeSlider/>
       <section class="home__content">
         <div class="home__content-column">
-          <BookingSearchForm />
+          <BookingSearchForm/>
         </div>
         <div class="home__content-column">
-          <HomeMap />
-          <HomeLinks />
-          <HomeFilterSliderPlace title="Популярные бани" />
-          <HomeFilterSliderPlace title="Популярные услуги" ads />
-          <HomeFilterSliderRecentPlace title="Недавно вы смотрели" />
-          <HomeNews />
+          <HomeMap/>
+          <HomeLinks/>
+          <HomeFilterSliderPlace title="Популярные бани"/>
+          <HomeFilterSliderPlace title="Популярные услуги" ads/>
+          <HomeFilterSliderRecentPlace title="Недавно вы смотрели"/>
+          <HomeNews/>
         </div>
       </section>
     </div>
     <div v-else>
       <HeaderNav class="mobile"/>
       <div class="container container-mobile">
-        <HomeSlider class="mobile" />
-        <HomeMobileSearchServices />
-        <HomeMobileServices />
+        <HomeSlider class="mobile"/>
+        <HomeMobileSearchServices/>
+        <HomeMobileServices/>
       </div>
       <div class="container">
-        <HomeMobileCatalog />
-        <HomeMobileLinks />
-        <HomeFilterSliderPlace class="mobile" title="Популярные бани" />
-        <HomeFilterSliderPlace class="mobile" title="Популярные услуги" />
+        <HomeMobileCatalog/>
+        <HomeMobileLinks/>
+        <HomeFilterSliderPlace class="mobile" title="Популярные бани"/>
+        <HomeFilterSliderPlace class="mobile" title="Популярные услуги"/>
         <HomeFilterSliderRecentPlace
-          class="mobile"
-          title="Недавно вы смотрели"
+            class="mobile"
+            title="Недавно вы смотрели"
         />
-        <HomeNews class="mobile" ads />
+        <HomeNews class="mobile" ads/>
       </div>
-      <HomeMobileFooter />
+      <HomeMobileFooter/>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useWindowSize } from "@vueuse/core";
-const { width } = useWindowSize();
+import {useWindowSize} from "@vueuse/core";
+
+const {width} = useWindowSize();
 </script>
 
 <style lang="scss" scoped>
@@ -65,6 +66,12 @@ const { width } = useWindowSize();
     gap: 20px;
     min-width: 0;
     position: relative;
+
+    & :deep(.booking-search) {
+      .booking-search__header {
+        position: static;
+      }
+    }
 
     &:first-of-type {
       padding-top: 15px;

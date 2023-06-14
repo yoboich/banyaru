@@ -87,27 +87,19 @@ const isRoute = (name) => {
     bottom: 20px;
     transform: translateX(-50%);
     box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
-
-    ul {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
-    }
-
-    .header__nav-item {
-      width: auto;
-      height: auto;
-      aspect-ratio: 1;
-    }
   }
 
   &-list {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
     margin: 0;
     padding: 0;
     width: 100%;
+
+    @media (max-width: 1000px) {
+      gap: 10px;
+    }
   }
 
   &-item {
@@ -116,8 +108,7 @@ const isRoute = (name) => {
     margin: 0;
     padding: 0;
 
-    width: 70px;
-    height: 70px;
+    aspect-ratio: 1;
     border-radius: 50%;
 
     cursor: pointer;

@@ -137,6 +137,10 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
         &.next {
           right: 10px;
         }
+
+        @media (max-width: 1000px) {
+          display: none;
+        }
       }
     }
 

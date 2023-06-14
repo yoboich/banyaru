@@ -118,18 +118,18 @@ const toggleTag = (tagName) => {
 const prevScrollTop = ref(0)
 const showFilter = ref(true)
 
-onMounted(() => {
-  const el = scrollArea.value.el.el
-  el.addEventListener('scroll', () => {
-    if (prevScrollTop.value < el.scrollTop) {
-      showFilter.value = false
-    } else {
-      showFilter.value = true
-    }
-
-    prevScrollTop.value = el.scrollTop
-  })
-})
+// onMounted(() => {
+//   const el = scrollArea.value.el.el
+//   el.addEventListener('scroll', () => {
+//     if (prevScrollTop.value < el.scrollTop) {
+//       showFilter.value = false
+//     } else {
+//       showFilter.value = true
+//     }
+//
+//     prevScrollTop.value = el.scrollTop
+//   })
+// })
 
 definePageMeta({
   layout: "empty",
