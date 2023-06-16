@@ -1,13 +1,18 @@
 <template>
-    <div class="search-mobile" :style="{transform: `translateY(${cardY + 'px'})`}" ref="card" @click="isMiddle ? openCard() : null">
-      <div class="search-mobile__header" @touchmove.prevent="moveCard($event)" @touchend.prevent="moveEnd($event)">
+    <div class="search-mobile" :style="{transform: `translateY(${cardY + 'px'})`}" ref="card"
+         @click="isMiddle ? openCard() : null"
+    >
+      <div class="search-mobile__header">
         <div class="line"></div>
       </div>
-      <div class="search-mobile__content" :class="{hidden: isMiddle}" ref="contentWrapper">
+      <div class="search-mobile__content" :class="{hidden: hideMobileCardScroll}" ref="contentWrapper">
         <slot/>
       </div>
     </div>
 </template>
+
+<!--@touchmove.prevent="moveCard($event)"-->
+<!--@touchend.prevent="moveEnd($event)"-->
 
 <script setup>
 const cardY = ref()
@@ -15,39 +20,57 @@ const card = ref()
 const contentWrapper = ref()
 const contentElement = ref()
 
+const prevY = ref(null)
+const diffY = ref()
+
 const emits = defineEmits(['close'])
 const limits = ref({})
 
 const isMiddle = computed(() => cardY.value === limits.value.middle)
 const route = useRoute()
 
+const mobileSheetHeight = useState('mobileSheetHeight')
+const hideMobileCardScroll = useState('hideMobileCardScroll')
+
 const props = defineProps({
   open: Boolean
 })
 
 const openCard = () => {
-  cardY.value = limits.value.max
+  cardY.value = limits.value.middle
 }
 
 const moveEnd = (e) => {
-  const posY = e.changedTouches[0].clientY
+  return null
+  prevY.value = null
+  const posY = cardY.value
   const config = limits.value
 
   if (posY > config.min && !props.open) {
     emits('close')
   } else if (posY >= config.middle) {
     cardY.value = config.middle
-    contentWrapper.value.scrollTop = 0
+    if (contentWrapper.value) {
+      contentWrapper.value.scrollTop = 0
+    }
   } else {
     cardY.value = config.max
   }
 }
 
 const moveCard = (e) => {
-  if (e.touches[0].clientY >= 20) {
-    cardY.value = e.touches[0].clientY;
+  return null
+  // if (e.touches[0].pageY >= 20) {
+  //   cardY.value = e.touches[0].pageY;
+  // } else {
+  //   cardY.value = 20
+  // }
+  if (prevY.value) {
+    diffY.value = e.touches[0].pageY - prevY.value
+    prevY.value = e.touches[0].pageY
+    cardY.value += diffY.value
   } else {
-    cardY.value = 20
+    prevY.value = e.touches[0].pageY
   }
 }
 
@@ -60,14 +83,18 @@ onMounted(() => {
   limits.value = {
     max: height * 0.05,
     middle: height * 0.4,
-    min: height * 0.8
+    min: height * 0.8,
   }
 
-  cardY.value = limits.value.max
+  cardY.value = window.screen.height + 30
+
+  mobileSheetHeight.value = height
 
   if (route.name === 'search') {
     const resizeObserver = new ResizeObserver(function() {
-      contentWrapper.value.scrollTop = 0
+      if (contentWrapper.value) {
+        contentWrapper.value.scrollTop = 0
+      }
     });
 
     resizeObserver.observe(contentElement.value);
@@ -75,7 +102,7 @@ onMounted(() => {
 })
 
 defineExpose({
-  el: contentWrapper
+  el: contentWrapper,
 })
 </script>
 
@@ -92,7 +119,8 @@ defineExpose({
 
 .search-mobile {
   width: 100vw;
-  height: calc(100vh - 20px);
+  //height: calc(100vh - 20px);
+  height: 100vh;
   position: absolute;
   top: 0;
   left: 0;

@@ -527,8 +527,12 @@ li {
 .search {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &__btn--create {
     @include flex-center-all;

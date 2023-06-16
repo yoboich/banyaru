@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     modules: ["@vite-pwa/nuxt"],
     pwa: {
         includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
-        registerType: "autoUpdate",
+        // registerType: "autoUpdate",
         manifest: {
             name: "Баня.ру",
             short_name: "Баня.ру",
