@@ -19,10 +19,6 @@
     line-height: 100%;
     margin-bottom: 15px;
 
-    span {
-      font-weight: bold;
-    }
-
     & + div {
       margin-bottom: 10px;
     }

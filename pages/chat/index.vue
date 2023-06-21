@@ -24,6 +24,7 @@
     </div>
     <div class="container" v-else>
       <div class="profile-tabs__wrapper">
+        <h1 class="chat__title">Чаты</h1>
         <ProfileTabs :tabs="tabLabels" />
       </div>
       <div class="profile-mobile__items">

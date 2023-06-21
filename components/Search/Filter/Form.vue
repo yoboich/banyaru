@@ -14,8 +14,7 @@
       <SwitchBlock :tabs="pageTabs" @tab-changed="onTabChange"/>
     </div>
     <div class="search-filter__categories" v-if="activeSwitchTab === 0">
-      <nuxt-link
-          to="#"
+      <div
           class="search-filter__category"
           v-for="i of 14"
           :key="i"
@@ -27,7 +26,7 @@
           />
         </div>
         <h4 class="search-filter__category-name">Категория</h4>
-      </nuxt-link>
+      </div>
     </div>
     <div class="search-filter__tabs" v-else>
       <ProfileTabs class="search-filter__tabs-items" :tabs="tabs"/>
@@ -305,7 +304,6 @@ const counter = ref(1);
     padding-bottom: 20px;
 
     @media (max-width: 1400px) {
-      //grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
@@ -315,6 +313,12 @@ const counter = ref(1);
   }
 
   &__category {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    height: auto;
+
     &:hover {
       .search-filter__category-image {
         border-color: $green;
@@ -324,9 +328,8 @@ const counter = ref(1);
     &-image {
       @include flex-center-all;
       aspect-ratio: 1;
+      background: #fff;
       border-radius: 50%;
-      box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
-      margin-bottom: 10px;
       transition: all 0.2s;
       border: 3px solid transparent;
 

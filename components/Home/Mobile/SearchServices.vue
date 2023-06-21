@@ -47,7 +47,7 @@ services.value = services.value.concat(services.value);
   .search-service {
     //padding: 15px 40px 15px 10px;
     padding: 0 15px;
-    height: 70px;
+    height: 65px;
     border-radius: 25px;
     border: 2px solid #dadeec;
     text-align: left;

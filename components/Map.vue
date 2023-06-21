@@ -1,5 +1,5 @@
 <template>
-    <YandexMap :settings="settings" :coordinates="[55.751244, 37.618423]" :controls="[]" :options="options" ></YandexMap>
+    <YandexMap ref="map" :settings="settings" :coordinates="[55.751244, 37.618423]" :controls="[]" :options="options" @click="onClick" ></YandexMap>
 </template>
 
 <script setup>
@@ -17,6 +17,10 @@ const settings = ref({
 
 const options = {
   suppressMapOpenBlock: true
+}
+
+const onClick = () => {
+  hideSearchPanel()
 }
 </script>
 

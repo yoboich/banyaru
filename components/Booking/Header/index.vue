@@ -2,9 +2,9 @@
   <div class="booking-page__header">
     <nuxt-link
       class="booking-page__action booking-page__action--back"
-      to="/booking"
+      to="/search"
     >
-      <IconBase icon="arrow-left" color="gray" />
+      <IconBase icon="arrow-left" color="green" />
     </nuxt-link>
     <div class="booking-page__preview">
       <BookingPreviewImage />

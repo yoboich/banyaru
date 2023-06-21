@@ -61,6 +61,11 @@ defineExpose({
   box-shadow: 0px 11px 48px rgba(178, 188, 221, 0.15);
   position: relative;
 
+  @media (max-width: 1000px) {
+    height: 100vh;
+    border-radius: 0;
+  }
+
   &__content {
     border-radius: 25px 25px 0 0;
     overflow-y: auto;
@@ -80,10 +85,6 @@ defineExpose({
     overflow-y: auto;
     border: 1px solid #dadeec;
     border-radius: 25px;
-
-    //@media (max-width: 1000px) {
-    //  display: none;
-    //}
 
     &::-webkit-scrollbar {
       width: 12px;
@@ -105,6 +106,11 @@ defineExpose({
       height: 20000px;
       opacity: 0;
     }
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
+
   }
 }
 </style>

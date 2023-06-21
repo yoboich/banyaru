@@ -230,9 +230,9 @@
                 <IconBase icon="clip" color="gray"/>
               </label>
               <label for="" class="chat__inputbox-input">
-                <input type="text" placeholder="Написать сообщение"/>
+                <input v-model="text" type="text" placeholder="Написать сообщение"/>
               </label>
-              <button class="chat__inputbox-send">
+              <button class="chat__inputbox-send" :class="{active: text.length}">
                 <IconBase icon="send"/>
               </button>
             </div>
@@ -248,6 +248,8 @@ import {useWindowSize} from "@vueuse/core";
 
 const {width} = useWindowSize()
 const callElement = ref()
+
+const text = ref('')
 
 definePageMeta({
   layout: "purchases",
@@ -308,8 +310,9 @@ const callUser = () => callElement.value?.dialog.showModal()
 
       &-btn {
         position: absolute;
-        right: 0;
-        top: -100%;
+        right: 20px;
+        transform: translateY(-100%);
+        top: -10px;
 
         &:hover {
           background: #fff;
@@ -321,7 +324,18 @@ const callUser = () => callElement.value?.dialog.showModal()
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background: $green;
+
+        .icon-btn {
+          width: 30px;
+        }
+
+        &.active {
+          background: $green;
+
+          svg {
+            --icon-color: #fff;
+          }
+        }
 
         @media (max-width: 1000px) {
           width: 55px;
@@ -345,12 +359,20 @@ const callUser = () => callElement.value?.dialog.showModal()
         @media (max-width: 1000px) {
           width: 55px;
           height: 55px;
-          background: $green;
+          //background: $green;
           border-radius: 50%;
 
+          &:hover {
+            background: $green;
+
+            .icon-base {
+              --icon-color: white;
+            }
+          }
+
           .icon-base {
-            --icon-color: white;
-            width: 20px;
+            //--icon-color: white;
+            width: 25px;
           }
         }
       }

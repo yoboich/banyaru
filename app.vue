@@ -1,5 +1,5 @@
 <template>
-  <div class="app" :class="{ mobile: width <= 1000 }">
+  <div class="app full-screen-div" :class="{ mobile: width <= 1000 }">
     <VitePwaManifest />
     <NuxtLayout>
       <NuxtPage />
@@ -18,6 +18,17 @@ useHead({
       content: `width=device-width, initial-scale=${width.value < 375 ? (width.value > 350 ? '0.95' : '0.8') : '1'} maximum-scale=1.0, user-scalable=no`
     },
   ]
+})
+
+const route = useRoute()
+
+watch(() => route.name, () => {
+  const body = document.querySelector('body')
+  if (route.name === 'search') {
+    body.style['overscroll-behavior'] = 'contain'
+  } else {
+    body.style['overscroll-behavior'] = 'auto'
+  }
 })
 </script>
 

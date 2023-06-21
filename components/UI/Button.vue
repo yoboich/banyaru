@@ -58,7 +58,7 @@ const props = defineProps({
   }
 
   &.disabled {
-    background: #DADEEC;
+    background: #9297B8;
     color: #fff;
   }
 

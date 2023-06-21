@@ -1,313 +1,317 @@
 <template>
   <div class="search">
     <Map class="search__map"/>
-    <MapSidebar ref="scrollArea" open>
-      <section class="booking">
-        <div class="booking-page flex">
-          <BookingHeader/>
-          <div class="booking-page__content">
-            <Teleport to="body">
-              <Call ref="callElement"/>
-            </Teleport>
-            <div class="booking-page__block-actions flex">
-              <UIButton class="green booking-page__block-action action-phone flex" @click="callUser">
-                <IconBase icon="phone" color="white"/>
-                <span>+7 999 333 14</span>
-              </UIButton>
-              <UIButton class="green booking-page__block-action action-chat" to="/chat">
-                <IconBase icon="message" color="white"/>
-                <div class="unread">3</div>
-              </UIButton>
-              <UIButton class="booking-page__block-action purple action-calc flex" @click="moveToCalc"
-                        v-if="calcStep === 0">
-                <IconBase icon="calc" color="white"/>
-                <span>Калькулятор</span>
-              </UIButton>
-              <UIButton class="booking-page__block-action disabled action-calc flex" @click="moveToCalc"
-                        v-else-if="!isFormFilled">
-                Заполните поля
-              </UIButton>
-              <UIButton class="booking-page__block-action purple action-calc flex" @click="submitForm" v-else>
-                Заказать
-              </UIButton>
-            </div>
-            <div class="booking-page__intro p-x">
-              <Teleport to="body">
-                <Gallery ref="gallery"/>
-              </Teleport>
-              <SwiperSlider class="booking-page__slider" :navigation="width > 1000" :space-between="0" counter>
-                <swiper-slide
-                    style="cursor: pointer"
-                    v-for="i of 10"
-                    :key="i"
-                    @click="gallery?.gallery.showModal()"
-                >
-                  <img src="~/assets/images/preview/room.jpg" alt=""/>
-                </swiper-slide>
-              </SwiperSlider>
-              <BookingIntroRoom/>
-              <div class="booking-page__card">
-                <div class="booking-page__paid-hint">
-                  <span>Платное</span>
-                  <IconBase icon="info" color="green"/>
-                </div>
-                <h2 class="booking-page__price">
-                  от 2 000 ₽/час
-                  <div class="booking-page__price-action">
-                    <IconBase icon="arrow-left" color="green"/>
-                  </div>
-                </h2>
-                <ul class="booking-page__tags">
-                  <li class="booking-page__tag active">Баня на дровах</li>
-                  <li class="booking-page__tag active">Сауна</li>
-                  <li class="booking-page__tag">Хаммам</li>
-                </ul>
-                <div class="flex">
-                  <h3 class="booking-page__place">
-                    Сауна цветы
-                    <IconBase icon="info" color="black"/>
-                  </h3>
-                  <BookingSearchItemRate rate="4.2"/>
-                  <Reviews text="122 отзыва"/>
-                </div>
-                <BookingSearchItemLocation place="Пражская" time="13 мин"/>
-                <p class="booking-page__street">г. Москва, ул. Большая Очаковская, 35</p>
-                <WorkTime time="9:00" closed/>
-              </div>
-            </div>
-            <div class="p-x booking-page__description">
-              <h1 class="booking-page__title booking-page__description-title">
-                Описание
-              </h1>
-              <div class="booking-page__description-items">
-                <div
-                    class="booking-page__description-item"
-                    v-for="item of descriptionItems"
-                    :key="item.label"
-                >
-                  <div class="booking-page__description-label">
-                    <IconBase :icon="item.icon" color="gray" subpath="/booking"/>
-                    <span>{{ item.label }}</span>
-                  </div>
-                  <div class="booking-page__description-text">
-                    {{ item.text }}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <BookingPrices/>
-            <BookingDiscounts/>
-            <form @submit.prevent="submitForm" class="p-x calculator" ref="calculatorElement">
-              <CalculatorDialog ref="dialog"/>
-              <h1 class="booking-page__title calculator-title">
-                <span>Калькулятор заказа </span>
-                <button type="button" @click="dialog?.dialog.showModal()">
-                  <span>i</span>
-                </button>
-              </h1>
-              <div class="calculator__params">
-                <div class="calculator__params-item counter">
-                  <div class="calculator__param-label">
-                    <h2 class="calculator__param-title">Количество гостей</h2>
-                    <span class="calculator__param-suptitle">Макс. чел: 7</span>
-                  </div>
-                  <div class="counter__controls">
-                    <button type="button" class="counter__controls-btn" @click="decrement">
-                      <IconBase icon="decrement" color="green"/>
-                    </button>
-                    <span class="counter__controls-count">
-        {{ guests }}
-      </span>
-                    <button type="button" class="counter__controls-btn" @click="increment">
-                      <IconBase icon="increment" color="green"/>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="calculator__params-item receiver">
-                  <div class="calculator__param-label">
-                    <h2 class="calculator__param-title">На кого заказ</h2>
-                    <span class="calculator__param-suptitle"></span>
-                  </div>
-                  <input
-                      class="receiver-input"
-                      :class="{error: isValidate && errors.receiver}"
-                      placeholder="Имя"
-                      v-model="receiver"
-                  />
-                </div>
-                <div class="calculator__params-item" v-if="activeCalendar === 'time'">
-                  <div class="calculator__param-label">
-                    <h2 class="calculator__param-title">Выбрать дату и время</h2>
-                    <span class="calculator__param-suptitle">Мин. время брони, ч: 2</span>
-                  </div>
-                </div>
-              </div>
-              <div class="calendar">
-                <SwitchBlock :tabs="['Часы', 'Сутки']" @tabChanged="onTabChange"/>
-
-                <div class="calendar__details" v-if="activeCalendar === 'days'">
-                  <h4 class="calendar__details-title">Выбрать дату</h4>
-                  <p class="calendar__details-item">Мин. время брони, ночей: 1</p>
-                  <p class="calendar__details-item">Время заезда 14:00</p>
-                  <p class="calendar__details-item">Время выезда 12:00</p>
-                </div>
-
-                <div class="calendar__content">
-                  <div class="calendar__months flex">
-                    <button
-                        type="button"
-                        class="calendar__months-item calendar__months-item--prev"
-                        @click="changeMonth(prevMonth)"
-                    >
-                      {{ months[prevMonth] }}
-                    </button>
-                    <button
-                        type="button"
-                        class="calendar__months-item calendar__months-item--current"
-                    >
-                      {{ months[currentMonth] }}
-                    </button>
-                    <button
-                        type="button"
-                        class="calendar__months-item calendar__months-item--next"
-                        @click="changeMonth(nextMonth)"
-                    >
-                      {{ months[nextMonth] }}
-                    </button>
-                  </div>
-
-                  <CalendarDate
-                      :month="currentMonth"
-                      @month-change="changeMonth"
-                      v-if="activeCalendar === 'days'"
-                      @date-selected="onDateSelected"
-                  />
-                  <CalendarTime
-                      :month="currentMonth"
-                      @date-selected="onDateSelected"
-                      v-else
-                  />
-
-                  <div class="calendar__status flex">
-                    <div
-                        class="calendar__status-hint"
-                        v-for="{ status, name } of statuses"
-                        :key="name"
-                        :class="[status]"
-                    >
-                      <div class="calendar__status-round"></div>
-                      <span class="calendar__status-name">{{ name }}</span>
-                    </div>
-                  </div>
-                  <div class="calendar__order">
-                    <h3 class="calendar__order-title">Ваш заказ</h3>
-                    <ul class="calendar__order-list">
-                      <li
-                          class="calendar__order-item"
-                          v-for="item of orderData"
-                          :key="item.label"
-                      >
-                        <IconBase
-                            v-if="item.value"
-                            class="calendar__order-check"
-                            icon="booking-check"
-                            color="green"
-                        />
-
-                        <div class="calendar__order-round" v-else></div>
-                        <div class="calendar__order-text">
-                          {{ item.label }}:
-                          <span :class="[item.value && 'colored']">{{
-                              item.value || "Выбрать"
-                            }}</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="calendar__actions">
-                    <UIButton class="calendar__actions-btn btn-clear gray" v-if="width > 1000">
-                      Очистить
-                    </UIButton>
-                    <UIButton class="calendar__actions-btn btn-chat green" v-else>
-                      <IconBase icon="message" color="white"/>
-                    </UIButton>
-                    <UIButton class="calendar__actions-btn btn-book purple" v-if="isFormFilled">
-                      Заказать <span>•</span> 12 000 ₽
-                    </UIButton>
-                    <UIButton class="calendar__actions-btn btn-book disabled" v-else>
-                      Заполните поля
-                    </UIButton>
-                  </div>
-                  <UIButton class="calendar__favorite-btn custom">
-                    <IconBase icon="favorite-filled" color="green"/>
-                    Добавить баню в избранное
+    <aside class="search__sidebar">
+      <ScrollArea ref="scrollArea">
+        <div class="search__sidebar-content">
+          <section class="booking">
+            <div class="booking-page flex">
+              <BookingHeader/>
+              <div class="booking-page__content">
+                <Teleport to="body">
+                  <Call ref="callElement"/>
+                </Teleport>
+                <div class="booking-page__block-actions flex">
+                  <UIButton class="green booking-page__block-action action-phone flex" @click="callUser">
+                    <IconBase icon="phone" color="white"/>
+                    <span>+7 999 333 14</span>
+                  </UIButton>
+                  <UIButton class="green booking-page__block-action action-chat" to="/chat">
+                    <IconBase icon="message" color="white"/>
+                    <div class="unread">3</div>
+                  </UIButton>
+                  <UIButton class="booking-page__block-action purple action-calc flex" @click="moveToCalc"
+                            v-if="calcStep === 0">
+                    <IconBase icon="calc" color="white"/>
+                    <span>Калькулятор</span>
+                  </UIButton>
+                  <UIButton class="booking-page__block-action disabled action-calc flex" @click="moveToCalc"
+                            v-else-if="!isFormFilled">
+                    Заполните поля
+                  </UIButton>
+                  <UIButton class="booking-page__block-action purple action-calc flex" @click="submitForm" v-else>
+                    Заказать
                   </UIButton>
                 </div>
-              </div>
-            </form>
-            <!-- ROOMS -->
-            <BookingRooms/>
-            <!-- SERVICES -->
-            <BookingServices/>
-            <!-- ACCESSORIES -->
-            <BookingAccessories/>
-            <!-- RECENTS -->
-            <div class="p-x booking-page__recents">
-              <h1 class="booking-page__title booking-page__recents-title">
-                Вы смотрели
-              </h1>
-              <SwiperSlider
-                  class="booking-page__recents-slider"
-                  :slidesPerView="width > 1000 ? 3 : 2"
-                  :spaceBetween="10"
-                  navigation
-              >
-                <swiper-slide v-for="i of 12" :key="i">
-                  <BookingCardItem favorite/>
-                </swiper-slide>
-              </SwiperSlider>
-            </div>
-            <!-- SIMILAR -->
-            <BookingSimilar/>
-            <!-- REVIEWS -->
-            <BookingReviews class="p-x"/>
-            <!-- ANNOUNCE -->
-            <div class="p-x booking-page__announce">
-              <button class="booking-page__announce-btn">Объявление</button>
-              <div class="booking-page__announce-controls">
-                <button class="booking-page__announce-control">
-                  <IconBase icon="arrow-left" color="green"/>
-                  Предыдущее
-                </button>
-                <button class="booking-page__announce-control">
-                  Следующее
-                  <IconBase icon="arrow-left" color="green"/>
-                </button>
-              </div>
-            </div>
-            <!-- INFO -->
-            <div class="p-x booking-page__info">
-              <h1 class="booking-page__title booking-page__info-title">
-                Объявление
-              </h1>
-              <div class="booking-page__items">
-                <div
-                    class="booking-page__info-item"
-                    v-for="{ label, text } of infoItems"
-                    :key="label"
-                >
-                  <div class="booking-page__info-label">{{ label }}</div>
-                  <div class="booking-page__info-text">{{ text }}</div>
+                <div class="booking-page__intro p-x">
+                  <Teleport to="body">
+                    <Gallery ref="gallery"/>
+                  </Teleport>
+                  <SwiperSlider class="booking-page__slider" :navigation="width > 1000" :space-between="0" counter>
+                    <swiper-slide
+                        style="cursor: pointer"
+                        v-for="i of 10"
+                        :key="i"
+                        @click="gallery?.gallery.showModal()"
+                    >
+                      <img src="~/assets/images/preview/room.jpg" alt=""/>
+                    </swiper-slide>
+                  </SwiperSlider>
+                  <BookingIntroRoom/>
+                  <div class="booking-page__card">
+                    <div class="booking-page__paid-hint">
+                      <span>Платное</span>
+                      <IconBase icon="info" color="green"/>
+                    </div>
+                    <h2 class="booking-page__price">
+                      от 2 000 ₽/час
+                      <div class="booking-page__price-action">
+                        <IconBase icon="arrow-left" color="green"/>
+                      </div>
+                    </h2>
+                    <ul class="booking-page__tags">
+                      <li class="booking-page__tag active">Баня на дровах</li>
+                      <li class="booking-page__tag active">Сауна</li>
+                      <li class="booking-page__tag">Хаммам</li>
+                    </ul>
+                    <div class="flex">
+                      <h3 class="booking-page__place">
+                        Сауна цветы
+                        <IconBase icon="info" color="black"/>
+                      </h3>
+                      <BookingSearchItemRate rate="4.2"/>
+                      <Reviews text="122 отзыва"/>
+                    </div>
+                    <BookingSearchItemLocation place="Пражская" time="13 мин"/>
+                    <p class="booking-page__street">г. Москва, ул. Большая Очаковская, 35</p>
+                    <WorkTime time="9:00" closed/>
+                  </div>
                 </div>
+                <div class="p-x booking-page__description">
+                  <h1 class="booking-page__title booking-page__description-title">
+                    Описание
+                  </h1>
+                  <div class="booking-page__description-items">
+                    <div
+                        class="booking-page__description-item"
+                        v-for="item of descriptionItems"
+                        :key="item.label"
+                    >
+                      <div class="booking-page__description-label">
+                        <IconBase :icon="item.icon" color="gray" subpath="/booking"/>
+                        <span>{{ item.label }}</span>
+                      </div>
+                      <div class="booking-page__description-text">
+                        {{ item.text }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <BookingPrices/>
+                <BookingDiscounts/>
+                <form @submit.prevent="submitForm" class="p-x calculator" ref="calculatorElement">
+                  <CalculatorDialog ref="dialog"/>
+                  <h1 class="booking-page__title calculator-title">
+                    <span>Калькулятор заказа </span>
+                    <button type="button" @click="dialog?.dialog.showModal()">
+                      <span>i</span>
+                    </button>
+                  </h1>
+                  <div class="calculator__params">
+                    <div class="calculator__params-item counter">
+                      <div class="calculator__param-label">
+                        <h2 class="calculator__param-title">Количество гостей</h2>
+                        <span class="calculator__param-suptitle">Макс. чел: 7</span>
+                      </div>
+                      <div class="counter__controls">
+                        <button type="button" class="counter__controls-btn" @click="decrement">
+                          <IconBase icon="decrement" color="green"/>
+                        </button>
+                        <span class="counter__controls-count">
+        {{ guests }}
+      </span>
+                        <button type="button" class="counter__controls-btn" @click="increment">
+                          <IconBase icon="increment" color="green"/>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="calculator__params-item receiver">
+                      <div class="calculator__param-label">
+                        <h2 class="calculator__param-title">На кого заказ</h2>
+                        <span class="calculator__param-suptitle"></span>
+                      </div>
+                      <input
+                          class="receiver-input"
+                          :class="{error: isValidate && errors.receiver}"
+                          placeholder="Имя"
+                          v-model="receiver"
+                      />
+                    </div>
+                    <div class="calculator__params-item" v-if="activeCalendar === 'time'">
+                      <div class="calculator__param-label">
+                        <h2 class="calculator__param-title">Выбрать дату и время</h2>
+                        <span class="calculator__param-suptitle">Мин. время брони, ч: 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calendar">
+                    <SwitchBlock :tabs="['Часы', 'Сутки']" @tabChanged="onTabChange"/>
+
+                    <div class="calendar__details" v-if="activeCalendar === 'days'">
+                      <h4 class="calendar__details-title">Выбрать дату</h4>
+                      <p class="calendar__details-item">Мин. время брони, ночей: 1</p>
+                      <p class="calendar__details-item">Время заезда 14:00</p>
+                      <p class="calendar__details-item">Время выезда 12:00</p>
+                    </div>
+
+                    <div class="calendar__content">
+                      <div class="calendar__months flex">
+                        <button
+                            type="button"
+                            class="calendar__months-item calendar__months-item--prev"
+                            @click="changeMonth(prevMonth)"
+                        >
+                          {{ months[prevMonth] }}
+                        </button>
+                        <button
+                            type="button"
+                            class="calendar__months-item calendar__months-item--current"
+                        >
+                          {{ months[currentMonth] }}
+                        </button>
+                        <button
+                            type="button"
+                            class="calendar__months-item calendar__months-item--next"
+                            @click="changeMonth(nextMonth)"
+                        >
+                          {{ months[nextMonth] }}
+                        </button>
+                      </div>
+
+                      <CalendarDate
+                          :month="currentMonth"
+                          @month-change="changeMonth"
+                          v-if="activeCalendar === 'days'"
+                          @date-selected="onDateSelected"
+                      />
+                      <CalendarTime
+                          :month="currentMonth"
+                          @date-selected="onDateSelected"
+                          v-else
+                      />
+
+                      <div class="calendar__status flex">
+                        <div
+                            class="calendar__status-hint"
+                            v-for="{ status, name } of statuses"
+                            :key="name"
+                            :class="[status]"
+                        >
+                          <div class="calendar__status-round"></div>
+                          <span class="calendar__status-name">{{ name }}</span>
+                        </div>
+                      </div>
+                      <div class="calendar__order">
+                        <h3 class="calendar__order-title">Ваш заказ</h3>
+                        <ul class="calendar__order-list">
+                          <li
+                              class="calendar__order-item"
+                              v-for="item of orderData"
+                              :key="item.label"
+                          >
+                            <IconBase
+                                v-if="item.value"
+                                class="calendar__order-check"
+                                icon="booking-check"
+                                color="green"
+                            />
+
+                            <div class="calendar__order-round" v-else></div>
+                            <div class="calendar__order-text">
+                              {{ item.label }}:
+                              <span :class="[item.value && 'colored']">{{
+                                  item.value || "Выбрать"
+                                }}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="calendar__actions">
+                        <UIButton class="calendar__actions-btn btn-clear gray" v-if="width > 1000">
+                          Очистить
+                        </UIButton>
+                        <UIButton class="calendar__actions-btn btn-chat green" v-else>
+                          <IconBase icon="message" color="white"/>
+                        </UIButton>
+                        <UIButton class="calendar__actions-btn btn-book purple" v-if="isFormFilled">
+                          Заказать <span>•</span> 12 000 ₽
+                        </UIButton>
+                        <UIButton class="calendar__actions-btn btn-book disabled" v-else>
+                          Заполните поля
+                        </UIButton>
+                      </div>
+                      <UIButton class="calendar__favorite-btn custom">
+                        <IconBase icon="favorite-filled" color="green"/>
+                        Добавить баню в избранное
+                      </UIButton>
+                    </div>
+                  </div>
+                </form>
+                <!-- ROOMS -->
+                <BookingRooms/>
+                <!-- SERVICES -->
+                <BookingServices/>
+                <!-- ACCESSORIES -->
+                <BookingAccessories/>
+                <!-- RECENTS -->
+                <div class="p-x booking-page__recents">
+                  <h1 class="booking-page__title booking-page__recents-title">
+                    Вы смотрели
+                  </h1>
+                  <SwiperSlider
+                      class="booking-page__recents-slider"
+                      :slidesPerView="width > 1000 ? 3 : 2"
+                      :spaceBetween="10"
+                      navigation
+                  >
+                    <swiper-slide v-for="i of 12" :key="i">
+                      <BookingCardItem favorite/>
+                    </swiper-slide>
+                  </SwiperSlider>
+                </div>
+                <!-- SIMILAR -->
+                <BookingSimilar/>
+                <!-- REVIEWS -->
+                <BookingReviews class="p-x"/>
+                <!-- ANNOUNCE -->
+                <div class="p-x booking-page__announce">
+                  <button class="booking-page__announce-btn">Объявление</button>
+                  <div class="booking-page__announce-controls">
+                    <button class="booking-page__announce-control">
+                      <IconBase icon="arrow-left" color="green"/>
+                      Предыдущее
+                    </button>
+                    <button class="booking-page__announce-control">
+                      Следующее
+                      <IconBase icon="arrow-left" color="green"/>
+                    </button>
+                  </div>
+                </div>
+                <!-- INFO -->
+                <div class="p-x booking-page__info">
+                  <h1 class="booking-page__title booking-page__info-title">
+                    Объявление
+                  </h1>
+                  <div class="booking-page__items">
+                    <div
+                        class="booking-page__info-item"
+                        v-for="{ label, text } of infoItems"
+                        :key="label"
+                    >
+                      <div class="booking-page__info-label">{{ label }}</div>
+                      <div class="booking-page__info-text">{{ text }}</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <Footer /> -->
+                <Footer class="mobile"/>
               </div>
             </div>
-            <!-- <Footer /> -->
-            <Footer class="mobile"/>
-          </div>
+          </section>
         </div>
-      </section>
-    </MapSidebar>
+      </ScrollArea>
+    </aside>
   </div>
 </template>
 

@@ -1,15 +1,21 @@
 <template>
+<!--  <div class="nav-wrapper">-->
+<!--    <UIButton v-if="route.name.includes('search')" class="search__list-btn gray" @click="isSearch = false" >-->
+<!--      <IconBase icon="list"/>-->
+<!--      Список-->
+<!--    </UIButton>-->
+<!--  </div>-->
   <nav class="header__nav">
     <ul class="header__nav-list">
       <li
-        class="header__nav-item"
-        :class="[`item-${key}`, isRoute(link) ? 'active' : '']"
-        v-for="({ icon, link }, key) of routes"
-        :key="key"
+          class="header__nav-item"
+          :class="[`item-${key}`, isRoute(link) ? 'active' : '']"
+          v-for="({ icon, link }, key) of routes"
+          :key="key"
       >
         <button class="header__nav-btn">
           <nuxt-link :to="link" class="header__nav-link">
-            <IconBase :icon="icon" color="gray" />
+            <IconBase :icon="icon" color="gray"/>
           </nuxt-link>
         </button>
       </li>
@@ -19,6 +25,8 @@
 
 <script setup>
 const route = useRoute();
+
+const isSearch = useState('isSearch')
 
 const routes = {
   home: {
@@ -47,7 +55,7 @@ const isRoute = (name) => {
   switch (name) {
     case "/search":
       return ["booking", "booking-slug", "search", "search-filter"].includes(
-        route.name
+          route.name
       );
       break;
     case "/":
@@ -66,6 +74,20 @@ const isRoute = (name) => {
 </script>
 
 <style lang="scss" scoped>
+.nav-wrapper {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
+}
+
+.search__list-btn {
+  order: 1;
+}
+
 .header__nav {
   background: #ffffff;
   box-shadow: 0px 6px 50px rgba(166, 175, 203, 0.28);
@@ -74,10 +96,11 @@ const isRoute = (name) => {
 
   max-width: 490px;
   width: 100%;
+  order: 0;
 
   &.mobile {
     max-width: 400px;
-    width: calc(100% - 30px);
+    width: calc(100% - 40px);
     margin: 0 auto;
 
     position: fixed;

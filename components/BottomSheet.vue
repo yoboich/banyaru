@@ -1,157 +1,198 @@
 <template>
-  <div class="bottom-sheet show">
-<!--    <div class="sheet-overlay"></div>-->
-    <div class="content">
-      <div class="header">
-        <div class="drag-icon"><span></span></div>
-      </div>
-      <div class="body">
-        <h2>Bottom Sheet Modal</h2>
-        <p>Create a bottom sheet modal that functions similarly to Facebook modal using HTML CSS and JavaScript. This modal allows user to view its contents, drag it up or down, and close it. It also works on touch-enabled devices. Lorem Ipsum are simply dummy text of there printing and typesetting industry. Lorem new Ipsum has been the industryss standard dummy text ever since the 1500s, when an off unknown printer tooks a galley of type and scrambled it to makes type spemen book It has survived not only five centuries.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quae facere, quaerat deleniti, voluptates optio ipsam ipsum beatae, maxime quis ea quasi minima numquam. Minima accusamus reiciendis, impedit blanditiis nulla quia? Odio deleniti commodi id nesciunt voluptas cumque odit, vel molestias ratione sit consectetur inventore error ullam magni labore voluptate doloribus sed similique. Delectus non pariatur eligendi eos voluptatum provident eveniet consequuntur. Laboriosam, nesciunt reiciendis libero sunt adipisci numquam voluptas ullam, iure voluptates soluta mollitia quam voluptatem? Nemo, ipsum magnam.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi commodi tenetur est beatae cupiditate incidunt aspernatur asperiores repudiandae? Odit, nulla modi ducimus assumenda ad voluptatem explicabo laudantium est unde ea similique excepturi fugiat nisi facere ab pariatur libero eius aperiam, non accusantium, asperiores optio. Accusantium, inventore in. Quaerat exercitationem aut, alias dolorem facere atque sint quo quasi vitae sed corrupti perferendis laborum eligendi repudiandae esse autem doloribus sapiente deleniti.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde voluptates, animi ipsa explicabo assumenda molestiae adipisci. Amet, dignissimos reiciendis, voluptatibus placeat quo ab quibusdam illum repellat, ad molestias quaerat saepe modi aperiam distinctio dolore id sapiente molestiae quas! Animi optio nobis nesciunt pariatur? Non necessitatibus mollitia veniam nihil eos natus libero quaerat vitae maiores. Praesentium nesciunt natus tempora. Doloremque, fuga?</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt deleniti a non dolorem delectus possimus distinctio! Nemo officiis tempore quos culpa fugit iste suscipit minus voluptatem, officia dicta ad deleniti harum voluptatibus dignissimos in, commodi placeat accusamus sint tenetur non natus? Error fugit quasi repudiandae mollitia doloribus officia eius magnam ratione soluta aut in iusto vel ut minima, at facere, minus sequi earum dolores animi ipsa nihil labore. Odio eius vitae iste repellendus molestias, amet sapiente laudantium optio, provident dignissimos voluptatum nesciunt nemo magni obcaecati commodi officiis delectus esse sed.</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat atque labore eligendi iusto sint! Fuga vel eius dolor eligendi ab cumque, maxime commodi, ducimus inventore temporibus illo delectus iste, quisquam ipsum labore eaque ipsa soluta praesentium voluptatem accusamus amet recusandae. Veniam necessitatibus laboriosam deleniti maxime, saepe vitae officia tempora voluptates voluptas ratione fugiat ad? Nostrum explicabo, earum dolor magnam commodi maiores iusto delectus porro ducimus architecto non enim eum, perspiciatis facere mollitia. Minus, mollitia animi! Nostrum deleniti, error quia hic eum modi? Corrupti illo provident dolores qui enim, expedita adipisci.</p>
-      </div>
+  <div id="sheet" class="sheet" aria-hidden="true" ref="sheet" role="dialog" @touchstart="onDragStart"
+       @touchmove="onDragMove" @touchend.value="onDragEnd" @keyup="onKeyup">
+    <div class="sheet__content" :style="{height: sheetHeight + 'vh'}" @click="onClick">
+      <div class="drag-line"></div>
+      <main class="sheet__content-body" :style="{'overflow-y': sheetHeight  === 100 ? 'auto' : 'hidden'}" ref="content">
+        <slot/>
+      </main>
     </div>
   </div>
 </template>
 
 <script setup>
-onMounted(() => {
-  // const showModalBtn = document.querySelector(".show-modal");
-  const bottomSheet = document.querySelector(".bottom-sheet");
-  // const sheetOverlay = bottomSheet.querySelector(".sheet-overlay");
-  const sheetContent = bottomSheet.querySelector(".content");
-  const dragIcon = bottomSheet.querySelector(".drag-icon");
-// Global variables for tracking drag events
-  let isDragging = false, startY, startHeight;
-// Show the bottom sheet, hide body vertical scrollbar, and call updateSheetHeight
-  const showBottomSheet = () => {
-    bottomSheet.classList.add("show");
-    document.body.style.overflowY = "hidden";
-    updateSheetHeight(50);
-  }
-  const updateSheetHeight = (height) => {
-    sheetContent.style.height = `${height}vh`; //updates the height of the sheet content
-    // Toggles the fullscreen class to bottomSheet if the height is equal to 100
-    bottomSheet.classList.toggle("fullscreen", height === 100);
-  }
-// Hide the bottom sheet and show body vertical scrollbar
-  const hideBottomSheet = () => {
-    bottomSheet.classList.remove("show");
-    document.body.style.overflowY = "auto";
-  }
-// Sets initial drag position, sheetContent height and add dragging class to the bottom sheet
-  const dragStart = (e) => {
-    isDragging = true;
-    startY = e.pageY || e.touches?.[0].pageY;
-    startHeight = parseInt(sheetContent.style.height);
-    bottomSheet.classList.add("dragging");
-  }
-// Calculates the new height for the sheet content and call the updateSheetHeight function
-  const dragging = (e) => {
-    if(!isDragging) return;
-    const delta = startY - (e.pageY || e.touches?.[0].pageY);
-    const newHeight = startHeight + delta / window.innerHeight * 100;
-    updateSheetHeight(newHeight);
-  }
-// Determines whether to hide, set to fullscreen, or set to default
-// height based on the current height of the sheet content
-  const dragStop = () => {
-    isDragging = false;
-    bottomSheet.classList.remove("dragging");
-    const sheetHeight = parseInt(sheetContent.style.height);
-    sheetHeight < 25 ? hideBottomSheet() : sheetHeight > 75 ? updateSheetHeight(100) : updateSheetHeight(50);
-  }
+definePageMeta({
+  layout: 'empty'
+})
 
-  sheetContent.addEventListener("mousedown", dragStart);
-  document.addEventListener("mousemove", dragging);
-  document.addEventListener("mouseup", dragStop);
-  sheetContent.addEventListener("touchstart", dragStart);
-  document.addEventListener("touchmove", dragging);
-  document.addEventListener("touchend", dragStop);
-  // sheetOverlay.addEventListener("click", hideBottomSheet);
-  // showModalBtn.addEventListener("click", showBottomSheet);
+const sheetHeight = ref(0)
+const sheet = ref()
+const emits = defineEmits(['close'])
+const content = ref()
+
+const onClick = () => {
+  if (sheetHeight.value === 50) {
+    setSheetHeight(100)
+  }
+}
+
+const setSheetHeight = (value) => {
+  sheetHeight.value = Math.max(0, Math.min(100, value))
+
+  if (sheetHeight.value >= 90) {
+    sheet.value.classList.add("fullscreen")
+  } else {
+    sheet.value.classList.remove("fullscreen")
+  }
+}
+
+const setIsSheetShown = (isShown) => {
+  if (!isShown) emits('close')
+  sheet.value.setAttribute("aria-hidden", String(!isShown))
+}
+
+const isFocused = element => document.activeElement === element
+
+const onKeyup = (e) => {
+  const isSheetElementFocused =
+      sheet.value.contains(e.target) && isFocused(e.target)
+
+  if (e.key === "Escape" && !isSheetElementFocused) {
+    setIsSheetShown(false)
+  }
+}
+
+const touchPosition = (event) =>
+    event.changedTouches ? event.changedTouches[0] : event
+
+const dragPosition = ref(0)
+
+const onDragStart = (e) => {
+  if (content.value.scrollTop > 0) return
+  dragPosition.value = touchPosition(e).pageY
+  sheet.value.classList.add("not-selectable")
+}
+
+const onDragMove = (e) => {
+  if (content.value.scrollTop > 0) return
+
+  if (dragPosition.value === undefined) return
+
+  const y = touchPosition(e).pageY
+  const deltaY = dragPosition.value - y
+  const deltaHeight = deltaY / window.screen.availHeight * 100
+
+  setSheetHeight(sheetHeight.value + deltaHeight)
+  dragPosition.value = y
+}
+
+const onDragEnd = (e) => {
+  if (content.value.scrollTop > 0) return
+  sheet.value.classList.remove("not-selectable")
+  dragPosition.value = undefined
+
+  if (sheetHeight.value < 25) {
+    setIsSheetShown(false)
+  } else if (sheetHeight.value > 75) {
+    setSheetHeight(100)
+  } else {
+    setSheetHeight(50)
+  }
+}
+
+onMounted(() => {
+  setSheetHeight(Math.min(50, 720 / window.screen.availHeight * 100))
+  setIsSheetShown(true)
 })
 </script>
 
 <style lang="scss" scoped>
-
-.bottom-sheet {
-  position: fixed;
-  bottom: 0;
+iframe {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
   left: 0;
-  //width: 100%;
-  //height: 100%;
-  display: flex;
-  opacity: 0;
-  pointer-events: none;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-end;
-  transition: 0.1s linear;
-}
-.bottom-sheet.show {
-  opacity: 1;
-  pointer-events: auto;
 }
 
-.bottom-sheet .content {
-  width: 100%;
-  position: relative;
-  background: #fff;
-  max-height: 100vh;
-  height: 50vh;
-  max-width: 1150px;
-  padding: 25px 30px;
-  transform: translateY(100%);
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.03);
-  transition: 0.3s ease;
-}
-.bottom-sheet.show .content{
-  transform: translateY(0%);
-}
-.bottom-sheet.dragging .content {
-  transition: none;
-}
-.bottom-sheet.fullscreen .content {
-  border-radius: 0;
-  overflow-y: hidden;
-}
-.bottom-sheet .header {
+.sheet {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  visibility: visible;
+  transition: opacity 0.5s, visibility 0.5s;
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
+  }
+
+  &__content {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+    border-radius: 25px 25px 0 0;
+    overflow: hidden;
+
+    --default-transitions: transform 0s, border-radius 0.5s;
+    transition: var(--default-transitions);
+    transform: translateY(0);
+
+    width: 100vw;
+    max-height: calc(100vh - 40px);
+    height: 30vh;
+
+    box-sizing: border-box;
+
+    padding-top: 20px;
+    position: relative;
+
+    &.fullscreen {
+      border-radius: 0;
+      height: calc(100vh - 40px) !important;
+      margin-top: 20px;
+    }
+
+    & .drag-line {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 5px;
+      width: 40px;
+      background: #DADEEC;
+      border-radius: 100px;
+    }
+  }
 }
-.header .drag-icon {
-  cursor: grab;
-  user-select: none;
-  padding: 15px;
-  margin-top: -15px;
+
+.sheet[aria-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
-.header .drag-icon span {
-  height: 4px;
-  width: 40px;
-  display: block;
-  background: #C7D0E1;
-  border-radius: 50px;
+
+.sheet[aria-hidden="true"] .sheet__contents {
+  transform: translateY(100%);
 }
-.bottom-sheet .body {
-  //height: 100%;
-  overflow-y: auto;
-  padding: 15px 0 40px;
-  scrollbar-width: none;
+
+.sheet__content-body {
+  flex-grow: 1;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
-.bottom-sheet .body::-webkit-scrollbar {
-  width: 0;
-}
-.bottom-sheet .body h2 {
-  font-size: 1.8rem;
-}
-.bottom-sheet .body p {
-  margin-top: 20px;
-  font-size: 1.05rem;
-}
+
 </style>

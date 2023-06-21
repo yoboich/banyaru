@@ -58,26 +58,26 @@ defineExpose({
 
   &.with-hint {
     input {
-      padding: 15px 90px 15px 25px;
+      padding: 15px 105px 15px 25px;
     }
   }
 
   .hint-btn {
-    padding: 5px 8px;
+    padding: 0 6px;
     background: #ed197f;
 
     border-radius: 12px;
 
     color: #fff;
     text-transform: uppercase;
-    font-size: 12px;
-
     position: absolute;
     top: 50%;
     right: 25px;
     transform: translateY(-50%);
 
     transition: all 0.2s;
+    font-size: 20px;
+    line-height: 100%;
   }
 
   input {
@@ -94,8 +94,7 @@ defineExpose({
     color: #3e3e51;
 
     @media (max-width: 1000px) {
-      font-size: 16px;
-      line-height: 18px;
+      height: 70px;
     }
 
     &::placeholder {

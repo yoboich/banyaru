@@ -33,12 +33,28 @@
 
 html {
   background: $whiteSmoke;
-  height: 100%;
+  //height: 100%;
 }
 
-body {
-  //overscroll-behavior: contain;
+//body {
+//  //overscroll-behavior: contain;
+//  height: 100%;
+//}
+
+body, html {
   height: 100%;
+  width: 100%;
+  margin: 0;
+  //overscroll-behavior: none;
+  overflow-x: hidden;
+}
+.full-screen-div {
+  width: 100vw;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .app {
@@ -157,7 +173,7 @@ li {
 
   .chat {
     &__help {
-      margin: 15px 15px 0;
+      margin: 80px 15px 0;
     }
 
     .chat__item a {
@@ -187,6 +203,18 @@ li {
 }
 
 .chat {
+
+  &__title {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
+    margin-bottom: 30px;
+
+    @media (max-width: 1000px) {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
 
   .container {
     display: grid;
@@ -538,7 +566,7 @@ li {
     @include flex-center-all;
     position: absolute;
     right: 20px;
-    top: 100px;
+    top: 120px;
     padding: 0;
     width: 50px;
     height: 50px;
@@ -571,6 +599,14 @@ li {
       min-height: 100%;
       display: flex;
       flex-direction: column;
+    }
+
+    @media (max-width: 1000px) {
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      max-width: 100%;
     }
   }
 }
