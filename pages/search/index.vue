@@ -176,7 +176,7 @@ const showFilter = ref(true)
   }
 
   .header__nav {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 20px;
 
