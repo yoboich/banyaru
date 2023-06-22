@@ -1,5 +1,5 @@
 <template>
-  <div class="search" ref="searchContent" @touchmove.passive="onMove" @touchend.passive="onMoveEnd">
+  <div class="search" ref="searchContent">
     <Map class="search__map"/>
     <div v-show="isSearch">
       <UISearchInput placeholder="Поиск Баня.ру" v-if="step === 0" v-model="searchTerm" hint @click="changeStep"/>

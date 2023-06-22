@@ -64,11 +64,15 @@ const onDragStart = (e) => {
 }
 
 const onDragMove = (e) => {
-  if (content.value.scrollTop > 0) return
+  const y = touchPosition(e).pageY
 
+  if (sheetHeight.value !== 100 || (y > dragPosition.value && content.value.scrollTop === 0)) {
+    e.preventDefault()
+  }
+
+  if (content.value.scrollTop > 0) return
   if (dragPosition.value === undefined) return
 
-  const y = touchPosition(e).pageY
   const deltaY = dragPosition.value - y
   const deltaHeight = deltaY / window.screen.availHeight * 100
 
@@ -79,7 +83,6 @@ const onDragMove = (e) => {
 const onDragEnd = (e) => {
   if (content.value.scrollTop > 0) return
   sheet.value.classList.remove("not-selectable")
-  dragPosition.value = undefined
 
   if (sheetHeight.value < 25) {
     setIsSheetShown(false)

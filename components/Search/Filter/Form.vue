@@ -313,11 +313,8 @@ const counter = ref(1);
   }
 
   &__category {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     cursor: pointer;
-    height: auto;
+    height: fit-content;
 
     &:hover {
       .search-filter__category-image {
@@ -332,6 +329,7 @@ const counter = ref(1);
       border-radius: 50%;
       transition: all 0.2s;
       border: 3px solid transparent;
+      margin-bottom: 10px;
 
       img {
         width: 70%;
