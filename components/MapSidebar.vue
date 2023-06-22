@@ -7,12 +7,7 @@
         </div>
       </ScrollArea>
     </aside>
-    <!--    <SearchMobile @close="emits('close')" v-else>-->
-    <!--      <div>-->
-    <!--        <slot/>-->
-    <!--      </div>-->
-    <!--    </SearchMobile>-->
-    <BottomSheet v-else @close="emits('close')">
+    <BottomSheet @close="emits('close')" v-else >
       <slot/>
     </BottomSheet>
   </div>
@@ -25,6 +20,16 @@ const {width} = useWindowSize()
 const emits = defineEmits(['close'])
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.no-drag-icon {
+  .sheet {
+    .drag-line {
+      display: none;
+    }
 
+    &__content {
+      padding-top: 0;
+    }
+  }
+}
 </style>

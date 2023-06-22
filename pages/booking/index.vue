@@ -156,7 +156,7 @@ definePageMeta({
     position: sticky;
     top: -1px;
     left: 0;
-    padding: 20px 15px;
+    padding: 20px 0;
     max-width: 600px;
     width: 100%;
     z-index: 20;
@@ -187,7 +187,6 @@ definePageMeta({
   &__filter {
     transition: all .4s ease-out;
     margin-top: 20px;
-    overflow: hidden;
 
     &-info {
       display: flex;

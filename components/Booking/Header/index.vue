@@ -45,7 +45,6 @@
   z-index: 20;
   background: #fff;
   width: 100%;
-  max-width: 600px;
   padding: 15px 20px;
   border: 1px solid #dadeec;
   border-bottom: none;

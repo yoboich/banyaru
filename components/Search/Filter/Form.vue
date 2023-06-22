@@ -250,7 +250,6 @@ const counter = ref(1);
     flex-direction: column;
     padding: 0 20px;
     position: relative;
-    min-height: 100%;
     flex-grow: 1;
 
     & > .switch {

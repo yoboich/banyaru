@@ -1,54 +1,53 @@
 <template>
   <div class="item" :class="{ wide: props.wide }">
     <SwiperSlider
-      v-if="props.wide"
-      class="item-preview"
-      navigation
-      :slidesPerView="1.3"
-      :spaceBetween="10"
+        v-if="props.wide"
+        class="item-preview"
+        navigation
+        :slidesPerView="1.3"
+        :spaceBetween="10"
     >
       <swiper-slide v-for="i of 3" :key="i">
-        <nuxt-link to="/booking/test-slug"
-          ><div class="item-preview__content">
-            <img src="~/assets/images/preview/slider-girl.jpg" alt="" /></div
-        ></nuxt-link>
+        <nuxt-link class="item-preview__content" to="/search/test-slug">
+          <img height="220" src="~/assets/images/preview/slider-girl.jpg" alt=""/>
+        </nuxt-link>
       </swiper-slide>
     </SwiperSlider>
     <div class="item-preview" v-else>
-      <nuxt-link to="/booking/test-slug">
-        <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
+      <nuxt-link to="/search/test-slug">
+        <img src="~/assets/images/preview/slider-girl.jpg" alt=""/>
       </nuxt-link>
     </div>
     <div class="item__content">
       <div class="item__content-top" v-if="props.wide">
-        <WorkTime :time="'9:00'" />
+        <WorkTime :time="'9:00'"/>
         <div class="item__hint">Этот баннер привлекает внимание!</div>
-        <BookingSearchItemControls />
+        <BookingSearchItemControls/>
       </div>
       <div class="item__details">
         <div class="item__details-info">
           <div>
             <h4 class="item-title">
-              <nuxt-link to="/booking/item"> Сауна цветы </nuxt-link>
+              <nuxt-link to="/search/item"> Сауна цветы</nuxt-link>
             </h4>
             <h3 class="item-price">от 2 000 ₽/час</h3>
           </div>
-          <BookingSearchItemControls v-if="!props.wide" />
+          <BookingSearchItemControls v-if="!props.wide"/>
         </div>
-        <BookingSearchItemTags :tags="firstTags" />
-        <BookingSearchItemTags :tags="secondTags" />
+        <BookingSearchItemTags :tags="firstTags"/>
+        <BookingSearchItemTags :tags="secondTags"/>
       </div>
       <div class="item__content-bottom">
         <div class="item__content-info">
-          <BookingSearchItemLocation place="Пражская" time="13 мин" />
-          <WorkTime v-if="!props.wide" :time="'9:00'" />
-          <BookingSearchItemRate rate="4,2" />
-          <Reviews text="11 отзывов" />
+          <BookingSearchItemLocation place="Пражская" time="13 мин"/>
+          <WorkTime v-if="!props.wide" :time="'9:00'"/>
+          <BookingSearchItemRate rate="4,2"/>
+          <Reviews text="11 отзывов"/>
         </div>
         <div class="item__contact-btns">
           <UIButton class="green">+7 999 333 14 ...</UIButton>
           <UIButton class="green chat-btn">
-            <IconBase icon="message" color="white" />
+            <IconBase icon="message" color="white"/>
           </UIButton>
         </div>
       </div>
@@ -57,7 +56,7 @@
 </template>
 
 <script setup>
-import { SwiperSlide } from "swiper/vue";
+import {SwiperSlide} from "swiper/vue";
 
 const props = defineProps({
   wide: {
@@ -112,23 +111,23 @@ const secondTags = ref(["Залы 3", "Бассейн", "до 15 чел."]);
     }
 
     &:deep(.item-preview) {
-      height: 220px;
       margin-bottom: 20px;
       border-radius: 10px;
-      overflow: hidden;
+      //overflow: hidden;
 
       .item-preview__content {
-        border-radius: 10px;
-        overflow: hidden;
-        height: 100%;
+        display: block;
+        //height: 220px;
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
+          border-radius: 10px;
         }
       }
+
       & .slider__arrow {
         &.prev {
           left: 10px;

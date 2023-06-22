@@ -11,7 +11,6 @@ export const waitForElementConnected = async (element: Node) => {
 };
 
 export const hideSearchPanel = () => {
-  console.log(124)
   const step = useState('step')
   step.value = 0
 }

@@ -3,7 +3,7 @@
     <div class="search-item__preview thumbs" v-if="props.type === 'first'">
       <SwiperSlider class="main-slider thumbs" ref="mainSlider" :thumbs="{swiper: thumbsSlider?.swiperInstance}">
         <swiper-slide v-for="i of 10" :key="i" >
-          <nuxt-link to="/booking/test">
+          <nuxt-link to="/search/test">
             <img src="~/assets/images/preview/room.jpg" alt="">
           </nuxt-link>
         </swiper-slide>
@@ -17,14 +17,14 @@
     <div class="search-item__preview" v-else-if="props.type === 'second'">
       <SwiperSlider class="main-slider" :slides-per-view="1.5" :space-between="10" >
         <swiper-slide v-for="i of 10" :key="i" >
-          <nuxt-link to="/booking/test">
+          <nuxt-link to="/search/test">
             <img src="~/assets/images/preview/room.jpg" alt="">
           </nuxt-link>
         </swiper-slide>
       </SwiperSlider>
     </div>
     <div class="search-item__preview" v-else>
-      <nuxt-link to="/booking/test">
+      <nuxt-link to="/search/test">
         <img src="~/assets/images/preview/room.jpg" alt="">
       </nuxt-link>
     </div>
@@ -88,6 +88,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .search-item {
+  margin-bottom: 40px;
   &.small {
     display: flex;
     flex-wrap: wrap;

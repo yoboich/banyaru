@@ -1,88 +1,117 @@
 <template>
-  <div class="search" ref="searchContent">
-    <Map class="search__map"/>
-    <div v-show="isSearch">
-      <UISearchInput placeholder="Поиск Баня.ру" v-if="step === 0" v-model="searchTerm" hint @click="changeStep"/>
-      <MapSidebar v-else @close="hideSearchPanel">
-        <SearchFilterForm v-if="step === 1" @focus="changeStep"/>
-        <SearchForm v-else ref="searchForm"/>
-      </MapSidebar>
-      <HeaderNav :class="{left: step === 0}"/>
-      <HeaderButton v-if="width > 1000"/>
-      <UIButton v-show="step === 0" v-else class="search__btn--create green" to="/create-post">
-        <IconBase icon="nav-plus" color="white"/>
-      </UIButton>
-    </div>
-    <div v-show="!isSearch">
-      <MapSidebar @close="hideSearchPanel" ref="scrollArea">
-        <section class="booking">
-          <div class="booking-search p-x">
-            <div class="booking-search__header" :class="{'show-filter': showFilter}">
-              <div class="booking-search__searchbox">
-                <UISearchInput v-model="searchTerm" placeholder="Поиск Баня.ру" hint/>
-                <UIButtonClose @click="resetSearch"/>
-              </div>
-              <div class="booking-search__filter" v-show="showFilter">
-                <div class="booking-search__filter-info">
-                  <div class="booking-search__filter-found">
-                    <span>1 936 объявлений</span>
-                    <button class="booking-search__sort-btn">
-                      <IconBase icon="sort" color="gray"/>
-                    </button>
-                  </div>
-                  <nuxt-link class="booking-search__filter-more" to="/search">
-                    <div
-                        class="count"
-                        v-show="selectedFilters.length && selectedFilters.length < 10"
-                    >
-                      {{ selectedFilters.length }}
+
+    <div class="search" ref="searchContent">
+      <Map class="search__map"/>
+      <div class="search__nav" :class="{left: isInitialSearch}">
+        <HeaderNav/>
+        <UIButton v-if="route.name.includes('search')" class="search__nav-btn gray" @click="step = 3">
+          <IconBase icon="list"/>
+          Список
+        </UIButton>
+      </div>
+      <Transition mode="out-in">
+        <div class="search__controls" v-show="isInitialSearch">
+          <UIButton class="gray search__controls-item" @click="zoomIn">
+            <IconBase icon="search-zoomin"/>
+          </UIButton>
+          <UIButton class="gray search__controls-item" @click="zoomOut">
+            <IconBase icon="search-zoomout"/>
+          </UIButton>
+          <UIButton class="gray search__controls-item" @click="mapGeolocate">
+            <IconBase icon="search-location"/>
+          </UIButton>
+        </div>
+      </Transition>
+      <div>
+        <UISearchInput class="search__input" placeholder="Поиск Баня.ру" v-show="isInitialSearch" v-model="searchTerm"
+                       hint
+                       @click="step = 1"/>
+        <MapSidebar v-show="!isInitialSearch" :class="{'no-drag-icon': isBookingList}" @close="hideSearchPanel">
+          <SearchFilterForm v-show="isCategorySearch" @focus="step = 2"/>
+          <SearchForm v-show="isFilterSearch"/>
+          <section v-show="isBookingList" class="booking">
+            <div class="booking-search p-x">
+              <div class="booking-search__header" :class="{'show-filter': showFilter}">
+                <div class="booking-search__searchbox">
+                  <UISearchInput v-model="searchTerm" placeholder="Поиск Баня.ру" hint/>
+                  <UIButtonClose @click="resetSearch"/>
+                </div>
+                <div class="booking-search__filter" v-show="showFilter">
+                  <div class="booking-search__filter-info">
+                    <div class="booking-search__filter-found">
+                      <span>1 936 объявлений</span>
+                      <button class="booking-search__sort-btn">
+                        <IconBase icon="sort" color="gray"/>
+                      </button>
                     </div>
-                    <IconBase icon="filter" color="black"/>
-                  </nuxt-link>
-                </div>
-                <div
-                    class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
-                    data-filter="first"
-                >
-                  <button class="booking-search__filter-btn slide-left">
-                    <IconBase icon="arrow-left" color="gray"/>
-                  </button>
-                  <button
-                      class="booking-search__filter-btn clear"
-                      @click="resetFilters"
+                    <nuxt-link class="booking-search__filter-more" to="/search">
+                      <div
+                          class="count"
+                          v-show="selectedFilters.length && selectedFilters.length < 10"
+                      >
+                        {{ selectedFilters.length }}
+                      </div>
+                      <IconBase icon="filter" color="black"/>
+                    </nuxt-link>
+                  </div>
+                  <div
+                      class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
+                      data-filter="first"
                   >
-                    <IconBase icon="close" color="gray"/>
-                  </button>
-                  <BookingSearchFormTag
-                      v-for="(tagName, i) of BookingSearchTagsFirst"
-                      :key="i"
-                      :name="tagName"
-                      :class="{ active: selectedFilters.includes(tagName) }"
-                      @click="toggleTag(tagName)"
-                  />
-                </div>
-                <div
-                    class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
-                    data-filter="second"
-                >
-                  <BookingSearchFormTag
-                      v-for="(tagName, i) of BookingSearchTagsSecond"
-                      :key="i"
-                      :name="tagName"
-                      :class="{ active: selectedFilters.includes(tagName) }"
-                      @click="toggleTag(tagName)"
-                  />
+                    <button class="booking-search__filter-btn slide-left">
+                      <IconBase icon="arrow-left" color="gray"/>
+                    </button>
+                    <button
+                        class="booking-search__filter-btn clear"
+                        @click="resetFilters"
+                    >
+                      <IconBase icon="close" color="gray"/>
+                    </button>
+                    <BookingSearchFormTag
+                        v-for="(tagName, i) of BookingSearchTagsFirst"
+                        :key="i"
+                        :name="tagName"
+                        :class="{ active: selectedFilters.includes(tagName) }"
+                        @click="toggleTag(tagName)"
+                    />
+                  </div>
+                  <div
+                      class="booking-search__filter-tags custoism-scrollbar custom-scrollbar--horizontal"
+                      data-filter="second"
+                  >
+                    <BookingSearchFormTag
+                        v-for="(tagName, i) of BookingSearchTagsSecond"
+                        :key="i"
+                        :name="tagName"
+                        :class="{ active: selectedFilters.includes(tagName) }"
+                        @click="toggleTag(tagName)"
+                    />
+                  </div>
                 </div>
               </div>
+              <div class="booking-search__results" v-if="width > 1000">
+                <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i"/>
+              </div>
+              <div class="booking-search__results" v-else>
+                <BookingMobileSearchItem v-for="i of 7" :type="i === 1 ? 'first'  : (i < 3 ? 'second' : 'third') "
+                                         :key="i"/>
+              </div>
+              <Transition mode="out-in">
+                <button class="booking-search__btn" v-show="showMapBtn" @click="step = 0">
+                  <IconBase icon="map"/>
+                  <span>Карта</span>
+                </button>
+              </Transition>
             </div>
-            <div class="booking-search__results">
-              <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i"/>
-            </div>
-          </div>
-        </section>
-      </MapSidebar>
+          </section>
+        </MapSidebar>
+        <HeaderButton v-if="width > 1000"/>
+        <UIButton v-show="isInitialSearch" v-else class="search__btn--create green" to="/create-post">
+          <IconBase icon="nav-plus" color="white"/>
+        </UIButton>
+      </div>
     </div>
-  </div>
+
 </template>
 
 <script setup>
@@ -90,25 +119,33 @@ import {useWindowSize} from "@vueuse/core";
 
 const {width} = useWindowSize()
 
-const isSearch = useState('isSearch', () => true)
+const route = useRoute()
+const showMapBtn = useState('showMapBtn', () => false)
 
 definePageMeta({
   layout: "empty",
+  keepalive: true
 });
 
 const searchTerm = ref('')
 const step = useState('step', () => 0)
 
-const changeStep = () => {
-  if (step.value < 1) {
-    step.value++
-  } else {
-    step.value++
-  }
-}
+const isInitialSearch = computed(() => step.value === 0)
+const isCategorySearch = computed(() => step.value === 1)
+const isFilterSearch = computed(() => step.value === 2)
+const isBookingList = computed(() => step.value === 3)
 
-watch(step, () => {
-  console.log(step.value)
+const openSheet = useState('openSheet')
+const closeSheet = useState('closeSheet')
+
+watch(step, (newVal, oldVal) => {
+  if (width.value <= 1000) {
+    if (oldVal === 0) {
+      openSheet.value()
+    } else if (newVal === 0) {
+      closeSheet.value()
+    }
+  }
 })
 
 
@@ -150,24 +187,60 @@ const toggleTag = (tagName) => {
   }
 };
 
-const prevScrollTop = ref(0)
 const showFilter = ref(true)
 
+const zoomIn = useState('mapZoomIn')
+const zoomOut = useState('mapZoomOut')
+const mapGeolocate = ref(null)
 
+onMounted(() => {
+  mapGeolocate.value = () => ymaps.geolocation.get({
+    provider: 'browser',
+    mapStateAutoApply: true
+  }).then(function (result) {
+    result.geoObjects.options.set('preset', 'islands#greenCircleIcon');
+    window.map.geoObjects.add(result.geoObjects);
+  });
+})
 </script>
 
 <style lang="scss" scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 .search {
   height: 100%;
   overflow: hidden;
 
-  &__list-btn {
-    position: absolute;
-
-  }
-
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &__controls {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &-item {
+      box-shadow: 1px 4px 12px rgba(166, 175, 205, 0.36);
+      padding: 0;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+
+      &:not(:last-of-type) {
+        margin-bottom: 10px;
+      }
+    }
   }
 
   &__map {
@@ -175,20 +248,76 @@ const showFilter = ref(true)
     height: 100vh;
   }
 
-  .header__nav {
+  & > div > :deep(.search-input) {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: calc(100% - 40px);
+    max-width: 490px;
+
+    @media (max-width: 1000px) {
+      max-width: calc(100% - 40px);
+    }
+
+    input {
+      border: none;
+      width: 100%;
+      height: 80px;
+
+      @media (max-width: 1000px) {
+        height: 70px;
+      }
+    }
+  }
+
+  &__nav {
     position: fixed;
+    align-items: flex-end;
     bottom: 20px;
     right: 20px;
+    display: flex;
+    gap: 15px 40px;
+    flex-direction: column-reverse;
+
+    &-btn {
+      font-size: 16px;
+      box-shadow: 0px 4px 24px rgba(166, 175, 203, 0.32);
+      border: none;
+
+      .icon-base {
+        width: 24px;
+      }
+
+      @media (max-width: 1000px) {
+        font-size: 23px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      width: calc(100vw - 40px);
+      max-width: 490px;
+      flex-direction: column-reverse !important;
+      align-items: flex-start;
+    }
+
+    .header__nav {
+      width: 490px;
+
+      @media (max-width: 1000px) {
+        width: 100%;
+      }
+    }
 
     &.left {
       left: 20px;
       right: auto;
+      flex-direction: row;
 
       @media (max-width: 1000px) {
-        left: 50%;
-        transform: translateX(-50%);
+        //left: 50%;
+        //transform: translateX(-50%);
 
-        width: calc(100% - 40px);
+        //width: calc(100% - 40px);
       }
     }
 
@@ -209,22 +338,22 @@ const showFilter = ref(true)
     }
   }
 
-  &-input {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    max-width: 490px;
-    width: 100%;
-
-    @media (max-width: 1000px) {
-      max-width: calc(100% - 40px);
-      width: 100%;
-    }
-
-    & :deep(input) {
-      border: none;
-    }
-  }
+  //&-input {
+  //  position: absolute;
+  //  left: 20px;
+  //  top: 20px;
+  //  max-width: 490px;
+  //  width: 100%;
+  //
+  //  @media (max-width: 1000px) {
+  //    max-width: calc(100% - 40px);
+  //    width: 100%;
+  //  }
+  //
+  //  & :deep(input) {
+  //    border: none;
+  //  }
+  //}
 }
 
 
@@ -248,7 +377,24 @@ const showFilter = ref(true)
   display: flex;
   flex-direction: column;
   background: #fff;
-  height: 100%;
+
+  &__btn {
+    position: sticky;
+    padding: 15px 12px;
+    border-radius: 100px;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    bottom: 25px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #DADEEC;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    width: fit-content;
+    z-index: 10;
+  }
 
   &.p-x {
     padding: 0 15px;
@@ -259,15 +405,9 @@ const showFilter = ref(true)
     position: sticky;
     top: -1px;
     left: 0;
-    padding: 20px 15px;
-    max-width: 600px;
+    padding: 20px 0;
     width: 100%;
     z-index: 20;
-
-    &.show-filter {
-      .booking-search__filter {
-      }
-    }
   }
 
   &__searchbox {
@@ -288,9 +428,8 @@ const showFilter = ref(true)
   }
 
   &__filter {
-    transition: all .4s ease-out;
+    //transition: all .4s ease-out;
     margin-top: 20px;
-    overflow: hidden;
 
     &-info {
       display: flex;
@@ -373,7 +512,7 @@ const showFilter = ref(true)
       border-radius: 50%;
       border: 2px solid #dadeec;
       background-color: #fff;
-      transition: background-color 0.2s border-color 0.2s;
+      //transition: background-color 0.2s border-color 0.2s;
 
       cursor: pointer;
 
@@ -408,7 +547,7 @@ const showFilter = ref(true)
   }
 
   &__results {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 
     &::-webkit-scrollbar {
       display: none;

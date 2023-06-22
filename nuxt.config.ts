@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
         // registerType: "autoUpdate",
         manifest: {
+            display: 'standalone',
             name: "Баня.ру",
             short_name: "Баня.ру",
             description: "Баня.ру – портал о банях и саунах России",

@@ -122,8 +122,7 @@ const toggleTag = (tagName) => {
     position: sticky;
     top: -1px;
     left: 0;
-    padding: 20px 15px;
-    max-width: 600px;
+    padding: 20px 0;
     width: 100%;
     z-index: 20;
   }

@@ -141,7 +141,7 @@ defineExpose({
   }
 
   &__header {
-    padding: 20px 15px;
+    padding: 20px 0;
     display: flex;
     position: relative;
     margin-bottom: 90px;

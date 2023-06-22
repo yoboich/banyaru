@@ -1,6 +1,6 @@
 <template>
-  <div id="sheet" class="sheet" aria-hidden="true" ref="sheet" role="dialog" @touchstart="onDragStart"
-       @touchmove="onDragMove" @touchend.value="onDragEnd" @keyup="onKeyup">
+  <div ref="sheet" class="sheet" aria-hidden="true" role="dialog" @touchstart="onDragStart"
+       @touchmove="onDragMove" @touchend="onDragEnd" @keyup="onKeyup">
     <div class="sheet__content" :style="{height: sheetHeight + 'vh'}" @click="onClick">
       <div class="drag-line"></div>
       <main class="sheet__content-body" :style="{'overflow-y': sheetHeight  === 100 ? 'auto' : 'hidden'}" ref="content">
@@ -19,6 +19,9 @@ const sheetHeight = ref(0)
 const sheet = ref()
 const emits = defineEmits(['close'])
 const content = ref()
+
+const showMapBtn = useState('showMapBtn')
+const step = useState('step')
 
 const onClick = () => {
   if (sheetHeight.value === 50) {
@@ -64,9 +67,17 @@ const onDragStart = (e) => {
 }
 
 const onDragMove = (e) => {
+  e.stopPropagation()
+
+  if (content.value.scrollTop === 0 && step.value !== 4) {
+    showMapBtn.value = false
+  } else {
+    showMapBtn.value = true
+  }
+
   const y = touchPosition(e).pageY
 
-  if (sheetHeight.value !== 100 || (y > dragPosition.value && content.value.scrollTop === 0)) {
+  if (sheetHeight.value !== 100 || (y >= dragPosition.value && content.value.scrollTop === 0)) {
     e.preventDefault()
   }
 
@@ -86,20 +97,43 @@ const onDragEnd = (e) => {
 
   if (sheetHeight.value < 25) {
     setIsSheetShown(false)
+    showMapBtn.value = false
   } else if (sheetHeight.value > 75) {
     setSheetHeight(100)
   } else {
     setSheetHeight(50)
+    showMapBtn.value = false
   }
 }
 
-onMounted(() => {
-  setSheetHeight(Math.min(50, 720 / window.screen.availHeight * 100))
+const close = (vh = 0) => {
+  setIsSheetShown(false)
+  setSheetHeight(vh)
+  console.log('METHOD CLOSED')
+}
+
+const open = (vh = 50) => {
   setIsSheetShown(true)
+  setSheetHeight(vh)
+  console.log('OPENED')
+}
+
+const closeSheet = useState('closeSheet', () => close)
+const openSheet = useState('openSheet', () => open)
+
+onMounted(() => {
+  // if (!sheet.value) {
+  //   sheet.value = document.querySelector('.sheet')
+  // }
+
+  setTimeout(() => {
+    setSheetHeight(0)
+    setIsSheetShown(false)
+  }, 100)
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 iframe {
   height: 100vh;
   width: 100vw;
@@ -143,6 +177,7 @@ iframe {
     --default-transitions: transform 0s, border-radius 0.5s;
     transition: var(--default-transitions);
     transform: translateY(0);
+    -webkit-overflow-scrolling: touch;
 
     width: 100vw;
     max-height: calc(100vh - 40px);
