@@ -602,6 +602,10 @@ watch(guests, () => {
     height: 370px;
     margin: 0 -15px 15px;
 
+    @media (max-width: 1000px) {
+      height: 250px;
+    }
+
     .slider__arrow.next {
       right: 10px;
     }
