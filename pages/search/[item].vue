@@ -569,7 +569,7 @@ const moveToCalc = () => {
   }
 
   const coords = calculatorElement.value.getBoundingClientRect()
-  scrollArea.value.el.el.scrollBy(0, coords.y - (width.value > 1000 ? 150 : 220))
+  scrollArea.value.el.scrollBy(0, coords.y - (width.value > 1000 ? 150 : 220))
   calcStep.value++
 }
 
@@ -595,7 +595,7 @@ watch(guests, () => {
   height: 100%;
 
   .error {
-    border-color: $red !important;
+    border-color: #FF858C !important;
   }
 
   &__slider {
