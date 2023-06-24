@@ -602,10 +602,6 @@ watch(guests, () => {
     height: 370px;
     margin: 0 -15px 15px;
 
-    @media (max-width: 1000px) {
-      height: 250px;
-    }
-
     .slider__arrow.next {
       right: 10px;
     }
@@ -620,8 +616,8 @@ watch(guests, () => {
       }
     }
 
-    @media (max-width: 500px) {
-      height: 340px !important;
+    @media (max-width: 1000px) {
+      height: 250px !important;
     }
   }
 
