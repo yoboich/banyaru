@@ -79,7 +79,7 @@ const changeTab = (i) => {
 
     &.active,
     &:hover {
-      color: $green;
+      font-weight: bold;
     }
   }
 }

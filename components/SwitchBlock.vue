@@ -9,6 +9,7 @@
     <button
       type="button"
       class="switch__btn"
+      :class="{active: activeTab === i}"
       v-for="(tab, i) of tabs"
       :key="tab"
       @click="selectTab(i)"
@@ -27,7 +28,7 @@ const props = defineProps({
   activeTab: {
     type: Number,
     default: () => 0
-  }
+  },
 });
 
 const emits = defineEmits(["tabChanged"]);
@@ -44,7 +45,7 @@ const activeTab = ref(props.activeTab);
 const btnWidth = 100 / props.tabs.length;
 
 const left = computed(() =>
-  activeTab.value ? btnWidth * activeTab.value + "%" : "5px"
+  activeTab.value ? btnWidth * activeTab.value + "%" : '2.5px'
 );
 
 const width = btnWidth + "%";
@@ -75,18 +76,19 @@ defineExpose({
 
   &.active {
     &::after {
-      left: v-bind(left);
+      left: v-bind(left) !important;
     }
   }
+
 
   &::after {
     content: "";
     position: absolute;
-    left: 5px;
+    left: 2.5px;
     top: 50%;
     transform: translate(0, -50%);
-    width: calc(v-bind(width) - 5px);
-    height: calc(100% - 10px);
+    width: calc(v-bind(width) - 2.5px);
+    height: calc(100% - 5px);
     border-radius: 100px;
     background: #fff;
     transition: all 0.2s;
@@ -104,6 +106,10 @@ defineExpose({
     font-size: 24px;
     line-height: 130%;
     cursor: pointer;
+
+    &.active {
+      font-weight: bold;
+    }
   }
 }
 </style>

@@ -6,7 +6,7 @@
         src="~/assets/images/preview/user.png"
         alt=""
     /></nuxt-link>
-    <nuxt-link to="/booking/item">
+    <nuxt-link to="/search/item">
       <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
     </nuxt-link>
   </div>

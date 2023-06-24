@@ -2,22 +2,40 @@
   <div class="catalog">
     <div class="catalog__header">
       <h1 class="catalog-title">Каталог</h1>
-      <nuxt-link class="catalog-link" to="#">Все</nuxt-link>
+      <nuxt-link class="catalog-link" to="/search?tab=categories">Все</nuxt-link>
     </div>
     <div class="catalog__content">
-      <nuxt-link to="/search" class="catalog-item" v-for="i of 4" :key="i">
-        <IconBase icon="hand" subpath="/home" />
-        <span>Массаж</span>
+      <nuxt-link to="/search?tab=list" class="catalog-item" v-for="({icon, name}, i) of categories" :key="i">
+        <IconBase :icon="icon" subpath="/categories"/>
+        <span>{{ name }}</span>
       </nuxt-link>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+const categories = ref([
+  {
+    "icon": "28bani-sauny",
+    "name": "Бани-сауны"
+  },
+  {
+    "icon": "26nomera",
+    "name": "Номера"
+  },
+  {
+    "icon": "30massag_m_2",
+    "name": "Массаж М 2"
+  },
+  {"icon": "2banshiki", "name": "Баньщики"}
+])
+</script>
 
 <style lang="scss" scoped>
 .catalog {
   margin-bottom: 30px;
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -67,7 +85,9 @@
     }
 
     svg {
-      width: 40px;
+      width: 60px;
+      height: 60px;
+      --icon-color: #{$green};
     }
   }
 }

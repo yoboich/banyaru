@@ -134,6 +134,7 @@
     // aspect-ratio: 1;
 
     &--back {
+      transform: translateX(-10px);
       &:hover {
         svg {
           --icon-color: #{$green};

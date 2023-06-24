@@ -1,6 +1,6 @@
 <template>
   <div class="booking-card__item">
-    <nuxt-link to="/booking/item">
+    <nuxt-link to="/search/item">
       <div class="booking-card__item-image">
         <img src="~/assets/images/preview/girl-bath.png" alt=""/>
       </div>
@@ -17,7 +17,7 @@
       </button>
     </div>
     <h3 class="booking-card__item-name">
-      <nuxt-link to="/booking/item">Сибирский сруб</nuxt-link>
+      <nuxt-link to="/search/item">Сибирский сруб</nuxt-link>
     </h3>
     <p class="booking-card__item-price">22 300 ₽/час</p>
   </div>

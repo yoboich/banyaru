@@ -1,6 +1,6 @@
 <template>
   <div class="filter-item">
-    <nuxt-link to="/booking/item" class="filter-item__image">
+    <nuxt-link to="/search/item" class="filter-item__image">
       <img src="~/assets/images/preview/place-image.png" alt="" />
       <button class="play">
         <IconBase icon="play" color="white" />
@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="filter-item__info-main">
-        <h3 class="title"><nuxt-link to="/booking/item">Сауна Дионис-СПА</nuxt-link></h3>
+        <h3 class="title"><nuxt-link to="/search/item">Сауна Дионис-СПА</nuxt-link></h3>
         <div class="location">
           <div class="location__dot"></div>
           <span>Павелецкая</span>

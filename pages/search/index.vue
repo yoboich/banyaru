@@ -1,116 +1,115 @@
 <template>
 
-    <div class="search" ref="searchContent">
-      <Map class="search__map"/>
-      <div class="search__nav" :class="{left: isInitialSearch}">
-        <HeaderNav/>
-        <UIButton v-if="route.name.includes('search')" class="search__nav-btn gray" @click="step = 3">
-          <IconBase icon="list"/>
-          Список
-        </UIButton>
-      </div>
-      <Transition mode="out-in">
-        <div class="search__controls" v-show="isInitialSearch">
-          <UIButton class="gray search__controls-item" @click="zoomIn">
-            <IconBase icon="search-zoomin"/>
-          </UIButton>
-          <UIButton class="gray search__controls-item" @click="zoomOut">
-            <IconBase icon="search-zoomout"/>
-          </UIButton>
-          <UIButton class="gray search__controls-item" @click="mapGeolocate">
-            <IconBase icon="search-location"/>
-          </UIButton>
-        </div>
-      </Transition>
-      <div>
-        <UISearchInput class="search__input" placeholder="Поиск Баня.ру" v-show="isInitialSearch" v-model="searchTerm"
-                       hint
-                       @click="step = 1"/>
-        <MapSidebar v-show="!isInitialSearch" :class="{'no-drag-icon': isBookingList}" @close="hideSearchPanel">
-          <SearchFilterForm v-show="isCategorySearch" @focus="step = 2"/>
-          <SearchForm v-show="isFilterSearch"/>
-          <section v-show="isBookingList" class="booking">
-            <div class="booking-search p-x">
-              <div class="booking-search__header" :class="{'show-filter': showFilter}">
-                <div class="booking-search__searchbox">
-                  <UISearchInput v-model="searchTerm" placeholder="Поиск Баня.ру" hint/>
-                  <UIButtonClose @click="resetSearch"/>
-                </div>
-                <div class="booking-search__filter" v-show="showFilter">
-                  <div class="booking-search__filter-info">
-                    <div class="booking-search__filter-found">
-                      <span>1 936 объявлений</span>
-                      <button class="booking-search__sort-btn">
-                        <IconBase icon="sort" color="gray"/>
-                      </button>
-                    </div>
-                    <nuxt-link class="booking-search__filter-more" to="/search">
-                      <div
-                          class="count"
-                          v-show="selectedFilters.length && selectedFilters.length < 10"
-                      >
-                        {{ selectedFilters.length }}
-                      </div>
-                      <IconBase icon="filter" color="black"/>
-                    </nuxt-link>
-                  </div>
-                  <div
-                      class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
-                      data-filter="first"
-                  >
-                    <button class="booking-search__filter-btn slide-left">
-                      <IconBase icon="arrow-left" color="gray"/>
-                    </button>
-                    <button
-                        class="booking-search__filter-btn clear"
-                        @click="resetFilters"
-                    >
-                      <IconBase icon="close" color="gray"/>
-                    </button>
-                    <BookingSearchFormTag
-                        v-for="(tagName, i) of BookingSearchTagsFirst"
-                        :key="i"
-                        :name="tagName"
-                        :class="{ active: selectedFilters.includes(tagName) }"
-                        @click="toggleTag(tagName)"
-                    />
-                  </div>
-                  <div
-                      class="booking-search__filter-tags custoism-scrollbar custom-scrollbar--horizontal"
-                      data-filter="second"
-                  >
-                    <BookingSearchFormTag
-                        v-for="(tagName, i) of BookingSearchTagsSecond"
-                        :key="i"
-                        :name="tagName"
-                        :class="{ active: selectedFilters.includes(tagName) }"
-                        @click="toggleTag(tagName)"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="booking-search__results" v-if="width > 1000">
-                <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i"/>
-              </div>
-              <div class="booking-search__results" v-else>
-                <BookingMobileSearchItem v-for="i of 7" :type="i === 1 ? 'first'  : (i < 3 ? 'second' : 'third') "
-                                         :key="i"/>
-              </div>
-              <Transition mode="out-in">
-                <button class="booking-search__btn" v-show="showMapBtn" @click="step = 0">
-                  <IconBase icon="map"/>
-                  <span>Карта</span>
-                </button>
-              </Transition>
-            </div>
-          </section>
-        </MapSidebar>
-        <HeaderButton v-if="width > 1000"/>
-        <UIButton v-show="isInitialSearch" v-else class="search__btn--create green" to="/create-post">
-          <IconBase icon="nav-plus" color="white"/>
-        </UIButton>
-      </div>
+  <div class="search" ref="searchContent">
+    <Map class="search__map"/>
+    <div class="search__nav" :class="{left: isInitialSearch}">
+      <HeaderNav/>
+      <UIButton v-if="route.name.includes('search')" class="search__nav-btn gray" @click="step = 4">
+        <IconBase icon="list"/>
+        Список
+      </UIButton>
     </div>
+    <Transition mode="out-in">
+      <div class="search__controls" v-show="isInitialSearch">
+        <UIButton class="gray search__controls-item" @click="zoomIn">
+          <IconBase icon="search-zoomin"/>
+        </UIButton>
+        <UIButton class="gray search__controls-item" @click="zoomOut">
+          <IconBase icon="search-zoomout"/>
+        </UIButton>
+        <UIButton class="gray search__controls-item" @click="mapGeolocate">
+          <IconBase icon="search-location"/>
+        </UIButton>
+      </div>
+    </Transition>
+    <div>
+      <UISearchInput class="search__input" placeholder="Поиск Баня.ру" v-show="isInitialSearch" v-model="searchTerm"
+                     hint @click="step = 1"/>
+      <MapSidebar v-show="!isInitialSearch" :class="{'no-drag-icon': isBookingList}" @close="hideSearchPanel">
+        <SearchFilterForm v-if="isCategorySearch"/>
+        <SearchForm v-else-if="isFilterSearch"/>
+        <section v-else="isBookingList" class="booking">
+          <div class="booking-search p-x">
+            <div class="booking-search__header" :class="{'show-filter': showFilter}">
+              <div class="booking-search__searchbox">
+                <UISearchInput v-model="searchTerm" placeholder="Поиск Баня.ру" hint/>
+                <UIButtonClose @click="resetSearch"/>
+              </div>
+              <div class="booking-search__filter" v-show="showFilter">
+                <div class="booking-search__filter-info">
+                  <div class="booking-search__filter-found">
+                    <span>1 936 объявлений</span>
+                    <button class="booking-search__sort-btn">
+                      <IconBase icon="sort" color="gray"/>
+                    </button>
+                  </div>
+                  <nuxt-link class="booking-search__filter-more" to="/search">
+                    <div
+                        class="count"
+                        v-show="selectedFilters.length && selectedFilters.length < 10"
+                    >
+                      {{ selectedFilters.length }}
+                    </div>
+                    <IconBase icon="filter" color="black"/>
+                  </nuxt-link>
+                </div>
+                <div
+                    class="booking-search__filter-tags custom-scrollbar custom-scrollbar--horizontal"
+                    data-filter="first"
+                >
+                  <button class="booking-search__filter-btn slide-left">
+                    <IconBase icon="arrow-left" color="gray"/>
+                  </button>
+                  <button
+                      class="booking-search__filter-btn clear"
+                      @click="resetFilters"
+                  >
+                    <IconBase icon="close" color="gray"/>
+                  </button>
+                  <BookingSearchFormTag
+                      v-for="(tagName, i) of BookingSearchTagsFirst"
+                      :key="i"
+                      :name="tagName"
+                      :class="{ active: selectedFilters.includes(tagName) }"
+                      @click="toggleTag(tagName)"
+                  />
+                </div>
+                <div
+                    class="booking-search__filter-tags custoism-scrollbar custom-scrollbar--horizontal"
+                    data-filter="second"
+                >
+                  <BookingSearchFormTag
+                      v-for="(tagName, i) of BookingSearchTagsSecond"
+                      :key="i"
+                      :name="tagName"
+                      :class="{ active: selectedFilters.includes(tagName) }"
+                      @click="toggleTag(tagName)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="booking-search__results" v-if="width > 1000">
+              <BookingSearchItem v-for="i of 7" :wide="i < 3" :key="i"/>
+            </div>
+            <div class="booking-search__results" v-else>
+              <BookingMobileSearchItem v-for="i of 7" :type="i === 1 ? 'first'  : (i < 3 ? 'second' : 'third') "
+                                       :key="i"/>
+            </div>
+            <Transition mode="out-in">
+              <button class="booking-search__btn" v-show="showMapBtn" @click="step = 0">
+                <IconBase icon="map"/>
+                <span>Карта</span>
+              </button>
+            </Transition>
+          </div>
+        </section>
+      </MapSidebar>
+      <HeaderButton v-if="width > 1000"/>
+      <UIButton v-show="isInitialSearch" v-else class="search__btn--create green" to="/create-post">
+        <IconBase icon="nav-plus" color="white"/>
+      </UIButton>
+    </div>
+  </div>
 
 </template>
 
@@ -127,23 +126,23 @@ definePageMeta({
   keepalive: true
 });
 
-const searchTerm = ref('')
+const searchTerm = useState('searchTerm', () => '')
 const step = useState('step', () => 0)
 
 const isInitialSearch = computed(() => step.value === 0)
 const isCategorySearch = computed(() => step.value === 1)
 const isFilterSearch = computed(() => step.value === 2)
-const isBookingList = computed(() => step.value === 3)
+const isBookingList = computed(() => step.value === 4)
 
-const openSheet = useState('openSheet')
-const closeSheet = useState('closeSheet')
+const triggerOpen = useState('triggerOpen')
+const triggerClose = useState('triggerClose')
 
 watch(step, (newVal, oldVal) => {
   if (width.value <= 1000) {
     if (oldVal === 0) {
-      openSheet.value()
+      triggerOpen.value = !triggerOpen.value
     } else if (newVal === 0) {
-      closeSheet.value()
+      triggerClose.value = !triggerClose.value
     }
   }
 })
@@ -170,7 +169,7 @@ const BookingSearchTagsSecond = ref([
 ]);
 
 const resetSearch = () => {
-  searchTerm.value = "";
+  step.value = 0
 };
 
 const resetFilters = () => {
@@ -193,7 +192,7 @@ const zoomIn = useState('mapZoomIn')
 const zoomOut = useState('mapZoomOut')
 const mapGeolocate = ref(null)
 
-onMounted(() => {
+onMounted(async () => {
   mapGeolocate.value = () => ymaps.geolocation.get({
     provider: 'browser',
     mapStateAutoApply: true
@@ -201,6 +200,25 @@ onMounted(() => {
     result.geoObjects.options.set('preset', 'islands#greenCircleIcon');
     window.map.geoObjects.add(result.geoObjects);
   });
+
+  if (route.query.tab) {
+    const tab = route.query.tab
+
+    switch (tab) {
+      case 'categories':
+        step.value = 1
+        break;
+      case 'list':
+        step.value = 4
+        break;
+    }
+  }
+})
+
+watch(searchTerm, (newVal, oldVal) => {
+  if (newVal.trim() && oldVal.trim() && newVal !== oldVal) {
+    step.value = 2
+  }
 })
 </script>
 

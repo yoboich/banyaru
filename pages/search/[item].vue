@@ -37,14 +37,20 @@
                   <Teleport to="body">
                     <Gallery ref="gallery"/>
                   </Teleport>
-                  <SwiperSlider class="booking-page__slider" :navigation="width > 1000" :space-between="0" counter>
+                  <SwiperSlider class="booking-page__slider" :slides-per-view="width > 1000 ? 1 : 1.4" :navigation="width > 1000" :space-between="10" counter>
+
                     <swiper-slide
+                        class="booking-page__slide"
                         style="cursor: pointer"
-                        v-for="i of 10"
+                        v-for="(item, i) of getSlices(images)"
                         :key="i"
                         @click="gallery?.gallery.showModal()"
                     >
-                      <img src="~/assets/images/preview/room.jpg" alt=""/>
+                      <img v-if="item.length === 1" src="~/assets/images/preview/room.jpg" alt=""/>
+                      <div v-else class="booking-page__slide-content">
+                        <img src="~/assets/images/preview/room.jpg" alt=""/>
+                        <img src="~/assets/images/preview/room.jpg" alt=""/>
+                      </div>
                     </swiper-slide>
                   </SwiperSlider>
                   <BookingIntroRoom/>
@@ -352,6 +358,32 @@ const isOrderFilled = () => {
 
 const emits = defineEmits(["changeCalendarType"]);
 
+const images = ref([1,2,3,4,5,6,7,8,9,10])
+
+
+function getSlices(arr) {
+  const result = [];
+  let group = []
+  let groupLen = 1
+  let i = 0
+
+  while (i < arr.length) {
+    group.push(arr[i])
+
+    if (group.length === groupLen) {
+      result.push(group)
+      group = []
+      groupLen = groupLen === 1 ? 2 : 1
+    }
+
+    i += 1
+  }
+
+
+  return result;
+}
+
+
 const months = [
   "январь",
   "февраль",
@@ -568,9 +600,7 @@ watch(guests, () => {
 
   &__slider {
     height: 370px;
-    border-radius: 25px;
-    overflow: hidden;
-    margin-bottom: 15px;
+    margin: 0 -15px 15px;
 
     .slider__arrow.next {
       right: 10px;
@@ -580,19 +610,40 @@ watch(guests, () => {
       left: 10px;
     }
 
-    .swiper-slide {
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+    .slider__counter {
+      @media (max-width: 1000px) {
+        display: none;
       }
     }
 
     @media (max-width: 500px) {
       height: 340px !important;
     }
+  }
 
+  &__slide {
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+
+      & > img {
+        height: calc(50% - 5px) !important;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 25px;
+
+      @media (max-width: 1000px) {
+        border-radius: 15px;
+      }
+    }
   }
 
   &__tags {

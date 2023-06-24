@@ -5,7 +5,7 @@
         <span>{{ typeLabels[props.data.type] }}</span>
         <IconBase icon="info" color="gray" />
       </div>
-      <nuxt-link to="/booking/post">
+      <nuxt-link to="/search/post">
         <img src="~/assets/images/preview/slider-girl.jpg" alt="" />
       </nuxt-link>
     </div>
@@ -15,7 +15,7 @@
         <IconBase icon="more" color="black" />
       </div>
       <span class="post__tag">Сауны</span>
-      <nuxt-link to="/booking/post">
+      <nuxt-link to="/search/post">
         <span class="post__name">Сауна Дионис-СПА</span>
       </nuxt-link>
       <h5 class="post__price">22 300 ₽</h5>

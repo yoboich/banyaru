@@ -1,13 +1,18 @@
 <template>
   <form class="search-filter__form">
     <div class="search-filter__header">
+      <div class="search-filter__top" v-show="activeSwitchTab">
+        <img src="/logo.svg" alt="">
+        <button class="search-filter__btn" @click.prevent="resetSearch">
+          Очистить
+        </button>
+      </div>
       <div class="search-filter__searchbox">
         <UISearchInput
             ref="searchInput"
             v-model="searchTerm"
             placeholder="Поиск по г. Москва"
             hint
-            @focus="emits('focus')"
         />
         <UIButtonClose type="button" @click="resetSearch"/>
       </div>
@@ -16,16 +21,15 @@
     <div class="search-filter__categories" v-if="activeSwitchTab === 0">
       <div
           class="search-filter__category"
-          v-for="i of 14"
+          v-for="({name, icon}, i) of categories"
           :key="i"
       >
         <div class="search-filter__category-image">
-          <img
-              :src="getLocalUrl(`/images/icons/categories/cat-${i}.svg`)"
-              alt=""
-          />
+          <IconBase :icon="icon" subpath="/categories" color="black"/>
         </div>
-        <h4 class="search-filter__category-name">Категория</h4>
+        <h4 class="search-filter__category-name">
+          {{ name }}
+        </h4>
       </div>
     </div>
     <div class="search-filter__tabs" v-else>
@@ -59,7 +63,7 @@
         </label>
         <div class="search-filter__block">
           <h2 class="search-filter__block-title">Место отдыха</h2>
-          <SwitchBlock :tabs="placeTabs" @tab-changed="onPlaceTabChange"/>
+          <SwitchBlock small :tabs="placeTabs" @tab-changed="onPlaceTabChange"/>
         </div>
         <div v-if="activeSwitchPlaceTab === 0">
           <div class="search-filter__block bath-type">
@@ -141,20 +145,21 @@
             </button>
           </div>
         </div>
-        <div class="flex search-filter__controls">
-          <UIButton>Очистить</UIButton>
-          <UIButton class="green">
-            Показать 120 объявлений
-          </UIButton>
-        </div>
+        <UIButton class="search-filter__btn-show green">
+          Показать 120 объявлений
+        </UIButton>
       </div>
     </div>
   </form>
 </template>
 
 <script setup>
-const searchTerm = ref("");
-const resetSearch = () => (searchTerm.value = "");
+const searchTerm = useState('searchTerm')
+const step = useState('step')
+
+const resetSearch = () => {
+  step.value = 0
+};
 
 const emits = defineEmits(['focus'])
 
@@ -169,6 +174,49 @@ const tabs = ["Снять", "Услуги", "Купить"];
 
 const tagList = ref(['Баня', 'Сауна', 'Баня по-черному', 'Тег 1', 'Тег 2', 'Тег 3', 'Тег 4'])
 const activeTags = ref([])
+
+const categories = ref(
+    [{"icon": "1banshicy", "name": "Банщицы"}, {"icon": "2banshiki", "name": "Баньщики"}, {
+      "icon": "3bani",
+      "name": "Бани"
+    }, {"icon": "4chany", "name": "Чаны"}, {"icon": "5drova", "name": "Дрова"}, {
+      "icon": "6veniki",
+      "name": "Веники"
+    }, {"icon": "7sol", "name": "Соль"}, {
+      "icon": "8bondarnye_izdeliya",
+      "name": "Бондарные изделия"
+    }, {"icon": "9chugun", "name": "Чугун"}, {"icon": "10kovka", "name": "Ковка"}, {
+      "icon": "11masla",
+      "name": "Масла"
+    }, {"icon": "12aksessuary", "name": "Аксессуары"}, {"icon": "13biznes", "name": "Бизнес"}, {
+      "icon": "14manikyur",
+      "name": "Маникюр"
+    }, {"icon": "15mebel", "name": "Мебель"}, {"icon": "16venik4", "name": "Веники 4"}, {
+      "icon": "17pechniki",
+      "name": "Печники"
+    }, {"icon": "18spa", "name": "СПА"}, {"icon": "19odejda", "name": "Одежда"}, {
+      "icon": "20kamni",
+      "name": "Камни"
+    }, {"icon": "21travy", "name": "Травы"}, {"icon": "22kupeli", "name": "Купели"}, {
+      "icon": "23venik2",
+      "name": "Веники 2"
+    }, {"icon": "24pechi", "name": "Печи"}, {"icon": "25kursy", "name": "Курсы"}, {
+      "icon": "26nomera",
+      "name": "Номера"
+    }, {"icon": "27barbery", "name": "Барберы"}, {
+      "icon": "28bani-sauny",
+      "name": "Бани-сауны"
+    }, {"icon": "29massajistki", "name": "Массажистки"}, {
+      "icon": "30massag_m_2",
+      "name": "Массаж М 2"
+    }, {"icon": "31venik3", "name": "Веники 3"}, {
+      "icon": "32massajisty",
+      "name": "Массажисты"
+    }, {"icon": "33parikmahery", "name": "Парикмахеры"}, {
+      "icon": "34plotniki",
+      "name": "Плотники"
+    }, {"icon": "35trubochisty", "name": "Трубочисты"}]
+)
 
 const toggleTag = (tag) => {
   if (activeTags.value.includes(tag)) {
@@ -203,10 +251,30 @@ const cities = getCities();
 const minPrice = ref();
 const maxPrice = ref();
 const counter = ref(1);
+
+const searchInput = ref()
+
+onMounted(() => {
+  searchInput.value.setFocus()
+})
+
 </script>
 
 <style lang="scss" scoped>
 .search-filter {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__btn {
+    color: $green;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -269,6 +337,10 @@ const counter = ref(1);
     z-index: 20;
     padding: 20px 0;
 
+    @media (max-width: 1000px) {
+      padding-top: 0;
+    }
+
     & :deep(.switch) {
       .switch__btn {
         font-size: 20px;
@@ -319,10 +391,15 @@ const counter = ref(1);
       .search-filter__category-image {
         border-color: $green;
       }
+
+      svg {
+        --icon-color: #{$green};
+      }
     }
 
     &-image {
       @include flex-center-all;
+      width: 100%;
       aspect-ratio: 1;
       background: #fff;
       border-radius: 50%;
@@ -330,11 +407,9 @@ const counter = ref(1);
       border: 3px solid transparent;
       margin-bottom: 10px;
 
-      img {
+      svg {
         width: 70%;
         height: 70%;
-        object-fit: contain;
-        object-position: center;
       }
     }
 
@@ -343,6 +418,7 @@ const counter = ref(1);
       font-size: 20px;
       line-height: 100%;
       text-align: center;
+      word-break: break-all;
 
       @media (max-width: 1400px) {
         font-size: 16px;
@@ -378,10 +454,10 @@ const counter = ref(1);
       @media (max-width: 1000px) {
         margin-bottom: 20px;
 
-        & :deep(.profile-tabs__item) {
-          font-size: 14px;
-          line-height: 16px;
-        }
+        //& :deep(.profile-tabs__item) {
+        //  font-size: 14px;
+        //  line-height: 16px;
+        //}
       }
     }
 
@@ -750,26 +826,12 @@ const counter = ref(1);
     transform: rotate(-90deg);
   }
 
-  &__controls {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 10px;
-
-    padding-bottom: 20px;
+  &__btn-show {
+    width: 100%;
+    position: sticky;
+    bottom: 20px;
+    left: 0;
     margin-top: auto;
-
-    .btn {
-      width: auto;
-
-      @media (max-width: 1200px) {
-        font-size: 18px;
-      }
-
-      @media (max-width: 1000px) {
-        font-size: 16px;
-        line-height: 18px;
-      }
-    }
   }
 }
 </style>

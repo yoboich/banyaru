@@ -71,6 +71,10 @@ defineExpose({
     overflow-y: auto;
     height: v-bind(windowHeightStyle);
 
+    @media (max-width: 1000px) {
+      height: 100% !important;
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }

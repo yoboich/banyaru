@@ -3,7 +3,8 @@
        @touchmove="onDragMove" @touchend="onDragEnd" @keyup="onKeyup">
     <div class="sheet__content" :style="{height: sheetHeight + 'vh'}" @click="onClick">
       <div class="drag-line"></div>
-      <main class="sheet__content-body" :style="{'overflow-y': sheetHeight  === 100 ? 'auto' : 'hidden'}" ref="content">
+      <main class="sheet__content-body" :style="{'overflow-y': sheetHeight  === 100 ? 'auto' : 'hidden'}"
+            ref="content">
         <slot/>
       </main>
     </div>
@@ -15,8 +16,8 @@ definePageMeta({
   layout: 'empty'
 })
 
-const sheetHeight = ref(0)
 const sheet = ref()
+const sheetHeight = ref(0)
 const emits = defineEmits(['close'])
 const content = ref()
 
@@ -68,6 +69,7 @@ const onDragStart = (e) => {
 
 const onDragMove = (e) => {
   e.stopPropagation()
+  document.activeElement.blur();
 
   if (content.value.scrollTop === 0 && step.value !== 4) {
     showMapBtn.value = false
@@ -109,27 +111,26 @@ const onDragEnd = (e) => {
 const close = (vh = 0) => {
   setIsSheetShown(false)
   setSheetHeight(vh)
-  console.log('METHOD CLOSED')
 }
 
-const open = (vh = 50) => {
+const open = (vh = 100) => {
   setIsSheetShown(true)
   setSheetHeight(vh)
-  console.log('OPENED')
 }
 
-const closeSheet = useState('closeSheet', () => close)
-const openSheet = useState('openSheet', () => open)
+const triggerOpen = useState('triggerOpen', () => false)
+const triggerClose = useState('triggerClose', () => false)
+
+watch(triggerOpen, () => {
+  open()
+})
+watch(triggerClose, () => {
+  close()
+})
 
 onMounted(() => {
-  // if (!sheet.value) {
-  //   sheet.value = document.querySelector('.sheet')
-  // }
-
-  setTimeout(() => {
-    setSheetHeight(0)
-    setIsSheetShown(false)
-  }, 100)
+  setIsSheetShown(false)
+  setSheetHeight(0)
 })
 </script>
 

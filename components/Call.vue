@@ -145,6 +145,7 @@ defineExpose({
     display: flex;
     position: relative;
     margin-bottom: 90px;
+    background: #000;
 
     &-btn {
       position: absolute;
