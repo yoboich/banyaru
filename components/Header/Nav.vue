@@ -116,7 +116,7 @@ const isRoute = (name) => {
 
     &.item-home {
       svg {
-        max-width: 28px;
+        max-width: 30px;
       }
     }
 
