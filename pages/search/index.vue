@@ -1,5 +1,4 @@
 <template>
-
   <div class="search" ref="searchContent">
     <Map class="search__map"/>
     <div class="search__nav" :class="{left: isInitialSearch}">
@@ -126,7 +125,7 @@ definePageMeta({
   keepalive: true
 });
 
-const searchTerm = useState('searchTerm', () => '')
+const searchTerm = useState('searchTerm')
 const step = useState('step', () => 0)
 
 const isInitialSearch = computed(() => step.value === 0)
@@ -150,7 +149,6 @@ watch(step, (newVal, oldVal) => {
 
 // Booking
 const selectedFilters = ref([]);
-const scrollArea = ref()
 
 const BookingSearchTagsFirst = ref([
   "Баня",

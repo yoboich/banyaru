@@ -561,6 +561,14 @@ const onDateSelected = (data) => {
   }
 };
 
+// const onMonthUpdate = (direction) => {
+//   if (direction === 'next') {
+//     changeMonth(nextMonth.value)
+//   } else {
+//     changeMonth(prevMonth.value)
+//   }
+// }
+
 const callUser = () => callElement.value?.dialog.showModal()
 
 const moveToCalc = () => {
@@ -1009,6 +1017,11 @@ watch(guests, () => {
           font-size: 14px;
           line-height: 20px;
 
+          @media (max-width: 1000px) {
+            max-width: 100%;
+            width: 40%;
+          }
+
           &::placeholder {
             color: #8f99ba;
           }
@@ -1033,6 +1046,11 @@ watch(guests, () => {
 
           max-width: 120px;
 
+          @media (max-width: 1000px) {
+            max-width: 100%;
+            width: 40%;
+          }
+
           &-count {
             font-weight: 500;
             font-size: 14px;
@@ -1055,6 +1073,11 @@ watch(guests, () => {
         gap: 15px;
 
         margin-bottom: 20px;
+
+        @media (max-width: 1000px) {
+          display: flex;
+          justify-content: space-between;
+        }
 
         &:last-of-type {
           margin-bottom: 0;

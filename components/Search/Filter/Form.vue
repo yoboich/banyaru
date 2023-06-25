@@ -3,7 +3,7 @@
     <div class="search-filter__header">
       <div class="search-filter__top" v-show="activeSwitchTab">
         <img src="/logo.svg" alt="">
-        <button class="search-filter__btn" @click.prevent="resetSearch">
+        <button class="search-filter__btn" @click.prevent="searchTerm = ''">
           Очистить
         </button>
       </div>

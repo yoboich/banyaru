@@ -51,7 +51,7 @@ definePageMeta({
   layout: "empty",
 });
 
-const emits = defineEmits(["dateSelected"]);
+const emits = defineEmits(["dateSelected", 'updateMonth']);
 
 const generateTimeDates = (year, month, day) => {
   let date = moment(new Date(year, month, day)).startOf("day");
@@ -92,9 +92,13 @@ const days = ref(generateDaysArray(year, props.month));
 const activeDay = ref();
 const activeDaysContainer = ref();
 
-onMounted(() => {
+const scrollToDay = () => {
   const btn = activeDaysContainer.value.querySelector(".active").closest('.calendar__days-item');
   activeDaysContainer.value.scroll({left: btn.offsetLeft - 15});
+}
+
+onMounted(() => {
+  scrollToDay()
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -137,6 +141,27 @@ const selectedDates = ref([
 const changeDay = (dayDate) => {
   day.value = dayDate;
 };
+
+// const setNextDate = () => {
+//   const idx = days.value.findIndex(d => getDayDate(d) === day.value)
+//
+//   if (idx > days.value.length - 2) {
+//     emits('updateMonth', 'next')
+//     day.value = '01'
+//   } else {
+//     changeDay(getDayDate(days.value[idx + 1]))
+//   }
+// }
+// const setPrevDate = () => {
+//   const idx = days.value.findIndex(d => getDayDate(d) === day.value)
+//
+//   if (idx - 1 < 0) {
+//     emits('updateMonth', 'prev')
+//     day.value = '01'
+//   } else {
+//     changeDay(getDayDate(days.value[idx + 1]))
+//   }
+// }
 
 const closestLeft = ref(null);
 const closestRight = ref(null);

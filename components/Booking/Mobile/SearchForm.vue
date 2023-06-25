@@ -38,8 +38,8 @@
 
 <script setup>
 import {SwiperSlide} from "swiper/vue";
+const searchTerm = useState('searchTerm')
 
-const searchTerm = ref()
 const tags = ref(['Найти баню', 'Банщики', 'Массаж', 'Банщики', 'Массаж'])
 
 </script>

@@ -21,6 +21,7 @@ useHead({
 })
 
 const route = useRoute()
+const searchTerm = useState('searchTerm', () => '')
 
 watch(() => route.name, () => {
   const body = document.querySelector('body')

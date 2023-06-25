@@ -24,6 +24,7 @@
     "swiper": "^9.3.2",
     "uuidv4": "^6.2.13",
     "vue-inline-svg": "^3.1.2",
-    "vue-yandex-maps@next": "^0.12.7"
+    "vue-yandex-maps@next": "^0.12.7",
+    "vue3-touch-events": "^4.1.3"
   }
 }

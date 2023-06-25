@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-const searchTerm = ref("");
+const searchTerm = useState('searchTerm');
 
 const data = [
   {
