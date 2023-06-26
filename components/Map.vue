@@ -22,9 +22,9 @@ const options = {
   suppressMapOpenBlock: true
 }
 
-const mapZoomIn = useState('mapZoomIn', () => null)
-const mapZoomOut = useState('mapZoomOut', () => null)
-const addToMap = useState('addToMap', () => null)
+const mapZoomIn = ref(null)
+const mapZoomOut = ref(null)
+const addToMap = ref(null)
 
 const initHandler = (map) => {
   window.map = map
@@ -47,6 +47,12 @@ const onClick = () => {
 
 onMounted(async () => {
   await loadYmap()
+})
+
+defineExpose({
+  mapZoomIn,
+  mapZoomOut,
+  addToMap
 })
 </script>
 

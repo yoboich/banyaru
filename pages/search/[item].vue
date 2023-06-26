@@ -38,7 +38,6 @@
                     <Gallery ref="gallery"/>
                   </Teleport>
                   <SwiperSlider class="booking-page__slider" :slides-per-view="width > 1000 ? 1 : 1.4" :navigation="width > 1000" :space-between="10" counter>
-
                     <swiper-slide
                         class="booking-page__slide"
                         style="cursor: pointer"
@@ -81,6 +80,19 @@
                     <BookingSearchItemLocation place="Пражская" time="13 мин"/>
                     <p class="booking-page__street">г. Москва, ул. Большая Очаковская, 35</p>
                     <WorkTime time="9:00" closed/>
+                  </div>
+                </div>
+                <div class="p-x booking-page__location">
+                  <Map class="booking-page__map" />
+                  <div class="booking-page__location-controls">
+                    <UIButton>
+                      <IconBase icon="route" color="green" />
+                      <span>Маршрут</span>
+                    </UIButton>
+                    <UIButton>
+                      <IconBase icon="car" color="green" />
+                      <span>Такси</span>
+                    </UIButton>
                   </div>
                 </div>
                 <div class="p-x booking-page__description">
@@ -604,6 +616,38 @@ watch(guests, () => {
 
   .error {
     border-color: #FF858C !important;
+  }
+
+  &__location {
+    &-controls {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 20px;
+
+      .btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+          .icon-base {
+            --icon-color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  &__map {
+    height: 200px !important;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-bottom: 15px;
+
+    @media (max-width: 1000px) {
+      height: 150px !important;
+    }
   }
 
   &__slider {

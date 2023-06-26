@@ -1,6 +1,6 @@
 <template>
   <div class="search" ref="searchContent">
-    <Map class="search__map"/>
+    <Map class="search__map" ref="map"/>
     <div class="search__nav" :class="{left: isInitialSearch}">
       <HeaderNav/>
       <UIButton v-if="route.name.includes('search')" class="search__nav-btn gray" @click="step = 4">
@@ -10,10 +10,10 @@
     </div>
     <Transition mode="out-in">
       <div class="search__controls" v-show="isInitialSearch">
-        <UIButton class="gray search__controls-item" @click="zoomIn">
+        <UIButton class="gray search__controls-item" @click="map?.mapZoomIn">
           <IconBase icon="search-zoomin"/>
         </UIButton>
-        <UIButton class="gray search__controls-item" @click="zoomOut">
+        <UIButton class="gray search__controls-item" @click="map?.mapZoomOut">
           <IconBase icon="search-zoomout"/>
         </UIButton>
         <UIButton class="gray search__controls-item" @click="mapGeolocate">
@@ -186,8 +186,8 @@ const toggleTag = (tagName) => {
 
 const showFilter = ref(true)
 
-const zoomIn = useState('mapZoomIn')
-const zoomOut = useState('mapZoomOut')
+const map = ref()
+
 const mapGeolocate = ref(null)
 
 onMounted(async () => {
