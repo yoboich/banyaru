@@ -1,5 +1,5 @@
 <template>
-  <div class="booking-page__reviews">
+  <div class="booking-page__reviews" ref="wrapper">
     <h1 class="booking-page__title booking-page__reviews-title">Отзывы</h1>
     <div class="booking-page__reviews-new">
       <div class="booking-page__reviews-rate flex">
@@ -91,6 +91,10 @@ onMounted(async () => {
     initialHeight.value += 45 * 3
   })
 });
+
+const wrapper = ref()
+
+defineExpose({wrapper})
 </script>
 
 <style lang="scss">

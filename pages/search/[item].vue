@@ -74,8 +74,8 @@
                         Сауна цветы
                         <IconBase icon="info" color="black"/>
                       </h3>
-                      <BookingSearchItemRate rate="4.2"/>
-                      <Reviews text="122 отзыва"/>
+                      <BookingSearchItemRate @click="scrollToReviews" rate="4.2"/>
+                      <Reviews @click="scrollToReviews" text="122 отзыва"/>
                     </div>
                     <BookingSearchItemLocation place="Пражская" time="13 мин"/>
                     <p class="booking-page__street">г. Москва, ул. Большая Очаковская, 35</p>
@@ -291,7 +291,7 @@
                 <!-- SIMILAR -->
                 <BookingSimilar/>
                 <!-- REVIEWS -->
-                <BookingReviews class="p-x"/>
+                <BookingReviews ref="reviewsElement" class="p-x"/>
                 <!-- ANNOUNCE -->
                 <div class="p-x booking-page__announce">
                   <button class="booking-page__announce-btn">Объявление</button>
@@ -352,6 +352,7 @@ const gallery = ref();
 const callElement = ref()
 const scrollArea = ref()
 const calculatorElement = ref()
+const reviewsElement = ref()
 
 const activeCalendar = ref("time");
 const calcStep = ref(0)
@@ -591,6 +592,11 @@ const moveToCalc = () => {
   const coords = calculatorElement.value.getBoundingClientRect()
   scrollArea.value.el.scrollBy(0, coords.y - (width.value > 1000 ? 150 : 220))
   calcStep.value++
+}
+
+const scrollToReviews = () => {
+  const coords = reviewsElement.value.wrapper.getBoundingClientRect()
+  scrollArea.value.el.scrollBy(0, coords.y - (width.value > 1000 ? 150 : 220))
 }
 
 const submitForm = () => {
