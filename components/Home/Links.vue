@@ -1,7 +1,34 @@
+<template>
+  <div class="useful-links">
+    <div class="useful-links__item" v-for="(item, i) of items" :key="i">
+      <ul class="useful-links__list">
+        <h5 class="title">{{ item.title }}</h5>
+        <li
+          class="useful-links__list-item"
+          v-for="(link, j) of item.links"
+          :key="j"
+        >
+          <nuxt-link :to="link.src">
+            <span class="name">{{ link.name }}</span>
+            <span class="amount">{{ link.quantity }}</span>
+          </nuxt-link>
+        </li>
+      </ul>
+      <nuxt-link class="useful-links__single-image" :to="item.src"
+        ><img :src="item.image" alt=""
+      /></nuxt-link>
+    </div>
+  </div>
+</template>
+
 <script setup>
+import image from "~/assets/images/preview/links-image.png";
+
 const items = [
   {
-    title: "Снять сауну",
+    image, // replace to api
+    src: "/search",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -19,7 +46,7 @@ const items = [
         src: "/search",
       },
       {
-        name: "Банный комплекс повышеной комфортности",
+        name: "Банный комплекс повыш...",
         quantity: "2000",
         src: "/search",
       },
@@ -31,17 +58,14 @@ const items = [
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
         src: "/search",
       },
     ],
   },
   {
-    title: "Банные комплексы",
+    image, // replace to api
+    src: "/search",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -59,7 +83,7 @@ const items = [
         src: "/search",
       },
       {
-        name: "Банный комплекс повышеной комфортности",
+        name: "Банный комплекс повыш...",
         quantity: "2000",
         src: "/search",
       },
@@ -71,17 +95,14 @@ const items = [
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
         src: "/search",
       },
     ],
   },
   {
-    title: "Снять сауну",
+    image, // replace to api
+    src: "/search",
+    title: "Популярные ссылки",
     links: [
       {
         name: "Spa-терапия",
@@ -99,7 +120,7 @@ const items = [
         src: "/search",
       },
       {
-        name: "Банный комплекс повышеной комфортности",
+        name: "Банный комплекс повыш...",
         quantity: "2000",
         src: "/search",
       },
@@ -111,171 +132,6 @@ const items = [
       {
         name: "Баня недалеко от метро",
         quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
-        src: "/search",
-      },
-    ],
-  },
-  {
-    title: "Банные комплексы",
-    links: [
-      {
-        name: "Spa-терапия",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Банный комплекс повышеной комфортности",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
-        src: "/search",
-      },
-    ],
-  },
-  {
-    title: "Снять сауну",
-    links: [
-      {
-        name: "Spa-терапия",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Банный комплекс повышеной комфортности",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
-        src: "/search",
-      },
-    ],
-  },
-  {
-    title: "Банные комплексы",
-    links: [
-      {
-        name: "Spa-терапия",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Банный комплекс повышеной комфортности",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
-        src: "/search",
-      },
-    ],
-  },
-  {
-    title: "Снять сауну",
-    links: [
-      {
-        name: "Spa-терапия",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Банный комплекс повышеной комфортности",
-        quantity: "2000",
-        src: "/search",
-      },
-      {
-        name: "Ледяная купель",
-        quantity: "4000",
-        src: "/search",
-      },
-      {
-        name: "Баня недалеко от метро",
-        quantity: "34000",
-        src: "/search",
-      },
-      {
-        name: "Арендовать сауну на день",
-        quantity: "4000",
         src: "/search",
       },
     ],
@@ -283,102 +139,159 @@ const items = [
 ];
 </script>
 
-<template>
-  <section class="links">
-    <h2 class="links__title">Полезные ссылки</h2>
-    <div class="links__inner">
-      <nuxt-link to="/search" class="links__item item item_first">
-        <h2 class="item__title_first">Каталог Саун</h2>
-      </nuxt-link>
-      <div v-for="item in items" class="links__item item">
-        <h2 class="item__title">{{ item.title }}</h2>
-        <div class="item__menu">
-          <nuxt-link
-            :to="link.src"
-            class="item__content"
-            v-for="link in item.links"
-          >
-            <span class="item__name">{{ link.name }}</span>
-            <span class="item__quantity">{{ link.quantity }}</span>
-          </nuxt-link>
-        </div>
-      </div>
-      <nuxt-link to="search" class="links__item item item_last">
-        <h2 class="item__title_last">Загородные сауны</h2>
-      </nuxt-link>
-    </div>
-  </section>
-</template>
-
 <style lang="scss" scoped>
-.links {
-  margin-top: 8.3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 6.2rem;
-  margin-bottom: 2rem;
-  &__title {
-    font-family: "Gilroy";
-    font-size: 2.6rem;
-  }
-  &__inner {
-    display: grid;
-    gap: 1px;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2%;
-    margin-bottom: 2rem;
-  }
+.useful-links {
   &__item {
-    background-color: $default-color;
-    border-radius: 23px;
-    padding: 3.2rem 3.3rem;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @media (max-width: 1400px) {
+      grid-template-columns: 1fr;
+    }
+
+    // & > *:first-child {
+    //   order: 2;
+    // }
+
+    &:nth-child(2n + 1) {
+      & > *:first-child {
+        order: 2;
+      }
+    }
+
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
   }
-  .item {
-    display: flex;
-    flex-direction: column;
-    &_first {
-      background-image: url("@/assets/img/promotions/3.jpg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    &_last {
-      background-image: url("@/assets/img/promotions/2.jpg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    &__title {
-      font-size: 1.6rem;
+
+  &__list {
+    border-radius: 20px;
+    padding: 20px 30px 40px;
+    background: #fff;
+
+    .title {
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 0.8rem;
-      &_first {
-        color: $default-color;
-        font-family: "Gilroy";
-        font-size: 2.6rem;
+      line-height: 20px;
+      margin-bottom: 20px;
+    }
+
+    &-item {
+      &:not(:last-of-type) {
+        margin-bottom: 15px;
       }
-      &_last {
-        color: $default-color;
-        font-family: "Gilroy";
-        font-size: 2.6rem;
+
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 18px;
+
+      .name {
+        color: #17a300;
+        padding-right: 15px;
+      }
+
+      .amount {
+        color: #8f99ba;
       }
     }
-    &__menu {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
-    }
-    &__content {
-      display: flex;
-      gap: 1rem;
-    }
-    &__name {
-      color: $green-color;
-    }
-    &__quantity {
-      color: #8f99ba;
+  }
+
+  &__single-image {
+    height: 100%;
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
 }
+// .links {
+//   // margin-top: 8.3rem;
+//   // display: flex;
+//   // flex-direction: column;~
+//   // gap: 6.2rem;
+//   // margin-bottom: 2rem;
+//   &__title {
+//     font-family: "Gilroy";
+//     font-size: 2.6rem;
+//     margin-bottom: 20px;
+//     margin-left: 30px;
+//   }
+
+//   &__inner {
+//     display: grid;
+//     gap: 20px;
+//     grid-template-columns: 1fr 1fr;
+//   }
+
+//   &__item {
+//     background-color: $default-color;
+//     border-radius: 23px;
+//     padding: 20px 30px;
+//   }
+
+//   .item {
+//     display: flex;
+//     flex-direction: column;
+//     &_first {
+//       background-image: url("@/assets/img/promotions/4.png");
+//       background-position: center;
+//       background-repeat: no-repeat;
+//       background-size: cover;
+//     }
+//     &_last {
+//       background-image: url("@/assets/img/promotions/2.jpg");
+//       background-position: center;
+//       background-repeat: no-repeat;
+//       background-size: cover;
+//     }
+//     &__title {
+//       font-weight: 700;
+//       font-size: 16px;
+//       line-height: 20px;
+//       margin-bottom: 20px;
+
+//       &_first {
+//         color: $default-color;
+//         font-family: "Gilroy";
+//         font-size: 2.6rem;
+//       }
+//       &_last {
+//         color: $default-color;
+//         font-family: "Gilroy";
+//         font-size: 2.6rem;
+//       }
+//     }
+//     &__menu {
+//       display: flex;
+//       flex-direction: column;
+//       gap: 1rem;
+//       margin-bottom: 0.8rem;
+//     }
+//     &__content {
+//       display: flex;
+//       gap: 1rem;
+//     }
+//     &__name {
+//       color: $green;
+//     }
+//     &__quantity {
+//       color: #8f99ba;
+//     }
+//   }
+// }
+// .links__item:nth-child(5) {
+//   background-image: url("@/assets/img/promotions/5.png");
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
 </style>

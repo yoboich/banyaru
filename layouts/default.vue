@@ -1,39 +1,19 @@
-<script setup>
-	import { useWindowSize } from '@vueuse/core';
-	const isLarge = ref(true);
-
-	const { width } = useWindowSize();
-	watchEffect(() => {
-		if (width.value <= 768) {
-			isLarge.value = false;
-		} else {
-			isLarge.value = true;
-		}
-	});
-	onMounted(() => {
-		if (width.value <= 768) {
-			isLarge.value = false;
-		}
-	});
-</script>
-
 <template>
-	<ClientOnly fallback-tag="span" fallback="Loading comments...">
-		<div class="wrapper">
-			<TheHeader v-if="isLarge" />
-			<TheMobileMenu v-if="!isLarge" />
-			<div class="wrapper-content">
-				<slot />
-			</div>
-			<TheFooter v-if="isLarge" />
-		</div>
-	</ClientOnly>
+  <div>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer v-if="width > 1000" />
+
+    <!-- <TheHeader v-if="width > 1000" /> -->
+    <!-- <MobileHeader v-else /> -->
+  </div>
 </template>
 
-<style scoped lang="scss">
-	.wrapper-content {
-		@media screen and (max-width: 768px) {
-			margin: 0;
-		}
-	}
-</style>
+<script setup>
+import { useWindowSize } from "@vueuse/core";
+const { width } = useWindowSize();
+</script>
+
+<style scoped lang="scss"></style>
